@@ -206,68 +206,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <ol type="1">
-<li></li>
+          <ol>
+<li>(a)<br>$$<br>\nabla f(x) &#x3D; Ax+b^T<br>$$<br>(b)<br>$$<br>\nabla f(x) &#x3D; g^{‘}(h(x))\nabla h(x)<br>$$important</li>
 </ol>
-<ol type="a">
-<li><p><span class="math display">\[
-\nabla f(x) = Ax+b^T
-\]</span></p></li>
-<li><p><span class="math display">\[
-\nabla f(x) = g^{&#39;}(h(x))\nabla h(x)
-\]</span>important</p></li>
-<li><p><span class="math display">\[
-\nabla^2 f(x) = A
-\]</span></p></li>
-<li><p><span class="math display">\[
-\nabla f(x) = g^{&#39;}(a^Tx)a \\
-\nabla^2 f(x) = g^{&#39;&#39;}(a^Tx)aa^T
-\]</span></p></li>
+<p>(c)<br>$$<br>\nabla^2 f(x) &#x3D; A<br>$$<br>(d)<br>$$<br>\nabla f(x) &#x3D; g^{‘}(a^Tx)a \<br>\nabla^2 f(x) &#x3D; g^{‘’}(a^Tx)aa^T<br>$$</p>
+<ol start="2">
+<li>(a)<br>$ A^T &#x3D; (zz^T)^T &#x3D; zz^T &#x3D; A $<br>对于$\forall x \in R^n$<br>有$x^TAx &#x3D; x^Tzz^Tx \<br>  &#x3D; (x^Tz)(x^Tz)^T$</li>
 </ol>
-<ol start="2" type="1">
-<li></li>
-</ol>
-<ol type="a">
-<li><p>$ A^T = (zz<sup>T)</sup>T = zz^T = A $ 对于<span
-class="math inline">\(\forall x \in R^n\)</span> 有<span
-class="math inline">\(x^TAx = x^Tzz^Tx \\
-     = (x^Tz)(x^Tz)^T\)</span> 因为x^Tz 正定 所以A正定
-<strong>(b)</strong> <span class="math inline">\(\because\)</span>
-z为非零向量 <span class="math inline">\(\therefore R(A) = 1\)</span>
-<span class="math inline">\(N(A = {x|z^Tx=0})\)</span> N
-是NullSpace</p></li>
-<li><p>对于<span class="math inline">\(\forall x \in R^m\)</span>
-有<span class="math inline">\(x^TBAB^Tx = (x^TB)A(x^TB)^T\)</span>
-因为A正定，所以 $ (B<sup>Tx)</sup>TA(B^Tx) $ 所以<span
-class="math inline">\(BAB^T\)</span>PSD</p></li>
-</ol>
-<ol start="3" type="1">
-<li>(a). <span class="math display">\[
-\begin{align*}
-\because A &amp;= T\Lambda T^{-1} \\
-\therefore AT &amp;= T\Lambda        \\
-A[t^{(i)}] &amp;= [t^{(i)}]\Lambda      \\
-[At^{(0)},At^{(1)},\cdots,At^{(n-1)}] &amp;= \begin{bmatrix} t^{(0)}
-&amp; t^{(1)}&amp; \cdots &amp; t^{(n-1)}\end{bmatrix}
-\cdot  \begin{bmatrix}
-\lambda^{0} &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
-0 &amp; \lambda^{1} &amp; 0 &amp; \cdots &amp; 0 \\
-0 &amp; 0 &amp; \lambda^{2} &amp; \cdots &amp; 0 \\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-0 &amp; 0 &amp; 0 &amp; \cdots &amp; \lambda^{n-1}
-\end{bmatrix}   \\
-\therefore At^{(i)}&amp;=\lambda t{(i)}
-\end{align*}
-\]</span> (b). <span class="math display">\[
-A=U\Lambda U^T \\
-AU = U\Lambda \\
-\]</span> 然后和a相同 (c). <span class="math inline">\(\because\)</span>
-A is PSD <span class="math inline">\(\therefore\)</span> 对于A的特征矩阵
-有<span class="math inline">\(A = U\Lambda U^T \geq 0\)</span> <span
-class="math inline">\(U\Lambda U^T = [u^{(i)}]\Lambda
-[u^{(i)}]^T\)</span> <span class="math inline">\(=
-\lambda^{(i)}(t^{(i)})^2\)</span> <span class="math inline">\(\therefore
-\lambda^{(i)} \geq 0\)</span></li>
+<p>因为x^Tz 正定<br>所以A正定<br><strong>(b)</strong><br>$\because$ z为非零向量<br>$\therefore R(A) &#x3D; 1$<br>$N(A &#x3D; {x|z^Tx&#x3D;0})$ N 是NullSpace</p>
+<p>(c)<br>对于$\forall x \in R^m$<br>有$x^TBAB^Tx &#x3D; (x^TB)A(x^TB)^T$<br>因为A正定，所以 $ (B^Tx)^TA(B^Tx) \geq 0$<br>所以$BAB^T$PSD</p>
+<ol start="3">
+<li>(a).<br>$$<br>\begin{align*}<br>\because A &amp;&#x3D; T\Lambda T^{-1} \<br>\therefore AT &amp;&#x3D; T\Lambda        \<br>A[t^{(i)}] &amp;&#x3D; [t^{(i)}]\Lambda      \<br>[At^{(0)},At^{(1)},\cdots,At^{(n-1)}] &amp;&#x3D; \begin{bmatrix} t^{(0)} &amp; t^{(1)}&amp; \cdots &amp; t^{(n-1)}\end{bmatrix} \cdot  \begin{bmatrix}<br>\lambda^{0} &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \<br>0 &amp; \lambda^{1} &amp; 0 &amp; \cdots &amp; 0 \<br>0 &amp; 0 &amp; \lambda^{2} &amp; \cdots &amp; 0 \<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>0 &amp; 0 &amp; 0 &amp; \cdots &amp; \lambda^{n-1}<br>\end{bmatrix}   \<br>\therefore At^{(i)}&amp;&#x3D;\lambda t{(i)}<br>\end{align*}<br>$$<br>(b).<br>$$<br>A&#x3D;U\Lambda U^T \<br>AU &#x3D; U\Lambda \<br>$$<br>然后和a相同<br>(c).<br>$\because$ A is PSD<br>$\therefore$ 对于A的特征矩阵  有$A &#x3D; U\Lambda U^T \geq 0$<br>$U\Lambda U^T &#x3D; [u^{(i)}]\Lambda [u^{(i)}]^T$<br>$&#x3D; \lambda^{(i)}(t^{(i)})^2$<br>$\therefore \lambda^{(i)} \geq 0$</li>
 </ol>
 
       
@@ -344,272 +293,229 @@ class="math inline">\(U\Lambda U^T = [u^{(i)}]\Lambda
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="线性代数重要性质与定理总结">线性代数重要性质与定理总结</h1>
-<hr />
-<h2 id="基本概念与符号"><strong>1. 基本概念与符号</strong></h2>
+          <h1 id="线性代数重要性质与定理总结"><a href="#线性代数重要性质与定理总结" class="headerlink" title="线性代数重要性质与定理总结"></a>线性代数重要性质与定理总结</h1><hr>
+<h2 id="1-基本概念与符号"><a href="#1-基本概念与符号" class="headerlink" title="1. 基本概念与符号"></a><strong>1. 基本概念与符号</strong></h2><ul>
+<li><p><strong>矩阵表示</strong>  </p>
 <ul>
-<li><strong>矩阵表示</strong>
-<ul>
-<li>$ A ^{m n} <span class="math inline">\(：\)</span> m $ 行 $ n $
-列的实矩阵。<br />
-</li>
-<li><strong>列向量</strong>：$ x ^n
-$，默认按列排列；<strong>行向量</strong>为 $ x^T $。<br />
-</li>
+<li>$ A \in \mathbb{R}^{m \times n} $：$ m $ 行 $ n $ 列的实矩阵。  </li>
+<li><strong>列向量</strong>：$ x \in \mathbb{R}^n $，默认按列排列；<strong>行向量</strong>为 $ x^T $。  </li>
 <li>矩阵元素：$ A_{ij} $ 表示第 $ i $ 行第 $ j $ 列的元素。</li>
-</ul></li>
-<li><strong>矩阵分块</strong>
-<ul>
-<li>列分块：$ A = [a^1  a^2   a^n] $，其中 $ a^j $ 为第 $ j $ 列。<br />
-</li>
-<li>行分块：$ A = [a_1^T;  a_2^T;  ;  a_m^T] $，其中 $ a_i^T $ 为第 $ i
-$ 行。</li>
-</ul></li>
 </ul>
-<hr />
-<h2 id="矩阵乘法"><strong>2. 矩阵乘法</strong></h2>
+</li>
+<li><p><strong>矩阵分块</strong>  </p>
 <ul>
-<li><strong>定义</strong>
-<ul>
-<li>$ C = AB $，其中 $ C_{ij} = <em>{k=1}^n A</em>{ik} B_{kj} $。<br />
-</li>
-<li>矩阵乘积维度：$ A ^{m n}, B ^{n p} C ^{m p} $。</li>
-</ul></li>
-<li><strong>特殊乘积形式</strong>
-<ul>
-<li><strong>内积</strong>：$ x^T y = _{i=1}^n x_i y_i $。<br />
-</li>
-<li><strong>外积</strong>：$ xy^T ^{m n} $，元素为 $ x_i y_j $。<br />
-</li>
-<li><strong>矩阵-向量乘积</strong>：
-<ul>
-<li>按行：$ Ax = [a_1^T x;  a_2^T x;  ;  a_m^T x] $。<br />
-</li>
-<li>按列：$ Ax = _{j=1}^n x_j a^j $。</li>
-</ul></li>
-</ul></li>
-<li><strong>矩阵乘积的四种视角</strong>
-<ol type="1">
-<li>行-列内积：$ C_{ij} = a_i^T b^j $。<br />
-</li>
-<li>列-行外积和：$ AB = _{k=1}^n a^k b_k^T $。<br />
-</li>
-<li>矩阵-列向量乘积：$ AB = [A b^1  A b^2   A b^p] $。<br />
-</li>
-<li>行向量-矩阵乘积：$ AB = [a_1^T B;  a_2^T B;  ;  a_m^T B] $。</li>
-</ol></li>
-<li><strong>性质</strong>
-<ul>
-<li>结合律：$ (AB)C = A(BC) $。<br />
-</li>
-<li>分配律：$ A(B + C) = AB + AC $。<br />
-</li>
-<li><strong>不可交换</strong>：一般 $ AB BA $。</li>
-</ul></li>
+<li>列分块：$ A &#x3D; [a^1 \ a^2 \ \cdots \ a^n] $，其中 $ a^j $ 为第 $ j $ 列。  </li>
+<li>行分块：$ A &#x3D; [a_1^T; \ a_2^T; \ \cdots; \ a_m^T] $，其中 $ a_i^T $ 为第 $ i $ 行。</li>
 </ul>
-<hr />
-<h2 id="运算与性质"><strong>3. 运算与性质</strong></h2>
-<ul>
-<li><strong>单位矩阵与对角矩阵</strong>
-<ul>
-<li>单位矩阵 $ I ^{n n} $，满足 $ AI = A = IA $。<br />
 </li>
-<li>对角矩阵 $ D = (d_1, , d_n) $，非对角元素为 0。</li>
-</ul></li>
-<li><strong>转置</strong>
-<ul>
-<li>转置性质：
-<ul>
-<li>$ (A<sup>T)</sup>T = A $。<br />
-</li>
-<li>$ (AB)^T = B^T A^T $。<br />
-</li>
-<li>$ (A + B)^T = A^T + B^T $。</li>
-</ul></li>
-</ul></li>
-<li><strong>对称矩阵</strong>
-<ul>
-<li>对称矩阵：$ A = A^T $。<br />
-</li>
-<li>任何方阵 $ A $ 可分解为对称与反对称矩阵之和：<br />
-$ A = (A + A^T) + (A - A^T) $。</li>
-</ul></li>
-<li><strong>迹（Trace）</strong>
-<ul>
-<li>定义：$ (A) = <em>{i=1}^n A</em>{ii} $。<br />
-</li>
-<li>性质：
-<ul>
-<li>$ (A) = (A^T) $。<br />
-</li>
-<li>$ (AB) = (BA) $。<br />
-</li>
-<li>线性性：$ (A + B) = (A) + (B) $。</li>
-</ul></li>
-</ul></li>
-<li><strong>范数（Norms）</strong>
-<ul>
-<li>向量范数：
-<ul>
-<li>$ _2 $ 范数：$ |x|_2 = $。<br />
-</li>
-<li>$ _1 $ 范数：$ |x|_1 = |x_i| $。<br />
-</li>
-<li>$ <em>$ 范数：$ |x|</em>= |x_i| $。<br />
-</li>
-</ul></li>
-<li>矩阵范数：
-<ul>
-<li>Frobenius 范数：$ |A|_F = $。</li>
-</ul></li>
-</ul></li>
-<li><strong>线性相关与秩</strong>
-<ul>
-<li>列秩 = 行秩 = 矩阵的秩。<br />
-</li>
-<li>满秩矩阵：$ (A) = (m, n) $。<br />
-</li>
-<li>秩的性质：
-<ul>
-<li>$ (AB) ((A), (B)) $。</li>
-</ul></li>
-</ul></li>
-<li><strong>逆矩阵</strong>
-<ul>
-<li>存在条件：方阵且满秩（非奇异）。<br />
-</li>
-<li>性质：
-<ul>
-<li>$ (A<sup>{-1})</sup>{-1} = A $。<br />
-</li>
-<li>$ (AB)^{-1} = B^{-1} A^{-1} $。<br />
-</li>
-<li>$ (A<sup>{-1})</sup>T = (A<sup>T)</sup>{-1} $。</li>
-</ul></li>
-</ul></li>
-<li><strong>正交矩阵</strong>
-<ul>
-<li>定义：列向量正交且归一化，满足 $ U^T U = I $。<br />
-</li>
-<li>性质：
-<ul>
-<li>保范性：$ |U x|_2 = |x|_2 $。</li>
-</ul></li>
-</ul></li>
-<li><strong>范围与零空间</strong>
-<ul>
-<li>列空间 $ (A) = {Ax x ^n} $。<br />
-</li>
-<li>零空间 $ (A) = {x Ax = 0} $。<br />
-</li>
-<li>正交补关系：$ (A^T) (A) = ^n $。</li>
-</ul></li>
-<li><strong>行列式（Determinant）</strong>
-<ul>
-<li>几何意义：平行多面体的体积。<br />
-</li>
-<li>性质：
-<ul>
-<li>$ |AB| = |A||B| $。<br />
-</li>
-<li>$ |A^{-1}| = 1 / |A| $。<br />
-</li>
-<li>$ |A| = 0 A $ 奇异。<br />
-</li>
-</ul></li>
-<li>递归公式：<br />
-$ |A| = <em>{j=1}^n (-1)^{i+j} A</em>{ij} |A_{i j}| ( i ) $。</li>
-</ul></li>
-<li><strong>二次型与半正定矩阵</strong>
-<ul>
-<li>对称矩阵分类：
-<ul>
-<li>正定（PD）：$ x^T A x &gt; 0 (x ) $。<br />
-</li>
-<li>半正定（PSD）：$ x^T A x $。<br />
-</li>
-<li>负定（ND）、半负定（NSD）、不定。<br />
-</li>
-</ul></li>
-<li>Gram 矩阵：$ G = A^T A $ 必为半正定；若 $ A $ 列满秩，则 $ G $
-正定。</li>
-</ul></li>
-<li><strong>特征值与特征向量</strong>
-<ul>
-<li>定义：$ A x = x (x ) $。<br />
-</li>
-<li>对称矩阵性质：
-<ol type="1">
-<li>特征值为实数。<br />
-</li>
-<li>存在正交特征向量集，可对角化：$ A = U U^T $。<br />
-</li>
-</ol></li>
-<li>迹与行列式：
-<ul>
-<li>$ (A) = _i $。<br />
-</li>
-<li>$ |A| = _i $。<br />
-</li>
-</ul></li>
-<li>优化视角：
-<ul>
-<li>最大特征值对应二次型最大值：$ <em>{|x|=1} x^T A x = </em>{} $。</li>
-</ul></li>
-</ul></li>
 </ul>
-<hr />
-<h2 id="矩阵微积分"><strong>4. 矩阵微积分</strong></h2>
+<hr>
+<h2 id="2-矩阵乘法"><a href="#2-矩阵乘法" class="headerlink" title="2. 矩阵乘法"></a><strong>2. 矩阵乘法</strong></h2><ul>
+<li><p><strong>定义</strong>  </p>
 <ul>
-<li><strong>梯度（Gradient）</strong>
-<ul>
-<li>标量函数 $ f: ^{m n} <span
-class="math inline">\(，梯度为矩阵：\)</span> (<em>A f(A))</em>{ij} =
-$。<br />
-</li>
-<li>重要公式：
-<ul>
-<li>**$ _x (b^T x) = b $。**<br />
-</li>
-<li>**$ _x (x^T A x) = 2 A x (A ) $。**</li>
-</ul></li>
-</ul></li>
-<li><strong>Hessian 矩阵</strong>
-<ul>
-<li>定义：二阶偏导数矩阵，对称。<br />
-</li>
-<li>二次型：$ _x^2 (x^T A x) = 2 A (A ) $。</li>
-</ul></li>
-<li><strong>最小二乘法</strong>
-<ul>
-<li>目标函数：$ _x |Ax - b|_2^2 $。<br />
-</li>
-<li>解：$ x = (A^T A)^{-1} A^T b $。</li>
-</ul></li>
-<li><strong>行列式的梯度</strong>
-<ul>
-<li>$ _A |A| = |A| A^{-T} $。<br />
-</li>
-<li>对数行列式：$ _A |A| = A^{-1} (A ) $。</li>
-</ul></li>
-<li><strong>特征值的优化视角</strong>
-<ul>
-<li>拉格朗日函数：$ (x, ) = x^T A x - (x^T x - 1) $。<br />
-</li>
-<li>最优解条件：$ A x = x $，即 $ x $ 为特征向量，$ $ 为特征值。</li>
-</ul></li>
+<li>$ C &#x3D; AB $，其中 $ C_{ij} &#x3D; \sum_{k&#x3D;1}^n A_{ik} B_{kj} $。  </li>
+<li>矩阵乘积维度：$ A \in \mathbb{R}^{m \times n}, B \in \mathbb{R}^{n \times p} \Rightarrow C \in \mathbb{R}^{m \times p} $。</li>
 </ul>
-<hr />
-<h3 id="关键总结"><strong>关键总结</strong></h3>
-<ol type="1">
-<li><strong>矩阵乘法</strong>需关注不同视角（行、列、外积和）。<br />
 </li>
-<li><strong>对称矩阵</strong>的特征值分解是核心工具，用于优化与二次型分析。<br />
+<li><p><strong>特殊乘积形式</strong>  </p>
+<ul>
+<li><strong>内积</strong>：$ x^T y &#x3D; \sum_{i&#x3D;1}^n x_i y_i $。  </li>
+<li><strong>外积</strong>：$ xy^T \in \mathbb{R}^{m \times n} $，元素为 $ x_i y_j $。  </li>
+<li><strong>矩阵-向量乘积</strong>：  <ul>
+<li>按行：$ Ax &#x3D; [a_1^T x; \ a_2^T x; \ \cdots; \ a_m^T x] $。  </li>
+<li>按列：$ Ax &#x3D; \sum_{j&#x3D;1}^n x_j a^j $。</li>
+</ul>
 </li>
-<li><strong>行列式</strong>的几何意义与递归计算。<br />
+</ul>
 </li>
-<li><strong>梯度与Hessian</strong>在优化问题中的应用（如最小二乘、特征值优化）。<br />
+<li><p><strong>矩阵乘积的四种视角</strong>  </p>
+<ol>
+<li>行-列内积：$ C_{ij} &#x3D; a_i^T b^j $。  </li>
+<li>列-行外积和：$ AB &#x3D; \sum_{k&#x3D;1}^n a^k b_k^T $。  </li>
+<li>矩阵-列向量乘积：$ AB &#x3D; [A b^1 \ A b^2 \ \cdots \ A b^p] $。  </li>
+<li>行向量-矩阵乘积：$ AB &#x3D; [a_1^T B; \ a_2^T B; \ \cdots; \ a_m^T B] $。</li>
+</ol>
 </li>
+<li><p><strong>性质</strong>  </p>
+<ul>
+<li>结合律：$ (AB)C &#x3D; A(BC) $。  </li>
+<li>分配律：$ A(B + C) &#x3D; AB + AC $。  </li>
+<li><strong>不可交换</strong>：一般 $ AB \neq BA $。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-运算与性质"><a href="#3-运算与性质" class="headerlink" title="3. 运算与性质"></a><strong>3. 运算与性质</strong></h2><ul>
+<li><p><strong>单位矩阵与对角矩阵</strong>  </p>
+<ul>
+<li>单位矩阵 $ I \in \mathbb{R}^{n \times n} $，满足 $ AI &#x3D; A &#x3D; IA $。  </li>
+<li>对角矩阵 $ D &#x3D; \text{diag}(d_1, \dots, d_n) $，非对角元素为 0。</li>
+</ul>
+</li>
+<li><p><strong>转置</strong>  </p>
+<ul>
+<li>转置性质：  <ul>
+<li>$ (A^T)^T &#x3D; A $。  </li>
+<li>$ (AB)^T &#x3D; B^T A^T $。  </li>
+<li>$ (A + B)^T &#x3D; A^T + B^T $。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>对称矩阵</strong>  </p>
+<ul>
+<li>对称矩阵：$ A &#x3D; A^T $。  </li>
+<li>任何方阵 $ A $ 可分解为对称与反对称矩阵之和：<br>$ A &#x3D; \frac{1}{2}(A + A^T) + \frac{1}{2}(A - A^T) $。</li>
+</ul>
+</li>
+<li><p><strong>迹（Trace）</strong>  </p>
+<ul>
+<li>定义：$ \text{tr}(A) &#x3D; \sum_{i&#x3D;1}^n A_{ii} $。  </li>
+<li>性质：  <ul>
+<li>$ \text{tr}(A) &#x3D; \text{tr}(A^T) $。  </li>
+<li>$ \text{tr}(AB) &#x3D; \text{tr}(BA) $。  </li>
+<li>线性性：$ \text{tr}(A + B) &#x3D; \text{tr}(A) + \text{tr}(B) $。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>范数（Norms）</strong>  </p>
+<ul>
+<li>向量范数：  <ul>
+<li>$ \ell_2 $ 范数：$ |x|_2 &#x3D; \sqrt{x^T x} $。  </li>
+<li>$ \ell_1 $ 范数：$ |x|_1 &#x3D; \sum |x_i| $。  </li>
+<li>$ \ell_\infty $ 范数：$ |x|_\infty &#x3D; \max |x_i| $。</li>
+</ul>
+</li>
+<li>矩阵范数：  <ul>
+<li>Frobenius 范数：$ |A|_F &#x3D; \sqrt{\text{tr}(A^T A)} $。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>线性相关与秩</strong>  </p>
+<ul>
+<li>列秩 &#x3D; 行秩 &#x3D; 矩阵的秩。  </li>
+<li>满秩矩阵：$ \text{rank}(A) &#x3D; \min(m, n) $。  </li>
+<li>秩的性质：  <ul>
+<li>$ \text{rank}(AB) \leq \min(\text{rank}(A), \text{rank}(B)) $。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>逆矩阵</strong>  </p>
+<ul>
+<li>存在条件：方阵且满秩（非奇异）。  </li>
+<li>性质：  <ul>
+<li>$ (A^{-1})^{-1} &#x3D; A $。  </li>
+<li>$ (AB)^{-1} &#x3D; B^{-1} A^{-1} $。  </li>
+<li>$ (A^{-1})^T &#x3D; (A^T)^{-1} $。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>正交矩阵</strong>  </p>
+<ul>
+<li>定义：列向量正交且归一化，满足 $ U^T U &#x3D; I $。  </li>
+<li>性质：  <ul>
+<li>保范性：$ |U x|_2 &#x3D; |x|_2 $。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>范围与零空间</strong>  </p>
+<ul>
+<li>列空间 $ \mathcal{R}(A) &#x3D; {Ax \mid x \in \mathbb{R}^n} $。  </li>
+<li>零空间 $ \mathcal{N}(A) &#x3D; {x \mid Ax &#x3D; 0} $。  </li>
+<li>正交补关系：$ \mathcal{R}(A^T) \oplus \mathcal{N}(A) &#x3D; \mathbb{R}^n $。</li>
+</ul>
+</li>
+<li><p><strong>行列式（Determinant）</strong>  </p>
+<ul>
+<li>几何意义：平行多面体的体积。  </li>
+<li>性质：  <ul>
+<li>$ |AB| &#x3D; |A||B| $。  </li>
+<li>$ |A^{-1}| &#x3D; 1 &#x2F; |A| $。  </li>
+<li>$ |A| &#x3D; 0 \iff A $ 奇异。</li>
+</ul>
+</li>
+<li>递归公式：<br>$ |A| &#x3D; \sum_{j&#x3D;1}^n (-1)^{i+j} A_{ij} |A_{\backslash i \backslash j}| \quad (\text{按第 } i \text{ 行展开}) $。</li>
+</ul>
+</li>
+<li><p><strong>二次型与半正定矩阵</strong>  </p>
+<ul>
+<li>对称矩阵分类：  <ul>
+<li>正定（PD）：$ x^T A x &gt; 0 \quad (\forall x \neq 0) $。  </li>
+<li>半正定（PSD）：$ x^T A x \geq 0 $。  </li>
+<li>负定（ND）、半负定（NSD）、不定。</li>
+</ul>
+</li>
+<li>Gram 矩阵：$ G &#x3D; A^T A $ 必为半正定；若 $ A $ 列满秩，则 $ G $ 正定。</li>
+</ul>
+</li>
+<li><p><strong>特征值与特征向量</strong>  </p>
+<ul>
+<li>定义：$ A x &#x3D; \lambda x \quad (x \neq 0) $。  </li>
+<li>对称矩阵性质：  <ol>
+<li>特征值为实数。  </li>
+<li>存在正交特征向量集，可对角化：$ A &#x3D; U \Lambda U^T $。</li>
+</ol>
+</li>
+<li>迹与行列式：  <ul>
+<li>$ \text{tr}(A) &#x3D; \sum \lambda_i $。  </li>
+<li>$ |A| &#x3D; \prod \lambda_i $。</li>
+</ul>
+</li>
+<li>优化视角：  <ul>
+<li>最大特征值对应二次型最大值：$ \max_{|x|&#x3D;1} x^T A x &#x3D; \lambda_{\max} $。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4-矩阵微积分"><a href="#4-矩阵微积分" class="headerlink" title="4. 矩阵微积分"></a><strong>4. 矩阵微积分</strong></h2><ul>
+<li><p><strong>梯度（Gradient）</strong>  </p>
+<ul>
+<li>标量函数 $ f: \mathbb{R}^{m \times n} \to \mathbb{R} $，梯度为矩阵：<br>$ (\nabla_A f(A))<em>{ij} &#x3D; \frac{\partial f(A)}{\partial A</em>{ij}} $。  </li>
+<li>重要公式：  <ul>
+<li><strong>$ \nabla_x (b^T x) &#x3D; b $。</strong>  </li>
+<li><strong>$ \nabla_x (x^T A x) &#x3D; 2 A x \quad (A \text{ 对称}) $。</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Hessian 矩阵</strong>  </p>
+<ul>
+<li>定义：二阶偏导数矩阵，对称。  </li>
+<li>二次型：$ \nabla_x^2 (x^T A x) &#x3D; 2 A \quad (A \text{ 对称}) $。</li>
+</ul>
+</li>
+<li><p><strong>最小二乘法</strong>  </p>
+<ul>
+<li>目标函数：$ \min_x |Ax - b|_2^2 $。  </li>
+<li>解：$ x &#x3D; (A^T A)^{-1} A^T b $。</li>
+</ul>
+</li>
+<li><p><strong>行列式的梯度</strong>  </p>
+<ul>
+<li>$ \nabla_A |A| &#x3D; |A| A^{-T} $。  </li>
+<li>对数行列式：$ \nabla_A \log |A| &#x3D; A^{-1} \quad (A \succ 0) $。</li>
+</ul>
+</li>
+<li><p><strong>特征值的优化视角</strong>  </p>
+<ul>
+<li>拉格朗日函数：$ \mathcal{L}(x, \lambda) &#x3D; x^T A x - \lambda (x^T x - 1) $。  </li>
+<li>最优解条件：$ A x &#x3D; \lambda x $，即 $ x $ 为特征向量，$ \lambda $ 为特征值。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="关键总结"><a href="#关键总结" class="headerlink" title="关键总结"></a><strong>关键总结</strong></h3><ol>
+<li><strong>矩阵乘法</strong>需关注不同视角（行、列、外积和）。  </li>
+<li><strong>对称矩阵</strong>的特征值分解是核心工具，用于优化与二次型分析。  </li>
+<li><strong>行列式</strong>的几何意义与递归计算。  </li>
+<li><strong>梯度与Hessian</strong>在优化问题中的应用（如最小二乘、特征值优化）。  </li>
 <li><strong>正定矩阵</strong>的性质在机器学习中至关重要（如协方差矩阵、核函数）。</li>
 </ol>
 
@@ -1226,7 +1132,7 @@ $。<br />
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>2018 Autumn CS229 Lecture9笔记
+          <p>2018 Autumn CS229 Lecture9笔记</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/02/13/Lecture-9/#more" rel="contents">

@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="\[ \nabla f(x) &#x3D; Ax+b^T \] \[ \nabla f(x) &#x3D; g^{&#39;}(h(x))\nabla h(x) \]important \[ \nabla^2 f(x) &#x3D; A \] \[ \nabla f(x) &#x3D; g^{&#39;}(a^Tx)a \\ \nabla^2 f(x) &#x3D; g^{&#39;&#39;}(a^Tx)a">
+    <meta name="description" content="(a)$$\nabla f(x) &#x3D; Ax+b^T$$(b)$$\nabla f(x) &#x3D; g^{‘}(h(x))\nabla h(x)$$important  (c)$$\nabla^2 f(x) &#x3D; A$$(d)$$\nabla f(x) &#x3D; g^{‘}(a^Tx)a \\nabla^2 f(x) &#x3D; g^{‘’}(a^Tx)aa^T$$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PS0solution">
 <meta property="og:url" content="http://example.com/2025/03/08/PS0solution/index.html">
 <meta property="og:site_name" content="iron moon Blog">
-<meta property="og:description" content="\[ \nabla f(x) &#x3D; Ax+b^T \] \[ \nabla f(x) &#x3D; g^{&#39;}(h(x))\nabla h(x) \]important \[ \nabla^2 f(x) &#x3D; A \] \[ \nabla f(x) &#x3D; g^{&#39;}(a^Tx)a \\ \nabla^2 f(x) &#x3D; g^{&#39;&#39;}(a^Tx)a">
+<meta property="og:description" content="(a)$$\nabla f(x) &#x3D; Ax+b^T$$(b)$$\nabla f(x) &#x3D; g^{‘}(h(x))\nabla h(x)$$important  (c)$$\nabla^2 f(x) &#x3D; A$$(d)$$\nabla f(x) &#x3D; g^{‘}(a^Tx)a \\nabla^2 f(x) &#x3D; g^{‘’}(a^Tx)aa^T$$">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-08T09:33:39.000Z">
 <meta property="article:modified_time" content="2025-03-08T09:35:59.028Z">
@@ -211,68 +211,17 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><ol type="1">
-<li></li>
+    <div class="post-body" itemprop="articleBody"><ol>
+<li>(a)<br>$$<br>\nabla f(x) &#x3D; Ax+b^T<br>$$<br>(b)<br>$$<br>\nabla f(x) &#x3D; g^{‘}(h(x))\nabla h(x)<br>$$important</li>
 </ol>
-<ol type="a">
-<li><p><span class="math display">\[
-\nabla f(x) = Ax+b^T
-\]</span></p></li>
-<li><p><span class="math display">\[
-\nabla f(x) = g^{&#39;}(h(x))\nabla h(x)
-\]</span>important</p></li>
-<li><p><span class="math display">\[
-\nabla^2 f(x) = A
-\]</span></p></li>
-<li><p><span class="math display">\[
-\nabla f(x) = g^{&#39;}(a^Tx)a \\
-\nabla^2 f(x) = g^{&#39;&#39;}(a^Tx)aa^T
-\]</span></p></li>
+<p>(c)<br>$$<br>\nabla^2 f(x) &#x3D; A<br>$$<br>(d)<br>$$<br>\nabla f(x) &#x3D; g^{‘}(a^Tx)a \<br>\nabla^2 f(x) &#x3D; g^{‘’}(a^Tx)aa^T<br>$$</p>
+<ol start="2">
+<li>(a)<br>$ A^T &#x3D; (zz^T)^T &#x3D; zz^T &#x3D; A $<br>对于$\forall x \in R^n$<br>有$x^TAx &#x3D; x^Tzz^Tx \<br>  &#x3D; (x^Tz)(x^Tz)^T$</li>
 </ol>
-<ol start="2" type="1">
-<li></li>
-</ol>
-<ol type="a">
-<li><p>$ A^T = (zz<sup>T)</sup>T = zz^T = A $ 对于<span
-class="math inline">\(\forall x \in R^n\)</span> 有<span
-class="math inline">\(x^TAx = x^Tzz^Tx \\
-     = (x^Tz)(x^Tz)^T\)</span> 因为x^Tz 正定 所以A正定
-<strong>(b)</strong> <span class="math inline">\(\because\)</span>
-z为非零向量 <span class="math inline">\(\therefore R(A) = 1\)</span>
-<span class="math inline">\(N(A = {x|z^Tx=0})\)</span> N
-是NullSpace</p></li>
-<li><p>对于<span class="math inline">\(\forall x \in R^m\)</span>
-有<span class="math inline">\(x^TBAB^Tx = (x^TB)A(x^TB)^T\)</span>
-因为A正定，所以 $ (B<sup>Tx)</sup>TA(B^Tx) $ 所以<span
-class="math inline">\(BAB^T\)</span>PSD</p></li>
-</ol>
-<ol start="3" type="1">
-<li>(a). <span class="math display">\[
-\begin{align*}
-\because A &amp;= T\Lambda T^{-1} \\
-\therefore AT &amp;= T\Lambda        \\
-A[t^{(i)}] &amp;= [t^{(i)}]\Lambda      \\
-[At^{(0)},At^{(1)},\cdots,At^{(n-1)}] &amp;= \begin{bmatrix} t^{(0)}
-&amp; t^{(1)}&amp; \cdots &amp; t^{(n-1)}\end{bmatrix}
-\cdot  \begin{bmatrix}
-\lambda^{0} &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
-0 &amp; \lambda^{1} &amp; 0 &amp; \cdots &amp; 0 \\
-0 &amp; 0 &amp; \lambda^{2} &amp; \cdots &amp; 0 \\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-0 &amp; 0 &amp; 0 &amp; \cdots &amp; \lambda^{n-1}
-\end{bmatrix}   \\
-\therefore At^{(i)}&amp;=\lambda t{(i)}
-\end{align*}
-\]</span> (b). <span class="math display">\[
-A=U\Lambda U^T \\
-AU = U\Lambda \\
-\]</span> 然后和a相同 (c). <span class="math inline">\(\because\)</span>
-A is PSD <span class="math inline">\(\therefore\)</span> 对于A的特征矩阵
-有<span class="math inline">\(A = U\Lambda U^T \geq 0\)</span> <span
-class="math inline">\(U\Lambda U^T = [u^{(i)}]\Lambda
-[u^{(i)}]^T\)</span> <span class="math inline">\(=
-\lambda^{(i)}(t^{(i)})^2\)</span> <span class="math inline">\(\therefore
-\lambda^{(i)} \geq 0\)</span></li>
+<p>因为x^Tz 正定<br>所以A正定<br><strong>(b)</strong><br>$\because$ z为非零向量<br>$\therefore R(A) &#x3D; 1$<br>$N(A &#x3D; {x|z^Tx&#x3D;0})$ N 是NullSpace</p>
+<p>(c)<br>对于$\forall x \in R^m$<br>有$x^TBAB^Tx &#x3D; (x^TB)A(x^TB)^T$<br>因为A正定，所以 $ (B^Tx)^TA(B^Tx) \geq 0$<br>所以$BAB^T$PSD</p>
+<ol start="3">
+<li>(a).<br>$$<br>\begin{align*}<br>\because A &amp;&#x3D; T\Lambda T^{-1} \<br>\therefore AT &amp;&#x3D; T\Lambda        \<br>A[t^{(i)}] &amp;&#x3D; [t^{(i)}]\Lambda      \<br>[At^{(0)},At^{(1)},\cdots,At^{(n-1)}] &amp;&#x3D; \begin{bmatrix} t^{(0)} &amp; t^{(1)}&amp; \cdots &amp; t^{(n-1)}\end{bmatrix} \cdot  \begin{bmatrix}<br>\lambda^{0} &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \<br>0 &amp; \lambda^{1} &amp; 0 &amp; \cdots &amp; 0 \<br>0 &amp; 0 &amp; \lambda^{2} &amp; \cdots &amp; 0 \<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>0 &amp; 0 &amp; 0 &amp; \cdots &amp; \lambda^{n-1}<br>\end{bmatrix}   \<br>\therefore At^{(i)}&amp;&#x3D;\lambda t{(i)}<br>\end{align*}<br>$$<br>(b).<br>$$<br>A&#x3D;U\Lambda U^T \<br>AU &#x3D; U\Lambda \<br>$$<br>然后和a相同<br>(c).<br>$\because$ A is PSD<br>$\therefore$ 对于A的特征矩阵  有$A &#x3D; U\Lambda U^T \geq 0$<br>$U\Lambda U^T &#x3D; [u^{(i)}]\Lambda [u^{(i)}]^T$<br>$&#x3D; \lambda^{(i)}(t^{(i)})^2$<br>$\therefore \lambda^{(i)} \geq 0$</li>
 </ol>
 
     </div>
