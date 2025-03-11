@@ -118,7 +118,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -145,6 +145,76 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9FMBR%E6%8D%9F%E5%9D%8F%E7%9A%84%E4%BF%AE%E5%A4%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iron moon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iron moon Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | iron moon Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9FMBR%E6%8D%9F%E5%9D%8F%E7%9A%84%E4%BF%AE%E5%A4%8D/" class="post-title-link" itemprop="url">记录一次操作系统MBR损坏的修复</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-03-11 22:03:51 / Modified: 22:30:23" itemprop="dateCreated datePublished" datetime="2025-03-11T22:03:51+08:00">2025-03-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>由于一开始在进行OS课设学习的时候<br><img src="/2025/02/23/Lecture-3/R%E6%8D%9F%E5%9D%8F%E7%9A%84%E4%BF%AE%E5%A4%8D/image.png" alt="alt text"><br>直接将这个引导程序部署到了使用的Ubuntu机上，而没有使用虚拟环境<br>所以就出现了重启后一直跳 Hello OS world的字符而进不去Ubuntu系统<br><img src="/2025/02/23/Lecture-3/R%E6%8D%9F%E5%9D%8F%E7%9A%84%E4%BF%AE%E5%A4%8D/image-4.png" alt="alt text"><br>此次也知道了VMworkstation的虚拟机的快照是没有对BIOS设置方面的快照的，也就是一旦虚拟机的引导软盘像这样损坏，那所有快照重启都会print hello OS world<br>重启 一直按F2键进入BIOS界面  这里必须按快一点 否则需要改配置让BIOS那个判断停留久一点<br><img src="/2025/02/23/Lecture-3/R%E6%8D%9F%E5%9D%8F%E7%9A%84%E4%BF%AE%E5%A4%8D/image-2.png" alt="alt text"><br>如果实在进不去  则找到对应虚拟机的vmx配置文件，然后在其末尾添加<br>bios.bootDelay &#x3D; “5000”这一行配置<br><img src="/2025/02/23/Lecture-3/R%E6%8D%9F%E5%9D%8F%E7%9A%84%E4%BF%AE%E5%A4%8D/image-5.png" alt="alt text"><br>进入BIOS界面<br><img src="/2025/02/23/Lecture-3/R%E6%8D%9F%E5%9D%8F%E7%9A%84%E4%BF%AE%E5%A4%8D/image-1.png" alt="alt text"><br>查看BOOT选项下面<br><img src="/2025/02/23/Lecture-3/R%E6%8D%9F%E5%9D%8F%E7%9A%84%E4%BF%AE%E5%A4%8D/image-3.png" alt="alt text"><br>然后选择将Hard Drive放在最前面  让主引导程序为HardDrive<br><img src="/2025/02/23/Lecture-3/R%E6%8D%9F%E5%9D%8F%E7%9A%84%E4%BF%AE%E5%A4%8D/image-6.png" alt="alt text"><br>其实这样也只是治标不治本，不过已经够用了</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -759,7 +829,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-03-10 09:55:48" itemprop="dateModified" datetime="2025-03-10T09:55:48+08:00">2025-03-10</time>
+      <time title="Modified: 2025-03-10 09:56:59" itemprop="dateModified" datetime="2025-03-10T09:56:59+08:00">2025-03-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1227,7 +1297,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-03-08 17:35:54" itemprop="dateModified" datetime="2025-03-08T17:35:54+08:00">2025-03-08</time>
+      <time title="Modified: 2025-03-08 17:39:56" itemprop="dateModified" datetime="2025-03-08T17:39:56+08:00">2025-03-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1253,89 +1323,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/02/13/Lecture-9/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="iron moon">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="iron moon Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | iron moon Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/" class="post-title-link" itemprop="url">软件安全复习</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-02-13 19:15:28" itemprop="dateCreated datePublished" datetime="2025-02-13T19:15:28+08:00">2025-02-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-02-21 17:19:28" itemprop="dateModified" datetime="2025-02-21T17:19:28+08:00">2025-02-21</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>软件安全复习总结</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
