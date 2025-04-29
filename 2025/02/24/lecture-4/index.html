@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="感知器算法(Perceptron Algorithm)基本思想: 通过迭代调整权重向量寻找能分隔不同类别数据点的超平面特点:     属于线性分类算法 实际应用效果有限, 通常被更先进的算法取代 无法处理非线性可分数据  指数族分布(Exponential Family)数学定义概率密度&#x2F;质量函数形式:$$p(x|\eta) &#x3D; b(x) \exp\left(\eta^T T(">
+    <meta name="description" content="感知器算法(Perceptron Algorithm) 基本思想: 通过迭代调整权重向量寻找能分隔不同类别数据点的超平面 特点: - 属于线性分类算法 - 实际应用效果有限, 通常被更先进的算法取代 - 无法处理非线性可分数据 指数族分布(Exponential Family) 数学定义 概率密度&#x2F;质量函数形式: \[p(x|\eta) &#x3D; b(x) \exp\left(\e">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lecture-4">
 <meta property="og:url" content="http://example.com/2025/02/24/lecture-4/index.html">
 <meta property="og:site_name" content="iron moon Blog">
-<meta property="og:description" content="感知器算法(Perceptron Algorithm)基本思想: 通过迭代调整权重向量寻找能分隔不同类别数据点的超平面特点:     属于线性分类算法 实际应用效果有限, 通常被更先进的算法取代 无法处理非线性可分数据  指数族分布(Exponential Family)数学定义概率密度&#x2F;质量函数形式:$$p(x|\eta) &#x3D; b(x) \exp\left(\eta^T T(">
+<meta property="og:description" content="感知器算法(Perceptron Algorithm) 基本思想: 通过迭代调整权重向量寻找能分隔不同类别数据点的超平面 特点: - 属于线性分类算法 - 实际应用效果有限, 通常被更先进的算法取代 - 无法处理非线性可分数据 指数族分布(Exponential Family) 数学定义 概率密度&#x2F;质量函数形式: \[p(x|\eta) &#x3D; b(x) \exp\left(\e">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-02-24T08:55:06.000Z">
-<meta property="article:modified_time" content="2025-03-08T10:24:43.651Z">
+<meta property="article:modified_time" content="2025-04-29T08:35:16.690Z">
 <meta property="article:author" content="iron moon">
 <meta property="article:tag" content="2018Autumn">
 <meta name="twitter:card" content="summary">
@@ -111,7 +111,9 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%84%9F%E7%9F%A5%E5%99%A8%E7%AE%97%E6%B3%95-Perceptron-Algorithm"><span class="nav-number">1.</span> <span class="nav-text">感知器算法(Perceptron Algorithm)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E6%97%8F%E5%88%86%E5%B8%83-Exponential-Family"><span class="nav-number">2.</span> <span class="nav-text">指数族分布(Exponential Family)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">数学定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E6%80%A7%E8%B4%A8"><span class="nav-number">2.2.</span> <span class="nav-text">重要性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%88%86%E5%B8%83%E5%AF%B9%E5%BA%94%E8%A1%A8"><span class="nav-number">2.3.</span> <span class="nav-text">常见分布对应表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B-GLM"><span class="nav-number">3.</span> <span class="nav-text">广义线性模型(GLM)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%81%87%E8%AE%BE"><span class="nav-number">3.1.</span> <span class="nav-text">核心假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%8C%96%E4%BD%93%E7%B3%BB"><span class="nav-number">3.2.</span> <span class="nav-text">参数化体系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B"><span class="nav-number">3.3.</span> <span class="nav-text">训练过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E7%A4%BA%E4%BE%8B-Logistic%E5%9B%9E%E5%BD%92"><span class="nav-number">3.4.</span> <span class="nav-text">典型示例: Logistic回归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax%E5%9B%9E%E5%BD%92-%E5%A4%9A%E5%88%86%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">Softmax回归(多分类)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6"><span class="nav-number">4.1.</span> <span class="nav-text">核心机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9B%AE%E6%A0%87"><span class="nav-number">4.2.</span> <span class="nav-text">优化目标</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%84%9F%E7%9F%A5%E5%99%A8%E7%AE%97%E6%B3%95perceptron-algorithm"><span class="nav-number">1.</span> <span class="nav-text">感知器算法(Perceptron
+Algorithm)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E6%97%8F%E5%88%86%E5%B8%83exponential-family"><span class="nav-number">2.</span> <span class="nav-text">指数族分布(Exponential
+Family)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">数学定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%88%86%E5%B8%83%E5%AF%B9%E5%BA%94%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">常见分布对应表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E4%B9%89%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8Bglm"><span class="nav-number">3.</span> <span class="nav-text">广义线性模型(GLM)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%81%87%E8%AE%BE"><span class="nav-number">3.1.</span> <span class="nav-text">核心假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%8C%96%E4%BD%93%E7%B3%BB"><span class="nav-number">3.2.</span> <span class="nav-text">参数化体系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B"><span class="nav-number">3.3.</span> <span class="nav-text">训练过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E7%A4%BA%E4%BE%8B-logistic%E5%9B%9E%E5%BD%92"><span class="nav-number">3.4.</span> <span class="nav-text">典型示例: Logistic回归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#softmax%E5%9B%9E%E5%BD%92%E5%A4%9A%E5%88%86%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">Softmax回归(多分类)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6"><span class="nav-number">4.1.</span> <span class="nav-text">核心机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%9B%AE%E6%A0%87"><span class="nav-number">4.2.</span> <span class="nav-text">优化目标</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -197,7 +199,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-03-08 18:24:43" itemprop="dateModified" datetime="2025-03-08T18:24:43+08:00">2025-03-08</time>
+      <time title="Modified: 2025-04-29 16:35:16" itemprop="dateModified" datetime="2025-04-29T16:35:16+08:00">2025-04-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -218,15 +220,26 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="感知器算法-Perceptron-Algorithm"><a href="#感知器算法-Perceptron-Algorithm" class="headerlink" title="感知器算法(Perceptron Algorithm)"></a>感知器算法(Perceptron Algorithm)</h2><p><strong>基本思想</strong>: 通过迭代调整权重向量寻找能分隔不同类别数据点的超平面<br><strong>特点</strong>:   </p>
-<ul>
-<li>属于线性分类算法</li>
-<li>实际应用效果有限, 通常被更先进的算法取代</li>
-<li>无法处理非线性可分数据</li>
-</ul>
-<h2 id="指数族分布-Exponential-Family"><a href="#指数族分布-Exponential-Family" class="headerlink" title="指数族分布(Exponential Family)"></a>指数族分布(Exponential Family)</h2><h3 id="数学定义"><a href="#数学定义" class="headerlink" title="数学定义"></a>数学定义</h3><p>概率密度&#x2F;质量函数形式:<br>$$p(x|\eta) &#x3D; b(x) \exp\left(\eta^T T(x) - a(\eta)\right)$$</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="感知器算法perceptron-algorithm">感知器算法(Perceptron
+Algorithm)</h2>
+<p><strong>基本思想</strong>:
+通过迭代调整权重向量寻找能分隔不同类别数据点的超平面<br />
+<strong>特点</strong>:<br />
+- 属于线性分类算法 - 实际应用效果有限, 通常被更先进的算法取代 -
+无法处理非线性可分数据</p>
+<h2 id="指数族分布exponential-family">指数族分布(Exponential
+Family)</h2>
+<h3 id="数学定义">数学定义</h3>
+<p>概率密度/质量函数形式:<br />
+<span class="math display">\[p(x|\eta) = b(x) \exp\left(\eta^T T(x) -
+a(\eta)\right)\]</span></p>
 <p><strong>参数说明</strong>:</p>
 <table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 19%" />
+<col style="width: 74%" />
+</colgroup>
 <thead>
 <tr>
 <th>符号</th>
@@ -234,43 +247,40 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>$x$</td>
+<tbody>
+<tr>
+<td><span class="math inline">\(x\)</span></td>
 <td>随机变量</td>
 <td>观测数据点</td>
 </tr>
 <tr>
-<td>$\eta$</td>
+<td><span class="math inline">\(\eta\)</span></td>
 <td>自然参数</td>
 <td>决定分布形式的参数向量</td>
 </tr>
 <tr>
-<td>$T(x)$</td>
+<td><span class="math inline">\(T(x)\)</span></td>
 <td>充分统计量</td>
 <td>包含参数全部信息的函数(在CS229课程中常简化为$ x $)</td>
 </tr>
 <tr>
-<td>$b(x)$</td>
+<td><span class="math inline">\(b(x)\)</span></td>
 <td>基函数</td>
 <td><strong>与参数无关的基础测量函数</strong></td>
 </tr>
 <tr>
-<td>$a(\eta)$</td>
+<td><span class="math inline">\(a(\eta)\)</span></td>
 <td>对数归一化因子</td>
-<td>确保概率积分为1的归一化项, 满足 $a(\eta) &#x3D; \log\int b(x)\exp(\eta^T T(x))dx $</td>
+<td>确保概率积分为1的归一化项, 满足 $a() = b(x)(^T T(x))dx $</td>
 </tr>
-</tbody></table>
-<p>b(x)与参数无关  非常重要</p>
-<h3 id="重要性质"><a href="#重要性质" class="headerlink" title="重要性质"></a>重要性质</h3><ol>
-<li><strong>凸优化特性</strong>: 在自然参数空间中对数似然函数是凹函数, 保证MLE有全局最优解</li>
-<li><strong>矩计算</strong>: <ul>
-<li>期望: $ \mathbb{E}[T(x)] &#x3D; \frac{\partial a(\eta)}{\partial \eta} $</li>
-<li>方差: $ \text{Var}[T(x)] &#x3D; \frac{\partial^2 a(\eta)}{\partial \eta^2} $</li>
-</ul>
-</li>
-<li><strong>统一表示</strong>: 涵盖常见概率分布(见下表)</li>
-</ol>
-<h3 id="常见分布对应表"><a href="#常见分布对应表" class="headerlink" title="常见分布对应表"></a>常见分布对应表</h3><table>
+</tbody>
+</table>
+<p>b(x)与参数无关 非常重要 ### 重要性质 1. <strong>凸优化特性</strong>:
+在自然参数空间中对数似然函数是凹函数, 保证MLE有全局最优解 2.
+<strong>矩计算</strong>: - 期望: $ [T(x)] = $ - 方差: $ [T(x)] = $ 3.
+<strong>统一表示</strong>: 涵盖常见概率分布(见下表)</p>
+<h3 id="常见分布对应表">常见分布对应表</h3>
+<table>
 <thead>
 <tr>
 <th>数据类型</th>
@@ -278,7 +288,8 @@
 <th>典型应用场景</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>连续值(实数域)</td>
 <td>高斯分布(Gaussian)</td>
 <td>回归问题</td>
@@ -295,22 +306,27 @@
 </tr>
 <tr>
 <td>正实数</td>
-<td>Gamma&#x2F;指数分布</td>
+<td>Gamma/指数分布</td>
 <td>生存分析</td>
 </tr>
 <tr>
 <td>概率分布</td>
-<td>Beta&#x2F;Dirichlet分布</td>
+<td>Beta/Dirichlet分布</td>
 <td>贝叶斯统计中的先验分布</td>
 </tr>
-</tbody></table>
-<hr>
-<h2 id="广义线性模型-GLM"><a href="#广义线性模型-GLM" class="headerlink" title="广义线性模型(GLM)"></a>广义线性模型(GLM)</h2><h3 id="核心假设"><a href="#核心假设" class="headerlink" title="核心假设"></a>核心假设</h3><ol>
-<li><strong>响应变量分布</strong>: $ y|x;\theta \sim \text{ExponentialFamily}(\eta) $</li>
-<li><strong>线性组合</strong>: 自然参数满足 $ \eta &#x3D; \theta^T x $($ \theta \in \mathbb{R}^n, x \in \mathbb{R}^n $)</li>
-<li><strong>输出预测</strong>: $ h_\theta(x) &#x3D; \mathbb{E}[y|x;\theta] &#x3D; g^{-1}(\eta) $, 其中 $ g^{-1} $ 为连接函数</li>
+</tbody>
+</table>
+<h2 id="广义线性模型glm">广义线性模型(GLM)</h2>
+<h3 id="核心假设">核心假设</h3>
+<ol type="1">
+<li><strong>响应变量分布</strong>: $ y|x;() $</li>
+<li><strong>线性组合</strong>: 自然参数满足 $ = ^T x <span
+class="math inline">\((\)</span> ^n, x ^n $)</li>
+<li><strong>输出预测</strong>: $ h_(x) = [y|x;] = g^{-1}() $, 其中 $
+g^{-1} $ 为连接函数</li>
 </ol>
-<h3 id="参数化体系"><a href="#参数化体系" class="headerlink" title="参数化体系"></a>参数化体系</h3><table>
+<h3 id="参数化体系">参数化体系</h3>
+<table>
 <thead>
 <tr>
 <th>模型参数(θ)</th>
@@ -318,23 +334,38 @@
 <th>规范参数(μ)</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>待学习权重</td>
-<td>$ \theta^Tx $</td>
-<td>$\mathbb{E}[y|x]$</td>
+<td>$ ^Tx $</td>
+<td><span class="math inline">\(\mathbb{E}[y\|x]\)</span></td>
 </tr>
-</tbody></table>
-<h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p>采用梯度下降法更新参数:<br>$$\theta_j :&#x3D; \theta_j - \alpha \left( h_\theta(x^{(i)}) - y^{(i)} \right) x_j^{(i)}$$</p>
-<h3 id="典型示例-Logistic回归"><a href="#典型示例-Logistic回归" class="headerlink" title="典型示例: Logistic回归"></a>典型示例: Logistic回归</h3><ol>
-<li><strong>连接函数</strong>: $ g(\mu) &#x3D; \ln(\mu&#x2F;(1-\mu)) $</li>
-<li><strong>预测函数</strong>:<br>$$h_\theta(x) &#x3D; \sigma(\theta^T x) &#x3D; \frac{1}{1+e^{-\theta^T x}}$$<br>其中 $ \sigma(\cdot) $ 为sigmoid函数, 对应伯努利分布的期望计算</li>
+</tbody>
+</table>
+<h3 id="训练过程">训练过程</h3>
+<p>采用梯度下降法更新参数: <span class="math display">\[\theta_j :=
+\theta_j - \alpha \left( h_\theta(x^{(i)}) - y^{(i)} \right)
+x_j^{(i)}\]</span></p>
+<h3 id="典型示例-logistic回归">典型示例: Logistic回归</h3>
+<ol type="1">
+<li><strong>连接函数</strong>: $ g() = (/(1-)) $</li>
+<li><strong>预测函数</strong>: <span class="math display">\[h_\theta(x)
+= \sigma(\theta^T x) = \frac{1}{1+e^{-\theta^T x}}\]</span> 其中 $ () $
+为sigmoid函数, 对应伯努利分布的期望计算</li>
 </ol>
-<hr>
-<h2 id="Softmax回归-多分类"><a href="#Softmax回归-多分类" class="headerlink" title="Softmax回归(多分类)"></a>Softmax回归(多分类)</h2><h3 id="核心机制"><a href="#核心机制" class="headerlink" title="核心机制"></a>核心机制</h3><ol>
+<h2 id="softmax回归多分类">Softmax回归(多分类)</h2>
+<h3 id="核心机制">核心机制</h3>
+<ol type="1">
 <li><strong>扩展逻辑</strong>: 将二分类推广到多分类场景</li>
-<li><strong>输出层设计</strong>: 使用softmax函数生成类别概率分布:<br>$$p(y&#x3D;k|x) &#x3D; \frac{e^{\theta_k^T x}}{\sum_{j&#x3D;1}^K e^{\theta_j^T x}}$$</li>
+<li><strong>输出层设计</strong>: 使用softmax函数生成类别概率分布: <span
+class="math display">\[p(y=k|x) = \frac{e^{\theta_k^T x}}{\sum_{j=1}^K
+e^{\theta_j^T x}}\]</span></li>
 </ol>
-<h3 id="优化目标"><a href="#优化目标" class="headerlink" title="优化目标"></a>优化目标</h3><p>最小化交叉熵损失:<br>$$\mathcal{L}(\theta) &#x3D; -\sum_{i&#x3D;1}^m \sum_{k&#x3D;1}^K \mathbb{I}{y^{(i)}&#x3D;k} \log \frac{e^{\theta_k^T x^{(i)}}}{\sum_{j&#x3D;1}^K e^{\theta_j^T x^{(i)}}}$$</p>
+<h3 id="优化目标">优化目标</h3>
+<p>最小化交叉熵损失: <span class="math display">\[\mathcal{L}(\theta) =
+-\sum_{i=1}^m \sum_{k=1}^K \mathbb{I}\{y^{(i)}=k\} \log
+\frac{e^{\theta_k^T x^{(i)}}}{\sum_{j=1}^K e^{\theta_j^T
+x^{(i)}}}\]</span></p>
 
     </div>
 
