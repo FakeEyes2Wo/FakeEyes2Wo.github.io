@@ -216,20 +216,18 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>由于一开始在进行OS课设学习的时候 <img src="image.png"
+    <div class="post-body" itemprop="articleBody"><p>由于一开始在进行OS课设学习的时候 <img data-src="image.png"
 alt="alt text" />
 直接将这个引导程序部署到了使用的Ubuntu机上，而没有使用虚拟环境
-所以就出现了重启后一直跳 Hello OS world的字符而进不去Ubuntu系统 <img
-src="image-4.png" alt="alt text" />
+所以就出现了重启后一直跳 Hello OS world的字符而进不去Ubuntu系统 <img data-src="image-4.png" alt="alt text" />
 此次也知道了VMworkstation的虚拟机的快照是没有对BIOS设置方面的快照的，也就是一旦虚拟机的引导软盘像这样损坏，那所有快照重启都会print
 hello OS world 重启 一直按F2键进入BIOS界面 这里必须按快一点
-否则需要改配置让BIOS那个判断停留久一点 <img src="image-2.png"
+否则需要改配置让BIOS那个判断停留久一点 <img data-src="image-2.png"
 alt="alt text" /> 如果实在进不去
 则找到对应虚拟机的vmx配置文件，然后在其末尾添加 bios.bootDelay =
-"5000"这一行配置 <img src="image-5.png" alt="alt text" /> 进入BIOS界面
-<img src="image-1.png" alt="alt text" /> 查看BOOT选项下面 <img
-src="image-3.png" alt="alt text" /> 然后选择将Hard Drive放在最前面
-让主引导程序为HardDrive <img src="image-6.png" alt="alt text" />
+"5000"这一行配置 <img data-src="image-5.png" alt="alt text" /> 进入BIOS界面
+<img data-src="image-1.png" alt="alt text" /> 查看BOOT选项下面 <img data-src="image-3.png" alt="alt text" /> 然后选择将Hard Drive放在最前面
+让主引导程序为HardDrive <img data-src="image-6.png" alt="alt text" />
 其实这样也只是治标不治本，不过已经够用了</p>
 
     </div>

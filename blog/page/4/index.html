@@ -226,153 +226,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="感知器算法perceptron-algorithm">感知器算法(Perceptron
-Algorithm)</h2>
-<p><strong>基本思想</strong>:
-通过迭代调整权重向量寻找能分隔不同类别数据点的超平面<br />
-<strong>特点</strong>:<br />
-- 属于线性分类算法 - 实际应用效果有限, 通常被更先进的算法取代 -
-无法处理非线性可分数据</p>
-<h2 id="指数族分布exponential-family">指数族分布(Exponential
-Family)</h2>
-<h3 id="数学定义">数学定义</h3>
-<p>概率密度/质量函数形式:<br />
-<span class="math display">\[p(x|\eta) = b(x) \exp\left(\eta^T T(x) -
-a(\eta)\right)\]</span></p>
-<p><strong>参数说明</strong>:</p>
-<table>
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 19%" />
-<col style="width: 74%" />
-</colgroup>
-<thead>
-<tr>
-<th>符号</th>
-<th>名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="math inline">\(x\)</span></td>
-<td>随机变量</td>
-<td>观测数据点</td>
-</tr>
-<tr>
-<td><span class="math inline">\(\eta\)</span></td>
-<td>自然参数</td>
-<td>决定分布形式的参数向量</td>
-</tr>
-<tr>
-<td><span class="math inline">\(T(x)\)</span></td>
-<td>充分统计量</td>
-<td>包含参数全部信息的函数(在CS229课程中常简化为$ x $)</td>
-</tr>
-<tr>
-<td><span class="math inline">\(b(x)\)</span></td>
-<td>基函数</td>
-<td><strong>与参数无关的基础测量函数</strong></td>
-</tr>
-<tr>
-<td><span class="math inline">\(a(\eta)\)</span></td>
-<td>对数归一化因子</td>
-<td>确保概率积分为1的归一化项, 满足 $a() = b(x)(^T T(x))dx $</td>
-</tr>
-</tbody>
-</table>
-<p>b(x)与参数无关 非常重要 ### 重要性质 1. <strong>凸优化特性</strong>:
-在自然参数空间中对数似然函数是凹函数, 保证MLE有全局最优解 2.
-<strong>矩计算</strong>: - 期望: $ [T(x)] = $ - 方差: $ [T(x)] = $ 3.
-<strong>统一表示</strong>: 涵盖常见概率分布(见下表)</p>
-<h3 id="常见分布对应表">常见分布对应表</h3>
-<table>
-<thead>
-<tr>
-<th>数据类型</th>
-<th>分布类型</th>
-<th>典型应用场景</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>连续值(实数域)</td>
-<td>高斯分布(Gaussian)</td>
-<td>回归问题</td>
-</tr>
-<tr>
-<td>二元离散值</td>
-<td>伯努利分布(Bernoulli)</td>
-<td>二分类</td>
-</tr>
-<tr>
-<td>计数数据</td>
-<td>泊松分布(Poisson)</td>
-<td>事件计数建模</td>
-</tr>
-<tr>
-<td>正实数</td>
-<td>Gamma/指数分布</td>
-<td>生存分析</td>
-</tr>
-<tr>
-<td>概率分布</td>
-<td>Beta/Dirichlet分布</td>
-<td>贝叶斯统计中的先验分布</td>
-</tr>
-</tbody>
-</table>
-<h2 id="广义线性模型glm">广义线性模型(GLM)</h2>
-<h3 id="核心假设">核心假设</h3>
-<ol type="1">
-<li><strong>响应变量分布</strong>: $ y|x;() $</li>
-<li><strong>线性组合</strong>: 自然参数满足 $ = ^T x <span
-class="math inline">\((\)</span> ^n, x ^n $)</li>
-<li><strong>输出预测</strong>: $ h_(x) = [y|x;] = g^{-1}() $, 其中 $
-g^{-1} $ 为连接函数</li>
-</ol>
-<h3 id="参数化体系">参数化体系</h3>
-<table>
-<thead>
-<tr>
-<th>模型参数(θ)</th>
-<th>自然参数(η)</th>
-<th>规范参数(μ)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>待学习权重</td>
-<td>$ ^Tx $</td>
-<td><span class="math inline">\(\mathbb{E}[y\|x]\)</span></td>
-</tr>
-</tbody>
-</table>
-<h3 id="训练过程">训练过程</h3>
-<p>采用梯度下降法更新参数: <span class="math display">\[\theta_j :=
-\theta_j - \alpha \left( h_\theta(x^{(i)}) - y^{(i)} \right)
-x_j^{(i)}\]</span></p>
-<h3 id="典型示例-logistic回归">典型示例: Logistic回归</h3>
-<ol type="1">
-<li><strong>连接函数</strong>: $ g() = (/(1-)) $</li>
-<li><strong>预测函数</strong>: <span class="math display">\[h_\theta(x)
-= \sigma(\theta^T x) = \frac{1}{1+e^{-\theta^T x}}\]</span> 其中 $ () $
-为sigmoid函数, 对应伯努利分布的期望计算</li>
-</ol>
-<h2 id="softmax回归多分类">Softmax回归(多分类)</h2>
-<h3 id="核心机制">核心机制</h3>
-<ol type="1">
-<li><strong>扩展逻辑</strong>: 将二分类推广到多分类场景</li>
-<li><strong>输出层设计</strong>: 使用softmax函数生成类别概率分布: <span
-class="math display">\[p(y=k|x) = \frac{e^{\theta_k^T x}}{\sum_{j=1}^K
-e^{\theta_j^T x}}\]</span></li>
-</ol>
-<h3 id="优化目标">优化目标</h3>
-<p>最小化交叉熵损失: <span class="math display">\[\mathcal{L}(\theta) =
--\sum_{i=1}^m \sum_{k=1}^K \mathbb{I}\{y^{(i)}=k\} \log
-\frac{e^{\theta_k^T x^{(i)}}}{\sum_{j=1}^K e^{\theta_j^T
-x^{(i)}}}\]</span></p>
-
+          <p>感知器算法(Perceptron Algorithm) 基本思想: 通过迭代调整权重向量寻找能分隔不同类别数据点的超平面 特点: - 属于线性分类算法 - 实际应用效果有限, 通常被更先进的算法取代 - 无法处理非线性可分数据 指数族分布(Exponential Family)...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/24/Lecture-4/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -539,10 +401,10 @@ x^{(i)}}}\]</span></p>
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>课程设计
+          <p>课程设计 # 软件安全课程设计 任务资料 pcap-sample.zip 网络与系统安全课程设计指导手册-2025v3 Task1 依赖安装 下面的代码只实现了基本的功能 task1_version0.zip 这段代码只实现了从pcap-sample.c增加代码实现顺序包重组的功...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/#more" rel="contents">
+              <a class="btn" href="/2025/02/21/%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -631,10 +493,10 @@ x^{(i)}}}\]</span></p>
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>2018 Autumn CS229 Lecture9笔记
+          <p>2018 Autumn CS229 Lecture9笔记 # 偏差-方差 测试误差分解为"bias"和"variance"项, 并研究它们中的每一个是如何受到模型参数化选择及其权衡的影响的。使用偏差-方差权衡, 我们将讨论何时会发生过拟合和欠拟合并避免。 测试误差和训练误差之间的...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/13/Lecture-9/#more" rel="contents">
+              <a class="btn" href="/2025/02/13/Lecture-9/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -714,10 +576,10 @@ x^{(i)}}}\]</span></p>
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>软件安全复习总结
+          <p>软件安全复习总结 # 第三章 恶意代码 恶意代码与正常软件安全问题的差异 恶意代码：设计目的是用来实现恶意功能的代码或程序 正常软件也会引发安全问题，但绝大多数情况并非作者有意 恶意代码攻击目的 恶作剧和炫耀技术 追求经济利益 参与商业竞争 实现政治意图 服务于军事目标 恶意代码...</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/#more" rel="contents">
+              <a class="btn" href="/2025/02/13/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E5%A4%8D%E4%B9%A0/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -791,30 +653,15 @@ x^{(i)}}}\]</span></p>
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very
-first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for
-more info. If you get any problems when using Hexo, you can find the
-answer in <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
-you can ask me on <a
-target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+          <p>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/13/hello-world/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

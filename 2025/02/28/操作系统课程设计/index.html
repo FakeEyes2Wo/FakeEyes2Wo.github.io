@@ -289,7 +289,7 @@ FreeDOS 镜像。</li>
 <li><strong>在 FreeDOS 中运行程序</strong>
 <ul>
 <li>在 FreeDOS 中执行以下命令： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B:\pmtest1.com</span><br></pre></td></tr></table></figure></li>
-<li>如果一切正常，屏幕上会显示一个红色的字母“P”如图 <img src="image.png"
+<li>如果一切正常，屏幕上会显示一个红色的字母“P”如图 <img data-src="image.png"
 alt="alt text" /></li>
 </ul></li>
 </ol>
@@ -299,7 +299,7 @@ alt="alt text" /></li>
 那么需要有一个boot.asm然后将我们的展示代码写道Loader中去。</p>
 <h3 id="段选择子结构">段选择子结构</h3>
 <figure>
-<img src="Selector_Structure.png" alt="段选择子结构" />
+<img data-src="Selector_Structure.png" alt="段选择子结构" />
 <figcaption aria-hidden="true">段选择子结构</figcaption>
 </figure>
 <hr />
@@ -351,7 +351,7 @@ alt="alt text" /></li>
 <p>在保护模式下，要访问 4gb
 的内存空间，再采取实模式下的方法是远远不够的，所以段寄存器中存储的数据变成了选择子，其格式如下图所示，其中索引值即
 gdt 中索引值，TI 用于指示是去 GDT 还是 LDT 中寻找段基址，RPL 是特权级
-<img src="Selector_Structure.png" alt="Selector_Structure" /></p>
+<img data-src="Selector_Structure.png" alt="Selector_Structure" /></p>
 <h5 id="参考资料">参考资料</h5>
 <ul>
 <li>https://www.cnblogs.com/fdxsec/p/18655799</li>

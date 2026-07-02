@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="2018 Autumn CS229 Lecture9笔记">
+    <meta name="description" content="2018 Autumn CS229 Lecture9笔记 # 偏差-方差 测试误差分解为&quot;bias&quot;和&quot;variance&quot;项, 并研究它们中的每一个是如何受到模型参数化选择及其权衡的影响的。使用偏差-方差权衡, 我们将讨论何时会发生过拟合和欠拟合并避免。 测试误差和训练误差之间的...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lecture 9">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2025/02/13/Lecture-9/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="2018 Autumn CS229 Lecture9笔记">
+<meta property="og:description" content="2018 Autumn CS229 Lecture9笔记 # 偏差-方差 测试误差分解为&quot;bias&quot;和&quot;variance&quot;项, 并研究它们中的每一个是如何受到模型参数化选择及其权衡的影响的。使用偏差-方差权衡, 我们将讨论何时会发生过拟合和欠拟合并避免。 测试误差和训练误差之间的...">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://fakeeyes2wo.github.io/2025/02/13/Lecture-9/image.png">
 <meta property="og:image" content="https://fakeeyes2wo.github.io/2025/02/13/Lecture-9/image9_2.png">
@@ -198,7 +198,7 @@ Class）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a cla
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="Lecture 9 | Iron Moon Blog">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="2018 Autumn CS229 Lecture9笔记 # 偏差-方差 测试误差分解为"bias"和"variance"项, 并研究它们中的每一个是如何受到模型参数化选择及其权衡的影响的。使用偏差-方差权衡, 我们将讨论何时会发生过拟合和欠拟合并避免。 测试误差和训练误差之间的...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -235,6 +235,7 @@ Class）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a cla
   
 </div>
 
+            <div class="post-description">2018 Autumn CS229 Lecture9笔记 # 偏差-方差 测试误差分解为"bias"和"variance"项, 并研究它们中的每一个是如何受到模型参数化选择及其权衡的影响的。使用偏差-方差权衡, 我们将讨论何时会发生过拟合和欠拟合并避免。 测试误差和训练误差之间的...</div>
         </div>
       </header>
 
@@ -250,7 +251,7 @@ Class）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a cla
 那么它可能会有很大的偏差（但方差很小）,
 并且它通常会遭受欠拟合。如果它太“复杂”并且有很多参数,
 那么它可能会受到大方差的影响（但偏差较小）,
-从而导致过拟合。偏差和方差之间的典型权衡如下 <img src="image.png"
+从而导致过拟合。偏差和方差之间的典型权衡如下 <img data-src="image.png"
 alt="alt text" /> <strong>图8.8 偏差-方差权衡曲线</strong>
 偏差-方差权衡曲线或测试误差曲线并不普遍地遵循图8.8的形状,
 至少在简单地通过参数数量来衡量模型复杂性时不是普遍的。</p>
@@ -264,7 +265,7 @@ alt="alt text" /> <strong>图8.8 偏差-方差权衡曲线</strong>
 测试误差会再次下降, 形成第二个下降区域, 称为“双下降”。</li>
 </ul>
 <figure>
-<img src="image9_2.png" alt="alt text" />
+<img data-src="image9_2.png" alt="alt text" />
 <figcaption aria-hidden="true">alt text</figcaption>
 </figure>
 <h3 id="逐样本双下降">逐样本双下降</h3>
@@ -274,8 +275,7 @@ alt="alt text" /> <strong>图8.8 偏差-方差权衡曲线</strong>
 然后再次减小。我们称之为样本双下降现象。 当n≈d时,
 还有其他算法可以实现较小的测试误差,
 但这些实验中评估的算法未能做到这一点。 事实上, 可以通过优化正则化,
-n≈d区域的测试误差可以得到显著改善, 模型和样本双下降都得到了缓解 <img
-src="image9_3.png" alt="alt text" /></p>
+n≈d区域的测试误差可以得到显著改善, 模型和样本双下降都得到了缓解 <img data-src="image9_3.png" alt="alt text" /></p>
 <h2 id="样本复杂性界限">样本复杂性界限</h2>
 <h3 id="切尔诺夫界chernoff-bound霍夫丁不等式">切尔诺夫界（Chernoff
 Bound）/霍夫丁不等式</h3>
