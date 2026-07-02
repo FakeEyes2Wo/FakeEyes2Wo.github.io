@@ -1323,7 +1323,7 @@ pre code {
     transition: all 0.2s ease-in-out;
   }
   .links-of-author a::before {
-    background: #ff4730;
+    background: #ff2f34;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2954,42 +2954,6 @@ body {
 .home-route.active {
   color: #fff;
 }
-.home-strip {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  overflow: hidden;
-  margin-bottom: 42px;
-  border: 1px solid rgba(87,83,78,0.14);
-  border-radius: 14px;
-  background: rgba(87,83,78,0.14);
-}
-.home-strip a {
-  display: block;
-  padding: 18px;
-  background: rgba(255,255,255,0.82);
-  color: inherit;
-  text-decoration: none;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-.home-strip a:hover,
-.home-strip a:focus {
-  background: #fff7ed;
-  transform: translateY(-2px);
-}
-.home-strip strong,
-.home-strip span {
-  display: block;
-}
-.home-strip strong {
-  color: #1c1917;
-  font-size: 1rem;
-}
-.home-strip span {
-  margin-top: 6px;
-  color: #57534e;
-  font-size: 0.9rem;
-}
 .home-section {
   margin-top: 42px;
 }
@@ -3097,7 +3061,6 @@ body {
     grid-template-columns: 1fr;
     padding: 32px;
   }
-  .home-strip,
   .home-link-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3122,7 +3085,6 @@ body {
   .home-route em {
     grid-column: 2;
   }
-  .home-strip,
   .home-link-grid {
     grid-template-columns: 1fr;
   }
