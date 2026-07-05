@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="AI scientist 对于现在的 AI research，主要有两种方式： 一种是纯粹的 workflow。 另外一种是 agent 协作模式。多个 agent 分别执行不同 role，来实现半自动甚至全自动的协作模式。 另外还有 Agent 虚拟实验室。 根据 survey...">
+    <meta name="description" content="AI scientist对于现在的 AI research，主要有两种方式： 一种是纯粹的 workflow。 另外一种是 agent 协作模式。多个 agent 分别执行不同 role，来实现半自动甚至全自动的协作模式。 另外还有 Agent 虚拟实验室。 根据 survey，...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AI4S 和AI4 R search survey的阅读概览">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2026/07/01/AI4S-%E5%92%8CAI4-R-search-survey%E7%9A%84%E9%98%85%E8%AF%BB%E6%A6%82%E8%A7%88/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="AI scientist 对于现在的 AI research，主要有两种方式： 一种是纯粹的 workflow。 另外一种是 agent 协作模式。多个 agent 分别执行不同 role，来实现半自动甚至全自动的协作模式。 另外还有 Agent 虚拟实验室。 根据 survey...">
+<meta property="og:description" content="AI scientist对于现在的 AI research，主要有两种方式： 一种是纯粹的 workflow。 另外一种是 agent 协作模式。多个 agent 分别执行不同 role，来实现半自动甚至全自动的协作模式。 另外还有 Agent 虚拟实验室。 根据 survey，...">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-07-01T11:31:04.000Z">
-<meta property="article:modified_time" content="2026-07-01T11:31:28.396Z">
+<meta property="article:modified_time" content="2026-07-05T11:21:25.869Z">
 <meta property="article:author" content="iron moon">
 <meta property="article:tag" content="AI4S">
 <meta name="twitter:card" content="summary">
@@ -112,14 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ai-scientist"><span class="nav-number">1.</span> <span class="nav-text">AI scientist</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%91%E5%AD%A6%E7%90%86%E8%A7%A3-ai-for-scientific-comprehension"><span class="nav-number">1.1.</span> <span class="nav-text">科学理解 AI for
-Scientific Comprehension</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E7%A7%91%E5%AD%A6%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.1.</span> <span class="nav-text">文本科学理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8A%E8%87%AA%E5%8A%A8%E7%A7%91%E5%AD%A6%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">半自动科学理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E8%87%AA%E5%8A%A8%E7%A7%91%E5%AD%A6%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">全自动科学理解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC%E4%B8%8E%E5%9B%BE%E8%A1%A8%E7%A7%91%E5%AD%A6%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.2.</span> <span class="nav-text">表格与图表科学理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">表格理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E8%A1%A8%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">图表理解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E6%9C%AF%E8%B0%83%E6%9F%A5-ai-for-academic-survey"><span class="nav-number">1.2.</span> <span class="nav-text">学术调查 AI for Academic
-Survey</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C%E6%A3%80%E7%B4%A2"><span class="nav-number">1.2.1.</span> <span class="nav-text">相关工作检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0%E6%8A%A5%E5%91%8A%E7%94%9F%E6%88%90"><span class="nav-number">1.2.2.</span> <span class="nav-text">概述报告生成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E8%B7%AF%E7%BA%BF%E5%9B%BE%E7%BB%98%E5%88%B6"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">研究路线图绘制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section-%E7%BA%A7%E5%88%AB%E7%9A%84%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C%E7%94%9F%E6%88%90"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Section 级别的相关工作生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BA%A7%E5%88%AB%E7%9A%84-survey-%E7%94%9F%E6%88%90"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">文件级别的 Survey 生成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%91%E5%AD%A6%E5%8F%91%E7%8E%B0-ai-for-scientific-discovery"><span class="nav-number">1.3.</span> <span class="nav-text">科学发现 AI for Scientific
-Discovery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%83%B3%E6%B3%95%E6%8C%96%E6%8E%98"><span class="nav-number">1.3.1.</span> <span class="nav-text">想法挖掘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E5%86%85%E9%83%A8%E7%9F%A5%E8%AF%86%E8%BF%9B%E8%A1%8C%E6%83%B3%E6%B3%95%E6%8C%96%E6%8E%98"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">从内部知识进行想法挖掘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E5%A4%96%E9%83%A8%E4%BF%A1%E5%8F%B7%E4%B8%AD%E6%8C%96%E6%8E%98%E6%83%B3%E6%B3%95"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">从外部信号中挖掘想法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E5%9B%A2%E9%98%9F%E8%AE%A8%E8%AE%BA%E4%B8%AD%E6%8C%96%E6%8E%98%E6%83%B3%E6%B3%95"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">从团队讨论中挖掘想法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E9%A2%96%E6%80%A7%E4%B8%8E%E9%87%8D%E8%A6%81%E6%80%A7%E8%AF%84%E4%BC%B0"><span class="nav-number">1.3.2.</span> <span class="nav-text">新颖性与重要性评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90"><span class="nav-number">1.3.3.</span> <span class="nav-text">理论分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%91%E5%AD%A6%E5%AE%9E%E9%AA%8C%E6%89%A7%E8%A1%8C"><span class="nav-number">1.3.4.</span> <span class="nav-text">科学实验执行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">实验设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%89%8D%E4%BC%B0%E8%AE%A1"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">实验前估计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%AE%A1%E7%90%86"><span class="nav-number">1.3.4.3.</span> <span class="nav-text">实验管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%89%A7%E8%A1%8C-experiment-conduction"><span class="nav-number">1.3.4.4.</span> <span class="nav-text">实验执行 Experiment
-Conduction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%88%86%E6%9E%90"><span class="nav-number">1.3.4.5.</span> <span class="nav-text">实验分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0"><span class="nav-number">1.3.5.</span> <span class="nav-text">全自动发现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E6%9C%AF%E5%86%99%E4%BD%9C-ai-for-academic-writing"><span class="nav-number">1.4.</span> <span class="nav-text">学术写作 AI for Academic
-Writing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%8C%96%E5%86%99%E4%BD%9C"><span class="nav-number">1.4.1.</span> <span class="nav-text">半自动化写作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%BF%E4%BB%B6%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">稿件准备阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%BF%E4%BB%B6%E5%86%99%E4%BD%9C%E9%98%B6%E6%AE%B5"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">稿件写作阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%BF%E4%BB%B6%E5%AE%8C%E6%88%90%E5%90%8E%E7%9A%84%E8%BE%85%E5%8A%A9"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">稿件完成后的辅助</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E8%87%AA%E5%8A%A8%E5%8C%96%E5%86%99%E4%BD%9C"><span class="nav-number">1.4.2.</span> <span class="nav-text">全自动化写作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ai-%E5%90%8C%E8%A1%8C%E8%AF%84%E8%AE%AE-ai-for-academic-peer-review"><span class="nav-number">1.5.</span> <span class="nav-text">AI 同行评议 AI for
-Academic Peer Review</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E5%AE%A1%E5%89%8D-pre-review"><span class="nav-number">1.5.1.</span> <span class="nav-text">评审前 Pre-Review</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E5%AE%A1%E4%B8%AD-in-review"><span class="nav-number">1.5.2.</span> <span class="nav-text">评审中 In-Review</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E5%AE%A1%E5%90%8E-post-review"><span class="nav-number">1.5.3.</span> <span class="nav-text">评审后 Post-Review</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6%E6%96%B9%E5%90%91"><span class="nav-number">1.5.4.</span> <span class="nav-text">自然科学方向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%AD%A6%E7%A0%94%E7%A9%B6"><span class="nav-number">1.5.4.1.</span> <span class="nav-text">物理学研究</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E5%8C%BB%E5%AD%A6%E7%A0%94%E7%A9%B6"><span class="nav-number">1.5.4.2.</span> <span class="nav-text">生物学与医学研究</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%96%E5%AD%A6%E4%B8%8E%E6%9D%90%E6%96%99%E7%A0%94%E7%A9%B6"><span class="nav-number">1.5.4.3.</span> <span class="nav-text">化学与材料研究</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E7%A7%91%E5%AD%A6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E6%96%B9%E5%90%91"><span class="nav-number">1.5.5.</span> <span class="nav-text">应用科学与工程方向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%8E%E6%8E%A7%E5%88%B6"><span class="nav-number">1.5.5.1.</span> <span class="nav-text">机器人与控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.5.5.2.</span> <span class="nav-text">软件工程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BE%E4%BC%9A%E7%A7%91%E5%AD%A6%E6%96%B9%E5%90%91"><span class="nav-number">1.5.6.</span> <span class="nav-text">社会科学方向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BE%E4%BC%9A%E5%AD%A6%E4%B8%8E%E5%BF%83%E7%90%86%E5%AD%A6"><span class="nav-number">1.5.6.1.</span> <span class="nav-text">社会学与心理学</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E7%9B%B4%E6%8E%A5%E8%A1%A5%E8%BF%9B%E5%89%8D%E6%96%87%E7%9A%84-benchmark-%E6%B8%85%E5%8D%95"><span class="nav-number">1.6.</span> <span class="nav-text">可直接补进前文的 benchmark
-清单</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AI-scientist"><span class="nav-number">1.</span> <span class="nav-text">AI scientist</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%91%E5%AD%A6%E7%90%86%E8%A7%A3-AI-for-Scientific-Comprehension"><span class="nav-number">1.1.</span> <span class="nav-text">科学理解 AI for Scientific Comprehension</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E7%A7%91%E5%AD%A6%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.1.</span> <span class="nav-text">文本科学理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8A%E8%87%AA%E5%8A%A8%E7%A7%91%E5%AD%A6%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">半自动科学理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E8%87%AA%E5%8A%A8%E7%A7%91%E5%AD%A6%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">全自动科学理解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC%E4%B8%8E%E5%9B%BE%E8%A1%A8%E7%A7%91%E5%AD%A6%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.2.</span> <span class="nav-text">表格与图表科学理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">表格理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E8%A1%A8%E7%90%86%E8%A7%A3"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">图表理解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E6%9C%AF%E8%B0%83%E6%9F%A5-AI-for-Academic-Survey"><span class="nav-number">1.2.</span> <span class="nav-text">学术调查 AI for Academic Survey</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C%E6%A3%80%E7%B4%A2"><span class="nav-number">1.2.1.</span> <span class="nav-text">相关工作检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0%E6%8A%A5%E5%91%8A%E7%94%9F%E6%88%90"><span class="nav-number">1.2.2.</span> <span class="nav-text">概述报告生成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E8%B7%AF%E7%BA%BF%E5%9B%BE%E7%BB%98%E5%88%B6"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">研究路线图绘制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Section-%E7%BA%A7%E5%88%AB%E7%9A%84%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C%E7%94%9F%E6%88%90"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Section 级别的相关工作生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BA%A7%E5%88%AB%E7%9A%84-Survey-%E7%94%9F%E6%88%90"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">文件级别的 Survey 生成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%91%E5%AD%A6%E5%8F%91%E7%8E%B0-AI-for-Scientific-Discovery"><span class="nav-number">1.3.</span> <span class="nav-text">科学发现 AI for Scientific Discovery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%83%B3%E6%B3%95%E6%8C%96%E6%8E%98"><span class="nav-number">1.3.1.</span> <span class="nav-text">想法挖掘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E5%86%85%E9%83%A8%E7%9F%A5%E8%AF%86%E8%BF%9B%E8%A1%8C%E6%83%B3%E6%B3%95%E6%8C%96%E6%8E%98"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">从内部知识进行想法挖掘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E5%A4%96%E9%83%A8%E4%BF%A1%E5%8F%B7%E4%B8%AD%E6%8C%96%E6%8E%98%E6%83%B3%E6%B3%95"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">从外部信号中挖掘想法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E5%9B%A2%E9%98%9F%E8%AE%A8%E8%AE%BA%E4%B8%AD%E6%8C%96%E6%8E%98%E6%83%B3%E6%B3%95"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">从团队讨论中挖掘想法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E9%A2%96%E6%80%A7%E4%B8%8E%E9%87%8D%E8%A6%81%E6%80%A7%E8%AF%84%E4%BC%B0"><span class="nav-number">1.3.2.</span> <span class="nav-text">新颖性与重要性评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90"><span class="nav-number">1.3.3.</span> <span class="nav-text">理论分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%91%E5%AD%A6%E5%AE%9E%E9%AA%8C%E6%89%A7%E8%A1%8C"><span class="nav-number">1.3.4.</span> <span class="nav-text">科学实验执行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">实验设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%89%8D%E4%BC%B0%E8%AE%A1"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">实验前估计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%AE%A1%E7%90%86"><span class="nav-number">1.3.4.3.</span> <span class="nav-text">实验管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%89%A7%E8%A1%8C-Experiment-Conduction"><span class="nav-number">1.3.4.4.</span> <span class="nav-text">实验执行 Experiment Conduction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%88%86%E6%9E%90"><span class="nav-number">1.3.4.5.</span> <span class="nav-text">实验分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0"><span class="nav-number">1.3.5.</span> <span class="nav-text">全自动发现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E6%9C%AF%E5%86%99%E4%BD%9C-AI-for-Academic-Writing"><span class="nav-number">1.4.</span> <span class="nav-text">学术写作 AI for Academic Writing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8A%E8%87%AA%E5%8A%A8%E5%8C%96%E5%86%99%E4%BD%9C"><span class="nav-number">1.4.1.</span> <span class="nav-text">半自动化写作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%BF%E4%BB%B6%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">稿件准备阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%BF%E4%BB%B6%E5%86%99%E4%BD%9C%E9%98%B6%E6%AE%B5"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">稿件写作阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%BF%E4%BB%B6%E5%AE%8C%E6%88%90%E5%90%8E%E7%9A%84%E8%BE%85%E5%8A%A9"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">稿件完成后的辅助</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E8%87%AA%E5%8A%A8%E5%8C%96%E5%86%99%E4%BD%9C"><span class="nav-number">1.4.2.</span> <span class="nav-text">全自动化写作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-%E5%90%8C%E8%A1%8C%E8%AF%84%E8%AE%AE-AI-for-Academic-Peer-Review"><span class="nav-number">1.5.</span> <span class="nav-text">AI 同行评议 AI for Academic Peer Review</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E5%AE%A1%E5%89%8D-Pre-Review"><span class="nav-number">1.5.1.</span> <span class="nav-text">评审前 Pre-Review</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E5%AE%A1%E4%B8%AD-In-Review"><span class="nav-number">1.5.2.</span> <span class="nav-text">评审中 In-Review</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E5%AE%A1%E5%90%8E-Post-Review"><span class="nav-number">1.5.3.</span> <span class="nav-text">评审后 Post-Review</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC-8-%E7%AB%A0%E8%A1%A5%E5%85%85%EF%BC%9A%E5%A4%9A%E5%AD%A6%E7%A7%91%E5%BA%94%E7%94%A8%E4%B8%8E-benchmark"><span class="nav-number">1.6.</span> <span class="nav-text">第 8 章补充：多学科应用与 benchmark</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6%E6%96%B9%E5%90%91"><span class="nav-number">1.6.1.</span> <span class="nav-text">自然科学方向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%AD%A6%E7%A0%94%E7%A9%B6"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">物理学研究</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E7%89%A9%E5%AD%A6%E4%B8%8E%E5%8C%BB%E5%AD%A6%E7%A0%94%E7%A9%B6"><span class="nav-number">1.6.1.2.</span> <span class="nav-text">生物学与医学研究</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%96%E5%AD%A6%E4%B8%8E%E6%9D%90%E6%96%99%E7%A0%94%E7%A9%B6"><span class="nav-number">1.6.1.3.</span> <span class="nav-text">化学与材料研究</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E7%A7%91%E5%AD%A6%E4%B8%8E%E5%B7%A5%E7%A8%8B%E6%96%B9%E5%90%91"><span class="nav-number">1.6.2.</span> <span class="nav-text">应用科学与工程方向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%8E%E6%8E%A7%E5%88%B6"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">机器人与控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">软件工程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BE%E4%BC%9A%E7%A7%91%E5%AD%A6%E6%96%B9%E5%90%91"><span class="nav-number">1.6.3.</span> <span class="nav-text">社会科学方向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BE%E4%BC%9A%E5%AD%A6%E4%B8%8E%E5%BF%83%E7%90%86%E5%AD%A6"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">社会学与心理学</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E7%9B%B4%E6%8E%A5%E8%A1%A5%E8%BF%9B%E5%89%8D%E6%96%87%E7%9A%84-benchmark-%E6%B8%85%E5%8D%95"><span class="nav-number">1.7.</span> <span class="nav-text">可直接补进前文的 benchmark 清单</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -132,13 +125,13 @@ Academic Peer Review</span></a><ol class="nav-child"><li class="nav-item nav-lev
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -189,7 +182,7 @@ Academic Peer Review</span></a><ol class="nav-child"><li class="nav-item nav-lev
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="AI4S 和AI4 R search survey的阅读概览 | Iron Moon Blog">
-      <meta itemprop="description" content="AI scientist 对于现在的 AI research，主要有两种方式： 一种是纯粹的 workflow。 另外一种是 agent 协作模式。多个 agent 分别执行不同 role，来实现半自动甚至全自动的协作模式。 另外还有 Agent 虚拟实验室。 根据 survey...">
+      <meta itemprop="description" content="AI scientist对于现在的 AI research，主要有两种方式： 一种是纯粹的 workflow。 另外一种是 agent 协作模式。多个 agent 分别执行不同 role，来实现半自动甚至全自动的协作模式。 另外还有 Agent 虚拟实验室。 根据 survey，...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -203,27 +196,40 @@ Academic Peer Review</span></a><ol class="nav-child"><li class="nav-item nav-lev
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2026-07-01 19:31:04 / 修改时间：19:31:28" itemprop="dateCreated datePublished" datetime="2026-07-01T19:31:04+08:00">2026-07-01</time>
+      <time title="创建时间：2026-07-01 19:31:04" itemprop="dateCreated datePublished" datetime="2026-07-01T19:31:04+08:00">2026-07-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-07-05 19:21:25" itemprop="dateModified" datetime="2026-07-05T19:21:25+08:00">2026-07-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI4S/" itemprop="url" rel="index"><span itemprop="name">AI4S</span></a>
+        </span>
     </span>
 
   
 </div>
 
-            <div class="post-description">AI scientist 对于现在的 AI research，主要有两种方式： 一种是纯粹的 workflow。 另外一种是 agent 协作模式。多个 agent 分别执行不同 role，来实现半自动甚至全自动的协作模式。 另外还有 Agent 虚拟实验室。 根据 survey...</div>
+            <div class="post-description">AI scientist对于现在的 AI research，主要有两种方式： 一种是纯粹的 workflow。 另外一种是 agent 协作模式。多个 agent 分别执行不同 role，来实现半自动甚至全自动的协作模式。 另外还有 Agent 虚拟实验室。 根据 survey，...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="ai-scientist">AI scientist</h1>
-<p>对于现在的 AI research，主要有两种方式：</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="AI-scientist"><a href="#AI-scientist" class="headerlink" title="AI scientist"></a>AI scientist</h1><p>对于现在的 AI research，主要有两种方式：</p>
 <ul>
 <li>一种是纯粹的 workflow。</li>
-<li>另外一种是 agent 协作模式。多个 agent 分别执行不同
-role，来实现半自动甚至全自动的协作模式。</li>
+<li>另外一种是 agent 协作模式。多个 agent 分别执行不同 role，来实现半自动甚至全自动的协作模式。</li>
 </ul>
 <p>另外还有 Agent 虚拟实验室。</p>
 <p>根据 survey，AI4Research 大概分为 5 个领域：</p>
@@ -234,35 +240,30 @@ role，来实现半自动甚至全自动的协作模式。</li>
 <li>学术写作</li>
 <li>学术同行评议</li>
 </ul>
-<h2 id="科学理解-ai-for-scientific-comprehension">科学理解 AI for
-Scientific Comprehension</h2>
-<p>利用从原始文档 DSC 中提取的知识
-K，来最大化科学理解。这里的目标可以粗略理解为两点：</p>
+<h2 id="科学理解-AI-for-Scientific-Comprehension"><a href="#科学理解-AI-for-Scientific-Comprehension" class="headerlink" title="科学理解 AI for Scientific Comprehension"></a>科学理解 AI for Scientific Comprehension</h2><p>利用从原始文档 DSC 中提取的知识 K，来最大化科学理解。这里的目标可以粗略理解为两点：</p>
 <ul>
 <li>Coherence：理解结果和原文档之间的逻辑一致性</li>
 <li>Coverage：理解结果对原文档关键概念的覆盖程度</li>
 </ul>
-<h3 id="文本科学理解">文本科学理解</h3>
-<p>对于当前的科学理解部分，按照自动化程度，可以分成半自动和全自动两类。</p>
-<h4 id="半自动科学理解">半自动科学理解</h4>
-<ul>
-<li>人类引导的科学理解
+<h3 id="文本科学理解"><a href="#文本科学理解" class="headerlink" title="文本科学理解"></a>文本科学理解</h3><p>对于当前的科学理解部分，按照自动化程度，可以分成半自动和全自动两类。</p>
+<h4 id="半自动科学理解"><a href="#半自动科学理解" class="headerlink" title="半自动科学理解"></a>半自动科学理解</h4><ul>
+<li><p>人类引导的科学理解</p>
 <ul>
 <li>就是 Human in the Loop。</li>
 <li>研究者和模型通过迭代对话，一步步把复杂科学问题讲清楚。</li>
 <li>这种方法的好处是可靠性更高，也更容易暴露隐藏假设；缺点是人机交互成本比较高。</li>
-</ul></li>
-<li>工具增强的科学理解
+</ul>
+</li>
+<li><p>工具增强的科学理解</p>
 <ul>
 <li>指的是研究人员的查询超过语言模型的知识库或其上下文窗口限制的情况。</li>
-<li>这里可以进一步分成三类：
-<ul>
+<li>这里可以进一步分成三类：<ul>
 <li>知识检索增强工具：把模型训练数据之外的知识补进来。</li>
 <li>事实检查工具：降低幻觉和事实性错误。</li>
 <li>推理增强工具：补足模型在逻辑推理、公式推导、精确计算上的短板。</li>
-</ul></li>
-<li>survey
-里这一类其实很重要，因为它把“读论文”从纯聊天变成了工具驱动的研究工作流。</li>
+</ul>
+</li>
+<li>survey 里这一类其实很重要，因为它把“读论文”从纯聊天变成了工具驱动的研究工作流。</li>
 </ul>
 <table>
 <thead>
@@ -271,8 +272,7 @@ K，来最大化科学理解。这里的目标可以粗略理解为两点：</p>
 <th>功能</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>DomainClassifier</td>
 <td>判断问题属于物理、化学、数学、生物等哪个领域</td>
 </tr>
@@ -300,136 +300,119 @@ K，来最大化科学理解。这里的目标可以粗略理解为两点：</p>
 <td>Verifier</td>
 <td>判断结果是否合理</td>
 </tr>
-</tbody>
-</table></li>
-<li>自主引导的科学理解
+</tbody></table>
+</li>
+<li><p>自主引导的科学理解</p>
 <ul>
 <li>这一类是针对单轮查询，模型直接给出关于论文内容的完整、上下文敏感的回答。</li>
 <li>重点在于长上下文论文理解，以及和具体学科术语、表达习惯对齐。</li>
-<li>survey
-里也提到它正逐步走向论文级、多模态的整体理解，而不只是局部问答。</li>
-</ul></li>
+<li>survey 里也提到它正逐步走向论文级、多模态的整体理解，而不只是局部问答。</li>
 </ul>
-<h4 id="全自动科学理解">全自动科学理解</h4>
-<ul>
-<li>摘要引导的自动科学理解
+</li>
+</ul>
+<h4 id="全自动科学理解"><a href="#全自动科学理解" class="headerlink" title="全自动科学理解"></a>全自动科学理解</h4><ul>
+<li><p>摘要引导的自动科学理解</p>
 <ul>
 <li>用摘要来组织对冗长科学文本的整体理解。</li>
-<li>survey 里提到可以让多个 agent
-分工做摘要、校对、结果提炼，最后形成更完整的理解结果。</li>
-</ul></li>
-<li>自我提问、自我反思的自动科学理解
-<ul>
-<li>AI
-自己提出问题、自己回答问题，或者进行反思，来加深对科学内容的理解。</li>
-<li>这类方法和自我批评、自我改进、苏格拉底式拆解问题比较接近。</li>
-<li>对于这部分，后面如果要继续做，可以重点看问题生成器 + 答案评估器这类
-pipeline。</li>
-</ul></li>
+<li>survey 里提到可以让多个 agent 分工做摘要、校对、结果提炼，最后形成更完整的理解结果。</li>
 </ul>
-<h3 id="表格与图表科学理解">表格与图表科学理解</h3>
-<p>对于查阅文献内容的理解，除了纯文本，还有表格理解和图表理解两个部分。</p>
-<h4 id="表格理解">表格理解</h4>
+</li>
+<li><p>自我提问、自我反思的自动科学理解</p>
 <ul>
+<li>AI 自己提出问题、自己回答问题，或者进行反思，来加深对科学内容的理解。</li>
+<li>这类方法和自我批评、自我改进、苏格拉底式拆解问题比较接近。</li>
+<li>对于这部分，后面如果要继续做，可以重点看问题生成器 + 答案评估器这类 pipeline。</li>
+</ul>
+</li>
+</ul>
+<h3 id="表格与图表科学理解"><a href="#表格与图表科学理解" class="headerlink" title="表格与图表科学理解"></a>表格与图表科学理解</h3><p>对于查阅文献内容的理解，除了纯文本，还有表格理解和图表理解两个部分。</p>
+<h4 id="表格理解"><a href="#表格理解" class="headerlink" title="表格理解"></a>表格理解</h4><ul>
 <li>可以使用 MMTab 这类数据集进行评估。</li>
 <li>相关工作不只是“看懂表格”，还包括对表格的推理过程建模。</li>
-<li>survey 里提到的几个点：
-<ul>
+<li>survey 里提到的几个点：<ul>
 <li>Table-LLaVA：直接在表格图像上推理</li>
 <li>Chain-of-Table：在推理链中逐步构建和更新表格</li>
 <li>Tree-of-Table：把大表格压缩成树状结构，方便推理</li>
 <li>TableMaster：在文本推理和符号推理之间切换</li>
-</ul></li>
 </ul>
-<h4 id="图表理解">图表理解</h4>
-<ul>
+</li>
+</ul>
+<h4 id="图表理解"><a href="#图表理解" class="headerlink" title="图表理解"></a>图表理解</h4><ul>
 <li>图表理解更多是让多模态模型直接处理论文里的图表图像，支持问答、摘要等任务。</li>
 <li>survey 里也强调了图表数据集和指令数据集的重要性。</li>
-<li>这里可以继续顺着这个数据集方向看：<a
-target="_blank" rel="noopener" href="https://aclanthology.org/2024.findings-acl.463/">有个数据集</a></li>
-<li>另外还有 FDV
-这种把图表转成结构化文本表示的方法，适合做更深层的理解。</li>
+<li>这里可以继续顺着这个数据集方向看：<a target="_blank" rel="noopener" href="https://aclanthology.org/2024.findings-acl.463/">有个数据集</a></li>
+<li>另外还有 FDV 这种把图表转成结构化文本表示的方法，适合做更深层的理解。</li>
 </ul>
-<h2 id="学术调查-ai-for-academic-survey">学术调查 AI for Academic
-Survey</h2>
-<p>目标是最大化获取的调查质量。</p>
+<h2 id="学术调查-AI-for-Academic-Survey"><a href="#学术调查-AI-for-Academic-Survey" class="headerlink" title="学术调查 AI for Academic Survey"></a>学术调查 AI for Academic Survey</h2><p>目标是最大化获取的调查质量。</p>
 <p>这里有一个问题，调查质量如何评估？</p>
 <p>survey 里面给了三个维度：</p>
 <ul>
 <li>相关度 Relevance：度量文档与目标主题之间的匹配</li>
 <li>覆盖率 Coverage：评估领域的广度和深度</li>
-<li>清晰度
-Clarity：反映生成综述和需求之间的综合表示是否连贯、抽象质量是否足够、是否实用</li>
+<li>清晰度 Clarity：反映生成综述和需求之间的综合表示是否连贯、抽象质量是否足够、是否实用</li>
 </ul>
 <p>也就是：相关度、覆盖率、清晰度。</p>
 <p>AI for Academic Survey 主要包括两个大阶段：</p>
-<h3 id="相关工作检索">相关工作检索</h3>
-<ul>
-<li>语义引导检索
+<h3 id="相关工作检索"><a href="#相关工作检索" class="headerlink" title="相关工作检索"></a>相关工作检索</h3><ul>
+<li><p>语义引导检索</p>
 <ul>
 <li>通过查询语义和文档语义相似度去找相关文献。</li>
-</ul></li>
-<li>图引导检索
+</ul>
+</li>
+<li><p>图引导检索</p>
 <ul>
 <li>用作者关系图、论文引用图、实体关系图来做检索。</li>
 <li>这一类对跨学科关系建模、引文链路追踪、实体级关系挖掘比较有用。</li>
-</ul></li>
-<li>LLM-Augmented Retrieval
+</ul>
+</li>
+<li><p>LLM-Augmented Retrieval</p>
 <ul>
 <li>这部分很重要。</li>
-<li>单智能体检索之外，survey 更强调多智能体检索和更自主的 deep
-research。</li>
-<li>典型例子：
-<ul>
+<li>单智能体检索之外，survey 更强调多智能体检索和更自主的 deep research。</li>
+<li>典型例子：<ul>
 <li>Selector-Reader-Writer：选择要读的部分，更新共享记忆，再生成相关工作</li>
 <li>LitLLM：把自动综述拆成检索和生成两阶段</li>
 <li>PaSa：通过主动遍历引文网络来发现文献</li>
 <li>ExSearch：通过自激励循环不断优化搜索策略</li>
 <li>CuriousLLM：通过“好奇心驱动”主动生成问题，引导知识图检索</li>
-</ul></li>
-</ul></li>
 </ul>
-<h3 id="概述报告生成">概述报告生成</h3>
-<p>基于检索到的数据，自动生成结构化、连贯的综述报告。按照 survey
-里的写作顺序，这部分可以进一步分成三步：</p>
-<h4 id="研究路线图绘制">研究路线图绘制</h4>
-<ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="概述报告生成"><a href="#概述报告生成" class="headerlink" title="概述报告生成"></a>概述报告生成</h3><p>基于检索到的数据，自动生成结构化、连贯的综述报告。按照 survey 里的写作顺序，这部分可以进一步分成三步：</p>
+<h4 id="研究路线图绘制"><a href="#研究路线图绘制" class="headerlink" title="研究路线图绘制"></a>研究路线图绘制</h4><ul>
 <li>研究路线图映射是先把一个研究主题的发展轨迹整理出来。</li>
 <li>它的价值在于更系统地识别新趋势、未解决空白和未来方向。</li>
 <li>survey 里还提到，把综述组织成分层结构，会显著提高整体连贯性。</li>
 </ul>
-<h4 id="section-级别的相关工作生成">Section 级别的相关工作生成</h4>
-<ul>
-<li>提取相关工作
+<h4 id="Section-级别的相关工作生成"><a href="#Section-级别的相关工作生成" class="headerlink" title="Section 级别的相关工作生成"></a>Section 级别的相关工作生成</h4><ul>
+<li><p>提取相关工作</p>
 <ul>
 <li>早期方法偏抽取式，从多篇论文里抽句子，再重组为一个 section。</li>
-<li>这里有一个 SurveyBench。
-从文章里的表格看，他们现在的质量已经比较高了，似乎在一些维度上已经接近人类写作水平。</li>
-</ul></li>
-<li>生成相关工作
+<li>这里有一个 SurveyBench。 从文章里的表格看，他们现在的质量已经比较高了，似乎在一些维度上已经接近人类写作水平。</li>
+</ul>
+</li>
+<li><p>生成相关工作</p>
 <ul>
 <li>这一类更多是直接生成整段相关工作，而不是只抽句子。</li>
-<li>主要可以分成三类：
-<ul>
+<li>主要可以分成三类：<ul>
 <li>人类引导的生成：给关键词、摘要、论文分组等</li>
 <li>图引导生成：基于书目图、引文图来组织生成</li>
 <li>模型引导生成：模型自主完成任务</li>
-</ul></li>
-<li>这里使用 fine-tuning，说明应该有相关的数据集和标注范式。</li>
-<li>survey 里还提到有 LoRA
-微调、修辞结构建模、多阶段管道（检索、引文提取、上下文聚合、润色）等做法。</li>
-</ul></li>
 </ul>
-<h4 id="文件级别的-survey-生成">文件级别的 Survey 生成</h4>
-<ul>
+</li>
+<li>这里使用 fine-tuning，说明应该有相关的数据集和标注范式。</li>
+<li>survey 里还提到有 LoRA 微调、修辞结构建模、多阶段管道（检索、引文提取、上下文聚合、润色）等做法。</li>
+</ul>
+</li>
+</ul>
+<h4 id="文件级别的-Survey-生成"><a href="#文件级别的-Survey-生成" class="headerlink" title="文件级别的 Survey 生成"></a>文件级别的 Survey 生成</h4><ul>
 <li>这一层是完整生成一篇 survey。</li>
-<li>survey 里提到的代表性系统包括
-AutoSurvey、SurveyX、SurveyForge、STORM 等。</li>
+<li>survey 里提到的代表性系统包括 AutoSurvey、SurveyX、SurveyForge、STORM 等。</li>
 <li>这部分已经不只是“写相关工作”，而是在做完整文档级组织、章节衔接和迭代细化。</li>
 </ul>
-<h2 id="科学发现-ai-for-scientific-discovery">科学发现 AI for Scientific
-Discovery</h2>
-<p>这个是用于生成和验证新的科学假设或想法，并进行实验或模拟。</p>
+<h2 id="科学发现-AI-for-Scientific-Discovery"><a href="#科学发现-AI-for-Scientific-Discovery" class="headerlink" title="科学发现 AI for Scientific Discovery"></a>科学发现 AI for Scientific Discovery</h2><p>这个是用于生成和验证新的科学假设或想法，并进行实验或模拟。</p>
 <p>AI4SD 的目标是最大化所产生创新的总发现质量。</p>
 <p>这里可以按 survey 的定义拆成三个维度：</p>
 <ul>
@@ -437,12 +420,8 @@ Discovery</h2>
 <li>Validity：评估实验和理论上的合理性</li>
 <li>Significance：反映研究的后续影响</li>
 </ul>
-<p>这一部分在第 5 章有一些 benchmark
-和模型对比，但有些模型已经比较老，参考性不一定强。<br />
-另外它给出了一个 <a target="_blank" rel="noopener" href="https://liveideabench.com/">LiveIdeaBench</a>
-来评估 LLM 的创造力，这个比单看 survey 里的旧表格更值得参考。</p>
-<p>survey 对 AI for Scientific Discovery
-的划分比当前草稿更细，主要有五块：</p>
+<p>这一部分在第 5 章有一些 benchmark 和模型对比，但有些模型已经比较老，参考性不一定强。<br>另外它给出了一个 <a target="_blank" rel="noopener" href="https://liveideabench.com/">LiveIdeaBench</a> 来评估 LLM 的创造力，这个比单看 survey 里的旧表格更值得参考。</p>
+<p>survey 对 AI for Scientific Discovery 的划分比当前草稿更细，主要有五块：</p>
 <ul>
 <li>想法挖掘</li>
 <li>新颖性与重要性评估</li>
@@ -450,138 +429,133 @@ Discovery</h2>
 <li>科学实验执行</li>
 <li>全自动发现</li>
 </ul>
-<h3 id="想法挖掘">想法挖掘</h3>
-<h4 id="从内部知识进行想法挖掘">从内部知识进行想法挖掘</h4>
-<ul>
-<li>利用 LLM
-参数里的潜在知识和生成能力，不依赖外部数据来生成新想法。</li>
+<h3 id="想法挖掘"><a href="#想法挖掘" class="headerlink" title="想法挖掘"></a>想法挖掘</h3><h4 id="从内部知识进行想法挖掘"><a href="#从内部知识进行想法挖掘" class="headerlink" title="从内部知识进行想法挖掘"></a>从内部知识进行想法挖掘</h4><ul>
+<li>利用 LLM 参数里的潜在知识和生成能力，不依赖外部数据来生成新想法。</li>
 <li>这一类更像直接利用模型内部知识空间产出创意。</li>
 </ul>
-<h4 id="从外部信号中挖掘想法">从外部信号中挖掘想法</h4>
-<ul>
-<li>从外部知识中挖掘创意
+<h4 id="从外部信号中挖掘想法"><a href="#从外部信号中挖掘想法" class="headerlink" title="从外部信号中挖掘想法"></a>从外部信号中挖掘想法</h4><ul>
+<li><p>从外部知识中挖掘创意</p>
 <ul>
 <li>这里比较适合做 A+B 式创新。</li>
 <li>典型做法是把论文元数据、引文网络、知识图谱等结构化知识注入进来。</li>
-</ul></li>
-<li>从外部环境反馈中挖掘创意
+</ul>
+</li>
+<li><p>从外部环境反馈中挖掘创意</p>
 <ul>
 <li>这一类比单纯依靠外部知识更靠谱一点。</li>
-<li>它把 idea mining
-变成一个交互循环：提出实验、拿到反馈、再修正下一轮想法。</li>
+<li>它把 idea mining 变成一个交互循环：提出实验、拿到反馈、再修正下一轮想法。</li>
 <li>这一方向和多智能体自主研究系统关系很近。</li>
-</ul></li>
 </ul>
-<h4 id="从团队讨论中挖掘想法">从团队讨论中挖掘想法</h4>
-<ul>
-<li>AI-AI 协作
+</li>
+</ul>
+<h4 id="从团队讨论中挖掘想法"><a href="#从团队讨论中挖掘想法" class="headerlink" title="从团队讨论中挖掘想法"></a>从团队讨论中挖掘想法</h4><ul>
+<li><p>AI-AI 协作</p>
 <ul>
 <li>反馈引导挖掘：代理在不同研究阶段交换评论，通过反馈来提炼想法。</li>
 <li>团队讨论引导挖掘：把不同角色的多个代理组起来，模拟人类研究团队动态。</li>
-<li>survey 里提到一个 Chain-of-Ideas（CoI）agent：
-<ul>
+<li>survey 里提到一个 Chain-of-Ideas（CoI）agent：<ul>
 <li>把文献组织成顺序链，反映主题演进</li>
 <li>能以比较低的成本生成与小型研究团队相近质量的输出</li>
 <li>这个值得单独调研</li>
-</ul></li>
-</ul></li>
-<li>人机协作
+</ul>
+</li>
+</ul>
+</li>
+<li><p>人机协作</p>
 <ul>
 <li>人先挑选、策划中间产物，再让模型重组和精炼。</li>
 <li>这种方式往往更容易把控方向和质量。</li>
-</ul></li>
 </ul>
-<h3 id="新颖性与重要性评估">新颖性与重要性评估</h3>
-<ul>
-<li>传统方法
+</li>
+</ul>
+<h3 id="新颖性与重要性评估"><a href="#新颖性与重要性评估" class="headerlink" title="新颖性与重要性评估"></a>新颖性与重要性评估</h3><ul>
+<li><p>传统方法</p>
 <ul>
 <li>例如对论文词汇分布、概念层次、相似度等做分析。</li>
-</ul></li>
-<li>利用 LLM
+</ul>
+</li>
+<li><p>利用 LLM</p>
 <ul>
 <li>这一类现在越来越多，但容易高估创造性，或者产生同质化判断。</li>
-</ul></li>
-<li>人类和 AI 协作
-<ul>
-<li>这里的评估方法，我们需要找到里面效果最好的人类和 AI
-协作方法，以及单纯利用 LLM 的最好方法。</li>
-</ul></li>
 </ul>
-<h3 id="理论分析">理论分析</h3>
-<p>这一块在 survey 里实际上不只三个点，而是四个部分：</p>
+</li>
+<li><p>人类和 AI 协作</p>
 <ul>
-<li>科学主张形式化
+<li>这里的评估方法，我们需要找到里面效果最好的人类和 AI 协作方法，以及单纯利用 LLM 的最好方法。</li>
+</ul>
+</li>
+</ul>
+<h3 id="理论分析"><a href="#理论分析" class="headerlink" title="理论分析"></a>理论分析</h3><p>这一块在 survey 里实际上不只三个点，而是四个部分：</p>
+<ul>
+<li><p>科学主张形式化</p>
 <ul>
 <li>把自然语言里的论断转成可验证的结构化表示。</li>
-</ul></li>
-<li>科学证据收集
+</ul>
+</li>
+<li><p>科学证据收集</p>
 <ul>
 <li>系统检索、整理支持或反驳某个主张的证据。</li>
-</ul></li>
-<li>科学验证分析
+</ul>
+</li>
+<li><p>科学验证分析</p>
 <ul>
 <li>看主张是否逻辑一致、事实一致、推理稳健。</li>
-</ul></li>
-<li>定理证明
+</ul>
+</li>
+<li><p>定理证明</p>
 <ul>
 <li>这个更偏数学领域。</li>
 <li>这里需要单独调研一下现在最好的定理证明器，以及常用 benchmark。</li>
-</ul></li>
 </ul>
-<h3 id="科学实验执行">科学实验执行</h3>
-<h4 id="实验设计">实验设计</h4>
-<ul>
+</li>
+</ul>
+<h3 id="科学实验执行"><a href="#科学实验执行" class="headerlink" title="科学实验执行"></a>科学实验执行</h3><h4 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h4><ul>
 <li>半自动：人类-AI 协作创建实验计划</li>
 <li>全自动：agent 自动调度实验、根据新数据更新实验协议</li>
 </ul>
-<h4 id="实验前估计">实验前估计</h4>
-<ul>
-<li>评估性预测
+<h4 id="实验前估计"><a href="#实验前估计" class="headerlink" title="实验前估计"></a>实验前估计</h4><ul>
+<li><p>评估性预测</p>
 <ul>
 <li>预测实验结果的定量值或趋势</li>
 <li>深度学习 model 进行直接预测</li>
 <li>LLM-Augmented 预测</li>
-</ul></li>
-<li>探索性预测
+</ul>
+</li>
+<li><p>探索性预测</p>
 <ul>
 <li>利用人工智能预测实验结果、生成新化合物、设计反应路径或组合方案</li>
-</ul></li>
 </ul>
-<h4 id="实验管理">实验管理</h4>
-<ul>
+</li>
+</ul>
+<h4 id="实验管理"><a href="#实验管理" class="headerlink" title="实验管理"></a>实验管理</h4><ul>
 <li>开环管理</li>
 <li>闭环管理</li>
 <li>这一部分更接近自动驾驶实验室、机器人实验平台、闭环优化。</li>
 <li>这部分相对前沿，对本次比赛未必直接有用，可以不做过多展开。</li>
 </ul>
-<h4 id="实验执行-experiment-conduction">实验执行 Experiment
-Conduction</h4>
-<ul>
-<li>自动化机器学习实验执行
+<h4 id="实验执行-Experiment-Conduction"><a href="#实验执行-Experiment-Conduction" class="headerlink" title="实验执行 Experiment Conduction"></a>实验执行 Experiment Conduction</h4><ul>
+<li><p>自动化机器学习实验执行</p>
 <ul>
 <li>这一类更偏代码生成、训练、调参、调试、复现实验。</li>
 <li>这里可以重点看 ScienceAgentBench。</li>
-</ul></li>
-<li>真实世界实验模拟与执行
+</ul>
+</li>
+<li><p>真实世界实验模拟与执行</p>
 <ul>
 <li>包括自我改进、多智能体交互、外部工具集成、领域微调等方向。</li>
-</ul></li>
 </ul>
-<h4 id="实验分析">实验分析</h4>
-<ul>
+</li>
+</ul>
+<h4 id="实验分析"><a href="#实验分析" class="headerlink" title="实验分析"></a>实验分析</h4><ul>
 <li>自动评估</li>
 <li>理论一致性分析</li>
 <li>探索性分析</li>
 </ul>
-<h3 id="全自动发现">全自动发现</h3>
-<ul>
+<h3 id="全自动发现"><a href="#全自动发现" class="headerlink" title="全自动发现"></a>全自动发现</h3><ul>
 <li>全自动发现就是把假设生成、实验设计、自主执行、结果分析、反馈迭代闭环起来。</li>
-<li>这也是 AI Scientist、Zochi、Agent Laboratory
-这类系统真正想做的终点。</li>
+<li>这也是 AI Scientist、Zochi、Agent Laboratory 这类系统真正想做的终点。</li>
 </ul>
-<h2 id="学术写作-ai-for-academic-writing">学术写作 AI for Academic
-Writing</h2>
-<p>根据 survey 里面的定义，写作阶段是利用科学发现阶段的所有信息：</p>
+<h2 id="学术写作-AI-for-Academic-Writing"><a href="#学术写作-AI-for-Academic-Writing" class="headerlink" title="学术写作 AI for Academic Writing"></a>学术写作 AI for Academic Writing</h2><p>根据 survey 里面的定义，写作阶段是利用科学发现阶段的所有信息：</p>
 <ul>
 <li>idea</li>
 <li>exp</li>
@@ -595,8 +569,7 @@ Writing</h2>
 <li>生成原稿内容</li>
 <li>完成最后的语法矫正、表达修改、逻辑修改</li>
 </ul>
-<p>目标是最大限度地提高手稿的写作质量和有效性。<br />
-如果按 survey 里的指标来拆，大概可以看成：</p>
+<p>目标是最大限度地提高手稿的写作质量和有效性。<br>如果按 survey 里的指标来拆，大概可以看成：</p>
 <ul>
 <li>Consistency：逻辑流畅性和内部连贯性</li>
 <li>Readability：语言清晰度和可理解性</li>
@@ -607,70 +580,65 @@ Writing</h2>
 <li>半自动化写作</li>
 <li>全自动化写作</li>
 </ul>
-<h3 id="半自动化写作">半自动化写作</h3>
-<p>survey 里把半自动化写作分成三个阶段，不只是“初稿前后”这么粗：</p>
-<h4 id="稿件准备阶段">稿件准备阶段</h4>
-<ul>
-<li>标题拟定与优化
+<h3 id="半自动化写作"><a href="#半自动化写作" class="headerlink" title="半自动化写作"></a>半自动化写作</h3><p>survey 里把半自动化写作分成三个阶段，不只是“初稿前后”这么粗：</p>
+<h4 id="稿件准备阶段"><a href="#稿件准备阶段" class="headerlink" title="稿件准备阶段"></a>稿件准备阶段</h4><ul>
+<li><p>标题拟定与优化</p>
 <ul>
 <li>这部分原草稿里没写，但 survey 里明确单列了。</li>
 <li>本质上是先给多个候选标题，再从新颖性、复杂性、潜在影响力等维度筛。</li>
-</ul></li>
-<li>整体逻辑结构指导
+</ul>
+</li>
+<li><p>整体逻辑结构指导</p>
 <ul>
 <li>给模型章节标题、子标题、段落提纲，让它检查顺序是否合理、是否有重复、是否缺东西。</li>
-</ul></li>
 </ul>
-<h4 id="稿件写作阶段">稿件写作阶段</h4>
-<ul>
-<li>图表绘制
+</li>
+</ul>
+<h4 id="稿件写作阶段"><a href="#稿件写作阶段" class="headerlink" title="稿件写作阶段"></a>稿件写作阶段</h4><ul>
+<li><p>图表绘制</p>
 <ul>
 <li>这是这里面最重要的一块。</li>
 <li>一个方向是直接 AI 生成。</li>
-<li>另一个方向是使用 Python、SVG 或 tikz
-编程生成科学图表，以获得更好的图形质量。</li>
-<li>survey 里还补了图注生成这一层，不只是画图，还包括 caption
-生成和质量检查。</li>
-</ul></li>
-<li>公式转录
+<li>另一个方向是使用 Python、SVG 或 tikz 编程生成科学图表，以获得更好的图形质量。</li>
+<li>survey 里还补了图注生成这一层，不只是画图，还包括 caption 生成和质量检查。</li>
+</ul>
+</li>
+<li><p>公式转录</p>
 <ul>
 <li>有 pdf 里的公式转 LaTeX 的相关研究。</li>
 <li>这部分本质上是 OCR + 结构化表达式还原 + 迭代纠错。</li>
-</ul></li>
-<li>引文推荐与整合
+</ul>
+</li>
+<li><p>引文推荐与整合</p>
 <ul>
 <li>这是学术写作里一个很关键的辅助能力。</li>
-<li>这里需要重点查看 <a
-target="_blank" rel="noopener" href="https://github.com/bytedance/pasa">PaSa</a></li>
-<li>survey 里还提到了 ScholarCopilot
-这类能动态检索并嵌入参考文献的系统。</li>
-</ul></li>
+<li>这里需要重点查看 <a target="_blank" rel="noopener" href="https://github.com/bytedance/pasa">PaSa</a></li>
+<li>survey 里还提到了 ScholarCopilot 这类能动态检索并嵌入参考文献的系统。</li>
 </ul>
-<h4 id="稿件完成后的辅助">稿件完成后的辅助</h4>
-<ul>
-<li>语法校检
+</li>
+</ul>
+<h4 id="稿件完成后的辅助"><a href="#稿件完成后的辅助" class="headerlink" title="稿件完成后的辅助"></a>稿件完成后的辅助</h4><ul>
+<li><p>语法校检</p>
 <ul>
 <li>识别拼写错误、不正确的标点符号、重复措辞和字符编码问题，并提供相应的修订建议。</li>
-</ul></li>
-<li>表达与逻辑修订
+</ul>
+</li>
+<li><p>表达与逻辑修订</p>
 <ul>
 <li>自我引导修订：模型自己分析草稿并提出修改</li>
 <li>人工引导修订：用户指定修改区域或提出明确指令</li>
 <li>Human-in-the-loop 修订：AI 建议、人工反馈、文档更新循环进行</li>
 <li>这一块其实很适合接 Overleaf 一类写作环境</li>
-</ul></li>
 </ul>
-<h3 id="全自动化写作">全自动化写作</h3>
-<ul>
+</li>
+</ul>
+<h3 id="全自动化写作"><a href="#全自动化写作" class="headerlink" title="全自动化写作"></a>全自动化写作</h3><ul>
 <li>这一类是让 AI 无需人工干预直接生成完整科学手稿。</li>
 <li>survey 里主要是多智能体、模块化、自反馈架构。</li>
 <li>AI Scientist、Agent Laboratory、Zochi 都属于这个方向。</li>
-<li>但 survey
-也明确说了，现阶段还没有系统真正消除人工编辑，尤其是在正确引用文献这件事上。</li>
+<li>但 survey 也明确说了，现阶段还没有系统真正消除人工编辑，尤其是在正确引用文献这件事上。</li>
 </ul>
-<h2 id="ai-同行评议-ai-for-academic-peer-review">AI 同行评议 AI for
-Academic Peer Review</h2>
-<p>目标是基于稿件的评审结果，最大化评审质量。</p>
+<h2 id="AI-同行评议-AI-for-Academic-Peer-Review"><a href="#AI-同行评议-AI-for-Academic-Peer-Review" class="headerlink" title="AI 同行评议 AI for Academic Peer Review"></a>AI 同行评议 AI for Academic Peer Review</h2><p>目标是基于稿件的评审结果，最大化评审质量。</p>
 <p>这里的问题是评审结果如何进行量化。</p>
 <p>survey 里给了三个核心维度：</p>
 <ul>
@@ -679,188 +647,183 @@ Academic Peer Review</h2>
 <li>Consistency：评论是否与既定评价标准和领域规范一致</li>
 </ul>
 <p>也就是可以把评审质量理解成：正确性、有用性、一致性。</p>
-<p>而且 peer review 这一块，survey
-的结构其实比现在草稿更完整，分成三阶段：</p>
-<h3 id="评审前-pre-review">评审前 Pre-Review</h3>
-<ul>
-<li>初审 Desk-Review
+<p>而且 peer review 这一块，survey 的结构其实比现在草稿更完整，分成三阶段：</p>
+<h3 id="评审前-Pre-Review"><a href="#评审前-Pre-Review" class="headerlink" title="评审前 Pre-Review"></a>评审前 Pre-Review</h3><ul>
+<li><p>初审 Desk-Review</p>
 <ul>
 <li>用 AI 做关键词提取、主题匹配、初步评分、范围判断。</li>
-</ul></li>
-<li>审稿人匹配 Reviewer Matching
+</ul>
+</li>
+<li><p>审稿人匹配 Reviewer Matching</p>
 <ul>
 <li>核心目标是最大化评审质量、公平性和工作负荷平衡。</li>
 <li>这里还会涉及利益冲突检测和跨学科审稿人团队配置。</li>
-</ul></li>
 </ul>
-<h3 id="评审中-in-review">评审中 In-Review</h3>
-<ul>
-<li>同行评审生成 Peer-Review Generation
+</li>
+</ul>
+<h3 id="评审中-In-Review"><a href="#评审中-In-Review" class="headerlink" title="评审中 In-Review"></a>评审中 In-Review</h3><ul>
+<li><p>同行评审生成 Peer-Review Generation</p>
 <ul>
 <li>分数预测：预测创新性、清晰度等维度的分数</li>
 <li>评论生成：自动生成自然语言评审意见</li>
 <li>统一生成：把文本评论和数值评分整合成一份完整评审</li>
-<li>survey 里还提到，现成 LLM
-往往更重技术有效性，容易低估新颖性，这一点要注意</li>
-</ul></li>
-<li>元评审生成 Meta-Review Generation
+<li>survey 里还提到，现成 LLM 往往更重技术有效性，容易低估新颖性，这一点要注意</li>
+</ul>
+</li>
+<li><p>元评审生成 Meta-Review Generation</p>
 <ul>
 <li>把多位评审人的意见综合成一份更客观、更全面的总结</li>
 <li>重点是平衡不同观点、减少偏见、发现矛盾</li>
-</ul></li>
 </ul>
-<h3 id="评审后-post-review">评审后 Post-Review</h3>
-<ul>
-<li>影响力分析
+</li>
+</ul>
+<h3 id="评审后-Post-Review"><a href="#评审后-Post-Review" class="headerlink" title="评审后 Post-Review"></a>评审后 Post-Review</h3><ul>
+<li><p>影响力分析</p>
 <ul>
 <li>预测未来引用、研究影响力和后续学术意义</li>
-</ul></li>
-<li>推广增强
+</ul>
+</li>
+<li><p>推广增强</p>
 <ul>
 <li>自动生成海报、通俗摘要、视频等传播材料，扩大成果传播范围</li>
-</ul></li>
 </ul>
-<p><strong>--- 这后面是纯粹的AI了---</strong> ## 第 8
-章补充：多学科应用与 benchmark</p>
-<p>第 8 章本身更偏“AI4Research 在不同学科里的应用展开”，benchmark
-和数据集主要集中在第 9 章资源部分。<br />
-所以这里按“应用方向 + 可参考 benchmark / 数据集 /
-工具”的方式补充，后面如果要继续展开，可以直接从这里接着查。</p>
-<h3 id="自然科学方向">自然科学方向</h3>
-<h4 id="物理学研究">物理学研究</h4>
+</li>
+</ul>
+<p><strong>— 这后面是纯粹的AI了—</strong></p>
+<h2 id="第-8-章补充：多学科应用与-benchmark"><a href="#第-8-章补充：多学科应用与-benchmark" class="headerlink" title="第 8 章补充：多学科应用与 benchmark"></a>第 8 章补充：多学科应用与 benchmark</h2><p>第 8 章本身更偏“AI4Research 在不同学科里的应用展开”，benchmark 和数据集主要集中在第 9 章资源部分。<br>所以这里按“应用方向 + 可参考 benchmark &#x2F; 数据集 &#x2F; 工具”的方式补充，后面如果要继续展开，可以直接从这里接着查。</p>
+<h3 id="自然科学方向"><a href="#自然科学方向" class="headerlink" title="自然科学方向"></a>自然科学方向</h3><h4 id="物理学研究"><a href="#物理学研究" class="headerlink" title="物理学研究"></a>物理学研究</h4><ul>
+<li><p>典型应用</p>
 <ul>
-<li>典型应用
-<ul>
-<li>物理世界模拟
-<ul>
+<li>物理世界模拟<ul>
 <li>PINNs</li>
 <li>Hamiltonian Neural Networks</li>
 <li>Lagrangian Neural Networks</li>
-</ul></li>
-<li>自动定律发现
-<ul>
+</ul>
+</li>
+<li>自动定律发现<ul>
 <li>AI-Newton</li>
 <li>DrSR</li>
 <li>LLM-Feynman</li>
 <li>利用视觉提示和领域知识发现高维数据中的物理坐标与控制方程</li>
-</ul></li>
-</ul></li>
-<li>可参考 benchmark / 数据集
+</ul>
+</li>
+</ul>
+</li>
+<li><p>可参考 benchmark &#x2F; 数据集</p>
 <ul>
 <li>LLM-SRBench：偏科学方程发现，和“自动定律发现”这条线最相关</li>
 <li>TheoremQA：偏定理应用能力评估，适合和理论分析部分联动看</li>
-<li>MiniF2F / FIMO / MUSTARDSAUCE：偏形式化证明与定理证明</li>
-</ul></li>
-<li>这里的一个判断
-<ul>
-<li>物理方向在 survey
-里更强调“从数据发现规律”和“理论一致性”，所以比起通用问答
-benchmark，更值得优先看方程发现、证明、验证这类基准。</li>
-</ul></li>
+<li>MiniF2F &#x2F; FIMO &#x2F; MUSTARDSAUCE：偏形式化证明与定理证明</li>
 </ul>
-<h4 id="生物学与医学研究">生物学与医学研究</h4>
+</li>
+<li><p>这里的一个判断</p>
 <ul>
-<li>典型应用
+<li>物理方向在 survey 里更强调“从数据发现规律”和“理论一致性”，所以比起通用问答 benchmark，更值得优先看方程发现、证明、验证这类基准。</li>
+</ul>
+</li>
+</ul>
+<h4 id="生物学与医学研究"><a href="#生物学与医学研究" class="headerlink" title="生物学与医学研究"></a>生物学与医学研究</h4><ul>
+<li><p>典型应用</p>
 <ul>
-<li>蛋白质发现与结构预测
-<ul>
+<li>蛋白质发现与结构预测<ul>
 <li>AlphaFold 2</li>
 <li>AlphaFold 3</li>
-</ul></li>
+</ul>
+</li>
 <li>细胞与基因建模</li>
-<li>药物发现
-<ul>
+<li>药物发现<ul>
 <li>分子设计</li>
 <li>多智能体协同药物识别</li>
 <li>药物重定位</li>
-</ul></li>
-<li>临床诊断
-<ul>
+</ul>
+</li>
+<li>临床诊断<ul>
 <li>临床大脑</li>
 <li>多智能体医院模拟</li>
 <li>交互式物理执行</li>
-</ul></li>
-</ul></li>
-<li>可参考 benchmark / 数据集
+</ul>
+</li>
+</ul>
+</li>
+<li><p>可参考 benchmark &#x2F; 数据集</p>
 <ul>
 <li>BioProBench：生物协议理解与推理</li>
 <li>LLMEval-Med：医生验证的真实临床 benchmark</li>
-<li>BioKGBench / BioMaze：偏生物医学知识图谱检查和生物通路推理</li>
+<li>BioKGBench &#x2F; BioMaze：偏生物医学知识图谱检查和生物通路推理</li>
 <li>MedMCQA：医学问答</li>
 <li>AutoBio：偏生物实验室环境中的机器人自动化评估</li>
-</ul></li>
-<li>如果后面要落到比赛方案
-<ul>
-<li>生医方向最有价值的不是单一聊天能力，而是“检索 + 协议理解 + 实验设计
-+ 临床/实验验证”的串联能力。</li>
-</ul></li>
 </ul>
-<h4 id="化学与材料研究">化学与材料研究</h4>
+</li>
+<li><p>如果后面要落到比赛方案</p>
 <ul>
-<li>典型应用
+<li>生医方向最有价值的不是单一聊天能力，而是“检索 + 协议理解 + 实验设计 + 临床&#x2F;实验验证”的串联能力。</li>
+</ul>
+</li>
+</ul>
+<h4 id="化学与材料研究"><a href="#化学与材料研究" class="headerlink" title="化学与材料研究"></a>化学与材料研究</h4><ul>
+<li><p>典型应用</p>
 <ul>
 <li>自动分析</li>
 <li>自动发现</li>
 <li>全人类-AI 协作流程管理</li>
 <li>机器人平台 + 高通量实验 + 实时决策</li>
-</ul></li>
-<li>可参考 benchmark / 数据集
+</ul>
+</li>
+<li><p>可参考 benchmark &#x2F; 数据集</p>
 <ul>
 <li>面向真实世界药物发现应用的化合物活性预测 benchmark</li>
 <li>BioProBench：如果任务包含实验协议理解，也可以借来用</li>
-<li>DiscoveryBench /
-DiscoveryWorld：如果想评估端到端发现能力，这两个更接近完整科研流程</li>
-<li>ScienceAgentBench / Curie / BaisBench：适合看“AI
-scientist”式系统在发现任务上的总体表现</li>
-</ul></li>
-<li>这里需要注意
-<ul>
-<li>化学、材料方向的 benchmark 往往不是单纯
-QA，而是实验设计、候选生成、实验闭环、自动化平台协同。</li>
-</ul></li>
+<li>DiscoveryBench &#x2F; DiscoveryWorld：如果想评估端到端发现能力，这两个更接近完整科研流程</li>
+<li>ScienceAgentBench &#x2F; Curie &#x2F; BaisBench：适合看“AI scientist”式系统在发现任务上的总体表现</li>
 </ul>
-<h3 id="应用科学与工程方向">应用科学与工程方向</h3>
-<h4 id="机器人与控制">机器人与控制</h4>
+</li>
+<li><p>这里需要注意</p>
 <ul>
-<li>典型应用
+<li>化学、材料方向的 benchmark 往往不是单纯 QA，而是实验设计、候选生成、实验闭环、自动化平台协同。</li>
+</ul>
+</li>
+</ul>
+<h3 id="应用科学与工程方向"><a href="#应用科学与工程方向" class="headerlink" title="应用科学与工程方向"></a>应用科学与工程方向</h3><h4 id="机器人与控制"><a href="#机器人与控制" class="headerlink" title="机器人与控制"></a>机器人与控制</h4><ul>
+<li><p>典型应用</p>
 <ul>
 <li>自主设计与优化</li>
 <li>端到端基于视觉的控制</li>
 <li>模拟到现实的鲁棒性与安全性</li>
 <li>多任务与多智能体控制框架</li>
-</ul></li>
-<li>可参考 benchmark / 数据集
+</ul>
+</li>
+<li><p>可参考 benchmark &#x2F; 数据集</p>
 <ul>
-<li>这一块在 survey 里更偏应用综述，统一 benchmark
-写得没有科学发现那部分集中</li>
-<li>如果从“研究智能体执行能力”角度看，可以旁接：
-<ul>
+<li>这一块在 survey 里更偏应用综述，统一 benchmark 写得没有科学发现那部分集中</li>
+<li>如果从“研究智能体执行能力”角度看，可以旁接：<ul>
 <li>ScienceAgentBench</li>
 <li>DiscoveryWorld</li>
 <li>DiscoveryBench</li>
-</ul></li>
-<li>如果从“实验执行与代码实现”角度看，可以旁接：
-<ul>
+</ul>
+</li>
+<li>如果从“实验执行与代码实现”角度看，可以旁接：<ul>
 <li>MLGym-Bench</li>
 <li>MLE-Bench</li>
 <li>MLAgent-Bench</li>
-</ul></li>
-</ul></li>
-<li>我的理解
-<ul>
-<li>机器人与控制这一块，更像是“AI4Research
-能不能进入真实物理闭环”的试金石。</li>
-</ul></li>
 </ul>
-<h4 id="软件工程">软件工程</h4>
+</li>
+</ul>
+</li>
+<li><p>我的理解</p>
 <ul>
-<li>典型应用
+<li>机器人与控制这一块，更像是“AI4Research 能不能进入真实物理闭环”的试金石。</li>
+</ul>
+</li>
+</ul>
+<h4 id="软件工程"><a href="#软件工程" class="headerlink" title="软件工程"></a>软件工程</h4><ul>
+<li><p>典型应用</p>
 <ul>
 <li>代码生成</li>
 <li>端到端软件开发</li>
 <li>多智能体开发、调试、代码审查、测试</li>
-</ul></li>
-<li>可参考 benchmark / 数据集
+</ul>
+</li>
+<li><p>可参考 benchmark &#x2F; 数据集</p>
 <ul>
 <li>MLAgent-Bench</li>
 <li>MLE-Bench</li>
@@ -871,49 +834,46 @@ QA，而是实验设计、候选生成、实验闭环、自动化平台协同。
 <li>AutoReproduce</li>
 <li>SciReproduce-Bench</li>
 <li>DO Challenge</li>
-</ul></li>
-<li>这一组 benchmark 的意义
-<ul>
-<li>它们更接近真实 research
-workflow，不只是让模型写一个函数，而是看它能不能完成复现、调试、训练、评估、分析这一整套流程。</li>
-</ul></li>
 </ul>
-<h3 id="社会科学方向">社会科学方向</h3>
-<h4 id="社会学与心理学">社会学与心理学</h4>
+</li>
+<li><p>这一组 benchmark 的意义</p>
 <ul>
-<li>典型应用
+<li>它们更接近真实 research workflow，不只是让模型写一个函数，而是看它能不能完成复现、调试、训练、评估、分析这一整套流程。</li>
+</ul>
+</li>
+</ul>
+<h3 id="社会科学方向"><a href="#社会科学方向" class="headerlink" title="社会科学方向"></a>社会科学方向</h3><h4 id="社会学与心理学"><a href="#社会学与心理学" class="headerlink" title="社会学与心理学"></a>社会学与心理学</h4><ul>
+<li><p>典型应用</p>
 <ul>
 <li>AI 辅助实验与访谈研究</li>
 <li>社会现象的大规模模拟</li>
 <li>潜在风险讨论</li>
 <li>数字心理健康干预与情感叙事生成</li>
-</ul></li>
-<li>可参考 benchmark / 数据集
+</ul>
+</li>
+<li><p>可参考 benchmark &#x2F; 数据集</p>
 <ul>
-<li>这一块在 survey 里应用很多，但标准 benchmark
-相对没自然科学和代码实验那么成体系</li>
-<li>可以关注：
-<ul>
+<li>这一块在 survey 里应用很多，但标准 benchmark 相对没自然科学和代码实验那么成体系</li>
+<li>可以关注：<ul>
 <li>MimiTalk：AI 主导访谈</li>
 <li>经济现场实验预测相关任务</li>
 <li>与心理健康资源、叙事生成相关的评估任务</li>
-</ul></li>
-</ul></li>
-<li>这里的难点
-<ul>
-<li>社会科学里，预测方向和强度并不等于真正理解社会机制，所以这类
-benchmark 的外推性要谨慎看。</li>
-</ul></li>
 </ul>
-<h2 id="可直接补进前文的-benchmark-清单">可直接补进前文的 benchmark
-清单</h2>
-<p>如果后面要把这份笔记继续整理成“综述 + 方案储备”，下面这些 benchmark
-可以优先保留：</p>
+</li>
+</ul>
+</li>
+<li><p>这里的难点</p>
 <ul>
-<li>科学理解
+<li>社会科学里，预测方向和强度并不等于真正理解社会机制，所以这类 benchmark 的外推性要谨慎看。</li>
+</ul>
+</li>
+</ul>
+<h2 id="可直接补进前文的-benchmark-清单"><a href="#可直接补进前文的-benchmark-清单" class="headerlink" title="可直接补进前文的 benchmark 清单"></a>可直接补进前文的 benchmark 清单</h2><p>如果后面要把这份笔记继续整理成“综述 + 方案储备”，下面这些 benchmark 可以优先保留：</p>
+<ul>
+<li><p>科学理解</p>
 <ul>
 <li>ScienceQA</li>
-<li>LitQA / LitQA2</li>
+<li>LitQA &#x2F; LitQA2</li>
 <li>ScholarChemQA</li>
 <li>ArXivQA</li>
 <li>MMSci</li>
@@ -927,8 +887,9 @@ benchmark 的外推性要谨慎看。</li>
 <li>ChartX</li>
 <li>TableBench</li>
 <li>SCITOOLBENCH</li>
-</ul></li>
-<li>学术调查
+</ul>
+</li>
+<li><p>学术调查</p>
 <ul>
 <li>OARelatedWork</li>
 <li>OAG-Bench</li>
@@ -939,8 +900,9 @@ benchmark 的外推性要谨慎看。</li>
 <li>AutoSurvey</li>
 <li>SciReviewGen</li>
 <li>SurveyEval</li>
-</ul></li>
-<li>科学发现
+</ul>
+</li>
+<li><p>科学发现</p>
 <ul>
 <li>LiveIdeaBench</li>
 <li>ResearchBench</li>
@@ -960,8 +922,9 @@ benchmark 的外推性要谨慎看。</li>
 <li>DiscoveryBench</li>
 <li>Curie</li>
 <li>BaisBench</li>
-</ul></li>
-<li>学术写作
+</ul>
+</li>
+<li><p>学术写作</p>
 <ul>
 <li>FigGen</li>
 <li>SciCapenter</li>
@@ -971,8 +934,9 @@ benchmark 的外推性要谨慎看。</li>
 <li>ScholarCopilot</li>
 <li>AWE</li>
 <li>AAAR-1</li>
-</ul></li>
-<li>同行评议
+</ul>
+</li>
+<li><p>同行评议</p>
 <ul>
 <li>PeerRead</li>
 <li>NLPeer</li>
@@ -981,7 +945,8 @@ benchmark 的外推性要谨慎看。</li>
 <li>ORSUM</li>
 <li>AI-Peer-Review-Detection-Benchmark</li>
 <li>TRIED</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
     </div>
