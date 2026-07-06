@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="方法 数学公式 参数说明 适用特点 皮尔逊相关系数 $r &#x3D; \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\sqrt{\sum (y_i - \bar{y})^2}}$...">
+    <meta name="description" content="方法 数学公式 参数说明 适用特点 皮尔逊相关系数 \(r &#x3D; \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\sqrt{\sum (y_i - \bar{y})^2}}\) \(x...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="相关系数大全整理">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2026/04/19/%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0%E5%A4%A7%E5%85%A8%E6%95%B4%E7%90%86/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="方法 数学公式 参数说明 适用特点 皮尔逊相关系数 $r &#x3D; \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\sqrt{\sum (y_i - \bar{y})^2}}$...">
+<meta property="og:description" content="方法 数学公式 参数说明 适用特点 皮尔逊相关系数 \(r &#x3D; \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\sqrt{\sum (y_i - \bar{y})^2}}\) \(x...">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-19T02:49:43.000Z">
 <meta property="article:modified_time" content="2026-07-02T14:41:30.948Z">
@@ -185,7 +185,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="相关系数大全整理 | Iron Moon Blog">
-      <meta itemprop="description" content="方法 数学公式 参数说明 适用特点 皮尔逊相关系数 $r &#x3D; \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\sqrt{\sum (y_i - \bar{y})^2}}$...">
+      <meta itemprop="description" content="方法 数学公式 参数说明 适用特点 皮尔逊相关系数 \(r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\sqrt{\sum (y_i - \bar{y})^2}}\) \(x...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -213,14 +213,20 @@
   
 </div>
 
-            <div class="post-description">方法 数学公式 参数说明 适用特点 皮尔逊相关系数 $r &#x3D; \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\sqrt{\sum (y_i - \bar{y})^2}}$...</div>
+            <div class="post-description">方法 数学公式 参数说明 适用特点 皮尔逊相关系数 \(r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\sqrt{\sum (y_i - \bar{y})^2}}\) \(x...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><table>
+    <div class="post-body" itemprop="articleBody"><table style="width:100%;">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 63%" />
+<col style="width: 21%" />
+<col style="width: 5%" />
+</colgroup>
 <thead>
 <tr>
 <th>方法</th>
@@ -229,79 +235,103 @@
 <th>适用特点</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>皮尔逊相关系数</strong></td>
-<td>$r &#x3D; \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\sqrt{\sum (y_i - \bar{y})^2}}$</td>
-<td>$x_i, y_i$：样本值；$\bar{x}, \bar{y}$：均值</td>
+<td><span class="math inline">\(r = \frac{\sum (x_i - \bar{x})(y_i -
+\bar{y})}{\sqrt{\sum (x_i - \bar{x})^2}\sqrt{\sum (y_i -
+\bar{y})^2}}\)</span></td>
+<td><span class="math inline">\(x_i, y_i\)</span>：样本值；<span
+class="math inline">\(\bar{x}, \bar{y}\)</span>：均值</td>
 <td>线性关系</td>
 </tr>
 <tr>
 <td><strong>斯皮尔曼 ρ</strong></td>
-<td>$\rho &#x3D; 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}$</td>
-<td>$d_i$：排名差；$n$：样本数</td>
+<td><span class="math inline">\(\rho = 1 - \frac{6 \sum d_i^2}{n(n^2 -
+1)}\)</span></td>
+<td><span class="math inline">\(d_i\)</span>：排名差；<span
+class="math inline">\(n\)</span>：样本数</td>
 <td>单调关系（非线性可）</td>
 </tr>
 <tr>
 <td><strong>肯德尔 τ</strong></td>
-<td>$\tau &#x3D; \frac{C - D}{\frac{1}{2}n(n-1)}$</td>
-<td>$C$：一致对数；$D$：不一致对数</td>
+<td><span class="math inline">\(\tau = \frac{C -
+D}{\frac{1}{2}n(n-1)}\)</span></td>
+<td><span class="math inline">\(C\)</span>：一致对数；<span
+class="math inline">\(D\)</span>：不一致对数</td>
 <td>小样本、稳健</td>
 </tr>
 <tr>
 <td><strong>距离相关系数</strong></td>
-<td>$\mathrm{dCor}(X,Y) &#x3D; \frac{\mathrm{dCov}(X,Y)}{\sqrt{\mathrm{dVar}(X)\mathrm{dVar}(Y)}}$</td>
+<td><span class="math inline">\(\mathrm{dCor}(X,Y) =
+\frac{\mathrm{dCov}(X,Y)}{\sqrt{\mathrm{dVar}(X)\mathrm{dVar}(Y)}}\)</span></td>
 <td>dCov：距离协方差；dVar：距离方差</td>
 <td>任意依赖关系</td>
 </tr>
 <tr>
 <td><strong>互信息 (MI)</strong></td>
-<td>$I(X;Y)&#x3D;\sum_{x,y} p(x,y)\log \frac{p(x,y)}{p(x)p(y)}$</td>
-<td>$p(x,y)$：联合概率；$p(x)$：边缘概率</td>
+<td><span class="math inline">\(I(X;Y)=\sum_{x,y} p(x,y)\log
+\frac{p(x,y)}{p(x)p(y)}\)</span></td>
+<td><span class="math inline">\(p(x,y)\)</span>：联合概率；<span
+class="math inline">\(p(x)\)</span>：边缘概率</td>
 <td>任意非线性</td>
 </tr>
 <tr>
 <td><strong>最大信息系数 (MIC)</strong></td>
-<td>$\mathrm{MIC} &#x3D; \max_{grids} \frac{I(X;Y)}{\log \min(m,n)}$</td>
-<td>网格划分；$m,n$：分箱数</td>
+<td><span class="math inline">\(\mathrm{MIC} = \max_{grids}
+\frac{I(X;Y)}{\log \min(m,n)}\)</span></td>
+<td>网格划分；<span class="math inline">\(m,n\)</span>：分箱数</td>
 <td>非线性探索</td>
 </tr>
 <tr>
-<td><strong>Hoeffding’s D</strong></td>
-<td>$D &#x3D; \sum (F_{XY} - F_XF_Y)^2$（积分形式）</td>
-<td>$F_{XY}$：联合分布；$F_X,F_Y$：边缘分布</td>
+<td><strong>Hoeffding's D</strong></td>
+<td><span class="math inline">\(D = \sum (F_{XY} -
+F_XF_Y)^2\)</span>（积分形式）</td>
+<td><span class="math inline">\(F_{XY}\)</span>：联合分布；<span
+class="math inline">\(F_X,F_Y\)</span>：边缘分布</td>
 <td>任意依赖</td>
 </tr>
 <tr>
 <td><strong>克莱姆 V</strong></td>
-<td>$V &#x3D; \sqrt{\frac{\chi^2}{n(k-1)}}$</td>
-<td>$\chi^2$：卡方统计量；$k$：较小类别数</td>
+<td><span class="math inline">\(V =
+\sqrt{\frac{\chi^2}{n(k-1)}}\)</span></td>
+<td><span class="math inline">\(\chi^2\)</span>：卡方统计量；<span
+class="math inline">\(k\)</span>：较小类别数</td>
 <td>类别 vs 类别</td>
 </tr>
 <tr>
 <td><strong>相关比 η²</strong></td>
-<td>$\eta^2 &#x3D; \frac{\sum n_k(\bar{y}_k - \bar{y})^2}{\sum (y_i - \bar{y})^2}$</td>
-<td>$n_k$：组样本数；$\bar{y}_k$：组均值</td>
+<td><span class="math inline">\(\eta^2 = \frac{\sum n_k(\bar{y}_k -
+\bar{y})^2}{\sum (y_i - \bar{y})^2}\)</span></td>
+<td><span class="math inline">\(n_k\)</span>：组样本数；<span
+class="math inline">\(\bar{y}_k\)</span>：组均值</td>
 <td>类别 → 连续</td>
 </tr>
 <tr>
 <td><strong>点双列相关</strong></td>
-<td>$r_{pb} &#x3D; \frac{\bar{y}_1 - \bar{y}_0}{s_y}\sqrt{\frac{n_1 n_0}{n^2}}$</td>
-<td>$\bar{y}_1,\bar{y}_0$：两组均值；$s_y$：标准差</td>
+<td><span class="math inline">\(r_{pb} = \frac{\bar{y}_1 -
+\bar{y}_0}{s_y}\sqrt{\frac{n_1 n_0}{n^2}}\)</span></td>
+<td><span
+class="math inline">\(\bar{y}_1,\bar{y}_0\)</span>：两组均值；<span
+class="math inline">\(s_y\)</span>：标准差</td>
 <td>二分类 + 连续</td>
 </tr>
 <tr>
 <td><strong>偏相关系数</strong></td>
-<td>$r_{xy \cdot z} &#x3D; \frac{r_{xy} - r_{xz}r_{yz}}{\sqrt{(1-r_{xz}^2)(1-r_{yz}^2)}}$</td>
-<td>$r_{xy}$ 等：两两皮尔逊相关</td>
+<td><span class="math inline">\(r_{xy \cdot z} = \frac{r_{xy} -
+r_{xz}r_{yz}}{\sqrt{(1-r_{xz}^2)(1-r_{yz}^2)}}\)</span></td>
+<td><span class="math inline">\(r_{xy}\)</span> 等：两两皮尔逊相关</td>
 <td>控制变量</td>
 </tr>
 <tr>
 <td><strong>Phi_K</strong></td>
-<td>基于 $\chi^2$ → 非线性映射（无简单闭式）</td>
+<td>基于 <span class="math inline">\(\chi^2\)</span> →
+非线性映射（无简单闭式）</td>
 <td>通过分箱 + 卡方推导</td>
 <td>混合变量</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>一个比较好的分析路径是：先用距离相关系数或MIC进行探索性分析，捕捉潜在的依赖关系；如果发现关系是单调的，可以再切换回斯皮尔曼相关系数，以获得更具体的相关方向和强度信息。</p>
 
     </div>

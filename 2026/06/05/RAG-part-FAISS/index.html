@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="本文知识点来源于FAISS Johnson-Lindenstrauss引理：如果有一组高维空间中的点，可以把它们随机映射到一个较低维空间中，并且点与点之间的距离几乎保持不变。 Faiss 优化的是“在给定距离度量下，尽量快、尽量省内存地找近邻”；但最终业务效果还取决于 embed...">
+    <meta name="description" content="本文知识点来源于FAISS Johnson-Lindenstrauss引理： 如果有一组高维空间中的点，可以把它们随机映射到一个较低维空间中，并且点与点之间的距离几乎保持不变。 Faiss 优化的是“在给定距离度量下，尽量快、尽量省内存地找近邻”；但最终业务效果还取决于 embe...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RAG part: FAISS">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2026/06/05/RAG-part-FAISS/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="本文知识点来源于FAISS Johnson-Lindenstrauss引理：如果有一组高维空间中的点，可以把它们随机映射到一个较低维空间中，并且点与点之间的距离几乎保持不变。 Faiss 优化的是“在给定距离度量下，尽量快、尽量省内存地找近邻”；但最终业务效果还取决于 embed...">
+<meta property="og:description" content="本文知识点来源于FAISS Johnson-Lindenstrauss引理： 如果有一组高维空间中的点，可以把它们随机映射到一个较低维空间中，并且点与点之间的距离几乎保持不变。 Faiss 优化的是“在给定距离度量下，尽量快、尽量省内存地找近邻”；但最终业务效果还取决于 embe...">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-05T12:52:17.000Z">
 <meta property="article:modified_time" content="2026-07-02T14:41:43.837Z">
@@ -185,7 +185,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="RAG part: FAISS | Iron Moon Blog">
-      <meta itemprop="description" content="本文知识点来源于FAISS Johnson-Lindenstrauss引理：如果有一组高维空间中的点，可以把它们随机映射到一个较低维空间中，并且点与点之间的距离几乎保持不变。 Faiss 优化的是“在给定距离度量下，尽量快、尽量省内存地找近邻”；但最终业务效果还取决于 embed...">
+      <meta itemprop="description" content="本文知识点来源于FAISS Johnson-Lindenstrauss引理： 如果有一组高维空间中的点，可以把它们随机映射到一个较低维空间中，并且点与点之间的距离几乎保持不变。 Faiss 优化的是“在给定距离度量下，尽量快、尽量省内存地找近邻”；但最终业务效果还取决于 embe...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -213,18 +213,38 @@
   
 </div>
 
-            <div class="post-description">本文知识点来源于FAISS Johnson-Lindenstrauss引理：如果有一组高维空间中的点，可以把它们随机映射到一个较低维空间中，并且点与点之间的距离几乎保持不变。 Faiss 优化的是“在给定距离度量下，尽量快、尽量省内存地找近邻”；但最终业务效果还取决于 embed...</div>
+            <div class="post-description">本文知识点来源于FAISS Johnson-Lindenstrauss引理： 如果有一组高维空间中的点，可以把它们随机映射到一个较低维空间中，并且点与点之间的距离几乎保持不变。 Faiss 优化的是“在给定距离度量下，尽量快、尽量省内存地找近邻”；但最终业务效果还取决于 embe...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>本文知识点来源于<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2401.08281">FAISS</a></p>
-<p>Johnson-Lindenstrauss引理：<br>如果有一组高维空间中的点，可以把它们随机映射到一个较低维空间中，并且点与点之间的距离几乎保持不变。</p>
-<p>Faiss 优化的是“在给定距离度量下，尽量快、尽量省内存地找近邻”；但最终业务效果还取决于 embedding 是否真的表达了语义相似性。</p>
+    <div class="post-body" itemprop="articleBody"><p>本文知识点来源于<a
+target="_blank" rel="noopener" href="https://arxiv.org/pdf/2401.08281">FAISS</a></p>
+<p>Johnson-Lindenstrauss引理：
+如果有一组高维空间中的点，可以把它们随机映射到一个较低维空间中，并且点与点之间的距离几乎保持不变。</p>
+<p>Faiss
+优化的是“在给定距离度量下，尽量快、尽量省内存地找近邻”；但最终业务效果还取决于
+embedding 是否真的表达了语义相似性。</p>
 <p>Index IVF()</p>
-<p>Pareto 最优的数学定义如下：考虑两个配置 x 和 y，分别由搜索时间 T 和准确率 A 表示，即 x &#x3D; (T_x, A_x)，y &#x3D; (T_y, A_y)。若满足 $T_y \leq T_x$ 且 $A_y \geq A_x$，且至少有一个严格不等式成立（即 $T_y &lt; T_x$ 或 $A_y &gt; A_x$），则称 y 支配 x（y dominates x）。此时，配置 x 被 y 全面不差且至少一处更优，因此 x 没有存在价值。一个配置 x 被称为 Pareto optimal（帕累托最优），当且仅当不存在任何其他配置 y 能够支配 x，即没有配置能比 x 更快且准确率不低于 x（即 $T_y &lt; T_x$ 且 $A_y \geq A_x$），或比 x 更准且搜索时间不高于 x（即 $T_y \leq T_x$ 且 $A_y &gt; A_x$）。所有未被支配的 Pareto 最优配置点连成的曲线称为 Pareto frontier（帕累托前沿）。</p>
+<p>Pareto 最优的数学定义如下：考虑两个配置 x 和 y，分别由搜索时间 T
+和准确率 A 表示，即 x = (T_x, A_x)，y = (T_y, A_y)。若满足 <span
+class="math inline">\(T_y \leq T_x\)</span> 且 <span
+class="math inline">\(A_y \geq
+A_x\)</span>，且至少有一个严格不等式成立（即 <span
+class="math inline">\(T_y &lt; T_x\)</span> 或 <span
+class="math inline">\(A_y &gt; A_x\)</span>），则称 y 支配 x（y
+dominates x）。此时，配置 x 被 y 全面不差且至少一处更优，因此 x
+没有存在价值。一个配置 x 被称为 Pareto
+optimal（帕累托最优），当且仅当不存在任何其他配置 y 能够支配
+x，即没有配置能比 x 更快且准确率不低于 x（即 <span
+class="math inline">\(T_y &lt; T_x\)</span> 且 <span
+class="math inline">\(A_y \geq A_x\)</span>），或比 x
+更准且搜索时间不高于 x（即 <span class="math inline">\(T_y \leq
+T_x\)</span> 且 <span class="math inline">\(A_y &gt;
+A_x\)</span>）。所有未被支配的 Pareto 最优配置点连成的曲线称为 Pareto
+frontier（帕累托前沿）。</p>
 
     </div>
 
