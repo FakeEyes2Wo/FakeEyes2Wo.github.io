@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="对Mamba的一点学习 pre Knowledge 时不变性 如果在输入信号上有一个时移，那么输出信号上会产生相同的时移，那么这个系统就是时不变的。也就是说输入信号为 \(x(t - t_0)\) 时，输出信号为 \(y(t - t_0)\)。 如何去理解呢？系统的特性和行为不随...">
+    <meta name="description" content="对Mamba的一点学习pre Knowledge时不变性如果在输入信号上有一个时移，那么输出信号上会产生相同的时移，那么这个系统就是时不变的。也就是说输入信号为 $x(t - t_0)$ 时，输出信号为 $y(t - t_0)$。 如何去理解呢？系统的特性和行为不随时间改变，信号...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mamba 学习">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2025/09/24/mamba-%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="对Mamba的一点学习 pre Knowledge 时不变性 如果在输入信号上有一个时移，那么输出信号上会产生相同的时移，那么这个系统就是时不变的。也就是说输入信号为 \(x(t - t_0)\) 时，输出信号为 \(y(t - t_0)\)。 如何去理解呢？系统的特性和行为不随...">
+<meta property="og:description" content="对Mamba的一点学习pre Knowledge时不变性如果在输入信号上有一个时移，那么输出信号上会产生相同的时移，那么这个系统就是时不变的。也就是说输入信号为 $x(t - t_0)$ 时，输出信号为 $y(t - t_0)$。 如何去理解呢？系统的特性和行为不随时间改变，信号...">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-09-24T09:46:22.000Z">
 <meta property="article:modified_time" content="2025-12-03T02:28:45.201Z">
@@ -116,8 +116,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9mamba%E7%9A%84%E4%B8%80%E7%82%B9%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">对Mamba的一点学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-knowledge"><span class="nav-number">1.0.1.</span> <span class="nav-text">pre Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E4%B8%8D%E5%8F%98%E6%80%A7"><span class="nav-number">1.0.2.</span> <span class="nav-text">时不变性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssm-%E7%8A%B6%E6%80%81%E7%A9%BA%E9%97%B4%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">SSM 状态空间模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mamba"><span class="nav-number">1.2.</span> <span class="nav-text">MAMBA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E5%86%99%E6%88%90%E5%8D%B7%E7%A7%AF%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">2. 输出写成卷积形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E7%B3%BB%E7%BB%9F%E4%BB%8D%E4%B8%BA%E5%B8%B8%E7%B3%BB%E6%95%B0"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">1. 连续系统仍为常系数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E6%AF%8F%E4%B8%AA%E5%8C%BA%E9%97%B4%E5%86%85%E5%81%9A%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">2. 在每个区间内做离散化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delta_k-%E4%BD%9C%E4%B8%BA%E8%BE%93%E5%85%A5%E5%87%BD%E6%95%B0mamba-%E7%9A%84-selective-ssm"><span class="nav-number">1.2.1.</span> <span class="nav-text">\(\Delta_k\) 作为输入函数：Mamba 的 Selective
-SSM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E4%B8%80%E8%88%AC%E7%9A%84-selective-ssm-%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">2. 更一般的 Selective SSM 形式</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9Mamba%E7%9A%84%E4%B8%80%E7%82%B9%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">对Mamba的一点学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pre-Knowledge"><span class="nav-number">1.0.1.</span> <span class="nav-text">pre Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E4%B8%8D%E5%8F%98%E6%80%A7"><span class="nav-number">1.0.2.</span> <span class="nav-text">时不变性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSM-%E7%8A%B6%E6%80%81%E7%A9%BA%E9%97%B4%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">SSM 状态空间模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MAMBA"><span class="nav-number">1.2.</span> <span class="nav-text">MAMBA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3-SSM-%E7%9A%84%E5%8D%B7%E7%A7%AF%E5%BD%A2%E5%BC%8F%E4%B8%8E%E6%97%B6%E4%B8%8D%E5%8F%98%E6%80%A7"><span class="nav-number">1.2.1.</span> <span class="nav-text">离散 SSM 的卷积形式与时不变性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%BE%93%E5%87%BA%E5%86%99%E6%88%90%E5%8D%B7%E7%A7%AF%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">2. 输出写成卷积形式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E5%8F%AF%E5%8F%98%E6%AD%A5%E9%95%BF-Delta-k"><span class="nav-number">1.2.2.</span> <span class="nav-text">引入可变步长 $\Delta_k$</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E8%BF%9E%E7%BB%AD%E7%B3%BB%E7%BB%9F%E4%BB%8D%E4%B8%BA%E5%B8%B8%E7%B3%BB%E6%95%B0"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">1. 连续系统仍为常系数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9C%A8%E6%AF%8F%E4%B8%AA%E5%8C%BA%E9%97%B4%E5%86%85%E5%81%9A%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2. 在每个区间内做离散化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Delta-k-%E4%BD%9C%E4%B8%BA%E8%BE%93%E5%85%A5%E5%87%BD%E6%95%B0%EF%BC%9AMamba-%E7%9A%84-Selective-SSM"><span class="nav-number">1.2.3.</span> <span class="nav-text">$\Delta_k$ 作为输入函数：Mamba 的 Selective SSM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E8%AE%A9-Delta-k-%E4%BE%9D%E8%B5%96%E4%BA%8E%E8%BE%93%E5%85%A5-x-k"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">1. 让 $\Delta_k$ 依赖于输入 $x_k$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9B%B4%E4%B8%80%E8%88%AC%E7%9A%84-Selective-SSM-%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">2. 更一般的 Selective SSM 形式</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -187,7 +186,7 @@ SSM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="n
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="mamba 学习 | Iron Moon Blog">
-      <meta itemprop="description" content="对Mamba的一点学习 pre Knowledge 时不变性 如果在输入信号上有一个时移，那么输出信号上会产生相同的时移，那么这个系统就是时不变的。也就是说输入信号为 \(x(t - t_0)\) 时，输出信号为 \(y(t - t_0)\)。 如何去理解呢？系统的特性和行为不随...">
+      <meta itemprop="description" content="对Mamba的一点学习pre Knowledge时不变性如果在输入信号上有一个时移，那么输出信号上会产生相同的时移，那么这个系统就是时不变的。也就是说输入信号为 $x(t - t_0)$ 时，输出信号为 $y(t - t_0)$。 如何去理解呢？系统的特性和行为不随时间改变，信号...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -215,279 +214,94 @@ SSM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="n
   
 </div>
 
-            <div class="post-description">对Mamba的一点学习 pre Knowledge 时不变性 如果在输入信号上有一个时移，那么输出信号上会产生相同的时移，那么这个系统就是时不变的。也就是说输入信号为 \(x(t - t_0)\) 时，输出信号为 \(y(t - t_0)\)。 如何去理解呢？系统的特性和行为不随...</div>
+            <div class="post-description">对Mamba的一点学习pre Knowledge时不变性如果在输入信号上有一个时移，那么输出信号上会产生相同的时移，那么这个系统就是时不变的。也就是说输入信号为 $x(t - t_0)$ 时，输出信号为 $y(t - t_0)$。 如何去理解呢？系统的特性和行为不随时间改变，信号...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="对mamba的一点学习">对Mamba的一点学习</h1>
-<h3 id="pre-knowledge">pre Knowledge</h3>
-<h3 id="时不变性">时不变性</h3>
-<p>如果在输入信号上有一个时移，那么输出信号上会产生相同的时移，那么这个系统就是时不变的。也就是说输入信号为
-<span class="math inline">\(x(t - t_0)\)</span> 时，输出信号为 <span
-class="math inline">\(y(t - t_0)\)</span>。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="对Mamba的一点学习"><a href="#对Mamba的一点学习" class="headerlink" title="对Mamba的一点学习"></a>对Mamba的一点学习</h1><h3 id="pre-Knowledge"><a href="#pre-Knowledge" class="headerlink" title="pre Knowledge"></a>pre Knowledge</h3><h3 id="时不变性"><a href="#时不变性" class="headerlink" title="时不变性"></a>时不变性</h3><p>如果在输入信号上有一个时移，那么输出信号上会产生相同的时移，那么这个系统就是时不变的。也就是说输入信号为 $x(t - t_0)$ 时，输出信号为 $y(t - t_0)$。</p>
 <p>如何去理解呢？系统的特性和行为不随时间改变，信号的当前状态与时间无关，这个系统就是时不变的。举例来说，一个电路你今天做一次实验，和明天做一次实验，得到的结果是一样的，与时间无关。你的输入不随时间发生变化，第一次计算之后掌握的特征储存下来，将来使用的时候就不用重新计算特征了。</p>
 <p>例：如果我们考虑一个连续时间系统，定义如下：</p>
-<p><span class="math display">\[
-y(t) = \sin[x(t)]
-\]</span></p>
-<p>为了确认这个系统是时不变的，就必须判定对于任何输入和任何时移 <span
-class="math inline">\(t_0\)</span>，时不变性是否成立。令 <span
-class="math inline">\(x_1(t)\)</span> 是系统的任意输入，并令</p>
-<p><span class="math display">\[
-y_1(t) = \sin[x_1(t)]
-\]</span></p>
+<p>$$<br>y(t) &#x3D; \sin[x(t)]<br>$$</p>
+<p>为了确认这个系统是时不变的，就必须判定对于任何输入和任何时移 $t_0$，时不变性是否成立。令 $x_1(t)$ 是系统的任意输入，并令</p>
+<p>$$<br>y_1(t) &#x3D; \sin[x_1(t)]<br>$$</p>
 <p>是其相应的输出。</p>
-<p>然后，考虑将 <span class="math inline">\(x_1(t)\)</span>
-时移作为第二个输入：</p>
-<p><span class="math display">\[
-x_2(t) = x_1(t - t_0)
-\]</span></p>
+<p>然后，考虑将 $x_1(t)$ 时移作为第二个输入：</p>
+<p>$$<br>x_2(t) &#x3D; x_1(t - t_0)<br>$$</p>
 <p>对于这个系统的输出是：</p>
-<p><span class="math display">\[
-\begin{aligned}
-y_2(t) &amp;= \sin[x_2(t)] = \sin[x_1(t - t_0)] \\
-y_1(t - t_0) &amp;= \sin[x_1(t - t_0)] \\
-y_2(t) &amp;= y_1(t - t_0)
-\end{aligned}
-\]</span></p>
+<p>$$<br>\begin{aligned}<br>y_2(t) &amp;&#x3D; \sin[x_2(t)] &#x3D; \sin[x_1(t - t_0)] \<br>y_1(t - t_0) &amp;&#x3D; \sin[x_1(t - t_0)] \<br>y_2(t) &amp;&#x3D; y_1(t - t_0)<br>\end{aligned}<br>$$</p>
 <p>即证时不变性。</p>
-<p>要证明一个系统是时变性的话，仍然采用的是上面的方法，观察时移前后的输出并对比即可，或者找一个条件，使时不变性不成立(找反例)。例如
-<span class="math inline">\(y(t) = x(2t)\)</span>
-就是一个时变系统，尺度变换下不同时间的输入会导致输出的不同。</p>
-<h2 id="ssm-状态空间模型">SSM 状态空间模型</h2>
-<p>状态空间模型是一种用不可直接观测的隐含状态（hidden
-state）来描述系统动态行为的数学模型。系统的观测输出由该隐含状态演化而来。
-基本结构</p>
-<p>SSM 通常由两个核心方程组成： 1. 状态方程（State Equation）
-描述隐含状态如何随时间演化（以离散时间为例）： [ <em>t = </em>{t-1} +
-x_t ] 2. 观测方程（Observation/Output Equation）
-描述如何从隐含状态生成可观测输出： [ y_t = _t + D x_t ]</p>
-<p>其中： (x_t)：时刻 (t) 的输入 (_t)：时刻 (t)
-的隐含状态（通常维度远高于输入） (y_t)：时刻 (t) 的输出 (, , ,
-D)：模型参数（在线性 SSM 中为固定矩阵/标量）</p>
-<h2 id="mamba">MAMBA</h2>
-<p>首先我们对于之前的状态空间模型应用到实际的计算机领域，我们注意到，在SSM的过程中有
-<span class="math display">\[
-\begin{cases}
-\dfrac{dh(t)}{dt} = A h(t) + B x(t) \\
-y(t) = C h(t)
-\end{cases}
-\]</span>
-这是连续情况的SSM。所以为了将其离散化，我们需要对其进行采样。设采样间隔为$
-$</p>
-<p><span class="math display">\[
-\dfrac{dh(t)}{dt} = A h(t) + B x(t)
-\]</span> 的解为 <span class="math display">\[
-h(t) = e^{At} h(0) + \int_0^t e^{A(t-\tau)} B x(\tau) d\tau
-\]</span> 其中<span class="math inline">\(e^{At}\)</span>是矩阵指数函数
-<span class="math display">\[
-e^{At} = \sum_{n=0}^{\infty} \frac{(At)^n}{n!}
-\]</span></p>
-<p>假设在每个采样时刻 $ t_k = k$，输入 $ x(t) $ 在区间 $ [t_k, t_{k+1}]
-$ 内保持恒定，即：</p>
-<p><span class="math display">\[
-x(t) = x_k \quad \text{for } t \in [k\Delta, (k+1)\Delta]
-\]</span></p>
-<p>那么从 $ t = k$ 到 $ t = (k+1)$ 的状态演化为：</p>
-<p><span class="math display">\[
-h((k+1)\Delta) = e^{A\Delta} h(k\Delta) + \int_0^\Delta e^{A(\Delta -
-\tau)} B x_k d\tau
-\]</span></p>
-<p>令 $ ' = - $，则积分变为：</p>
-<p><span class="math display">\[
-\int_0^\Delta e^{A(\Delta - \tau)} B x_k d\tau = \left( \int_0^\Delta
-e^{A\tau&#39;} d\tau&#39; \right) B x_k
-\]</span></p>
+<p>要证明一个系统是时变性的话，仍然采用的是上面的方法，观察时移前后的输出并对比即可，或者找一个条件，使时不变性不成立(找反例)。例如 $y(t) &#x3D; x(2t)$ 就是一个时变系统，尺度变换下不同时间的输入会导致输出的不同。</p>
+<h2 id="SSM-状态空间模型"><a href="#SSM-状态空间模型" class="headerlink" title="SSM 状态空间模型"></a>SSM 状态空间模型</h2><p>状态空间模型是一种用不可直接观测的隐含状态（hidden state）来描述系统动态行为的数学模型。系统的观测输出由该隐含状态演化而来。<br>基本结构</p>
+<p>SSM 通常由两个核心方程组成：</p>
+<ol>
+<li>状态方程（State Equation）<br>描述隐含状态如何随时间演化（以离散时间为例）：<br>[<br>\mathbf{h}<em>t &#x3D; \mathbf{A} \mathbf{h}</em>{t-1} + \mathbf{B} x_t<br>]</li>
+<li>观测方程（Observation&#x2F;Output Equation）<br>描述如何从隐含状态生成可观测输出：<br>[<br>y_t &#x3D; \mathbf{C} \mathbf{h}_t + D x_t<br>]</li>
+</ol>
+<p>其中：<br>(x_t)：时刻 (t) 的输入<br>(\mathbf{h}_t)：时刻 (t) 的隐含状态（通常维度远高于输入）<br>(y_t)：时刻 (t) 的输出<br>(\mathbf{A}, \mathbf{B}, \mathbf{C}, D)：模型参数（在线性 SSM 中为固定矩阵&#x2F;标量）</p>
+<h2 id="MAMBA"><a href="#MAMBA" class="headerlink" title="MAMBA"></a>MAMBA</h2><p>首先我们对于之前的状态空间模型应用到实际的计算机领域，我们注意到，在SSM的过程中有<br>$$<br>\begin{cases}<br>\dfrac{dh(t)}{dt} &#x3D; A h(t) + B x(t) \<br>y(t) &#x3D; C h(t)<br>\end{cases}<br>$$<br>这是连续情况的SSM。所以为了将其离散化，我们需要对其进行采样。设采样间隔为$ \Delta $</p>
+<p>$$<br>\dfrac{dh(t)}{dt} &#x3D; A h(t) + B x(t)<br>$$<br>的解为<br>$$<br>h(t) &#x3D; e^{At} h(0) + \int_0^t e^{A(t-\tau)} B x(\tau) d\tau<br>$$<br>其中$e^{At}$是矩阵指数函数<br>$$<br>e^{At} &#x3D; \sum_{n&#x3D;0}^{\infty} \frac{(At)^n}{n!}<br>$$</p>
+<p>假设在每个采样时刻 $ t_k &#x3D; k\Delta $，输入 $ x(t) $ 在区间 $ [t_k, t_{k+1}] $ 内保持恒定，即：</p>
+<p>$$<br>x(t) &#x3D; x_k \quad \text{for } t \in [k\Delta, (k+1)\Delta]<br>$$</p>
+<p>那么从 $ t &#x3D; k\Delta $ 到 $ t &#x3D; (k+1)\Delta $ 的状态演化为：</p>
+<p>$$<br>h((k+1)\Delta) &#x3D; e^{A\Delta} h(k\Delta) + \int_0^\Delta e^{A(\Delta - \tau)} B x_k d\tau<br>$$</p>
+<p>令 $ \tau’ &#x3D; \Delta - \tau $，则积分变为：</p>
+<p>$$<br>\int_0^\Delta e^{A(\Delta - \tau)} B x_k d\tau &#x3D; \left( \int_0^\Delta e^{A\tau’} d\tau’ \right) B x_k<br>$$</p>
 <p>而：</p>
-<p><span class="math display">\[
-\int_0^\Delta e^{A\tau} d\tau = A^{-1}(e^{A\Delta} - I) \quad \text{（若
-} A \text{ 可逆）}
-\]</span></p>
+<p>$$<br>\int_0^\Delta e^{A\tau} d\tau &#x3D; A^{-1}(e^{A\Delta} - I) \quad \text{（若 } A \text{ 可逆）}<br>$$</p>
 <p>所以：</p>
-<p><span class="math display">\[
-h_{k+1} = e^{A\Delta} h_k + A^{-1}(e^{A\Delta} - I) B x_k
-\]</span></p>
-<p>令$ {A} = e^{A} $ $ {B} = _0<sup>e</sup>{A} dB =
-A<sup>{-1}(e</sup>{A} - I) B $ （若 $ A $ 可逆） 于是得到离散系统：
-<span class="math display">\[
-\begin{cases}
-h_{k+1} = \bar{A} h_k + \bar{B} x_k \\
-y_k = C h_k
-\end{cases}
-\]</span> ### 离散 SSM 的卷积形式与时不变性</p>
-<p>在上一小节中，我们已经得到了离散化后的状态空间模型（假设采样间隔为常数
-<span class="math inline">\(\Delta\)</span>）：</p>
-<p><span class="math display">\[
-\begin{cases}
-h_{k+1} = \bar{A} h_k + \bar{B} x_k \quad
-y_k = C h_k
-\end{cases}
-\]</span></p>
-<p>其中 <span class="math inline">\(\bar{A} = e^{A\Delta},\quad \bar{B}
-= \left(\displaystyle\int_0^\Delta e^{A\tau} d\tau\right) B =
-A^{-1}(e^{A\Delta}-I)B\)</span>（若 (A) 可逆）。</p>
-<p>从递推式出发，逐步展开前几步状态： <span class="math display">\[
-\begin{aligned}
-h_1 &amp;= \bar{A} h_0 + \bar{B} x_0 \\
-h_2 &amp;= \bar{A} h_1 + \bar{B} x_1
-= \bar{A}^2 h_0 + \bar{A}\bar{B} x_0 + \bar{B} x_1 \\
-h_3 &amp;= \bar{A} h_2 + \bar{B} x_2
-= \bar{A}^3 h_0 + \bar{A}^2 \bar{B} x_0 + \bar{A} \bar{B} x_1 + \bar{B}
-x_2
-\end{aligned}
-\]</span></p>
+<p>$$<br>h_{k+1} &#x3D; e^{A\Delta} h_k + A^{-1}(e^{A\Delta} - I) B x_k<br>$$</p>
+<p>令$ \bar{A} &#x3D; e^{A\Delta} $<br>$ \bar{B} &#x3D; \int_0^\Delta e^{A\tau} d\tau \cdot B &#x3D; A^{-1}(e^{A\Delta} - I) B $ （若 $ A $ 可逆）<br>于是得到离散系统：<br>$$<br>\begin{cases}<br>h_{k+1} &#x3D; \bar{A} h_k + \bar{B} x_k \<br>y_k &#x3D; C h_k<br>\end{cases}<br>$$</p>
+<h3 id="离散-SSM-的卷积形式与时不变性"><a href="#离散-SSM-的卷积形式与时不变性" class="headerlink" title="离散 SSM 的卷积形式与时不变性"></a>离散 SSM 的卷积形式与时不变性</h3><p>在上一小节中，我们已经得到了离散化后的状态空间模型（假设采样间隔为常数 $\Delta$）：</p>
+<p>$$<br>\begin{cases}<br>h_{k+1} &#x3D; \bar{A} h_k + \bar{B} x_k \quad<br>y_k &#x3D; C h_k<br>\end{cases}<br>$$</p>
+<p>其中<br>$\bar{A} &#x3D; e^{A\Delta},\quad \bar{B} &#x3D; \left(\displaystyle\int_0^\Delta e^{A\tau} d\tau\right) B &#x3D; A^{-1}(e^{A\Delta}-I)B$（若 (A) 可逆）。</p>
+<p>从递推式出发，逐步展开前几步状态：<br>$$<br>\begin{aligned}<br>h_1 &amp;&#x3D; \bar{A} h_0 + \bar{B} x_0 \<br>h_2 &amp;&#x3D; \bar{A} h_1 + \bar{B} x_1<br>&#x3D; \bar{A}^2 h_0 + \bar{A}\bar{B} x_0 + \bar{B} x_1 \<br>h_3 &amp;&#x3D; \bar{A} h_2 + \bar{B} x_2<br>&#x3D; \bar{A}^3 h_0 + \bar{A}^2 \bar{B} x_0 + \bar{A} \bar{B} x_1 + \bar{B} x_2<br>\end{aligned}<br>$$</p>
 <p>可以归纳得到一般形式：</p>
-<p><span class="math display">\[
-h_k = \bar{A}^k h_0 + \sum_{j=0}^{k-1} \bar{A}^{k-1-j} \bar{B}x_j
-\]</span></p>
-<p>令初始状态 (h_0 = 0)，则进一步简化为：</p>
-<p><span class="math display">\[
-h_k = \sum_{j=0}^{k-1} \bar{A}^{k-1-j} \bar{B}x_j
-\]</span></p>
-<p>可以看到，<span class="math inline">\(h_k\)</span> 是对过去所有输入
-<span class="math inline">\({x_j}_{j=0}^{k-1}\)</span>
-的“线性加权和”，权重矩阵由 <span
-class="math inline">\(\bar{A}^{k-1-j}\bar{B}\)</span>
-决定。越久远的输入，前面会乘上更多次 <span
-class="math inline">\(\bar{A}\)</span>，在一定条件下会产生“记忆衰减”的效果。</p>
-<h4 id="输出写成卷积形式">2. 输出写成卷积形式</h4>
-<p>根据观测方程： <span class="math display">\[
-y_k = C h_k
-\]</span></p>
-<p>将上式中的 <span class="math inline">\(h_k\)</span> 代入(仍令 (<span
-class="math inline">\(h_0\)</span> = 0)) <span class="math display">\[
-y_k=Ch_k=C
-\sum_{j=0}^{k-1} \bar{A}^{k-1-j} \bar{B},x_j \\
-= \sum_{j=0}^{k-1} C \bar{A}^{k-1-j} \bar{B},x_j
-\]</span></p>
-<p>定义“卷积核矩阵”（只与时间间隔 <span
-class="math inline">\(\ell\)</span> 有关）： <span
-class="math display">\[
-K_\ell := C \bar{A}^{\ell} \bar{B}, \quad \ell = 0,1,2,\dots
-\]</span></p>
-<p>令 <span class="math inline">\(\ell = k-1-j\)</span>，则有：</p>
-<p><span class="math display">\[
-y_k = \sum_{\ell=0}^{k-1} K_\ell x_{k-1-\ell}
-\]</span></p>
-<p>这样就转换成了卷积的形式，只不过这里的卷积核 <span
-class="math inline">\(K_\ell\)</span> 是矩阵，输入 <span
-class="math inline">\(x_k\)</span> 是向量，输出 <span
-class="math inline">\(y_k\)</span> 也是向量。</p>
-<p>现在我们这里的卷积核<span
-class="math inline">\(K_\ell\)</span>就只依赖于时间差<span
-class="math inline">\(\ell\)</span>,不依赖于绝对时刻(k).
-系统满足输入整体时移，输出整体同样时移的性质，是一个线性时不变(LTI)系统。
-接下来将引入可变时间步长 ### 引入可变步长 <span
-class="math inline">\(\Delta_k\)</span></p>
-<p>上面假设采样间隔为常数 <span
-class="math inline">\(\Delta\)</span>。现在我们考虑更一般的情况：
-现在，每一步的采样间隔可以不同，记为 <span
-class="math inline">\(\Delta_k\)</span>。</p>
-<h4 id="连续系统仍为常系数">1. 连续系统仍为常系数</h4>
-<p>连续时间的状态空间模型仍然是：</p>
-<p><span class="math display">\[
-\dfrac{d h(t)}{dt} = A h(t) + B x(t), \quad y(t) = C h(t)
-\]</span></p>
+<p>$$<br>h_k &#x3D; \bar{A}^k h_0 + \sum_{j&#x3D;0}^{k-1} \bar{A}^{k-1-j} \bar{B}x_j<br>$$</p>
+<p>令初始状态 (h_0 &#x3D; 0)，则进一步简化为：</p>
+<p>$$<br>h_k &#x3D; \sum_{j&#x3D;0}^{k-1} \bar{A}^{k-1-j} \bar{B}x_j<br>$$</p>
+<p>可以看到，$h_k$ 是对过去所有输入 ${x_j}_{j&#x3D;0}^{k-1}$ 的“线性加权和”，权重矩阵由 $\bar{A}^{k-1-j}\bar{B}$ 决定。越久远的输入，前面会乘上更多次 $\bar{A}$，在一定条件下会产生“记忆衰减”的效果。</p>
+<h4 id="2-输出写成卷积形式"><a href="#2-输出写成卷积形式" class="headerlink" title="2. 输出写成卷积形式"></a>2. 输出写成卷积形式</h4><p>根据观测方程：<br>$$<br>y_k &#x3D; C h_k<br>$$</p>
+<p>将上式中的 $h_k$ 代入(仍令 ($h_0$ &#x3D; 0))<br>$$<br>y_k&#x3D;Ch_k&#x3D;C<br>\sum_{j&#x3D;0}^{k-1} \bar{A}^{k-1-j} \bar{B},x_j \<br>&#x3D; \sum_{j&#x3D;0}^{k-1} C \bar{A}^{k-1-j} \bar{B},x_j<br>$$</p>
+<p>定义“卷积核矩阵”（只与时间间隔 $\ell$ 有关）：<br>$$<br>K_\ell :&#x3D; C \bar{A}^{\ell} \bar{B}, \quad \ell &#x3D; 0,1,2,\dots<br>$$</p>
+<p>令 $\ell &#x3D; k-1-j$，则有：</p>
+<p>$$<br>y_k &#x3D; \sum_{\ell&#x3D;0}^{k-1} K_\ell x_{k-1-\ell}<br>$$</p>
+<p>这样就转换成了卷积的形式，只不过这里的卷积核 $K_\ell$ 是矩阵，输入 $x_k$ 是向量，输出 $y_k$ 也是向量。</p>
+<p>现在我们这里的卷积核$K_\ell$就只依赖于时间差$\ell$,不依赖于绝对时刻(k).<br>系统满足输入整体时移，输出整体同样时移的性质，是一个线性时不变(LTI)系统。<br>接下来将引入可变时间步长</p>
+<h3 id="引入可变步长-Delta-k"><a href="#引入可变步长-Delta-k" class="headerlink" title="引入可变步长 $\Delta_k$"></a>引入可变步长 $\Delta_k$</h3><p>上面假设采样间隔为常数 $\Delta$。现在我们考虑更一般的情况：<br>现在，每一步的采样间隔可以不同，记为 $\Delta_k$。</p>
+<h4 id="1-连续系统仍为常系数"><a href="#1-连续系统仍为常系数" class="headerlink" title="1. 连续系统仍为常系数"></a>1. 连续系统仍为常系数</h4><p>连续时间的状态空间模型仍然是：</p>
+<p>$$<br>\dfrac{d h(t)}{dt} &#x3D; A h(t) + B x(t), \quad y(t) &#x3D; C h(t)<br>$$</p>
 <p>这里的 (A,B,C) 仍是常系数矩阵。</p>
 <p>不同的是，我们现在选取一列不等间隔的采样时刻：</p>
-<p><span class="math display">\[
-t_0,\ t_1,\ t_2,\ \dots,\quad t_{k+1} = t_k + \Delta_k
-\]</span></p>
-<p>在每个区间 <span class="math inline">\([t_k,t_{k+1}]\)</span>
-内，仍然采用零阶保持（Zero-Order Hold）假设：</p>
-<p><span class="math display">\[
-x(t) \approx x_k,\quad t\in[t_k,t_{k+1}]
-\]</span></p>
-<h4 id="在每个区间内做离散化">2. 在每个区间内做离散化</h4>
-<p>从 <span class="math inline">\(t=t_k\)</span> 到 <span
-class="math inline">\(t=t_{k+1} = t_k + \Delta_k\)</span>
-的状态演化可以写为（类似之前的推导，只是用 <span
-class="math inline">\(\Delta_k\)</span> 替换 <span
-class="math inline">\(\Delta\)</span>）：</p>
-<p><span class="math display">\[
-h(t_{k+1}) = e^{A\Delta_k} h(t_k)* \left(\int_0^{\Delta_k} e^{A(\Delta_k
-- \tau)} d\tau\right) B x_k
-\]</span> 于是定义 <span class="math display">\[
-\begin{aligned}
-\bar{A}_k &amp;= e^{A\Delta_k} \
-\bar{B}_k &amp;= \left(\int_0^{\Delta_k} e^{A\tau} d\tau\right) B
-= A^{-1}(e^{A\Delta_k}-I)B \quad (\text{若 } A \text{ 可逆})
-\end{aligned}
-\]</span></p>
-<p>离散系统变为： <span class="math display">\[
-\begin{cases}
-h_{k+1} = \bar{A}_k h_k + \bar{B}_k x_k \\
-y_k = C h_k
-\end{cases}
-\]</span> 与固定步长的情形相比，这里多了一个下标 <span
-class="math inline">\(k\)</span>： * <span
-class="math inline">\(\bar{A}_k,\bar{B}_k\)</span>
-不再是常数矩阵，而是随步长 <span class="math inline">\(\Delta_k\)</span>
-变化的矩阵； *
-因为每一步的有效“离散参数”不同，所以该离散系统已经不再是<strong>时不变系统</strong>，而是一个<strong>线性时变系统（LTV）</strong>。</p>
-<h3 id="delta_k-作为输入函数mamba-的-selective-ssm"><span
-class="math inline">\(\Delta_k\)</span> 作为输入函数：Mamba 的 Selective
-SSM</h3>
-<p>只要让采样步长 <span
-class="math inline">\(\Delta_k\)</span>变化，离散系统的矩阵 <span
-class="math inline">\(\bar{A}_k,\bar{B}_k\)</span> 就会随<span
-class="math inline">\(k\)</span>变化，从而得到一个线性时变系统。
-而<strong>Mamba</strong>让这种变化不只是随“时间步数”改变，而是<strong>随当前输入<span
-class="math inline">\(x_k\)</span>改变</strong>，实现“选择性”。 #### 1.
-让 <span class="math inline">\(\Delta_k\)</span> 依赖于输入 <span
-class="math inline">\(x_k\)</span> 定义一个小的神经网络（例如线性层 +
-激活函数）：</p>
-<p>$ <em>k = </em>(x_k) $</p>
-<p>例如可以取 $ <em>k = (W</em>x_k + b_) $</p>
-<p>用<span class="math inline">\(\phi_ \Delta(\cdot)\)</span>保证<span
-class="math inline">\(\Delta_k &gt; 0\)</span>。</p>
-<p>然后，将 <span class="math inline">\(\Delta_k\)</span> 代入前一节中
-<span class="math inline">\(\bar{A}_k,\bar{B}_k\)</span> 的定义：</p>
-<p><span class="math display">\[
-\begin{aligned}
-\bar{A}*k &amp;= e^{A\Delta_k} = e^{A\phi*\Delta(x_k)} \\
-\bar{B}_k &amp;= \left(\int_0^{\Delta_k} e^{A\tau} d\tau\right) B
-= A^{-1}(e^{A\Delta_k}-I)B
-\end{aligned}
-\]</span></p>
-<p>此时状态更新为： <span class="math display">\[
-h_{k+1} = \bar{A}_k(x_k), h_k + \bar{B}_k(x_k)x_k
-\]</span></p>
-<p>可以看到，这里的“有效离散参数” ({A}_k,{B}_k)
-已经是<strong>输入驱动的函数</strong>：</p>
-<p><span class="math display">\[
-\bar{A}_k = \bar{A}(\phi*\Delta(x_k)),\quad
-\bar{B}_k = \bar{B}(\phi*\Delta(x_k))
-\]</span></p>
+<p>$$<br>t_0,\ t_1,\ t_2,\ \dots,\quad t_{k+1} &#x3D; t_k + \Delta_k<br>$$</p>
+<p>在每个区间 $[t_k,t_{k+1}]$ 内，仍然采用零阶保持（Zero-Order Hold）假设：</p>
+<p>$$<br>x(t) \approx x_k,\quad t\in[t_k,t_{k+1}]<br>$$</p>
+<h4 id="2-在每个区间内做离散化"><a href="#2-在每个区间内做离散化" class="headerlink" title="2. 在每个区间内做离散化"></a>2. 在每个区间内做离散化</h4><p>从 $t&#x3D;t_k$ 到 $t&#x3D;t_{k+1} &#x3D; t_k + \Delta_k$ 的状态演化可以写为（类似之前的推导，只是用 $\Delta_k$ 替换 $\Delta$）：</p>
+<p>$$<br>h(t_{k+1}) &#x3D; e^{A\Delta_k} h(t_k)* \left(\int_0^{\Delta_k} e^{A(\Delta_k - \tau)} d\tau\right) B x_k<br>$$<br>于是定义<br>$$<br>\begin{aligned}<br>\bar{A}_k &amp;&#x3D; e^{A\Delta_k} <br>\bar{B}_k &amp;&#x3D; \left(\int_0^{\Delta_k} e^{A\tau} d\tau\right) B<br>&#x3D; A^{-1}(e^{A\Delta_k}-I)B \quad (\text{若 } A \text{ 可逆})<br>\end{aligned}<br>$$</p>
+<p>离散系统变为：<br>$$<br>\begin{cases}<br>h_{k+1} &#x3D; \bar{A}_k h_k + \bar{B}_k x_k \<br>y_k &#x3D; C h_k<br>\end{cases}<br>$$<br>与固定步长的情形相比，这里多了一个下标 $k$：</p>
+<ul>
+<li>$\bar{A}_k,\bar{B}_k$ 不再是常数矩阵，而是随步长 $\Delta_k$ 变化的矩阵；</li>
+<li>因为每一步的有效“离散参数”不同，所以该离散系统已经不再是<strong>时不变系统</strong>，而是一个<strong>线性时变系统（LTV）</strong>。</li>
+</ul>
+<h3 id="Delta-k-作为输入函数：Mamba-的-Selective-SSM"><a href="#Delta-k-作为输入函数：Mamba-的-Selective-SSM" class="headerlink" title="$\Delta_k$ 作为输入函数：Mamba 的 Selective SSM"></a>$\Delta_k$ 作为输入函数：Mamba 的 Selective SSM</h3><p>只要让采样步长 $\Delta_k$变化，离散系统的矩阵 $\bar{A}_k,\bar{B}_k$ 就会随$k$变化，从而得到一个线性时变系统。<br>而<strong>Mamba</strong>让这种变化不只是随“时间步数”改变，而是<strong>随当前输入$x_k$改变</strong>，实现“选择性”。</p>
+<h4 id="1-让-Delta-k-依赖于输入-x-k"><a href="#1-让-Delta-k-依赖于输入-x-k" class="headerlink" title="1. 让 $\Delta_k$ 依赖于输入 $x_k$"></a>1. 让 $\Delta_k$ 依赖于输入 $x_k$</h4><p>定义一个小的神经网络（例如线性层 + 激活函数）：</p>
+<p>$<br>\Delta_k &#x3D; \phi_\Delta(x_k)<br>$</p>
+<p>例如可以取<br>$<br>\Delta_k &#x3D; \operatorname{softplus}(W_\Delta x_k + b_\Delta)<br>$</p>
+<p>用$\phi_ \Delta(\cdot)$保证$\Delta_k &gt; 0$。</p>
+<p>然后，将 $\Delta_k$ 代入前一节中 $\bar{A}_k,\bar{B}_k$ 的定义：</p>
+<p>$$<br>\begin{aligned}<br>\bar{A}<em>k &amp;&#x3D; e^{A\Delta_k} &#x3D; e^{A\phi</em>\Delta(x_k)} \<br>\bar{B}_k &amp;&#x3D; \left(\int_0^{\Delta_k} e^{A\tau} d\tau\right) B<br>&#x3D; A^{-1}(e^{A\Delta_k}-I)B<br>\end{aligned}<br>$$</p>
+<p>此时状态更新为：<br>$$<br>h_{k+1} &#x3D; \bar{A}_k(x_k), h_k + \bar{B}_k(x_k)x_k<br>$$</p>
+<p>可以看到，这里的“有效离散参数” (\bar{A}_k,\bar{B}_k) 已经是<strong>输入驱动的函数</strong>：</p>
+<p>$$<br>\bar{A}_k &#x3D; \bar{A}(\phi<em>\Delta(x_k)),\quad<br>\bar{B}_k &#x3D; \bar{B}(\phi</em>\Delta(x_k))<br>$$</p>
 <blockquote>
-<p>从“连续时间常系数系统”出发，通过引入<strong>输入相关的步长 <span
-class="math inline">\(\Delta_k\)</span></strong>，我们得到了一个<strong>随输入变化的离散矩阵系统</strong>，这正是
-Mamba 论文中所谓 <strong>Selective State Space Model</strong>
-的重要一环。</p>
+<p>从“连续时间常系数系统”出发，通过引入<strong>输入相关的步长 $\Delta_k$<strong>，我们得到了一个</strong>随输入变化的离散矩阵系统</strong>，这正是 Mamba 论文中所谓 <strong>Selective State Space Model</strong> 的重要一环。</p>
 </blockquote>
-<h4 id="更一般的-selective-ssm-形式">2. 更一般的 Selective SSM 形式</h4>
-<p>在 Mamba 中，不仅 <span class="math inline">\(\Delta_k\)</span>
-可以依赖于 <span class="math inline">\(x_k\)</span>，还可以让 <span
-class="math inline">\(A_k,B_k,C_k\)</span> 也依赖于 <span
-class="math inline">\(x_k\)</span>。抽象地，可以写成：</p>
-<p><span class="math display">\[
-\begin{cases}
-(A_k,B_k,C_k,\Delta_k) = g(x_k) \\
-\bar{A}_k = \bar{A}(A_k,\Delta_k),\quad \bar{B}*k =
-\bar{B}(A_k,\Delta_k,B_k)
-h*{k+1} = \bar{A}_k h_k + \bar{B}_k x_k \\
-y_k = C_k h_k
-\end{cases}
-\]</span></p>
-<p>其中 <span class="math inline">\(g(\cdot)\)</span>
-是由神经网络（如线性层、MLP）构成的可学习函数。</p>
-<p>这时，系统的状态演化与输出不仅取决于<strong>过去的状态</strong>，也显式地取决于<strong>当前输入内容</strong>所决定的参数
-<span class="math inline">\((A_k,B_k,C_k,\Delta_k)\)</span>——这就是
-“Selective”
-一词的来源：<strong>模型可以根据输入内容，选择性地记忆或遗忘信息</strong>。</p>
+<h4 id="2-更一般的-Selective-SSM-形式"><a href="#2-更一般的-Selective-SSM-形式" class="headerlink" title="2. 更一般的 Selective SSM 形式"></a>2. 更一般的 Selective SSM 形式</h4><p>在 Mamba 中，不仅 $\Delta_k$ 可以依赖于 $x_k$，还可以让 $A_k,B_k,C_k$ 也依赖于 $x_k$。抽象地，可以写成：</p>
+<p>$$<br>\begin{cases}<br>(A_k,B_k,C_k,\Delta_k) &#x3D; g(x_k) \<br>\bar{A}_k &#x3D; \bar{A}(A_k,\Delta_k),\quad \bar{B}<em>k &#x3D; \bar{B}(A_k,\Delta_k,B_k)<br>h</em>{k+1} &#x3D; \bar{A}_k h_k + \bar{B}_k x_k \<br>y_k &#x3D; C_k h_k<br>\end{cases}<br>$$</p>
+<p>其中 $g(\cdot)$ 是由神经网络（如线性层、MLP）构成的可学习函数。</p>
+<p>这时，系统的状态演化与输出不仅取决于<strong>过去的状态</strong>，也显式地取决于<strong>当前输入内容</strong>所决定的参数 $(A_k,B_k,C_k,\Delta_k)$——这就是 “Selective” 一词的来源：<strong>模型可以根据输入内容，选择性地记忆或遗忘信息</strong>。</p>
 
     </div>
 

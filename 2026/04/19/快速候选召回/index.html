@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="协同过滤 ItemCF 基于物品相似度的协同过滤 核心假设： 用户的兴趣具有连贯性，喜欢某个物品的用户往往会对相似的物品感兴趣 物品相似度计算 \[ w_{ij} &#x3D; \frac{C[i][j]}{\sqrt{|N(i)\cdot |N(j)|}} \] 其中 \(N(i)\)表...">
+    <meta name="description" content="协同过滤ItemCF 基于物品相似度的协同过滤核心假设：用户的兴趣具有连贯性，喜欢某个物品的用户往往会对相似的物品感兴趣 物品相似度计算 $$w_{ij} &#x3D; \frac{C[i][j]}{\sqrt{|N(i)\cdot |N(j)|}}$$其中$N(i)$表示与物品...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="快速候选召回">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2026/04/19/%E5%BF%AB%E9%80%9F%E5%80%99%E9%80%89%E5%8F%AC%E5%9B%9E/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="协同过滤 ItemCF 基于物品相似度的协同过滤 核心假设： 用户的兴趣具有连贯性，喜欢某个物品的用户往往会对相似的物品感兴趣 物品相似度计算 \[ w_{ij} &#x3D; \frac{C[i][j]}{\sqrt{|N(i)\cdot |N(j)|}} \] 其中 \(N(i)\)表...">
+<meta property="og:description" content="协同过滤ItemCF 基于物品相似度的协同过滤核心假设：用户的兴趣具有连贯性，喜欢某个物品的用户往往会对相似的物品感兴趣 物品相似度计算 $$w_{ij} &#x3D; \frac{C[i][j]}{\sqrt{|N(i)\cdot |N(j)|}}$$其中$N(i)$表示与物品...">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-19T03:23:52.000Z">
 <meta property="article:modified_time" content="2026-04-21T03:57:41.698Z">
@@ -112,8 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">协同过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#itemcf-%E5%9F%BA%E4%BA%8E%E7%89%A9%E5%93%81%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">ItemCF
-基于物品相似度的协同过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#swing%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">Swing算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E6%AF%94%E4%BA%8Eitemcf%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">1.2.1.</span> <span class="nav-text">相比于ItemCF的优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#suprise-%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">Suprise 算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usercf"><span class="nav-number">1.3.</span> <span class="nav-text">UserCF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%BD%8E%E7%A7%A9%E5%88%86%E8%A7%A3"><span class="nav-number">1.4.</span> <span class="nav-text">矩阵低秩分解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#freesvd"><span class="nav-number">1.4.1.</span> <span class="nav-text">FreeSVD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#biassvd"><span class="nav-number">1.4.2.</span> <span class="nav-text">BiasSVD</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#i2i%E5%8F%AC%E5%9B%9E"><span class="nav-number">2.</span> <span class="nav-text">I2I召回</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">协同过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ItemCF-%E5%9F%BA%E4%BA%8E%E7%89%A9%E5%93%81%E7%9B%B8%E4%BC%BC%E5%BA%A6%E7%9A%84%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">ItemCF 基于物品相似度的协同过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E8%AF%84%E5%88%86%E6%95%B0%E6%8D%AE%E7%9A%84%E7%9B%B8%E4%BC%BC%E5%BA%A6%E8%AE%A1%E7%AE%97"><span class="nav-number">1.1.1.</span> <span class="nav-text">处理评分数据的相似度计算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">参数说明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swing%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">Swing算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E6%AF%94%E4%BA%8EItemCF%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">1.2.1.</span> <span class="nav-text">相比于ItemCF的优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swing%E5%85%B7%E4%BD%93%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">swing具体内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Suprise-%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.3.</span> <span class="nav-text">Suprise 算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UserCF"><span class="nav-number">1.3.</span> <span class="nav-text">UserCF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%BD%8E%E7%A7%A9%E5%88%86%E8%A7%A3"><span class="nav-number">1.4.</span> <span class="nav-text">矩阵低秩分解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FreeSVD"><span class="nav-number">1.4.1.</span> <span class="nav-text">FreeSVD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BiasSVD"><span class="nav-number">1.4.2.</span> <span class="nav-text">BiasSVD</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I2I%E5%8F%AC%E5%9B%9E"><span class="nav-number">2.</span> <span class="nav-text">I2I召回</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -183,7 +182,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="快速候选召回 | Iron Moon Blog">
-      <meta itemprop="description" content="协同过滤 ItemCF 基于物品相似度的协同过滤 核心假设： 用户的兴趣具有连贯性，喜欢某个物品的用户往往会对相似的物品感兴趣 物品相似度计算 \[ w_{ij} = \frac{C[i][j]}{\sqrt{|N(i)\cdot |N(j)|}} \] 其中 \(N(i)\)表...">
+      <meta itemprop="description" content="协同过滤ItemCF 基于物品相似度的协同过滤核心假设：用户的兴趣具有连贯性，喜欢某个物品的用户往往会对相似的物品感兴趣 物品相似度计算 $$w_{ij} &#x3D; \frac{C[i][j]}{\sqrt{|N(i)\cdot |N(j)|}}$$其中$N(i)$表示与物品...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -211,67 +210,43 @@
   
 </div>
 
-            <div class="post-description">协同过滤 ItemCF 基于物品相似度的协同过滤 核心假设： 用户的兴趣具有连贯性，喜欢某个物品的用户往往会对相似的物品感兴趣 物品相似度计算 \[ w_{ij} = \frac{C[i][j]}{\sqrt{|N(i)\cdot |N(j)|}} \] 其中 \(N(i)\)表...</div>
+            <div class="post-description">协同过滤ItemCF 基于物品相似度的协同过滤核心假设：用户的兴趣具有连贯性，喜欢某个物品的用户往往会对相似的物品感兴趣 物品相似度计算 $$w_{ij} &#x3D; \frac{C[i][j]}{\sqrt{|N(i)\cdot |N(j)|}}$$其中$N(i)$表示与物品...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="协同过滤">协同过滤</h1>
-<h2 id="itemcf-基于物品相似度的协同过滤">ItemCF
-基于物品相似度的协同过滤</h2>
-<p>核心假设：
-用户的兴趣具有连贯性，喜欢某个物品的用户往往会对相似的物品感兴趣</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="协同过滤"><a href="#协同过滤" class="headerlink" title="协同过滤"></a>协同过滤</h1><h2 id="ItemCF-基于物品相似度的协同过滤"><a href="#ItemCF-基于物品相似度的协同过滤" class="headerlink" title="ItemCF 基于物品相似度的协同过滤"></a>ItemCF 基于物品相似度的协同过滤</h2><p>核心假设：<br>用户的兴趣具有连贯性，喜欢某个物品的用户往往会对相似的物品感兴趣</p>
 <p>物品相似度计算</p>
-<p><span class="math display">\[
-w_{ij} = \frac{C[i][j]}{\sqrt{|N(i)\cdot |N(j)|}}
-\]</span> 其中 <span class="math inline">\(N(i)\)</span>表示与物品,<span
-class="math inline">\(C[i][j]\)</span>有交互的用户总数，是两个物品的共现次数（同时对两个物品有过行为的用户数）。分母对共现次数进行标准化，防止热门商品占据绝对优势。
-基于用户-物品倒排表可以大幅提速：为每个用户维护一个物品交互列表，遍历时将列表中的物品两两配对，累加共现矩阵<span
-class="math inline">\(C[i][j]\)</span>，再除以 <span
-class="math inline">\(\sqrt{|N(i)\cdot
-|N(j)|}\)</span>得到余弦相似度，只需计算真正有共同用户的物品对。 ###
-处理评分数据的相似度计算
-前面的余弦相似度适用于隐式反馈场景（如点击、浏览），当有显式评分数据（如5星评分）时，皮尔逊相关系数更符合
-[ w_{ij} = ]</p>
+<p>$$<br>w_{ij} &#x3D; \frac{C[i][j]}{\sqrt{|N(i)\cdot |N(j)|}}<br>$$<br>其中<br>$N(i)$表示与物品,$C[i][j]$有交互的用户总数，是两个物品的共现次数（同时对两个物品有过行为的用户数）。分母对共现次数进行标准化，防止热门商品占据绝对优势。<br>基于用户-物品倒排表可以大幅提速：为每个用户维护一个物品交互列表，遍历时将列表中的物品两两配对，累加共现矩阵$C[i][j]$，再除以 $\sqrt{|N(i)\cdot |N(j)|}$得到余弦相似度，只需计算真正有共同用户的物品对。</p>
+<h3 id="处理评分数据的相似度计算"><a href="#处理评分数据的相似度计算" class="headerlink" title="处理评分数据的相似度计算"></a>处理评分数据的相似度计算</h3><p>前面的余弦相似度适用于隐式反馈场景（如点击、浏览），当有显式评分数据（如5星评分）时，皮尔逊相关系数更符合<br>[<br>w_{ij} &#x3D;<br>\frac{<br>\sum_{u \in U_{ij}} (r_{ui} - \bar{r_i})(r_{uj} - \bar{r_j})<br>}{<br>\sqrt{\sum_{u \in U_{ij}} (r_{ui} - \bar{r_i})^2}<br>\sqrt{\sum_{u \in U_{ij}} (r_{uj} - \bar{r_j})^2}<br>}<br>]</p>
 <p>基于相似物品，可以预测用户对未接触物品的评分：</p>
-<p>[ <em>{u,j} = {r_j} + ] #### 参数说明 - ( S_j )：与物品 (j)
-相似的物品集合<br />
-- ( U</em>{ij} )：同时评价过物品 (i) 和 (j) 的用户集合<br />
-- ( r_{ui} )：用户 (u) 对物品 (i) 的评分<br />
-- ( {r_i} )：物品 (i) 的平均评分</p>
-<h2 id="swing算法">Swing算法</h2>
-<p>核心假设：如果多个用户在其他共同购买行为较少的情况下，同时购买了同一对物品，那么这对物品之间的关联性就更可信。</p>
-<h3 id="相比于itemcf的优势">相比于ItemCF的优势</h3>
-<p>传统ItemCF在处理这类细粒度的商品关系时往往力不从心——它将所有用户-物品交互一视同仁，无论是用户深思熟虑的购买，还是偶然的误点击、好奇心驱动的浏览，都被赋予相同的权重。这种做法不仅难以区分真正的兴趣关联和随机噪声，更无法有效捕捉物品间的替代性与互补性关系。
-### swing具体内容 Swing 首先将用户与物品的交互数据转化为二部图：</p>
+<p>[<br>\hat{r}<em>{u,j} &#x3D; \bar{r_j} +<br>\frac{<br>\sum</em>{k \in S_j} w_{jk} (r_{u,k} - \bar{r_k})<br>}{<br>\sum_{k \in S_j} w_{jk}<br>}<br>]</p>
+<h4 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h4><ul>
+<li>( S_j )：与物品 (j) 相似的物品集合  </li>
+<li>( U_{ij} )：同时评价过物品 (i) 和 (j) 的用户集合  </li>
+<li>( r_{ui} )：用户 (u) 对物品 (i) 的评分  </li>
+<li>( \bar{r_i} )：物品 (i) 的平均评分</li>
+</ul>
+<h2 id="Swing算法"><a href="#Swing算法" class="headerlink" title="Swing算法"></a>Swing算法</h2><p>核心假设：如果多个用户在其他共同购买行为较少的情况下，同时购买了同一对物品，那么这对物品之间的关联性就更可信。</p>
+<h3 id="相比于ItemCF的优势"><a href="#相比于ItemCF的优势" class="headerlink" title="相比于ItemCF的优势"></a>相比于ItemCF的优势</h3><p>传统ItemCF在处理这类细粒度的商品关系时往往力不从心——它将所有用户-物品交互一视同仁，无论是用户深思熟虑的购买，还是偶然的误点击、好奇心驱动的浏览，都被赋予相同的权重。这种做法不仅难以区分真正的兴趣关联和随机噪声，更无法有效捕捉物品间的替代性与互补性关系。</p>
+<h3 id="swing具体内容"><a href="#swing具体内容" class="headerlink" title="swing具体内容"></a>swing具体内容</h3><p>Swing 首先将用户与物品的交互数据转化为二部图：</p>
 <ul>
 <li>用户和物品分别作为两类节点</li>
 <li>发生过交互则添加一条连接边</li>
 </ul>
 <p>设：</p>
 <ul>
-<li>( U_i ) 和 ( U_j )：分别表示与物品 ( i ) 和 ( j )
-有过交互的用户集合<br />
-</li>
+<li>( U_i ) 和 ( U_j )：分别表示与物品 ( i ) 和 ( j ) 有过交互的用户集合  </li>
 <li>( I_u )：用户 ( u ) 交互过的所有物品集合</li>
 </ul>
-<p>对于同时购买（或交互）过物品 ( i ) 和 ( j ) 的每一对用户 ( (u, v)
-)，如果他们之间的<strong>其他共同购买行为越少</strong>：</p>
-<p>[ |I_u I_v| ]</p>
+<p>对于同时购买（或交互）过物品 ( i ) 和 ( j ) 的每一对用户 ( (u, v) )，如果他们之间的<strong>其他共同购买行为越少</strong>：</p>
+<p>[<br>|I_u \cap I_v| \text{ 越小}<br>]</p>
 <p>则说明他们共同选择这对物品的行为<strong>越具有特异性</strong>，应贡献<strong>更高的相似度得分</strong>。</p>
-<h3 id="suprise-算法">Suprise 算法</h3>
-<h2 id="usercf">UserCF</h2>
-<p>类似ItemCF</p>
-<h2 id="矩阵低秩分解">矩阵低秩分解</h2>
-<h3 id="freesvd">FreeSVD</h3>
-<h3 id="biassvd">BiasSVD</h3>
-<p>对于这个的公式 <span class="math display">\[
-\hat r_{ui} = \mu + b_u + b_i + p_u^T q_i
-\]</span> 里面的bias没有和pq相乘的原因 很有意思。</p>
-<h1 id="i2i召回">I2I召回</h1>
-<p>这个的理论基础来自于Word2Vec。</p>
+<h3 id="Suprise-算法"><a href="#Suprise-算法" class="headerlink" title="Suprise 算法"></a>Suprise 算法</h3><h2 id="UserCF"><a href="#UserCF" class="headerlink" title="UserCF"></a>UserCF</h2><p>类似ItemCF</p>
+<h2 id="矩阵低秩分解"><a href="#矩阵低秩分解" class="headerlink" title="矩阵低秩分解"></a>矩阵低秩分解</h2><h3 id="FreeSVD"><a href="#FreeSVD" class="headerlink" title="FreeSVD"></a>FreeSVD</h3><h3 id="BiasSVD"><a href="#BiasSVD" class="headerlink" title="BiasSVD"></a>BiasSVD</h3><p>对于这个的公式<br>$$<br>\hat r_{ui} &#x3D; \mu + b_u + b_i + p_u^T q_i<br>$$<br>里面的bias没有和pq相乘的原因  很有意思。</p>
+<h1 id="I2I召回"><a href="#I2I召回" class="headerlink" title="I2I召回"></a>I2I召回</h1><p>这个的理论基础来自于Word2Vec。</p>
 
     </div>
 

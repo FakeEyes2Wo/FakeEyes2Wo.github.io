@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="AI scientist-v2 AI Scientist v1 和 v2 的区别 More General Idea Generation 他们没有使用代码库增量开发，论文里面说的是采用了更高抽象级别开始的过程 这里需要查看一下，对比AI Scientistv1 和v2 在实验代...">
+    <meta name="description" content="AI scientist-v2AI Scientist v1 和 v2 的区别 More General Idea Generation他们没有使用代码库增量开发，论文里面说的是采用了更高抽象级别开始的过程 这里需要查看一下，对比AI Scientistv1 和v2 在实验代码上...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AI scientistv2-论文阅读">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2026/07/05/AI-scientistv2-%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="AI scientist-v2 AI Scientist v1 和 v2 的区别 More General Idea Generation 他们没有使用代码库增量开发，论文里面说的是采用了更高抽象级别开始的过程 这里需要查看一下，对比AI Scientistv1 和v2 在实验代...">
+<meta property="og:description" content="AI scientist-v2AI Scientist v1 和 v2 的区别 More General Idea Generation他们没有使用代码库增量开发，论文里面说的是采用了更高抽象级别开始的过程 这里需要查看一下，对比AI Scientistv1 和v2 在实验代码上...">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-07-05T11:20:10.000Z">
 <meta property="article:modified_time" content="2026-07-05T11:20:54.396Z">
@@ -112,7 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ai-scientist-v2"><span class="nav-number">1.</span> <span class="nav-text">AI scientist-v2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ai-scientist-v1-%E5%92%8C-v2-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">AI Scientist v1 和 v2 的区别</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AI-scientist-v2"><span class="nav-number">1.</span> <span class="nav-text">AI scientist-v2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-Scientist-v1-%E5%92%8C-v2-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">AI Scientist v1 和 v2 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AI-Scientist-v1%E8%BF%98%E4%BE%9D%E8%B5%96%E4%BA%8E%E9%A2%84%E5%AE%9A%E4%B9%89%E7%9A%84%E6%A8%A1%E6%9D%BF%E4%BB%A3%E7%A0%81%E4%BD%9C%E4%B8%BA%E8%B5%B7%E5%A7%8B%E5%9F%BA%E7%BA%BF%E5%AE%9E%E7%8E%B0%E3%80%82LLM%E9%A9%B1%E5%8A%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%94%B9%E9%9A%8F%E5%90%8E%E8%A2%AB%E9%99%90%E5%88%B6%E4%B8%BA%E9%A1%BA%E5%BA%8F%E4%BB%A3%E7%A0%81%E9%80%82%E9%85%8D%E3%80%82%E6%88%91%E4%BB%AC%E7%8E%B0%E5%9C%A8%E6%A6%82%E8%BF%B0%E6%88%91%E4%BB%AC%E6%B6%88%E9%99%A4%E6%AD%A4%E9%99%90%E5%88%B6%E7%9A%84%E7%AD%96%E7%95%A5%EF%BC%8C%E4%BB%8E%E8%80%8C%E6%8F%90%E9%AB%98%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%81%B5%E6%B4%BB%E6%80%A7%E5%92%8C%E8%87%AA%E4%B8%BB%E6%80%A7-%E6%9C%89%E4%B8%80%E4%B8%AA%E7%AE%A1%E7%90%86%E5%AE%9E%E9%AA%8C%E8%BF%9B%E5%BA%A6%E7%9A%84Manager%E8%BF%99%E7%8E%A9%E6%84%8F%E6%9C%AC%E8%B4%A8%E4%B8%8A%E6%98%AF%E4%B8%AA%E8%B6%85%E5%8F%82%E6%95%B0%E6%90%9C%E7%B4%A2%E5%99%A8%EF%BC%8C%E5%A4%AA%E6%8A%BD%E8%B1%A1%E4%BA%86-%E5%85%88%E5%9F%BA%E4%BA%8E%E5%8F%AF%E4%BB%A5%E8%BF%90%E8%A1%8C%E7%9A%84%E6%9C%80%E5%B0%8F%E5%B7%A5%E4%BD%9C%E5%8E%9F%E5%9E%8B%E9%AA%8C%E8%AF%81%E5%8F%AF%E8%A1%8C%E6%80%A7%EF%BC%8C%E7%84%B6%E5%90%8E%E4%BC%98%E5%8C%96%E5%85%B3%E9%94%AE%E8%B6%85%E5%8F%82%E6%95%B0%EF%BC%8C%E7%84%B6%E5%90%8E%E7%94%A8%E8%B0%83%E6%95%B4%E5%90%8E%E7%9A%84%E5%9F%BA%E7%BA%BF%E7%B3%BB%E7%BB%9F%E5%9C%B0%E7%A0%94%E7%A9%B6%E5%B7%B2%E6%88%90%EF%BC%8C%E6%9C%80%E5%90%8E%E5%86%8D%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%E3%80%82-%E6%AF%8F%E4%B8%AA%E9%98%B6%E6%AE%B5%E9%83%BD%E6%9C%89%E6%98%8E%E7%A1%AE%E7%9A%84%E5%81%9C%E6%AD%A2%E6%A0%87%E5%87%86%E3%80%82%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E7%BB%93%E6%9D%9F%E6%97%B6%EF%BC%8C%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E5%9E%8B%E6%88%90%E5%8A%9F%E6%89%A7%E8%A1%8C%E3%80%82%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%E7%BB%93%E6%9D%9F%E6%97%B6%EF%BC%8C%E5%AE%9E%E9%AA%8C%E7%A8%B3%E5%AE%9A%EF%BC%8C%E5%A6%82%E8%AE%AD%E7%BB%83%E6%9B%B2%E7%BA%BF%E4%B8%AD%E7%9A%84%E6%94%B6%E6%95%9B%E5%92%8C%E5%9C%A8%E8%87%B3%E5%B0%91%E4%B8%A4%E4%B8%AA%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8A%E7%9A%84%E6%88%90%E5%8A%9F%E6%89%A7%E8%A1%8C%E6%89%80%E6%8C%87%E7%A4%BA%E7%9A%84%E3%80%82%E5%BD%93%E5%88%86%E9%85%8D%E7%9A%84%E8%AE%A1%E7%AE%97%E9%A2%84%E7%AE%97%E8%80%97%E5%B0%BD%E6%97%B6%EF%BC%8C%E9%98%B6%E6%AE%B53%E5%92%8C4%E7%BB%93%E6%9D%9F%E3%80%82%E9%98%B6%E6%AE%B53%E8%BF%98%E5%8C%85%E6%8B%AC%E5%AF%B9%E5%AE%9E%E9%AA%8C%E6%8C%81%E7%BB%AD%E6%97%B6%E9%97%B4%E7%9A%84%E6%A3%80%E6%9F%A5-%E5%A6%82%E6%9E%9C%E8%BF%90%E8%A1%8C%E5%AE%8C%E6%88%90%E5%BE%97%E6%AF%94%E4%B9%8B%E5%89%8D%E5%BF%AB%E5%BE%97%E5%A4%9A%EF%BC%8C%E5%88%86%E9%85%8D%E7%9A%84%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%EF%BC%8C%E7%B3%BB%E7%BB%9F%E5%BB%BA%E8%AE%AE%E5%A2%9E%E5%8A%A0%E5%AE%9E%E9%AA%8C%E7%9A%84%E5%A4%8D%E6%9D%82%E6%80%A7%E3%80%82"><span class="nav-number">1.2.</span> <span class="nav-text">AI Scientist-v1还依赖于预定义的模板代码作为起始基线实现。LLM驱动的代码更改随后被限制为顺序代码适配。我们现在概述我们消除此限制的策略，从而提高系统的灵活性和自主性  - 有一个管理实验进度的Manager这玩意本质上是个超参数搜索器，太抽象了  先基于可以运行的最小工作原型验证可行性，然后优化关键超参数，然后用调整后的基线系统地研究已成，最后再消融实验。  每个阶段都有明确的停止标准。第一阶段结束时，一个基本的工作原型成功执行。第二阶段结束时，实验稳定，如训练曲线中的收敛和在至少两个数据集上的成功执行所指示的。当分配的计算预算耗尽时，阶段3和4结束。阶段3还包括对实验持续时间的检查-如果运行完成得比之前快得多，分配的运行时间，系统建议增加实验的复杂性。</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -182,7 +182,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="AI scientistv2-论文阅读 | Iron Moon Blog">
-      <meta itemprop="description" content="AI scientist-v2 AI Scientist v1 和 v2 的区别 More General Idea Generation 他们没有使用代码库增量开发，论文里面说的是采用了更高抽象级别开始的过程 这里需要查看一下，对比AI Scientistv1 和v2 在实验代...">
+      <meta itemprop="description" content="AI scientist-v2AI Scientist v1 和 v2 的区别 More General Idea Generation他们没有使用代码库增量开发，论文里面说的是采用了更高抽象级别开始的过程 这里需要查看一下，对比AI Scientistv1 和v2 在实验代码上...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -213,45 +213,30 @@
   
 </div>
 
-            <div class="post-description">AI scientist-v2 AI Scientist v1 和 v2 的区别 More General Idea Generation 他们没有使用代码库增量开发，论文里面说的是采用了更高抽象级别开始的过程 这里需要查看一下，对比AI Scientistv1 和v2 在实验代...</div>
+            <div class="post-description">AI scientist-v2AI Scientist v1 和 v2 的区别 More General Idea Generation他们没有使用代码库增量开发，论文里面说的是采用了更高抽象级别开始的过程 这里需要查看一下，对比AI Scientistv1 和v2 在实验代码上...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="ai-scientist-v2">AI scientist-v2</h1>
-<h2 id="ai-scientist-v1-和-v2-的区别">AI Scientist v1 和 v2 的区别</h2>
-<ul>
-<li>More General Idea Generation
-他们没有使用代码库增量开发，论文里面说的是采用了更高抽象级别开始的过程</li>
+    <div class="post-body" itemprop="articleBody"><h1 id="AI-scientist-v2"><a href="#AI-scientist-v2" class="headerlink" title="AI scientist-v2"></a>AI scientist-v2</h1><h2 id="AI-Scientist-v1-和-v2-的区别"><a href="#AI-Scientist-v1-和-v2-的区别" class="headerlink" title="AI Scientist v1 和 v2 的区别"></a>AI Scientist v1 和 v2 的区别</h2><ul>
+<li>More General Idea Generation<br>他们没有使用代码库增量开发，论文里面说的是采用了更高抽象级别开始的过程</li>
 </ul>
-<p><strong>这里需要查看一下，对比AI Scientistv1 和v2
-在实验代码上的区别</strong></p>
+<p><strong>这里需要查看一下，对比AI Scientistv1 和v2 在实验代码上的区别</strong></p>
 <ul>
-<li><p>AI
-Scientist-v1还依赖于预定义的模板代码作为起始基线实现。LLM驱动的代码更改随后被限制为顺序代码适配。我们现在概述我们消除此限制的策略，从而提高系统的灵活性和自主性</p>
+<li><h2 id="AI-Scientist-v1还依赖于预定义的模板代码作为起始基线实现。LLM驱动的代码更改随后被限制为顺序代码适配。我们现在概述我们消除此限制的策略，从而提高系统的灵活性和自主性-有一个管理实验进度的Manager这玩意本质上是个超参数搜索器，太抽象了-先基于可以运行的最小工作原型验证可行性，然后优化关键超参数，然后用调整后的基线系统地研究已成，最后再消融实验。-每个阶段都有明确的停止标准。第一阶段结束时，一个基本的工作原型成功执行。第二阶段结束时，实验稳定，如训练曲线中的收敛和在至少两个数据集上的成功执行所指示的。当分配的计算预算耗尽时，阶段3和4结束。阶段3还包括对实验持续时间的检查-如果运行完成得比之前快得多，分配的运行时间，系统建议增加实验的复杂性。"><a href="#AI-Scientist-v1还依赖于预定义的模板代码作为起始基线实现。LLM驱动的代码更改随后被限制为顺序代码适配。我们现在概述我们消除此限制的策略，从而提高系统的灵活性和自主性-有一个管理实验进度的Manager这玩意本质上是个超参数搜索器，太抽象了-先基于可以运行的最小工作原型验证可行性，然后优化关键超参数，然后用调整后的基线系统地研究已成，最后再消融实验。-每个阶段都有明确的停止标准。第一阶段结束时，一个基本的工作原型成功执行。第二阶段结束时，实验稳定，如训练曲线中的收敛和在至少两个数据集上的成功执行所指示的。当分配的计算预算耗尽时，阶段3和4结束。阶段3还包括对实验持续时间的检查-如果运行完成得比之前快得多，分配的运行时间，系统建议增加实验的复杂性。" class="headerlink" title="AI Scientist-v1还依赖于预定义的模板代码作为起始基线实现。LLM驱动的代码更改随后被限制为顺序代码适配。我们现在概述我们消除此限制的策略，从而提高系统的灵活性和自主性  - 有一个管理实验进度的Manager这玩意本质上是个超参数搜索器，太抽象了  先基于可以运行的最小工作原型验证可行性，然后优化关键超参数，然后用调整后的基线系统地研究已成，最后再消融实验。  每个阶段都有明确的停止标准。第一阶段结束时，一个基本的工作原型成功执行。第二阶段结束时，实验稳定，如训练曲线中的收敛和在至少两个数据集上的成功执行所指示的。当分配的计算预算耗尽时，阶段3和4结束。阶段3还包括对实验持续时间的检查-如果运行完成得比之前快得多，分配的运行时间，系统建议增加实验的复杂性。"></a>AI Scientist-v1还依赖于预定义的模板代码作为起始基线实现。LLM驱动的代码更改随后被限制为顺序代码适配。我们现在概述我们消除此限制的策略，从而提高系统的灵活性和自主性<br>  - 有一个管理实验进度的Manager<em>这玩意本质上是个超参数搜索器，太抽象了</em><br>  先基于可以运行的最小工作原型验证可行性，然后优化关键超参数，然后用调整后的基线系统地研究已成，最后再消融实验。<br>  每个阶段都有明确的停止标准。第一阶段结束时，一个基本的工作原型成功执行。第二阶段结束时，实验稳定，如训练曲线中的收敛和在至少两个数据集上的成功执行所指示的。当分配的计算预算耗尽时，阶段3和4结束。阶段3还包括对实验持续时间的检查-如果运行完成得比之前快得多，分配的运行时间，系统建议增加实验的复杂性。</h2></li>
+<li><p>分类Agentic搜索树<br>  每个实验节点经历以下执行周期：LLM首先生成具体的实验计划和相关的Python代码来实现实验。生成的代码立即在Python解释器中执行如果执行遇到错误，则记录错误消息，并将节点标记为buggy，结束该节点的当前执行周期。如果执行成功，则实验继续到绘图阶段。<br>  <em>这里很显然是不行的</em><br>  同时注意到他们绘图和实验是分开的。实验过程中的相关实验输出是保存在numpy文件中的。</p>
+<p>  <strong>节点类型</strong></p>
 <ul>
-<li>有一个管理实验进度的Manager<em>这玩意本质上是个超参数搜索器，太抽象了</em>
-先基于可以运行的最小工作原型验证可行性，然后优化关键超参数，然后用调整后的基线系统地研究已成，最后再消融实验。
-每个阶段都有明确的停止标准。第一阶段结束时，一个基本的工作原型成功执行。第二阶段结束时，实验稳定，如训练曲线中的收敛和在至少两个数据集上的成功执行所指示的。当分配的计算预算耗尽时，阶段3和4结束。阶段3还包括对实验持续时间的检查-如果运行完成得比之前快得多，分配的运行时间，系统建议增加实验的复杂性。</li>
-<li></li>
-</ul></li>
-<li><p>分类Agentic搜索树
-每个实验节点经历以下执行周期：LLM首先生成具体的实验计划和相关的Python代码来实现实验。生成的代码立即在Python解释器中执行如果执行遇到错误，则记录错误消息，并将节点标记为buggy，结束该节点的当前执行周期。如果执行成功，则实验继续到绘图阶段。
-<em>这里很显然是不行的</em>
-同时注意到他们绘图和实验是分开的。实验过程中的相关实验输出是保存在numpy文件中的。</p>
-<p><strong>节点类型</strong></p>
-<ul>
-<li>超参数节点 系统地探索替代的超参数配置</li>
-<li>消融节点
-评估关键的消融研究，评估实验基础的各种组件或假设的重要性。类似于超参数节点，以前测试的消融条件被跟踪以避免重复，并创建调试节点以响应任何遇到的错误。</li>
-<li>复制节点
-使用不同的随机种子执行它们的父实验的重复。通常，创建几个复制节点以计算实验结果的统计测量（平均值和标准差），从而增强结果的鲁棒性。</li>
-<li>聚合节点 是为合并和可视化复制节点的组合结果而创建的特殊节点。</li>
-</ul></li>
+<li>超参数节点   系统地探索替代的超参数配置</li>
+<li>消融节点    评估关键的消融研究，评估实验基础的各种组件或假设的重要性。类似于超参数节点，以前测试的消融条件被跟踪以避免重复，并创建调试节点以响应任何遇到的错误。</li>
+<li>复制节点    使用不同的随机种子执行它们的父实验的重复。通常，创建几个复制节点以计算实验结果的统计测量（平均值和标准差），从而增强结果的鲁棒性。</li>
+<li>聚合节点     是为合并和可视化复制节点的组合结果而创建的特殊节点。</li>
 </ul>
-<p>总的来说，有点干巴 不用AI润色了</p>
+</li>
+</ul>
+<p>总的来说，有点干巴  不用AI润色了</p>
 
     </div>
 

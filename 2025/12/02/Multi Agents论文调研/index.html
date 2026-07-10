@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="智能体 Agent是一个能感知环境、做出决策、执行动作，并通过经验学习改进自身行为的自主实体。 现在LLM出来过后，Agent的研究领域基本上采取大模型来作为大脑构建LLM + Agent 这个的话我知道的有Reflection和RAG等机制 Reflection机制为自我反思机...">
+    <meta name="description" content="智能体Agent是一个能感知环境、做出决策、执行动作，并通过经验学习改进自身行为的自主实体。现在LLM出来过后，Agent的研究领域基本上采取大模型来作为大脑构建LLM + Agent 这个的话我知道的有Reflection和RAG等机制 Reflection机制为自我反思机制，...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="multi agents 论文调研">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2025/12/02/Multi%20Agents%E8%AE%BA%E6%96%87%E8%B0%83%E7%A0%94/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="智能体 Agent是一个能感知环境、做出决策、执行动作，并通过经验学习改进自身行为的自主实体。 现在LLM出来过后，Agent的研究领域基本上采取大模型来作为大脑构建LLM + Agent 这个的话我知道的有Reflection和RAG等机制 Reflection机制为自我反思机...">
+<meta property="og:description" content="智能体Agent是一个能感知环境、做出决策、执行动作，并通过经验学习改进自身行为的自主实体。现在LLM出来过后，Agent的研究领域基本上采取大模型来作为大脑构建LLM + Agent 这个的话我知道的有Reflection和RAG等机制 Reflection机制为自我反思机制，...">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-02T01:47:19.000Z">
 <meta property="article:modified_time" content="2025-12-03T02:26:18.326Z">
@@ -116,7 +116,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E4%BD%93"><span class="nav-number">1.</span> <span class="nav-text">智能体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">多智能体系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#llm%E4%B8%8E%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">LLM与多智能体系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E6%8E%A7%E5%88%B6%E7%90%86%E8%AE%BA"><span class="nav-number">2.2.</span> <span class="nav-text">多智能体控制理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ai%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E6%96%B9%E9%9D%A2%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.3.</span> <span class="nav-text">AI智能体博弈方面的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%BF%80%E5%8A%B1%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.3.1.</span> <span class="nav-text">多智能体间的通信，激励设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E7%9A%84%E7%A0%94%E7%A9%B6"><span class="nav-number">2.4.</span> <span class="nav-text">多智能体系统可扩展性的研究</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.5.</span> <span class="nav-text">多智能体强化学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9ai%E7%B3%BB%E7%BB%9F%E6%96%B9%E9%9D%A2%E6%9F%90%E4%B8%AAagent%E6%89%80%E4%BD%9C%E5%87%BA%E7%9A%84%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.5.1.</span> <span class="nav-text">对AI系统方面某个agent所作出的工作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.6.</span> <span class="nav-text">多智能体表征学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%A7%92%E8%89%B2%E7%9A%84%E8%A1%A8%E5%BE%81"><span class="nav-number">2.6.1.</span> <span class="nav-text">基于角色的表征</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E4%BD%93"><span class="nav-number">1.</span> <span class="nav-text">智能体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">多智能体系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LLM%E4%B8%8E%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">LLM与多智能体系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E6%8E%A7%E5%88%B6%E7%90%86%E8%AE%BA"><span class="nav-number">2.2.</span> <span class="nav-text">多智能体控制理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AI%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E6%96%B9%E9%9D%A2%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.3.</span> <span class="nav-text">AI智能体博弈方面的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%EF%BC%8C%E6%BF%80%E5%8A%B1%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.3.1.</span> <span class="nav-text">多智能体间的通信，激励设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E7%B3%BB%E7%BB%9F%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E7%9A%84%E7%A0%94%E7%A9%B6"><span class="nav-number">2.4.</span> <span class="nav-text">多智能体系统可扩展性的研究</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.5.</span> <span class="nav-text">多智能体强化学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9AI%E7%B3%BB%E7%BB%9F%E6%96%B9%E9%9D%A2%E6%9F%90%E4%B8%AAagent%E6%89%80%E4%BD%9C%E5%87%BA%E7%9A%84%E5%B7%A5%E4%BD%9C-%E8%B4%A1%E7%8C%AE%E8%BF%9B%E8%A1%8C%E9%87%8F%E5%8C%96%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">2.5.1.</span> <span class="nav-text">对AI系统方面某个agent所作出的工作\贡献进行量化的内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E8%A1%A8%E5%BE%81%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.6.</span> <span class="nav-text">多智能体表征学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%A7%92%E8%89%B2%E7%9A%84%E8%A1%A8%E5%BE%81"><span class="nav-number">2.6.1.</span> <span class="nav-text">基于角色的表征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8GNN%E7%9A%84%E8%A1%A8%E5%BE%81"><span class="nav-number">2.6.2.</span> <span class="nav-text">使用GNN的表征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E5%80%BC%E5%88%86%E8%A7%A3%E4%B8%93%E9%97%A8%E4%BC%98%E5%8C%96%E7%9A%84latent%E8%A1%A8%E5%BE%81"><span class="nav-number">2.6.3.</span> <span class="nav-text">为值分解专门优化的latent表征</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,7 +186,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="multi agents 论文调研 | Iron Moon Blog">
-      <meta itemprop="description" content="智能体 Agent是一个能感知环境、做出决策、执行动作，并通过经验学习改进自身行为的自主实体。 现在LLM出来过后，Agent的研究领域基本上采取大模型来作为大脑构建LLM + Agent 这个的话我知道的有Reflection和RAG等机制 Reflection机制为自我反思机...">
+      <meta itemprop="description" content="智能体Agent是一个能感知环境、做出决策、执行动作，并通过经验学习改进自身行为的自主实体。现在LLM出来过后，Agent的研究领域基本上采取大模型来作为大脑构建LLM + Agent 这个的话我知道的有Reflection和RAG等机制 Reflection机制为自我反思机制，...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -214,126 +214,60 @@
   
 </div>
 
-            <div class="post-description">智能体 Agent是一个能感知环境、做出决策、执行动作，并通过经验学习改进自身行为的自主实体。 现在LLM出来过后，Agent的研究领域基本上采取大模型来作为大脑构建LLM + Agent 这个的话我知道的有Reflection和RAG等机制 Reflection机制为自我反思机...</div>
+            <div class="post-description">智能体Agent是一个能感知环境、做出决策、执行动作，并通过经验学习改进自身行为的自主实体。现在LLM出来过后，Agent的研究领域基本上采取大模型来作为大脑构建LLM + Agent 这个的话我知道的有Reflection和RAG等机制 Reflection机制为自我反思机制，...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="智能体">智能体</h2>
-<p>Agent是一个能感知环境、做出决策、执行动作，并通过经验学习改进自身行为的自主实体。
-现在LLM出来过后，Agent的研究领域基本上采取大模型来作为大脑构建LLM +
-Agent</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="智能体"><a href="#智能体" class="headerlink" title="智能体"></a>智能体</h2><p>Agent是一个能感知环境、做出决策、执行动作，并通过经验学习改进自身行为的自主实体。<br>现在LLM出来过后，Agent的研究领域基本上采取大模型来作为大脑构建LLM + Agent</p>
 <p>这个的话我知道的有Reflection和RAG等机制</p>
-<p>Reflection机制为自我反思机制，大模型自己判断自己的思路是否正确。这个玩意我看过的有在
-gemini 解决IMO题目的时候看到过</p>
-<h2 id="多智能体系统">多智能体系统</h2>
-<ul>
-<li>多智能体系统工程应用
+<p>Reflection机制为自我反思机制，大模型自己判断自己的思路是否正确。这个玩意我看过的有在 gemini 解决IMO题目的时候看到过</p>
+<h2 id="多智能体系统"><a href="#多智能体系统" class="headerlink" title="多智能体系统"></a>多智能体系统</h2><ul>
+<li><p>多智能体系统工程应用</p>
 <ul>
 <li>多智能体的分布式问题求解机制</li>
 <li>多智能体的可扩展性</li>
 <li>多智能体的鲁棒性</li>
-</ul></li>
-<li>多智能体的控制理论
+</ul>
+</li>
+<li><p>多智能体的控制理论</p>
 <ul>
 <li>有限时间容错控制</li>
 <li>多智能体间的通信，激励设计</li>
-</ul></li>
-<li>多智能体RL
+</ul>
+</li>
+<li><p>多智能体RL</p>
 <ul>
 <li>多智能体奖励分配</li>
 <li>多智能体表征学习</li>
-</ul></li>
 </ul>
-<h3 id="llm与多智能体系统">LLM与多智能体系统</h3>
-<p><strong>大模型赋能的智能体团队</strong> 这种系统在 这篇<a
-target="_blank" rel="noopener" href="https://arxiv.org/pdf/2501.06322">survey</a>里面的说法是
-现在主流的研究在开发这种多智能体系统上，尤其是针对某个具体场景开发多智能体系统。
-文章里面说这种多智能体系统包括 &gt; -
-智能体（Agents）：具有角色、能力、行为和知识模型的核心行动者。其能力包括学习、规划、推理和决策等，这些能力赋予智能体及整个系统以智能。
-&gt; -
-环境（Environment）：智能体所处的外部世界，智能体可以感知该环境并对其采取行动。环境可以是模拟的，也可以是物理空间，例如工厂、道路、电网等。
-&gt; -
-交互（Interactions）：智能体之间通过标准的智能体通信语言进行交流。根据系统需求，智能体之间的交互可包括合作、协调、协商等多种形式。
-&gt; -
-组织结构（Organization）：智能体既可以采用层级化控制结构，也可以基于涌现行为进行自组织。</p>
+</li>
+</ul>
+<h3 id="LLM与多智能体系统"><a href="#LLM与多智能体系统" class="headerlink" title="LLM与多智能体系统"></a>LLM与多智能体系统</h3><p><strong>大模型赋能的智能体团队</strong><br>这种系统在 这篇<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2501.06322">survey</a>里面的说法是   现在主流的研究在开发这种多智能体系统上，尤其是针对某个具体场景开发多智能体系统。<br>文章里面说这种多智能体系统包括</p>
+<blockquote>
+<ul>
+<li>智能体（Agents）：具有角色、能力、行为和知识模型的核心行动者。其能力包括学习、规划、推理和决策等，这些能力赋予智能体及整个系统以智能。</li>
+<li>环境（Environment）：智能体所处的外部世界，智能体可以感知该环境并对其采取行动。环境可以是模拟的，也可以是物理空间，例如工厂、道路、电网等。</li>
+<li>交互（Interactions）：智能体之间通过标准的智能体通信语言进行交流。根据系统需求，智能体之间的交互可包括合作、协调、协商等多种形式。</li>
+<li>组织结构（Organization）：智能体既可以采用层级化控制结构，也可以基于涌现行为进行自组织。</li>
+</ul>
+</blockquote>
 <p>里面的环境这块就说明这种多智能体系统的玩意主要是在某个具体场景进行落地，然后来发论文</p>
-<p><strong>e.g.</strong> 金融方面的：<a
-target="_blank" rel="noopener" href="https://arxiv.org/abs/2412.20138">TradingAgents: Multi-Agents LLM
-Financial Trading Framework</a> 法律方面的：<a
-target="_blank" rel="noopener" href="https://arxiv.org/abs/2407.16252">LawLuo: A Multi-Agent
-Collaborative Framework for Multi-Round Chinese Legal Consultation</a>
-安全方面的：<a
-target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/11172929">AI-Driven
-Multi-Agent System for Real-Time Security Analysis of Software
-Releases</a></p>
-<p><strong>多智能体的基础设施建设</strong> <a
-target="_blank" rel="noopener" href="https://arxiv.org/abs/2412.03801">AgentScope: A Flexible yet
-Robust Multi-Agent Platform</a> 然后还有langgraph langchain
-AutoGen这块。 <strong>多智能体协作</strong></p>
-<p><strong>协作类型又分为合作，竞争，合作竞争</strong>
-<strong>合作</strong>方面：各个智能体的目标基本对齐到一个共同目标
-G，强调分工与配合。如<a
-target="_blank" rel="noopener" href="https://arxiv.org/abs/2308.10848">AgentVerse</a>
-<strong>竞争</strong>方面：智能体之间存在冲突目标，让 LLM
-智能体相互对抗以优化决策。 比方说提供一个游戏环境，让LLM互相打。如<a
-target="_blank" rel="noopener" href="https://aclanthology.org/2024.acl-long.705/">LLMArena ACL 2024</a>
-<strong>合作竞争</strong>相结合的。这个一般出现在社科类研究，这里就没写。</p>
-<h3 id="多智能体控制理论">多智能体控制理论</h3>
-<h3 id="ai智能体博弈方面的问题">AI智能体博弈方面的问题</h3>
-<p>这里的话就是多智能体=可学习的博弈参与者，所以就有一堆围绕策略收敛、均衡概念、合作/对抗机制的工作。
-一些比较新的综述把 MARL 明确放在"博弈论 +
-机器学习"的交叉位置，讨论不同奖励结构下的合作、对抗、混合博弈；
-多智能体场景特有的问题：非平稳性、信用分配、可扩展性等。 综述<a
-target="_blank" rel="noopener" href="https://arxiv.org/abs/2312.01058">A Survey of Progress on
-Cooperative Multi-agent Reinforcement Learning</a> e.g.
-多个智能体共同博弈学习，最终达到某个稳态:
-像下面这篇论文就是在带状态扰动/对抗者的马尔可夫博弈里，定义了一个均衡并给出
-Q-learning 收敛条件。 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2307.16212">Robust
-Multi-Agent Reinforcement Learning with State Uncertainty</a></p>
-<h4 id="多智能体间的通信激励设计">多智能体间的通信，激励设计</h4>
-<p><a target="_blank" rel="noopener" href="https://doi.org/10.1609/aaai.v36i9.21179">Multi-Agent
-Incentive Communication (AAAI 2023)</a>
-在强化学习框架下，每个智能体可发送"激励信号"给其他智能体，该信号直接加到接收方的局部Q值上，引导其行为朝向全局最优；
-<a target="_blank" rel="noopener" href="https://doi.org/10.1609/aaai.v39i22.34490">Efficient
-Communication in Multi-Agent Reinforcement Learning with
-Consensus-guided Messages(AAAI 2024)</a></p>
-<h3 id="多智能体系统可扩展性的研究">多智能体系统可扩展性的研究</h3>
-<p>比如一个系统能够在10个agent下运行，那么100个，1900个能不能稳定运行这种，去找系统的负载的类型的文章
-e.g. <a
-target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1877050924025638?via%3Dihub">The
-scalability impact on Organization-based Multi-Agent Systems</a></p>
-<h3 id="多智能体强化学习">多智能体强化学习</h3>
-<h4
-id="对ai系统方面某个agent所作出的工作">对AI系统方面某个agent所作出的工作</h4>
-<p>因为在合作 MARL/MAS 中，只有一个团队奖励，怎么知道哪个 agent
-在什么时候贡献了多少？或者在奖励非常稀疏的时候，又如何让学习收敛，然后就有了这种类型的工作
-<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2003.06709">FACMAC: Factored Multi-Agent
-Centralised Policy Gradients(NeurIPS 2021)</a></p>
-<p><a target="_blank" rel="noopener" href="https://icml.cc/virtual/2022/spotlight/17844">ndividual
-Reward Assisted Multi-Agent Reinforcement Learning（ICML 2022）</a></p>
-<p><a
-target="_blank" rel="noopener" href="https://ojs.aaai.org/index.php/AAAI/article/view/29681">STAS:
-Spatial-Temporal Return Decomposition for Solving Sparse Rewards
-Problems in MARL（AAAI 2024）</a></p>
-<h3 id="多智能体表征学习">多智能体表征学习</h3>
-<p>这个主要是为了让后续的值分解/策略学习更容易。
-这种学习又分为三类，分别是基于角色的表征，使用图结构的表征，关系建模的表征。和
-为值分解门优化的 latent 表征。</p>
-<h4 id="基于角色的表征">基于角色的表征</h4>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2003.08039">ROMA: Multi-Agent
-Reinforcement Learning with Emergent Roles (ICML 2020)</a>
-这篇论文就通过引入了入一个角色embedding空间，每个 agent 在其中采样一个
-role，policy 以 role 为条件。通过互信息和正则项，让同一角色的 agent
-行为相似，可以共享经验；不同角色的 agent 行为差异大，有任务分工。 ####
-使用GNN的表征 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2012.09762">MAGNet:
-Multi-agent Graph Network for Deep MARL</a> ####
-为值分解专门优化的latent表征 <a
-target="_blank" rel="noopener" href="https://arxiv.org/abs/2305.07182">UNSR：Unit-wise Attentive State
-Representation</a> 先用 transformer 学一个更 disentangled 的 unit-wise
-state 表征，再增强 MIXING 网络中的 credit assignment</p>
+<p><strong>e.g.</strong><br>金融方面的：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2412.20138">TradingAgents: Multi-Agents LLM Financial Trading Framework</a><br>法律方面的：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2407.16252">LawLuo: A Multi-Agent Collaborative Framework for Multi-Round Chinese Legal Consultation</a><br>安全方面的：<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/11172929">AI-Driven Multi-Agent System for Real-Time Security Analysis of Software Releases</a></p>
+<p><strong>多智能体的基础设施建设</strong><br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2412.03801">AgentScope: A Flexible yet Robust Multi-Agent Platform</a><br>然后还有langgraph langchain AutoGen这块。<br><strong>多智能体协作</strong></p>
+<p><strong>协作类型又分为合作，竞争，合作竞争</strong><br><strong>合作</strong>方面：各个智能体的目标基本对齐到一个共同目标 G，强调分工与配合。如<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2308.10848">AgentVerse</a><br><strong>竞争</strong>方面：智能体之间存在冲突目标，让 LLM 智能体相互对抗以优化决策。<br>比方说提供一个游戏环境，让LLM互相打。如<a target="_blank" rel="noopener" href="https://aclanthology.org/2024.acl-long.705/">LLMArena ACL 2024</a><br><strong>合作竞争</strong>相结合的。这个一般出现在社科类研究，这里就没写。</p>
+<h3 id="多智能体控制理论"><a href="#多智能体控制理论" class="headerlink" title="多智能体控制理论"></a>多智能体控制理论</h3><h3 id="AI智能体博弈方面的问题"><a href="#AI智能体博弈方面的问题" class="headerlink" title="AI智能体博弈方面的问题"></a>AI智能体博弈方面的问题</h3><p>这里的话就是多智能体&#x3D;可学习的博弈参与者，所以就有一堆围绕策略收敛、均衡概念、合作&#x2F;对抗机制的工作。<br>一些比较新的综述把 MARL 明确放在”博弈论 + 机器学习”的交叉位置，讨论不同奖励结构下的合作、对抗、混合博弈；<br>多智能体场景特有的问题：非平稳性、信用分配、可扩展性等。<br>综述<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2312.01058">A Survey of Progress on Cooperative Multi-agent Reinforcement Learning</a><br>e.g.<br>多个智能体共同博弈学习，最终达到某个稳态:<br>像下面这篇论文就是在带状态扰动&#x2F;对抗者的马尔可夫博弈里，定义了一个均衡并给出 Q-learning 收敛条件。<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2307.16212">Robust Multi-Agent Reinforcement Learning with State Uncertainty</a></p>
+<h4 id="多智能体间的通信，激励设计"><a href="#多智能体间的通信，激励设计" class="headerlink" title="多智能体间的通信，激励设计"></a>多智能体间的通信，激励设计</h4><p><a target="_blank" rel="noopener" href="https://doi.org/10.1609/aaai.v36i9.21179">Multi-Agent Incentive Communication (AAAI 2023)</a><br>在强化学习框架下，每个智能体可发送”激励信号”给其他智能体，该信号直接加到接收方的局部Q值上，引导其行为朝向全局最优；<br><a target="_blank" rel="noopener" href="https://doi.org/10.1609/aaai.v39i22.34490">Efficient Communication in Multi-Agent Reinforcement Learning with Consensus-guided Messages(AAAI 2024)</a></p>
+<h3 id="多智能体系统可扩展性的研究"><a href="#多智能体系统可扩展性的研究" class="headerlink" title="多智能体系统可扩展性的研究"></a>多智能体系统可扩展性的研究</h3><p>比如一个系统能够在10个agent下运行，那么100个，1900个能不能稳定运行这种，去找系统的负载的类型的文章<br>e.g. <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1877050924025638?via=ihub">The scalability impact on Organization-based Multi-Agent Systems</a></p>
+<h3 id="多智能体强化学习"><a href="#多智能体强化学习" class="headerlink" title="多智能体强化学习"></a>多智能体强化学习</h3><h4 id="对AI系统方面某个agent所作出的工作-贡献进行量化的内容"><a href="#对AI系统方面某个agent所作出的工作-贡献进行量化的内容" class="headerlink" title="对AI系统方面某个agent所作出的工作\贡献进行量化的内容"></a>对AI系统方面某个agent所作出的工作\贡献进行量化的内容</h4><p>因为在合作 MARL&#x2F;MAS 中，只有一个团队奖励，怎么知道哪个 agent 在什么时候贡献了多少？或者在奖励非常稀疏的时候，又如何让学习收敛，然后就有了这种类型的工作<br><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2003.06709">FACMAC: Factored Multi-Agent Centralised Policy Gradients(NeurIPS 2021)</a></p>
+<p><a target="_blank" rel="noopener" href="https://icml.cc/virtual/2022/spotlight/17844">ndividual Reward Assisted Multi-Agent Reinforcement Learning（ICML 2022）</a></p>
+<p><a target="_blank" rel="noopener" href="https://ojs.aaai.org/index.php/AAAI/article/view/29681">STAS: Spatial-Temporal Return Decomposition for Solving Sparse Rewards Problems in MARL（AAAI 2024）</a></p>
+<h3 id="多智能体表征学习"><a href="#多智能体表征学习" class="headerlink" title="多智能体表征学习"></a>多智能体表征学习</h3><p>这个主要是为了让后续的值分解&#x2F;策略学习更容易。<br>这种学习又分为三类，分别是基于角色的表征，使用图结构的表征，关系建模的表征。和 为值分解门优化的 latent 表征。</p>
+<h4 id="基于角色的表征"><a href="#基于角色的表征" class="headerlink" title="基于角色的表征"></a>基于角色的表征</h4><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2003.08039">ROMA: Multi-Agent Reinforcement Learning with Emergent Roles (ICML 2020)</a><br>这篇论文就通过引入了入一个角色embedding空间，每个 agent 在其中采样一个 role，policy 以 role 为条件。通过互信息和正则项，让同一角色的 agent 行为相似，可以共享经验；不同角色的 agent 行为差异大，有任务分工。</p>
+<h4 id="使用GNN的表征"><a href="#使用GNN的表征" class="headerlink" title="使用GNN的表征"></a>使用GNN的表征</h4><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2012.09762">MAGNet: Multi-agent Graph Network for Deep MARL</a></p>
+<h4 id="为值分解专门优化的latent表征"><a href="#为值分解专门优化的latent表征" class="headerlink" title="为值分解专门优化的latent表征"></a>为值分解专门优化的latent表征</h4><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2305.07182">UNSR：Unit-wise Attentive State Representation</a><br>先用 transformer 学一个更 disentangled 的 unit-wise state 表征，再增强 MIXING 网络中的 credit assignment</p>
 
     </div>
 
