@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="AutoSOTA这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。这个模块由两个阶段构成 符号化资...">
+    <meta name="description" content="这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource 因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。 这个模块由两个阶段构成 符号化资源获取 ze...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AutoSOTA 论文解读">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2026/07/09/AutoSOTA-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="AutoSOTA这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。这个模块由两个阶段构成 符号化资...">
+<meta property="og:description" content="这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource 因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。 这个模块由两个阶段构成 符号化资源获取 ze...">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-07-09T03:54:34.000Z">
-<meta property="article:modified_time" content="2026-07-10T01:31:07.523Z">
+<meta property="article:modified_time" content="2026-07-10T01:35:15.263Z">
 <meta property="article:author" content="iron moon">
 <meta property="article:tag" content="AI4S">
 <meta name="twitter:card" content="summary">
@@ -112,7 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AutoSOTA"><span class="nav-number">1.</span> <span class="nav-text">AutoSOTA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentResource"><span class="nav-number">1.1.</span> <span class="nav-text">AgentResource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentObjective"><span class="nav-number">1.2.</span> <span class="nav-text">AgentObjective</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentInit"><span class="nav-number">1.3.</span> <span class="nav-text">AgentInit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentMonitor"><span class="nav-number">1.4.</span> <span class="nav-text">AgentMonitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentFix"><span class="nav-number">1.5.</span> <span class="nav-text">AgentFix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentIdeator"><span class="nav-number">1.6.</span> <span class="nav-text">AgentIdeator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentScheduler"><span class="nav-number">1.7.</span> <span class="nav-text">AgentScheduler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scientific-Protocol-%E7%94%9F%E6%88%90"><span class="nav-number">1.7.1.</span> <span class="nav-text">Scientific Protocol 生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%B8%AA%E4%BC%98%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">1.7.2.</span> <span class="nav-text">整个优化工作流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentSupervisor"><span class="nav-number">1.8.</span> <span class="nav-text">AgentSupervisor</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#agentresource"><span class="nav-number">1.</span> <span class="nav-text">AgentResource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#agentobjective"><span class="nav-number">2.</span> <span class="nav-text">AgentObjective</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#agentinit"><span class="nav-number">3.</span> <span class="nav-text">AgentInit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#agentmonitor"><span class="nav-number">4.</span> <span class="nav-text">AgentMonitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#agentfix"><span class="nav-number">5.</span> <span class="nav-text">AgentFix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#agentideator"><span class="nav-number">6.</span> <span class="nav-text">AgentIdeator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scientific-protocol-%E7%94%9F%E6%88%90"><span class="nav-number">6.1.</span> <span class="nav-text">Scientific Protocol 生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%B8%AA%E4%BC%98%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">6.2.</span> <span class="nav-text">整个优化工作流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#agentsupervisor"><span class="nav-number">7.</span> <span class="nav-text">AgentSupervisor</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -182,7 +182,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="AutoSOTA 论文解读 | Iron Moon Blog">
-      <meta itemprop="description" content="AutoSOTA这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。这个模块由两个阶段构成 符号化资...">
+      <meta itemprop="description" content="这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource 因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。 这个模块由两个阶段构成 符号化资源获取 ze...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -204,7 +204,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-07-10 09:31:07" itemprop="dateModified" datetime="2026-07-10T09:31:07+08:00">2026-07-10</time>
+      <time title="修改时间：2026-07-10 09:35:15" itemprop="dateModified" datetime="2026-07-10T09:35:15+08:00">2026-07-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -219,203 +219,234 @@
   
 </div>
 
-            <div class="post-description">AutoSOTA这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。这个模块由两个阶段构成 符号化资...</div>
+            <div class="post-description">这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource 因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。 这个模块由两个阶段构成 符号化资源获取 ze...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="AutoSOTA"><a href="#AutoSOTA" class="headerlink" title="AutoSOTA"></a>AutoSOTA</h1><p>这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。</p>
+    <div class="post-body" itemprop="articleBody"><p>这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。</p>
 <p><strong>没开源</strong></p>
-<h2 id="AgentResource"><a href="#AgentResource" class="headerlink" title="AgentResource"></a>AgentResource</h2><p>因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。</p>
-<p>所以这里做了一个外部资源获取模块。<br>这个模块由两个阶段构成</p>
+<h2 id="agentresource">AgentResource</h2>
+<p>因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。</p>
+<p>所以这里做了一个外部资源获取模块。 这个模块由两个阶段构成</p>
 <ul>
-<li><p>符号化资源获取</p>
+<li>符号化资源获取
 <ul>
-<li><p>zero-download constraint 首先是系统仅通过解析仓库的内部结构和评估清单(这里是人工编写的rubric.csv清单。)来提取信息，这部分不下载，节约下载带宽</p>
-</li>
-<li><p>建立全局资源注册表  这个表对于每一篇论文（通过唯一序列号 seq 标识），系统会记录：</p>
+<li>zero-download constraint
+首先是系统仅通过解析仓库的内部结构和评估清单(这里是人工编写的rubric.csv清单。)来提取信息，这部分不下载，节约下载带宽</li>
+<li>建立全局资源注册表 这个表对于每一篇论文（通过唯一序列号 seq
+标识），系统会记录：
 <ul>
 <li>资源来源的 URL。</li>
 <li>资源分类（如：是数据集还是模型）。</li>
 <li>预估的文件大小。</li>
-</ul>
-</li>
-<li><p>最后计算总工作量指标$S_{total} &#x3D; \text{cal_total_size_bytes}$<br>  $\text{cal_total_size_bytes}$是一个作为下游调度和计算资源分配的主要启发式的度量</p>
-</li>
-</ul>
-</li>
-<li><p>物理获取与编排<br>  这个阶段基于第一阶段生成的“资源清单”，安全、可靠地将虚拟的元数据转化为本地的物理文件。<br>  同时<strong>严格基于注册表执行</strong>，不重新扫描原始仓库。</p>
+</ul></li>
+<li>最后计算总工作量指标<span class="math inline">\(S_{total} =
+\text{cal\_total\_size\_bytes}\)</span> <span
+class="math inline">\(\text{cal\_total\_size\_bytes}\)</span>是一个作为下游调度和计算资源分配的主要启发式的度量</li>
+</ul></li>
+<li>物理获取与编排
+这个阶段基于第一阶段生成的“资源清单”，安全、可靠地将虚拟的元数据转化为本地的物理文件。
+同时<strong>严格基于注册表执行</strong>，不重新扫描原始仓库。
 <ul>
-<li><p>门控选择和过滤<br>  只有$S_{total} \in [S_{min},S_{max}]$之间的任务才允许进入执行队列。然后具有不确定或者负大小的任务被抢先丢弃。还有个重复任务拦截层防止失败的没有下载，成功的重复下载。</p>
-</li>
-<li><p>语义储存架构<br>  资源以变成方式了路由到标准化的分层目录下。(还要确保跨平台文件系统兼容从而替换非法字符并截断为最多80字)<em>正常做法，写的很细</em></p>
-</li>
-<li><p>多态检索模式<br>  针对不同的资源来源，系统支持多种定制的检索策略：</p>
+<li>门控选择和过滤 只有<span class="math inline">\(S_{total} \in
+[S_{min},S_{max}]\)</span>之间的任务才允许进入执行队列。然后具有不确定或者负大小的任务被抢先丢弃。还有个重复任务拦截层防止失败的没有下载，成功的重复下载。</li>
+<li>语义储存架构
+资源以变成方式了路由到标准化的分层目录下。(还要确保跨平台文件系统兼容从而替换非法字符并截断为最多80字)<em>正常做法，写的很细</em></li>
+<li>多态检索模式 针对不同的资源来源，系统支持多种定制的检索策略：
 <ul>
-<li>基于规则的模式： 对于标准分发渠道，采用模式匹配，如，识别到 HuggingFace 仓库时使用优化过的 huggingface-cli 获取</li>
-<li>LLM 驱动的自主模式： 对于非标准或结构复杂的来源，系统会调用大语言模型（LLM）来生成并执行自定义的 Python 脚本，从而自动应对复杂的下载界面。</li>
-</ul>
-</li>
-<li><p>并发与容错机制<br>  允许多个任务同时并发下载，提供异步监控服务，实时追踪磁盘 I&#x2F;O 并动态映射进度<br>  维护一个全局的内存级 URL 映射表，原生支持去重和断点续传，自动从活跃队列中过滤掉已成功下载的 URL。</p>
-</li>
-</ul>
-</li>
+<li>基于规则的模式： 对于标准分发渠道，采用模式匹配，如，识别到
+HuggingFace 仓库时使用优化过的 huggingface-cli 获取</li>
+<li>LLM 驱动的自主模式：
+对于非标准或结构复杂的来源，系统会调用大语言模型（LLM）来生成并执行自定义的
+Python 脚本，从而自动应对复杂的下载界面。</li>
+</ul></li>
+<li>并发与容错机制
+允许多个任务同时并发下载，提供异步监控服务，实时追踪磁盘 I/O
+并动态映射进度 维护一个全局的内存级 URL
+映射表，原生支持去重和断点续传，自动从活跃队列中过滤掉已成功下载的
+URL。</li>
+</ul></li>
 </ul>
 <p>在下载完成过后，这些论文就转换成了可执行任务单元，提供规范代码，数据集，模型权重。</p>
-<h2 id="AgentObjective"><a href="#AgentObjective" class="headerlink" title="AgentObjective"></a>AgentObjective</h2><ul>
+<h2 id="agentobjective">AgentObjective</h2>
+<ul>
 <li>任务目标树形递归分解</li>
 </ul>
 <p>利用BFS算法，系统扩展属性结构的题目。从表示<strong>论文完整复现</strong>的根节点开始，动态的将任务分解成多个二进制子任务。</p>
-<p>然后这里还有一个权重驱动的终止机制，<br>根节点为1，然后第一层节点的权重和为1，然后依次向后分解。到阈值或者达到最大逻辑生长，则停止。</p>
+<p>然后这里还有一个权重驱动的终止机制，
+根节点为1，然后第一层节点的权重和为1，然后依次向后分解。到阈值或者达到最大逻辑生长，则停止。</p>
 <ul>
-<li><strong>分层上下文注入</strong>。这个也挺好的。<br>这里的上下文注入是为了<strong>任务目标树</strong>作用的。</li>
+<li><strong>分层上下文注入</strong>。这个也挺好的。
+这里的上下文注入是为了<strong>任务目标树</strong>作用的。</li>
 </ul>
-<p>论文里面的信息</p>
-<ol>
-<li>将PDF转成markdown。</li>
-<li>将里面的图片进行视觉理解 VLM</li>
-<li>官方代码库的工程细节<br><em>这里的官方代码库的工程细节的注入需要进一步探索。但是他没有源码</em><br>上下文注入式根据BFS任务分解过程的深度来被动态触发的。被分成三个逻辑层</li>
-</ol>
+<p>论文里面的信息 1. 将PDF转成markdown。 2. 将里面的图片进行视觉理解 VLM
+3. 官方代码库的工程细节
+<em>这里的官方代码库的工程细节的注入需要进一步探索。但是他没有源码</em>
+上下文注入式根据BFS任务分解过程的深度来被动态触发的。被分成三个逻辑层 -
+浅层策略层:
+在树形结构的标题顶点，系统只注入宏观层次的信息，如目录，摘要等，<strong>防止过早被技术细节淹没</strong>。</p>
 <ul>
-<li><p>浅层策略层: 在树形结构的标题顶点，系统只注入宏观层次的信息，如目录，摘要等，<strong>防止过早被技术细节淹没</strong>。</p>
-</li>
-<li><p>中间技术层: 随着任务分解进入算法模块，详细的方法和实验部分与VLM的视觉证据一起引入</p>
-</li>
-<li><p>深层实现层: 在到达设计原子工程操作的节点，Agent激活存储库级别的上下文。</p>
-</li>
+<li><p>中间技术层:
+随着任务分解进入算法模块，详细的方法和实验部分与VLM的视觉证据一起引入</p></li>
+<li><p>深层实现层:
+在到达设计原子工程操作的节点，Agent激活存储库级别的上下文。</p></li>
 </ul>
-<h2 id="AgentInit"><a href="#AgentInit" class="headerlink" title="AgentInit"></a>AgentInit</h2><p>构建论文的可执行环境</p>
+<h2 id="agentinit">AgentInit</h2>
+<p>构建论文的可执行环境</p>
 <p>这部分Agent是使用预设的工作流的。包括输入分析，子任务分解，环境构建，依赖性解析、资源获取、存储库检查、命令发现和执行准备。</p>
-<p>具体流程:</p>
-<ol>
-<li><strong>目标分析与任务分解</strong><br>分析论文、代码仓库、资源文件及 rubric 中的目标指标，明确需要复现的实验，并将初始化过程拆分为环境、依赖、数据、模型、命令和配置等子任务。</li>
-<li><strong>环境与资源准备</strong><br>构建并验证 Docker 运行环境，检查 GPU、CUDA、Python 和 PyTorch 兼容性，安装依赖，并获取所需数据集、预训练模型和检查点。</li>
-<li><strong>仓库检查与协议保持型修复</strong><br>检查 README、文件结构和代码入口，修复硬编码路径、缺失的连接逻辑或非核心脚本，同时保持原始评估协议、数据划分和目标实验设置不变。</li>
-<li><strong>命令恢复与执行接口生成</strong><br>确定训练和评估入口，恢复完整执行命令和实验配置，最终输出可运行的仓库状态、已验证的容器环境及后续执行计划。</li>
-</ol>
-<h2 id="AgentMonitor"><a href="#AgentMonitor" class="headerlink" title="AgentMonitor"></a>AgentMonitor</h2><p>跟踪长期执行并防止死锁</p>
-<p>论文中提及，设计这个Agent的原因是：<br>自动paper环境复现如果单纯使用主执行Agent，会</p>
-<ol>
-<li>陷入本地调试循环，反复尝试低价值修复而没有取得真正的进展，</li>
-<li>失去对全局目标的认识，并过度关注工程细节。</li>
-</ol>
+<p>具体流程: 1. <strong>目标分析与任务分解</strong>
+分析论文、代码仓库、资源文件及 rubric
+中的目标指标，明确需要复现的实验，并将初始化过程拆分为环境、依赖、数据、模型、命令和配置等子任务。
+2. <strong>环境与资源准备</strong> 构建并验证 Docker 运行环境，检查
+GPU、CUDA、Python 和 PyTorch
+兼容性，安装依赖，并获取所需数据集、预训练模型和检查点。 3.
+<strong>仓库检查与协议保持型修复</strong> 检查
+README、文件结构和代码入口，修复硬编码路径、缺失的连接逻辑或非核心脚本，同时保持原始评估协议、数据划分和目标实验设置不变。
+4. <strong>命令恢复与执行接口生成</strong>
+确定训练和评估入口，恢复完整执行命令和实验配置，最终输出可运行的仓库状态、已验证的容器环境及后续执行计划。</p>
+<h2 id="agentmonitor">AgentMonitor</h2>
+<p>跟踪长期执行并防止死锁</p>
+<p>论文中提及，设计这个Agent的原因是：
+自动paper环境复现如果单纯使用主执行Agent，会 1.
+陷入本地调试循环，反复尝试低价值修复而没有取得真正的进展， 2.
+失去对全局目标的认识，并过度关注工程细节。</p>
 <p>AgentMonitor这个Agent是跟踪主执行Agent的。本身并不对环境进行任何更改或者操作。</p>
-<p>主要有两项核心能力</p>
-<ol>
-<li>在线执行轨迹理解<br>实时分析主执行Agent在干啥</li>
-<li>外部状态跟踪<br>将重要信息保存到模型上下文之外</li>
-</ol>
+<p>主要有两项核心能力 1. 在线执行轨迹理解 实时分析主执行Agent在干啥 2.
+外部状态跟踪 将重要信息保存到模型上下文之外</p>
 <ul>
-<li><p>执行跟踪和死锁干预<br>  在同一个失败依赖项重复安装尝试，或者没有进展的长时间输出等会被识别为死锁。检测到这种状态过后，AgentMonitor会生成高级纠正指导。典型动作如下:</p>
-<ol>
+<li>执行跟踪和死锁干预
+在同一个失败依赖项重复安装尝试，或者没有进展的长时间输出等会被识别为死锁。检测到这种状态过后，AgentMonitor会生成高级纠正指导。典型动作如下:
+<ol type="1">
 <li>Continue：继续</li>
-<li>Resume with guidance：带指导继续,即切换到手动设置，或者咨询专门的skill。</li>
+<li>Resume with
+guidance：带指导继续,即切换到手动设置，或者咨询专门的skill。</li>
 <li>Fallback：切换备用方案</li>
 <li>Terminate：终止</li>
-<li>Rollback：回退<br>  同时Monitor剩余的全局预算会限制交互轮数。超过超时阈值时会终止执行。</li>
-</ol>
-</li>
-<li><p>通过外部存储器的持久上下文管理<br>这一部分主要是管理临界状态信息的。包括<br>代码库、评估输出、历史修改记录、当前想法库和累积的研究见解。</p>
-</li>
+<li>Rollback：回退
+同时Monitor剩余的全局预算会限制交互轮数。超过超时阈值时会终止执行。</li>
+</ol></li>
+<li>通过外部存储器的持久上下文管理
+这一部分主要是管理临界状态信息的。包括
+代码库、评估输出、历史修改记录、当前想法库和累积的研究见解。</li>
 </ul>
-<p>这玩意直接做了3个md文档</p>
+<p>这玩意直接做了3个md文档 - code_analysis.md<br />
+&gt; 这个文件通过对目标存储库的一次性的探索，构建出来的一个代码认知图。
+- idea_library.md &gt;
+一个动态演化的想法库，记录所有候选想法，尝试修改以及对应的结果。 -
+research_report.md &gt;
+通过<strong>专门的研究阶段</strong>填充的外部知识库。提供相关文献里面的简洁，技术，经验配置，优化策略等。</p>
+<p>在这两个基础上，系统采取两种互补的机制 1.
+一次性提取阶段将存储库的全局结构压缩为持久表示。消除了重复的全存储库扫描。
+2.
+Agent通过命令行操作:(符号搜索，模式匹配等)按需检索。<em>这个需要进一步设计</em>允许本地代码库的部分相关代码加载到上下文。</p>
+<h2 id="agentfix">AgentFix</h2>
 <ul>
-<li>code_analysis.md  <blockquote>
-<p>这个文件通过对目标存储库的一次性的探索，构建出来的一个代码认知图。</p>
-</blockquote>
-</li>
-<li>idea_library.md<blockquote>
-<p>一个动态演化的想法库，记录所有候选想法，尝试修改以及对应的结果。</p>
-</blockquote>
-</li>
-<li>research_report.md<blockquote>
-<p>通过<strong>专门的研究阶段</strong>填充的外部知识库。提供相关文献里面的简洁，技术，经验配置，优化策略等。</p>
-</blockquote>
-</li>
-</ul>
-<p>在这两个基础上，系统采取两种互补的机制</p>
-<ol>
-<li>一次性提取阶段将存储库的全局结构压缩为持久表示。消除了重复的全存储库扫描。</li>
-<li>Agent通过命令行操作:(符号搜索，模式匹配等)按需检索。<em>这个需要进一步设计</em>允许本地代码库的部分相关代码加载到上下文。</li>
-</ol>
-<h2 id="AgentFix"><a href="#AgentFix" class="headerlink" title="AgentFix"></a>AgentFix</h2><ul>
 <li>通过先验的高频故障家族使用明确的修复skill对当前故障进行修复。</li>
-<li>对于没有匹配到的修复，让Agent自行修复。为了防止AgentFix脱离论文复现条件的约束。*(论文中通过一个科学协议来说明。这部分需要查看源码进一步查看)*论文中安排了一个AgentSupervisor限制其的工程修复空间。</li>
-<li><strong>故障记忆机制。</strong> <blockquote>
-<p><em>这部分似乎是说通过将重复的成功提炼成一个md文档。但是没有源码我并不是很确定</em></p>
-</blockquote>
-</li>
+<li>对于没有匹配到的修复，让Agent自行修复。为了防止AgentFix脱离论文复现条件的约束。<em>(论文中通过一个科学协议来说明。这部分需要查看源码进一步查看)</em>论文中安排了一个AgentSupervisor限制其的工程修复空间。</li>
+<li><strong>故障记忆机制。</strong> &gt;
+<em>这部分似乎是说通过将重复的成功提炼成一个md文档。但是没有源码我并不是很确定</em></li>
 </ul>
-<h2 id="AgentIdeator"><a href="#AgentIdeator" class="headerlink" title="AgentIdeator"></a>AgentIdeator</h2><p>这个Ideator是在论文要求的基础上进行假设的，论文说这里和其他不同，说明或许有其他的论文是将假设生成作为一个天马行空的想法生成器的。</p>
-<p>AgentIdeator在下面的限制下</p>
-<ul>
-<li>Metric Alignment  假设必须针对文件中报告的具体目标，而不是通用的绩效指标</li>
-<li>Implementation Alignment  建议必须相对于复制环境和代码库的实际能力保持合理性</li>
-<li>Constraint Alignment  保留了关键的不变量，例如评估逻辑、数据集分割和核心方法的理论边界</li>
-<li>Lever Alignment  高价值的优化“杠杆”被确定为将抽象知识连接到代码中的具体干预点。<br>这些限制用来保证生成的假设必须在论文实验的边界内</li>
-</ul>
-<p>最终的输出按照粒度$\tau(h) \in \leftbrace PARAM,CODE,ALGO \rightbrace $并分配一个风险级别 $\rho(h) \in \leftbrace LOW,MEDIUM,HIGH \rightbrace $<br>同时定义一个权限谓词$Adm(h)$<br>$$Adm(h) &#x3D; \begin{cases} 1 &amp; \text{if } h \text{ preserves evaluation integrity} \<br>0 &amp; \text{if } h \text{ invokes prohibited shortcuts} \end{cases}$$</p>
-<p>然后得到最终的假设集合<br>$$<br>H_{adm} &#x3D; \leftbrace h \in H:Adm(h) &#x3D;1 \rightbrace<br>$$</p>
-<h2 id="AgentScheduler"><a href="#AgentScheduler" class="headerlink" title="AgentScheduler"></a>AgentScheduler</h2><p>负责管理论文复制的整个生命周期，从环境初始化、基线测量到迭代代码修改和评估，最后到状态持久化和结果导出，包括优化策略和资源管理两个关键机制。</p>
+<h2 id="agentideator">AgentIdeator</h2>
+<p>这个Ideator是在论文要求的基础上进行假设的，论文说这里和其他不同，说明或许有其他的论文是将假设生成作为一个天马行空的想法生成器的。</p>
+<p>AgentIdeator在下面的限制下 - Metric Alignment
+假设必须针对文件中报告的具体目标，而不是通用的绩效指标 - Implementation
+Alignment 建议必须相对于复制环境和代码库的实际能力保持合理性 -
+Constraint Alignment
+保留了关键的不变量，例如评估逻辑、数据集分割和核心方法的理论边界 - Lever
+Alignment 高价值的优化“杠杆”被确定为将抽象知识连接到代码中的具体干预点。
+这些限制用来保证生成的假设必须在论文实验的边界内</p>
+<p>最终的输出按照粒度$(h) PARAM,CODE,ALGO $并分配一个风险级别 <span
+class="math inline">\(\rho(h) \in \lbrace LOW,MEDIUM,HIGH
+\rbrace\)</span> 同时定义一个权限谓词<span
+class="math inline">\(Adm(h)\)</span> <span
+class="math display">\[Adm(h) = \begin{cases} 1 &amp; \text{if } h
+\text{ preserves evaluation integrity} \\
+0 &amp; \text{if } h \text{ invokes prohibited shortcuts}
+\end{cases}\]</span></p>
+<p>然后得到最终的假设集合 <span class="math display">\[
+H_{adm} = \lbrace h \in H:Adm(h) =1 \rbrace
+\]</span> ## AgentScheduler
+负责管理论文复制的整个生命周期，从环境初始化、基线测量到迭代代码修改和评估，最后到状态持久化和结果导出，包括优化策略和资源管理两个关键机制。</p>
 <ul>
 <li>优化策略</li>
 </ul>
-<h3 id="Scientific-Protocol-生成"><a href="#Scientific-Protocol-生成" class="headerlink" title="Scientific Protocol 生成"></a>Scientific Protocol 生成</h3><p>首先我们通过LLM作为scientific protocol 生成器。这个生成器的</p>
-<ul>
-<li>对整个代码库的深入理解，包括跨文件的依赖关系，跨算法阶段的数据流和评估协议约束。</li>
-<li>对最新研究的认识，能够识别结构平静并检索相关改进。</li>
-</ul>
-<h3 id="整个优化工作流"><a href="#整个优化工作流" class="headerlink" title="整个优化工作流"></a>整个优化工作流</h3><ol start="0">
-<li>环境优化和基线测量<br>执行基本的初始化任务。</li>
-</ol>
-<p>然后执行完整的evaluate在本地完成指标测量。用本地测量的指标进行比较。</p>
-<ol>
-<li><p>代码和论文理解<br>系统性探索代码库结构，检查评估脚本，识别算法分支，给出完整的推理过程，并估计每次评估的时间。<br>最后输出code_analysis.md<br>这个阶段还要被constraints限制。constraints限制的不变量会被后面的AgentSupervisor接受并提供指导。</p>
-</li>
-<li><p>思想库构建<br>一个列出候选优化方向的结构化文档。<br>Idea的结构化表示：[(type(PARAM,CODE,ALGO)<br>，风险级别，实施假设)]<br>Idea按照三个粒度级别组织:micro(单一参数调整)，meso(函数级别算法改进), macro(流水线阶段重构)</p>
-</li>
-</ol>
+<h3 id="scientific-protocol-生成">Scientific Protocol 生成</h3>
+<p>首先我们通过LLM作为scientific protocol 生成器。这个生成器的 -
+对整个代码库的深入理解，包括跨文件的依赖关系，跨算法阶段的数据流和评估协议约束。
+- 对最新研究的认识，能够识别结构平静并检索相关改进。</p>
+<h3 id="整个优化工作流">整个优化工作流</h3>
+<ol start="0" type="1">
+<li><p>环境优化和基线测量 执行基本的初始化任务。
+然后执行完整的evaluate在本地完成指标测量。用本地测量的指标进行比较。</p></li>
+<li><p>代码和论文理解
+系统性探索代码库结构，检查评估脚本，识别算法分支，给出完整的推理过程，并估计每次评估的时间。
+最后输出code_analysis.md
+这个阶段还要被constraints限制。constraints限制的不变量会被后面的AgentSupervisor接受并提供指导。</p></li>
+<li><p>思想库构建 一个列出候选优化方向的结构化文档。
+Idea的结构化表示：[(type(PARAM,CODE,ALGO) ，风险级别，实施假设)]
+Idea按照三个粒度级别组织:micro(单一参数调整)，meso(函数级别算法改进),
+macro(流水线阶段重构)</p>
 <p>初始的时候我们的Idea库至少包含10个想法，按可行性和优化潜力进行优先级排序。</p>
-<p>这个阶段结束后对所有Idea进行审核，并将违规的Idea标记为Reject。</p>
-<ol start="3">
-<li>迭代优化循环<ol>
+<p>这个阶段结束后对所有Idea进行审核，并将违规的Idea标记为Reject。</p></li>
+<li><p>迭代优化循环</p>
+<ol type="1">
 <li>迭代前Reflection</li>
 <li>Idea选择</li>
-<li>代码实现<ol>
+<li>代码实现
+<ol type="1">
 <li>Git Snapshot 保存当前代码状态，同时记录git COMMITID</li>
-<li>代码实现<br> 在这一段里面有一个Normal path和Leap Path的机制。</li>
+<li>代码实现 在这一段里面有一个Normal path和Leap Path的机制。</li>
 </ol>
 <ul>
 <li>Normal Path是从已有的idea库中选择一个通过审核的想法去执行,</li>
-<li>Leap Path是一个强制跳出局部搜索的机制。<br> 如：最近三轮都是PARAM-type的调整，那么当前轮必须进入Leap Path。必须提出一个新的，结构性更强的想法。<br> 对于Leap Path提出的新机制，还会提供一个Honeymoon Period。因为提出的机制可能是有用的，但是因为我们调参等各种各样的原因，没有使指标更高。但这并不代表这玩意没用。这个Period设定是用来允许系统继续尝试Leap Path提出的结构的。</li>
-</ul>
-</li>
+<li>Leap Path是一个强制跳出局部搜索的机制。
+如：最近三轮都是PARAM-type的调整，那么当前轮必须进入Leap
+Path。必须提出一个新的，结构性更强的想法。 对于Leap
+Path提出的新机制，还会提供一个Honeymoon
+Period。因为提出的机制可能是有用的，但是因为我们调参等各种各样的原因，没有使指标更高。但这并不代表这玩意没用。这个Period设定是用来允许系统继续尝试Leap
+Path提出的结构的。</li>
+</ul></li>
 <li>评估</li>
-<li>Debugging<br> 如果出现多次崩溃等，会直接回滚。</li>
+<li>Debugging 如果出现多次崩溃等，会直接回滚。</li>
 <li>结果记录</li>
-<li>创意库更新<br> 循环持续到MAX_ITERATIONS或者指标超过预定义的阈值</li>
-</ol>
-</li>
-<li>容器恢复到 _best状态，主机生成对应的docker image保证结果可复现。</li>
+<li>创意库更新 循环持续到MAX_ITERATIONS或者指标超过预定义的阈值</li>
+</ol></li>
+<li><p>容器恢复到 _best状态，主机生成对应的docker
+image保证结果可复现。</p></li>
 </ol>
 <ul>
-<li>资源管理<br>在系统级管理多篇论文和多个GPU的全局资源框架。这里有一个统一的全局任务队列。<br><em>感觉比较常规</em></li>
+<li>资源管理
+在系统级管理多篇论文和多个GPU的全局资源框架。这里有一个统一的全局任务队列。
+<em>感觉比较常规</em></li>
 </ul>
-<h2 id="AgentSupervisor"><a href="#AgentSupervisor" class="headerlink" title="AgentSupervisor"></a>AgentSupervisor</h2><p>这个是确保自动化研究系统长期优化过程一致的Agent。</p>
-<p>核心机制为红线系统: 一组六个不可协商的约束和一个随论文改变的约束，在优化工作流的多个点强制执行。</p>
+<h2 id="agentsupervisor">AgentSupervisor</h2>
+<p>这个是确保自动化研究系统长期优化过程一致的Agent。</p>
+<p>核心机制为红线系统:
+一组六个不可协商的约束和一个随论文改变的约束，在优化工作流的多个点强制执行。</p>
 <ul>
 <li>评估指标参数不得更改</li>
 <li>必须保持评估脚本完整性</li>
 <li>算法输出的完整性不得违反</li>
-<li>度量维度之间没有不公平的权衡  主要优化目标度量的改进不能以其他报告度量的显著降级为代价。系统需要在每次迭代中报告所有度量，并且明确约束交叉度量权衡。</li>
+<li>度量维度之间没有不公平的权衡
+主要优化目标度量的改进不能以其他报告度量的显著降级为代价。系统需要在每次迭代中报告所有度量，并且明确约束交叉度量权衡。</li>
 <li>必须保持数据集完整性</li>
 <li>禁止修改数据集</li>
 <li>必须明确识别并严格遵循特定于论文的约束：每篇论文的实验设置引入了独特的可比性要求。</li>
 </ul>
 <p>然后对于这些约束，不是单点检查的。是面向整个过程的多层监督机制。</p>
-<p>第一层： 明确要求工程师确定手头特定论文所有的硬约束，并在code_analysis.md文档中的专用”硬约束&#x2F;红线”列表中列举这些约束。<br>第二层: 在初始的idea库生成之后，执行强制性的审核。Agent必须在idea_library.md中构建审核表。并根据所有红线验证生成的想法。<br>第三层: 当第三阶段的Leap Path被触发过后，对于三个候选创新解决方案的每一个，Agent都需要对其进行检查。（因为Leap Path是动态生成的，没有经过第二层的审查）<br>第四层: 主提示中全局规则部分-约束作为最高优先级的操作原则强制执行，声明为”绝对禁止，在任何情况下都没有例外”  防止模型为了追求更好的指标而合理化违反约束。</p>
+<p>第一层：
+明确要求工程师确定手头特定论文所有的硬约束，并在code_analysis.md文档中的专用"硬约束/红线"列表中列举这些约束。</p>
+<p>第二层:
+在初始的idea库生成之后，执行强制性的审核。Agent必须在idea_library.md中构建审核表。并根据所有红线验证生成的想法。</p>
+<p>第三层: 当第三阶段的Leap
+Path被触发过后，对于三个候选创新解决方案的每一个，Agent都需要对其进行检查。（因为Leap
+Path是动态生成的，没有经过第二层的审查）</p>
+<p>第四层:
+主提示中全局规则部分-约束作为最高优先级的操作原则强制执行，声明为"绝对禁止，在任何情况下都没有例外"
+防止模型为了追求更好的指标而合理化违反约束。</p>
 
     </div>
 
