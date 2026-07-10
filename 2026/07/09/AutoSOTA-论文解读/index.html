@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#0f172a"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#0f172a">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="AutoSOTA这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。这个模块由两个阶段构成 符号化资...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AutoSOTA 论文解读">
+<meta property="og:url" content="https://fakeeyes2wo.github.io/2026/07/09/AutoSOTA-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/index.html">
+<meta property="og:site_name" content="Iron Moon Blog">
+<meta property="og:description" content="AutoSOTA这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。这个模块由两个阶段构成 符号化资...">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-09T03:54:34.000Z">
+<meta property="article:modified_time" content="2026-07-09T03:57:27.919Z">
+<meta property="article:author" content="iron moon">
+<meta property="article:tag" content="AI4S">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://fakeeyes2wo.github.io/2026/07/09/AutoSOTA-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fakeeyes2wo.github.io/2026/07/09/AutoSOTA-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/","path":"2026/07/09/AutoSOTA-论文解读/","title":"AutoSOTA 论文解读"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>AutoSOTA 论文解读 | Iron Moon Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Iron Moon Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">AI / Systems / Security</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-blog"><a href="/blog/" rel="section"><i class="fa fa-book fa-fw"></i>blog</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AutoSOTA"><span class="nav-number">1.</span> <span class="nav-text">AutoSOTA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentResource"><span class="nav-number">1.1.</span> <span class="nav-text">AgentResource</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentObjective"><span class="nav-number">1.2.</span> <span class="nav-text">AgentObjective</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentInit"><span class="nav-number">1.3.</span> <span class="nav-text">AgentInit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentMonitor"><span class="nav-number">1.4.</span> <span class="nav-text">AgentMonitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentFix"><span class="nav-number">1.5.</span> <span class="nav-text">AgentFix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentIdeator"><span class="nav-number">1.6.</span> <span class="nav-text">AgentIdeator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentScheduler"><span class="nav-number">1.7.</span> <span class="nav-text">AgentScheduler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scientific-Protocol-%E7%94%9F%E6%88%90"><span class="nav-number">1.7.1.</span> <span class="nav-text">Scientific Protocol 生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%B8%AA%E4%BC%98%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">1.7.2.</span> <span class="nav-text">整个优化工作流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AgentSupervisor"><span class="nav-number">1.8.</span> <span class="nav-text">AgentSupervisor</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iron moon</p>
+  <div class="site-description" itemprop="description">Technical notes and project write-ups focused on machine learning, systems, and security.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/FakeEyes2Wo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;FakeEyes2Wo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fakeeyes2wo.github.io/2026/07/09/AutoSOTA-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iron moon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Iron Moon Blog">
+      <meta itemprop="description" content="Technical notes and project write-ups focused on machine learning, systems, and security.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="AutoSOTA 论文解读 | Iron Moon Blog">
+      <meta itemprop="description" content="AutoSOTA这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。这个模块由两个阶段构成 符号化资...">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AutoSOTA 论文解读
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-07-09 11:54:34 / 修改时间：11:57:27" itemprop="dateCreated datePublished" datetime="2026-07-09T11:54:34+08:00">2026-07-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI4S/" itemprop="url" rel="index"><span itemprop="name">AI4S</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">AutoSOTA这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。 没开源 AgentResource因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。 所以这里做了一个外部资源获取模块。这个模块由两个阶段构成 符号化资...</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="AutoSOTA"><a href="#AutoSOTA" class="headerlink" title="AutoSOTA"></a>AutoSOTA</h1><p>这个论文做的是，从一篇有开源代码库的论文开始，复现论文项目，然后再将这个论文的指标优化高。</p>
+<p><strong>没开源</strong></p>
+<h2 id="AgentResource"><a href="#AgentResource" class="headerlink" title="AgentResource"></a>AgentResource</h2><p>因为现在的论文严重依赖于大规模数据集，预先训练的权重和专门的ckpt。</p>
+<p>所以这里做了一个外部资源获取模块。<br>这个模块由两个阶段构成</p>
+<ul>
+<li><p>符号化资源获取</p>
+<ul>
+<li><p>zero-download constraint 首先是系统仅通过解析仓库的内部结构和评估清单(这里是人工编写的rubric.csv清单。)来提取信息，这部分不下载，节约下载带宽</p>
+</li>
+<li><p>建立全局资源注册表  这个表对于每一篇论文（通过唯一序列号 seq 标识），系统会记录：</p>
+<ul>
+<li>资源来源的 URL。</li>
+<li>资源分类（如：是数据集还是模型）。</li>
+<li>预估的文件大小。</li>
+</ul>
+</li>
+<li><p>最后计算总工作量指标$S_{total} &#x3D; \text{cal_total_size_bytes}$<br>  $cal_total_size_bytes$是一个作为下游调度和计算资源分配的主要启发式的度量</p>
+</li>
+</ul>
+</li>
+<li><p>物理获取与编排<br>  这个阶段基于第一阶段生成的“资源清单”，安全、可靠地将虚拟的元数据转化为本地的物理文件。<br>  同时<strong>严格基于注册表执行</strong>，不重新扫描原始仓库。</p>
+<ul>
+<li><p>门控选择和过滤<br>  只有$S_{total} \in [S_{min},S_{max}]$之间的任务才允许进入执行队列。然后具有不确定或者负大小的任务被抢先丢弃。还有个重复任务拦截层防止失败的没有下载，成功的重复下载。</p>
+</li>
+<li><p>语义储存架构<br>  资源以变成方式了路由到标准化的分层目录下。(还要确保跨平台文件系统兼容从而替换非法字符并截断为最多80字)<em>正常做法，写的很细</em></p>
+</li>
+<li><p>多态检索模式<br>  针对不同的资源来源，系统支持多种定制的检索策略：</p>
+<ul>
+<li>基于规则的模式： 对于标准分发渠道，采用模式匹配，如，识别到 HuggingFace 仓库时使用优化过的 huggingface-cli 获取</li>
+<li>LLM 驱动的自主模式： 对于非标准或结构复杂的来源，系统会调用大语言模型（LLM）来生成并执行自定义的 Python 脚本，从而自动应对复杂的下载界面。</li>
+</ul>
+</li>
+<li><p>并发与容错机制<br>  允许多个任务同时并发下载，提供异步监控服务，实时追踪磁盘 I&#x2F;O 并动态映射进度<br>  维护一个全局的内存级 URL 映射表，原生支持去重和断点续传，自动从活跃队列中过滤掉已成功下载的 URL。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>在下载完成过后，这些论文就转换成了可执行任务单元，提供规范代码，数据集，模型权重。</p>
+<h2 id="AgentObjective"><a href="#AgentObjective" class="headerlink" title="AgentObjective"></a>AgentObjective</h2><ul>
+<li>任务目标树形递归分解</li>
+</ul>
+<p>利用BFS算法，系统扩展属性结构的题目。从表示<strong>论文完整复现</strong>的根节点开始，动态的将任务分解成多个二进制子任务。</p>
+<p>然后这里还有一个权重驱动的终止机制，<br>根节点为1，然后第一层节点的权重和为1，然后依次向后分解。到阈值或者达到最大逻辑生长，则停止。</p>
+<ul>
+<li><strong>分层上下文注入</strong>。这个也挺好的。<br>这里的上下文注入是为了<strong>任务目标树</strong>作用的。</li>
+</ul>
+<p>论文里面的信息</p>
+<ol>
+<li>将PDF转成markdown。</li>
+<li>将里面的图片进行视觉理解 VLM</li>
+<li>官方代码库的工程细节<br><em>这里的官方代码库的工程细节的注入需要进一步探索。但是他没有源码</em><br>上下文注入式根据BFS任务分解过程的深度来被动态触发的。被分成三个逻辑层</li>
+</ol>
+<ul>
+<li><p>浅层策略层: 在树形结构的标题顶点，系统只注入宏观层次的信息，如目录，摘要等，<strong>防止过早被技术细节淹没</strong>。</p>
+</li>
+<li><p>中间技术层: 随着任务分解进入算法模块，详细的方法和实验部分与VLM的视觉证据一起引入</p>
+</li>
+<li><p>深层实现层: 在到达设计原子工程操作的节点，Agent激活存储库级别的上下文。</p>
+</li>
+</ul>
+<h2 id="AgentInit"><a href="#AgentInit" class="headerlink" title="AgentInit"></a>AgentInit</h2><p>构建论文的可执行环境</p>
+<p>这部分Agent是使用预设的工作流的。包括输入分析，子任务分解，环境构建，依赖性解析、资源获取、存储库检查、命令发现和执行准备。</p>
+<p>具体流程:</p>
+<ol>
+<li><strong>目标分析与任务分解</strong><br>分析论文、代码仓库、资源文件及 rubric 中的目标指标，明确需要复现的实验，并将初始化过程拆分为环境、依赖、数据、模型、命令和配置等子任务。</li>
+<li><strong>环境与资源准备</strong><br>构建并验证 Docker 运行环境，检查 GPU、CUDA、Python 和 PyTorch 兼容性，安装依赖，并获取所需数据集、预训练模型和检查点。</li>
+<li><strong>仓库检查与协议保持型修复</strong><br>检查 README、文件结构和代码入口，修复硬编码路径、缺失的连接逻辑或非核心脚本，同时保持原始评估协议、数据划分和目标实验设置不变。</li>
+<li><strong>命令恢复与执行接口生成</strong><br>确定训练和评估入口，恢复完整执行命令和实验配置，最终输出可运行的仓库状态、已验证的容器环境及后续执行计划。</li>
+</ol>
+<h2 id="AgentMonitor"><a href="#AgentMonitor" class="headerlink" title="AgentMonitor"></a>AgentMonitor</h2><p>跟踪长期执行并防止死锁</p>
+<p>论文中提及，设计这个Agent的原因是：<br>自动paper环境复现如果单纯使用主执行Agent，会</p>
+<ol>
+<li>陷入本地调试循环，反复尝试低价值修复而没有取得真正的进展，</li>
+<li>失去对全局目标的认识，并过度关注工程细节。</li>
+</ol>
+<p>AgentMonitor这个Agent是跟踪主执行Agent的。本身并不对环境进行任何更改或者操作。</p>
+<p>主要有两项核心能力</p>
+<ol>
+<li>在线执行轨迹理解<br>实时分析主执行Agent在干啥</li>
+<li>外部状态跟踪<br>将重要信息保存到模型上下文之外</li>
+</ol>
+<ul>
+<li><p>执行跟踪和死锁干预<br>  在同一个失败依赖项重复安装尝试，或者没有进展的长时间输出等会被识别为死锁。检测到这种状态过后，AgentMonitor会生成高级纠正指导。典型动作如下:</p>
+<ol>
+<li>Continue：继续</li>
+<li>Resume with guidance：带指导继续,即切换到手动设置，或者咨询专门的skill。</li>
+<li>Fallback：切换备用方案</li>
+<li>Terminate：终止</li>
+<li>Rollback：回退<br>  同时Monitor剩余的全局预算会限制交互轮数。超过超时阈值时会终止执行。</li>
+</ol>
+</li>
+<li><p>通过外部存储器的持久上下文管理<br>这一部分主要是管理临界状态信息的。包括<br>代码库、评估输出、历史修改记录、当前想法库和累积的研究见解。</p>
+</li>
+</ul>
+<p>这玩意直接做了3个md文档</p>
+<ul>
+<li>code_analysis.md  <blockquote>
+<p>这个文件通过对目标存储库的一次性的探索，构建出来的一个代码认知图。</p>
+</blockquote>
+</li>
+<li>idea_library.md<blockquote>
+<p>一个动态演化的想法库，记录所有候选想法，尝试修改以及对应的结果。</p>
+</blockquote>
+</li>
+<li>research_report.md<blockquote>
+<p>通过<strong>专门的研究阶段</strong>填充的外部知识库。提供相关文献里面的简洁，技术，经验配置，优化策略等。</p>
+</blockquote>
+</li>
+</ul>
+<p>在这两个基础上，系统采取两种互补的机制</p>
+<ol>
+<li>一次性提取阶段将存储库的全局结构压缩为持久表示。消除了重复的全存储库扫描。</li>
+<li>Agent通过命令行操作:(符号搜索，模式匹配等)按需检索。<em>这个需要进一步设计</em>允许本地代码库的部分相关代码加载到上下文。</li>
+</ol>
+<h2 id="AgentFix"><a href="#AgentFix" class="headerlink" title="AgentFix"></a>AgentFix</h2><ul>
+<li>通过先验的高频故障家族使用明确的修复skill对当前故障进行修复。</li>
+<li>对于没有匹配到的修复，让Agent自行修复。为了防止AgentFix脱离论文复现条件的约束。*(论文中通过一个科学协议来说明。这部分需要查看源码进一步查看)*论文中安排了一个AgentSupervisor限制其的工程修复空间。</li>
+<li><strong>故障记忆机制。</strong> <blockquote>
+<p><em>这部分似乎是说通过将重复的成功提炼成一个md文档。但是没有源码我并不是很确定</em></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="AgentIdeator"><a href="#AgentIdeator" class="headerlink" title="AgentIdeator"></a>AgentIdeator</h2><p>这个Ideator是在论文要求的基础上进行假设的，论文说这里和其他不同，说明或许有其他的论文是将假设生成作为一个天马行空的想法生成器的。</p>
+<p>AgentIdeator在下面的限制下</p>
+<ul>
+<li>Metric Alignment  假设必须针对文件中报告的具体目标，而不是通用的绩效指标</li>
+<li>Implementation Alignment  建议必须相对于复制环境和代码库的实际能力保持合理性</li>
+<li>Constraint Alignment  保留了关键的不变量，例如评估逻辑、数据集分割和核心方法的理论边界</li>
+<li>Lever Alignment  高价值的优化“杠杆”被确定为将抽象知识连接到代码中的具体干预点。<br>这些限制用来保证生成的假设必须在论文实验的边界内</li>
+</ul>
+<p>最终的输出按照粒度$\tau(h) \in { PARAM,CODE,ALGO}$并分配一个风险级别$\rho(h) \in {LOW,MEDIUM,HIGH}$<br>同时定义一个权限谓词$Adm(h)$<br>$$Adm(h) &#x3D; \begin{cases} 1 &amp; \text{if } h \text{ preserves evaluation integrity} \<br>0 &amp; \text{if } h \text{ invokes prohibited shortcuts} \end{cases}$$</p>
+<p>然后得到最终的假设集合<br>$$<br>H_{adm} &#x3D; { h \in H:Adm(h) &#x3D;1 }<br>$$</p>
+<h2 id="AgentScheduler"><a href="#AgentScheduler" class="headerlink" title="AgentScheduler"></a>AgentScheduler</h2><p>负责管理论文复制的整个生命周期，从环境初始化、基线测量到迭代代码修改和评估，最后到状态持久化和结果导出，包括优化策略和资源管理两个关键机制。</p>
+<ul>
+<li>优化策略</li>
+</ul>
+<h3 id="Scientific-Protocol-生成"><a href="#Scientific-Protocol-生成" class="headerlink" title="Scientific Protocol 生成"></a>Scientific Protocol 生成</h3><p>首先我们通过LLM作为scientific protocol 生成器。这个生成器的</p>
+<ul>
+<li>对整个代码库的深入理解，包括跨文件的依赖关系，跨算法阶段的数据流和评估协议约束。</li>
+<li>对最新研究的认识，能够识别结构平静并检索相关改进。</li>
+</ul>
+<h3 id="整个优化工作流"><a href="#整个优化工作流" class="headerlink" title="整个优化工作流"></a>整个优化工作流</h3><ol start="0">
+<li>环境优化和基线测量<br>执行基本的初始化任务。</li>
+</ol>
+<p>然后执行完整的evaluate在本地完成指标测量。用本地测量的指标进行比较。</p>
+<ol>
+<li><p>代码和论文理解<br>系统性探索代码库结构，检查评估脚本，识别算法分支，给出完整的推理过程，并估计每次评估的时间。<br>最后输出code_analysis.md<br>这个阶段还要被constraints限制。constraints限制的不变量会被后面的AgentSupervisor接受并提供指导。</p>
+</li>
+<li><p>思想库构建<br>一个列出候选优化方向的结构化文档。<br>Idea的结构化表示：[(type(PARAM,CODE,ALGO)<br>，风险级别，实施假设)]<br>Idea按照三个粒度级别组织:micro(单一参数调整)，meso(函数级别算法改进), macro(流水线阶段重构)</p>
+</li>
+</ol>
+<p>初始的时候我们的Idea库至少包含10个想法，按可行性和优化潜力进行优先级排序。</p>
+<p>这个阶段结束后对所有Idea进行审核，并将违规的Idea标记为Reject。</p>
+<ol start="3">
+<li>迭代优化循环<ol>
+<li>迭代前Reflection</li>
+<li>Idea选择</li>
+<li>代码实现<ol>
+<li>Git Snapshot 保存当前代码状态，同时记录git COMMITID</li>
+<li>代码实现<br> 在这一段里面有一个Normal path和Leap Path的机制。</li>
+</ol>
+<ul>
+<li>Normal Path是从已有的idea库中选择一个通过审核的想法去执行,</li>
+<li>Leap Path是一个强制跳出局部搜索的机制。<br> 如：最近三轮都是PARAM-type的调整，那么当前轮必须进入Leap Path。必须提出一个新的，结构性更强的想法。<br> 对于Leap Path提出的新机制，还会提供一个Honeymoon Period。因为提出的机制可能是有用的，但是因为我们调参等各种各样的原因，没有使指标更高。但这并不代表这玩意没用。这个Period设定是用来允许系统继续尝试Leap Path提出的结构的。</li>
+</ul>
+</li>
+<li>评估</li>
+<li>Debugging<br> 如果出现多次崩溃等，会直接回滚。</li>
+<li>结果记录</li>
+<li>创意库更新<br> 循环持续到MAX_ITERATIONS或者指标超过预定义的阈值</li>
+</ol>
+</li>
+<li>容器恢复到 _best状态，主机生成对应的docker image保证结果可复现。</li>
+</ol>
+<ul>
+<li>资源管理<br>在系统级管理多篇论文和多个GPU的全局资源框架。这里有一个统一的全局任务队列。<br><em>感觉比较常规</em></li>
+</ul>
+<h2 id="AgentSupervisor"><a href="#AgentSupervisor" class="headerlink" title="AgentSupervisor"></a>AgentSupervisor</h2><p>这个是确保自动化研究系统长期优化过程一致的Agent。</p>
+<p>核心机制为红线系统: 一组六个不可协商的约束和一个随论文改变的约束，在优化工作流的多个点强制执行。</p>
+<ul>
+<li>评估指标参数不得更改</li>
+<li>必须保持评估脚本完整性</li>
+<li>算法输出的完整性不得违反</li>
+<li>度量维度之间没有不公平的权衡  主要优化目标度量的改进不能以其他报告度量的显著降级为代价。系统需要在每次迭代中报告所有度量，并且明确约束交叉度量权衡。</li>
+<li>必须保持数据集完整性</li>
+<li>禁止修改数据集</li>
+<li>必须明确识别并严格遵循特定于论文的约束：每篇论文的实验设置引入了独特的可比性要求。</li>
+</ul>
+<p>然后对于这些约束，不是单点检查的。是面向整个过程的多层监督机制。</p>
+<p>第一层： 明确要求工程师确定手头特定论文所有的硬约束，并在code_analysis.md文档中的专用”硬约束&#x2F;红线”列表中列举这些约束。<br>第二层: 在初始的idea库生成之后，执行强制性的审核。Agent必须在idea_library.md中构建审核表。并根据所有红线验证生成的想法。<br>第三层: 当第三阶段的Leap Path被触发过后，对于三个候选创新解决方案的每一个，Agent都需要对其进行检查。（因为Leap Path是动态生成的，没有经过第二层的审查）<br>第四层: 主提示中全局规则部分-约束作为最高优先级的操作原则强制执行，声明为”绝对禁止，在任何情况下都没有例外”  防止模型为了追求更好的指标而合理化违反约束。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI4S/" rel="tag"># AI4S</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/07/06/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E7%AB%A0/" rel="prev" title="强化学习第一章">
+                  <i class="fa fa-angle-left"></i> 强化学习第一章
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">iron moon</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

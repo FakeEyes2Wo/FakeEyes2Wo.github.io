@@ -19,15 +19,13 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="inference search problem Definition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...">
-<meta property="og:type" content="article">
-<meta property="og:title" content="cs221_l5">
-<meta property="og:url" content="https://fakeeyes2wo.github.io/2025/10/11/cs221-l2/index.html">
+    <meta name="description" content="Technical notes and project write-ups focused on machine learning, systems, and security.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Iron Moon Blog">
+<meta property="og:url" content="https://fakeeyes2wo.github.io/blog/page/5/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="inference search problem Definition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...">
+<meta property="og:description" content="Technical notes and project write-ups focused on machine learning, systems, and security.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-10-11T01:47:36.000Z">
-<meta property="article:modified_time" content="2025-10-16T09:12:41.337Z">
 <meta property="article:author" content="iron moon">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="Machine Learning">
@@ -37,13 +35,13 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://fakeeyes2wo.github.io/2025/10/11/cs221-l2/">
+<link rel="canonical" href="https://fakeeyes2wo.github.io/blog/page/5/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fakeeyes2wo.github.io/2025/10/11/cs221-l2/","path":"2025/10/11/cs221-l2/","title":"cs221_l5"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"blog/page/5/index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>cs221_l5 | Iron Moon Blog</title>
+<title>Iron Moon Blog</title>
   
 
 
@@ -76,7 +74,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">Iron Moon Blog</p>
+      <h1 class="site-title">Iron Moon Blog</h1>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">AI / Systems / Security</p>
@@ -103,7 +101,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -116,7 +114,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#inference-search-problem"><span class="nav-number">1.</span> <span class="nav-text">inference search problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#definition-search-problem"><span class="nav-number">1.1.</span> <span class="nav-text">Definition: search problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#backtracking-search-%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">1.1.1.</span> <span class="nav-text">BackTracking Search 回溯搜索</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,18 +158,17 @@
 
     </div>
 
-    <div class="main-inner post posts-expand">
+    <div class="main-inner index posts-expand">
 
-
-  
+    
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://fakeeyes2wo.github.io/2025/10/11/cs221-l2/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fakeeyes2wo.github.io/2025/02/13/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -185,13 +181,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="cs221_l5 | Iron Moon Blog">
-      <meta itemprop="description" content="inference search problem Definition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...">
+      <meta itemprop="name" content="undefined | Iron Moon Blog">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          cs221_l5
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/02/13/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -200,53 +196,31 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2025-10-11 09:47:36" itemprop="dateCreated datePublished" datetime="2025-10-11T09:47:36+08:00">2025-10-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-10-16 17:12:41" itemprop="dateModified" datetime="2025-10-16T17:12:41+08:00">2025-10-16</time>
+      <time title="创建时间：2025-02-13 10:31:22 / 修改时间：19:22:54" itemprop="dateCreated datePublished" datetime="2025-02-13T10:31:22+08:00">2025-02-13</time>
     </span>
 
   
 </div>
 
-            <div class="post-description">inference search problem Definition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="inference-search-problem">inference search problem</h1>
-<h2 id="definition-search-problem">Definition: search problem</h2>
-<ul>
-<li><strong>s_start</strong>: starting state<br />
-</li>
-<li><strong>Actions(s)</strong>: possible actions<br />
-</li>
-<li><strong>Cost(s, a)</strong>: action cost<br />
-</li>
-<li><strong>Succ(s, a)</strong>: successor<br />
-</li>
-<li><strong>IsEnd(s)</strong>: reached end state?</li>
-</ul>
-<h3 id="backtracking-search-回溯搜索">BackTracking Search 回溯搜索</h3>
-<div class="line-block">ALgorithms | Cost | time | Space |<br />
-Backtracing Search | Any | <span class="math inline">\(O(b^D)\)</span>
-b(is branch factor,D is deepth) | <span
-class="math inline">\(O(D)\)</span> |<br />
-</div>
-<p>|DFS | 0 | <span class="math inline">\(O(b^D)\)</span> | <span
-class="math inline">\(O(D)\)</span> | |BFS | C | <span
-class="math inline">\(O(b^d) (d is BF tree deepth)\)</span> | <span
-class="math inline">\(O(D)\)</span> | 如果没有负成本
-那么找到的就是最优策略 | DFS-ID |</p>
-<p>DFS-ID每次深搜都会有搜索的最大深度限制，如果没有找到解，那么就增大深度，再进行深搜，如此循环直到找到解为止。</p>
-
+    <div class="post-body" itemprop="articleBody">
+          <p>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the...</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/02/13/hello-world/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
     
@@ -254,21 +228,8 @@ class="math inline">\(O(D)\)</span> | 如果没有负成本
     
 
     <footer class="post-footer">
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2025/10/11/cs221-l1/" rel="prev" title="cs221_l1">
-                  <i class="fa fa-angle-left"></i> cs221_l1
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2025/10/16/cs234-l2/" rel="next" title="cs234_l2">
-                  cs234_l2 <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-          </div>
+        <div class="post-eof"></div>
+      
     </footer>
   </article>
 </div>
@@ -276,7 +237,9 @@ class="math inline">\(O(D)\)</span> | 如果没有负成本
 
 
 
-
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span>
+  </nav>
 
 </div>
   </main>
