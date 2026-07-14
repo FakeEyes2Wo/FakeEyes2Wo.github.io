@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="成员推理攻击(membership inference attack)首先该攻击是指在已经知道模型和一个数据的情况下，去判断这个数据是否用于模型的训练。 影子数据集的构建方法第一种方法使用对目标模型的黑盒访问来合成这些数据。第二种方法使用关于从中提取目标训练数据集的总体的统计数据...">
+    <meta name="description" content="成员推理攻击(membership inference attack) 首先该攻击是指在已经知道模型和一个数据的情况下，去判断这个数据是否用于模型的训练。 ## 影子数据集的构建方法 第一种方法使用对目标模型的黑盒访问来合成这些数据。第二种方法使用关于从中提取目标训练数据集的总体...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MIA学习记录">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2025/10/18/MIA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="成员推理攻击(membership inference attack)首先该攻击是指在已经知道模型和一个数据的情况下，去判断这个数据是否用于模型的训练。 影子数据集的构建方法第一种方法使用对目标模型的黑盒访问来合成这些数据。第二种方法使用关于从中提取目标训练数据集的总体的统计数据...">
+<meta property="og:description" content="成员推理攻击(membership inference attack) 首先该攻击是指在已经知道模型和一个数据的情况下，去判断这个数据是否用于模型的训练。 ## 影子数据集的构建方法 第一种方法使用对目标模型的黑盒访问来合成这些数据。第二种方法使用关于从中提取目标训练数据集的总体...">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fakeeyes2wo.github.io/image-1.png">
-<meta property="og:image" content="https://fakeeyes2wo.github.io/image-2.png">
+<meta property="og:image" content="https://fakeeyes2wo.github.io/2025/10/18/MIA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/image-1.png">
+<meta property="og:image" content="https://fakeeyes2wo.github.io/2025/10/18/MIA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/image-2.png">
 <meta property="article:published_time" content="2025-10-18T07:49:37.000Z">
 <meta property="article:modified_time" content="2025-10-18T16:28:50.822Z">
 <meta property="article:author" content="iron moon">
@@ -37,7 +37,7 @@
 <meta property="article:tag" content="Security">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://fakeeyes2wo.github.io/image-1.png">
+<meta name="twitter:image" content="https://fakeeyes2wo.github.io/2025/10/18/MIA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/image-1.png">
 
 
 <link rel="canonical" href="https://fakeeyes2wo.github.io/2025/10/18/MIA%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
@@ -119,7 +119,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%90%E5%91%98%E6%8E%A8%E7%90%86%E6%94%BB%E5%87%BB-membership-inference-attack"><span class="nav-number">1.</span> <span class="nav-text">成员推理攻击(membership inference attack)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%B1%E5%AD%90%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E6%9E%84%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">影子数据集的构建方法</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%90%E5%91%98%E6%8E%A8%E7%90%86%E6%94%BB%E5%87%BBmembership-inference-attack"><span class="nav-number">1.</span> <span class="nav-text">成员推理攻击(membership
+inference attack)</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -132,7 +133,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -189,7 +190,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="MIA学习记录 | Iron Moon Blog">
-      <meta itemprop="description" content="成员推理攻击(membership inference attack)首先该攻击是指在已经知道模型和一个数据的情况下，去判断这个数据是否用于模型的训练。 影子数据集的构建方法第一种方法使用对目标模型的黑盒访问来合成这些数据。第二种方法使用关于从中提取目标训练数据集的总体的统计数据...">
+      <meta itemprop="description" content="成员推理攻击(membership inference attack) 首先该攻击是指在已经知道模型和一个数据的情况下，去判断这个数据是否用于模型的训练。 ## 影子数据集的构建方法 第一种方法使用对目标模型的黑盒访问来合成这些数据。第二种方法使用关于从中提取目标训练数据集的总体...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -217,17 +218,43 @@
   
 </div>
 
-            <div class="post-description">成员推理攻击(membership inference attack)首先该攻击是指在已经知道模型和一个数据的情况下，去判断这个数据是否用于模型的训练。 影子数据集的构建方法第一种方法使用对目标模型的黑盒访问来合成这些数据。第二种方法使用关于从中提取目标训练数据集的总体的统计数据...</div>
+            <div class="post-description">成员推理攻击(membership inference attack) 首先该攻击是指在已经知道模型和一个数据的情况下，去判断这个数据是否用于模型的训练。 ## 影子数据集的构建方法 第一种方法使用对目标模型的黑盒访问来合成这些数据。第二种方法使用关于从中提取目标训练数据集的总体...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="成员推理攻击-membership-inference-attack"><a href="#成员推理攻击-membership-inference-attack" class="headerlink" title="成员推理攻击(membership inference attack)"></a>成员推理攻击(membership inference attack)</h1><p>首先该攻击是指在已经知道模型和一个数据的情况下，去判断这个数据是否用于模型的训练。</p>
-<p><img data-src="/image-1.png" alt="alt text"><br><img data-src="/image-2.png" alt="alt text"></p>
-<h2 id="影子数据集的构建方法"><a href="#影子数据集的构建方法" class="headerlink" title="影子数据集的构建方法"></a>影子数据集的构建方法</h2><p>第一种方法使用对目标模型的黑盒访问来合成这些数据。第二种方法使用关于从中提取目标训练数据集的总体的统计数据。第三种方法假设对手可以访问目标训练数据集的潜在噪声版本。第一种方法不假设任何关于目标模型训练数据分布的先验知识，而第二和第三种方法允许攻击者在推断给定记录是否在其训练数据集中之前仅查询目标模型一次。</p>
-<p>The second, sampling phase starts when the target model’s<br>probability yc that the proposed data record is classified as<br>belonging to class c is larger than the probabilities for all<br>other classes and also larger than a threshold confmin. This<br>ensures that the predicted label for the record is c, and that the<br>target model is sufficiently confident in its label prediction. We<br>select such record for the synthetic dataset with probability y<br>∗<br>c<br>and, if selection fails, repeat until a record is selected.<br>This synthesis procedure works only if the adversary can<br>efficiently explore the space of possible inputs and discover<br>inputs that are classified by the target model with high confi-<br>dence. For example, it may not work if the inputs are highresolution images and the target model performs a complex<br>image classification task.<br>Statistics-based synthesis. The attacker may have some statistical information about the population from which the target<br>model’s training data was drawn. For example, the attacker<br>may have prior knowledge of the marginal distributions of<br>different features. In our experiments, we generate synthetic<br>training records for the shadow models by independently<br>sampling the value of each feature from its own marginal<br>distribution. The resulting attack models are very effective.<br>Noisy real data. The attacker may have access to some data<br>that is similar to the target model’s training data and can be<br>considered as a “noisy” version thereof. In our experiments<br>with location datasets, we simulate this by flipping the (binary) values of 10% or 20% randomly selected features, then</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="成员推理攻击membership-inference-attack">成员推理攻击(membership
+inference attack)</h1>
+<p>首先该攻击是指在已经知道模型和一个数据的情况下，去判断这个数据是否用于模型的训练。</p>
+<p><img data-src="image-1.png" alt="alt text" /> <img data-src="image-2.png"
+alt="alt text" /> ## 影子数据集的构建方法</p>
+<p>第一种方法使用对目标模型的黑盒访问来合成这些数据。第二种方法使用关于从中提取目标训练数据集的总体的统计数据。第三种方法假设对手可以访问目标训练数据集的潜在噪声版本。第一种方法不假设任何关于目标模型训练数据分布的先验知识，而第二和第三种方法允许攻击者在推断给定记录是否在其训练数据集中之前仅查询目标模型一次。</p>
+<p>The second, sampling phase starts when the target model’s probability
+yc that the proposed data record is classified as belonging to class c
+is larger than the probabilities for all other classes and also larger
+than a threshold confmin. This ensures that the predicted label for the
+record is c, and that the target model is sufficiently confident in its
+label prediction. We select such record for the synthetic dataset with
+probability y ∗ c and, if selection fails, repeat until a record is
+selected. This synthesis procedure works only if the adversary can
+efficiently explore the space of possible inputs and discover inputs
+that are classified by the target model with high confi- dence. For
+example, it may not work if the inputs are highresolution images and the
+target model performs a complex image classification task.
+Statistics-based synthesis. The attacker may have some statistical
+information about the population from which the target model’s training
+data was drawn. For example, the attacker may have prior knowledge of
+the marginal distributions of different features. In our experiments, we
+generate synthetic training records for the shadow models by
+independently sampling the value of each feature from its own marginal
+distribution. The resulting attack models are very effective. Noisy real
+data. The attacker may have access to some data that is similar to the
+target model’s training data and can be considered as a “noisy” version
+thereof. In our experiments with location datasets, we simulate this by
+flipping the (binary) values of 10% or 20% randomly selected features,
+then</p>
 
     </div>
 

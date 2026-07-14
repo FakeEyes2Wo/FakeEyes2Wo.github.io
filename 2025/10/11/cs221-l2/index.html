@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="inference search problemDefinition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...">
+    <meta name="description" content="inference search problem Definition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cs221_l5">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2025/10/11/cs221-l2/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="inference search problemDefinition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...">
+<meta property="og:description" content="inference search problem Definition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-11T01:47:36.000Z">
 <meta property="article:modified_time" content="2025-10-16T09:12:41.337Z">
@@ -116,7 +116,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#inference-search-problem"><span class="nav-number">1.</span> <span class="nav-text">inference search problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-search-problem"><span class="nav-number">1.1.</span> <span class="nav-text">Definition: search problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BackTracking-Search-%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">1.1.1.</span> <span class="nav-text">BackTracking Search   回溯搜索</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#inference-search-problem"><span class="nav-number">1.</span> <span class="nav-text">inference search problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#definition-search-problem"><span class="nav-number">1.1.</span> <span class="nav-text">Definition: search problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#backtracking-search-%E5%9B%9E%E6%BA%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">1.1.1.</span> <span class="nav-text">BackTracking Search 回溯搜索</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -129,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -186,7 +186,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="cs221_l5 | Iron Moon Blog">
-      <meta itemprop="description" content="inference search problemDefinition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...">
+      <meta itemprop="description" content="inference search problem Definition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -214,21 +214,37 @@
   
 </div>
 
-            <div class="post-description">inference search problemDefinition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...</div>
+            <div class="post-description">inference search problem Definition: search problem s_start: starting state Actions(s): possible actions Cost(s, a): action cost Succ(s, a):...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="inference-search-problem"><a href="#inference-search-problem" class="headerlink" title="inference search problem"></a>inference search problem</h1><h2 id="Definition-search-problem"><a href="#Definition-search-problem" class="headerlink" title="Definition: search problem"></a>Definition: search problem</h2><ul>
-<li><strong>s_start</strong>: starting state  </li>
-<li><strong>Actions(s)</strong>: possible actions  </li>
-<li><strong>Cost(s, a)</strong>: action cost  </li>
-<li><strong>Succ(s, a)</strong>: successor  </li>
+    <div class="post-body" itemprop="articleBody"><h1 id="inference-search-problem">inference search problem</h1>
+<h2 id="definition-search-problem">Definition: search problem</h2>
+<ul>
+<li><strong>s_start</strong>: starting state<br />
+</li>
+<li><strong>Actions(s)</strong>: possible actions<br />
+</li>
+<li><strong>Cost(s, a)</strong>: action cost<br />
+</li>
+<li><strong>Succ(s, a)</strong>: successor<br />
+</li>
 <li><strong>IsEnd(s)</strong>: reached end state?</li>
 </ul>
-<h3 id="BackTracking-Search-回溯搜索"><a href="#BackTracking-Search-回溯搜索" class="headerlink" title="BackTracking Search   回溯搜索"></a>BackTracking Search   回溯搜索</h3><p>| ALgorithms  | Cost | time | Space |<br>| Backtracing Search | Any | $O(b^D)$ b(is branch factor,D is deepth) |  $O(D)$ |<br>|<br>|DFS | 0 | $O(b^D)$ | $O(D)$ |<br>|BFS | C |  $O(b^d) (d is BF tree deepth)$ | $O(D)$ |  如果没有负成本  那么找到的就是最优策略<br>| DFS-ID |</p>
+<h3 id="backtracking-search-回溯搜索">BackTracking Search 回溯搜索</h3>
+<div class="line-block">ALgorithms | Cost | time | Space |<br />
+Backtracing Search | Any | <span class="math inline">\(O(b^D)\)</span>
+b(is branch factor,D is deepth) | <span
+class="math inline">\(O(D)\)</span> |<br />
+</div>
+<p>|DFS | 0 | <span class="math inline">\(O(b^D)\)</span> | <span
+class="math inline">\(O(D)\)</span> | |BFS | C | <span
+class="math inline">\(O(b^d) (d is BF tree deepth)\)</span> | <span
+class="math inline">\(O(D)\)</span> | 如果没有负成本
+那么找到的就是最优策略 | DFS-ID |</p>
 <p>DFS-ID每次深搜都会有搜索的最大深度限制，如果没有找到解，那么就增大深度，再进行深搜，如此循环直到找到解为止。</p>
 
     </div>

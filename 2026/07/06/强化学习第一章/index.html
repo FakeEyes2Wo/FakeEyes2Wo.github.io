@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="第一章第一次阅读，只能发现扩展实例有价值 扩展实例: 井字棋问题： 井字棋由两名玩家轮流在 3×3 棋盘上落子，一方使用 X，另一方使用 O。率先在行、列或对角线上连成三个棋子者获胜；若棋盘填满仍无人获胜，则为平局。 由于完美玩家永远不会输，我们考虑与一个偶尔犯错的对手对弈，并将...">
+    <meta name="description" content="第一章 第一次阅读，只能发现扩展实例有价值 扩展实例: 井字棋 问题： 井字棋由两名玩家轮流在 3×3 棋盘上落子，一方使用 X，另一方使用 O。率先在行、列或对角线上连成三个棋子者获胜；若棋盘填满仍无人获胜，则为平局。 由于完美玩家永远不会输，我们考虑与一个偶尔犯错的对手对弈，...">
 <meta property="og:type" content="article">
-<meta property="og:title" content="强化学习第一章">
+<meta property="og:title" content="强化学习-第一章">
 <meta property="og:url" content="https://fakeeyes2wo.github.io/2026/07/06/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E7%AB%A0/index.html">
 <meta property="og:site_name" content="Iron Moon Blog">
-<meta property="og:description" content="第一章第一次阅读，只能发现扩展实例有价值 扩展实例: 井字棋问题： 井字棋由两名玩家轮流在 3×3 棋盘上落子，一方使用 X，另一方使用 O。率先在行、列或对角线上连成三个棋子者获胜；若棋盘填满仍无人获胜，则为平局。 由于完美玩家永远不会输，我们考虑与一个偶尔犯错的对手对弈，并将...">
+<meta property="og:description" content="第一章 第一次阅读，只能发现扩展实例有价值 扩展实例: 井字棋 问题： 井字棋由两名玩家轮流在 3×3 棋盘上落子，一方使用 X，另一方使用 O。率先在行、列或对角线上连成三个棋子者获胜；若棋盘填满仍无人获胜，则为平局。 由于完美玩家永远不会输，我们考虑与一个偶尔犯错的对手对弈，...">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-07-06T12:52:41.000Z">
-<meta property="article:modified_time" content="2026-07-06T13:02:35.633Z">
+<meta property="article:modified_time" content="2026-07-14T08:18:53.704Z">
 <meta property="article:author" content="iron moon">
 <meta property="article:tag" content="强化学习">
 <meta property="article:tag" content="Reinforce Learning">
@@ -37,10 +37,10 @@
 <link rel="canonical" href="https://fakeeyes2wo.github.io/2026/07/06/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E7%AB%A0/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fakeeyes2wo.github.io/2026/07/06/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E7%AB%A0/","path":"2026/07/06/强化学习第一章/","title":"强化学习第一章"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fakeeyes2wo.github.io/2026/07/06/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E7%AB%A0/","path":"2026/07/06/强化学习第一章/","title":"强化学习-第一章"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>强化学习第一章 | Iron Moon Blog</title>
+<title>强化学习-第一章 | Iron Moon Blog</title>
   
 
 
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E5%AE%9E%E4%BE%8B-%E4%BA%95%E5%AD%97%E6%A3%8B"><span class="nav-number">1.1.</span> <span class="nav-text">扩展实例: 井字棋</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.1.1.</span> <span class="nav-text">强化学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">1.1.2.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MiniMax%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">MiniMax算法</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E5%AE%9E%E4%BE%8B-%E4%BA%95%E5%AD%97%E6%A3%8B"><span class="nav-number">1.1.</span> <span class="nav-text">扩展实例: 井字棋</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.1.1.</span> <span class="nav-text">强化学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">1.1.2.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#minimax%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">MiniMax算法</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -126,7 +126,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -182,12 +182,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="强化学习第一章 | Iron Moon Blog">
-      <meta itemprop="description" content="第一章第一次阅读，只能发现扩展实例有价值 扩展实例: 井字棋问题： 井字棋由两名玩家轮流在 3×3 棋盘上落子，一方使用 X，另一方使用 O。率先在行、列或对角线上连成三个棋子者获胜；若棋盘填满仍无人获胜，则为平局。 由于完美玩家永远不会输，我们考虑与一个偶尔犯错的对手对弈，并将...">
+      <meta itemprop="name" content="强化学习-第一章 | Iron Moon Blog">
+      <meta itemprop="description" content="第一章 第一次阅读，只能发现扩展实例有价值 扩展实例: 井字棋 问题： 井字棋由两名玩家轮流在 3×3 棋盘上落子，一方使用 X，另一方使用 O。率先在行、列或对角线上连成三个棋子者获胜；若棋盘填满仍无人获胜，则为平局。 由于完美玩家永远不会输，我们考虑与一个偶尔犯错的对手对弈，...">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          强化学习第一章
+          强化学习-第一章
         </h1>
 
         <div class="post-meta-container">
@@ -197,9 +197,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2026-07-06 20:52:41 / 修改时间：21:02:35" itemprop="dateCreated datePublished" datetime="2026-07-06T20:52:41+08:00">2026-07-06</time>
+      <time title="创建时间：2026-07-06 20:52:41" itemprop="dateCreated datePublished" datetime="2026-07-06T20:52:41+08:00">2026-07-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-07-14 16:18:53" itemprop="dateModified" datetime="2026-07-14T16:18:53+08:00">2026-07-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -214,35 +220,94 @@
   
 </div>
 
-            <div class="post-description">第一章第一次阅读，只能发现扩展实例有价值 扩展实例: 井字棋问题： 井字棋由两名玩家轮流在 3×3 棋盘上落子，一方使用 X，另一方使用 O。率先在行、列或对角线上连成三个棋子者获胜；若棋盘填满仍无人获胜，则为平局。 由于完美玩家永远不会输，我们考虑与一个偶尔犯错的对手对弈，并将...</div>
+            <div class="post-description">第一章 第一次阅读，只能发现扩展实例有价值 扩展实例: 井字棋 问题： 井字棋由两名玩家轮流在 3×3 棋盘上落子，一方使用 X，另一方使用 O。率先在行、列或对角线上连成三个棋子者获胜；若棋盘填满仍无人获胜，则为平局。 由于完美玩家永远不会输，我们考虑与一个偶尔犯错的对手对弈，...</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><p>第一次阅读，只能发现扩展实例有价值</p>
-<h2 id="扩展实例-井字棋"><a href="#扩展实例-井字棋" class="headerlink" title="扩展实例: 井字棋"></a>扩展实例: 井字棋</h2><p>问题： 井字棋由两名玩家轮流在 3×3 棋盘上落子，一方使用 X，另一方使用 O。率先在行、列或对角线上连成三个棋子者获胜；若棋盘填满仍无人获胜，则为平局。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="第一章">第一章</h1>
+<p>第一次阅读，只能发现扩展实例有价值</p>
+<h2 id="扩展实例-井字棋">扩展实例: 井字棋</h2>
+<p>问题： 井字棋由两名玩家轮流在 3×3 棋盘上落子，一方使用 X，另一方使用
+O。率先在行、列或对角线上连成三个棋子者获胜；若棋盘填满仍无人获胜，则为平局。</p>
 <p>由于完美玩家永远不会输，我们考虑与一个偶尔犯错的对手对弈，并将平局视为与失败同样糟糕。问题是：能否构造一个能识别对手失误、通过学习不断提高胜率的玩家？</p>
-<h3 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h3><p>首先对这个问题进行建模</p>
-<p><strong>状态空间$S$是棋盘上的9个位置</strong><br>我们可以记为<br>$$<br>S &#x3D; \lbrace -1, 0, 1 \rbrace^9<br>$$<br>将其表示为<br>$$<br>board &#x3D; \big[ \underbrace{0, 0, 0, 0, 0, 0, 0, 0, 0}_{\text{一共9个0}} \big]<br>$$<br>胜利条件表示为一个三元数组列表<br>$$<br>WIN_LINES &#x3D; [<br>    (0, 1, 2), (3, 4, 5), (6, 7, 8),<br>    (0, 3, 6), (1, 4, 7), (2, 5, 8),<br>    (0, 4, 8), (2, 4, 6)<br>]<br>$$</p>
-<p><strong>动作空间$A$ 表示为</strong><br>$$<br>A(S) &#x3D; {s[i] \mid i \in [0,8], s[i] &#x3D; 0 }<br>$$<br>这里的$s[i]&#x3D;0$是因为我们落子必须要在棋盘空位上落子。</p>
-<p><strong>奖励函数$R$表示为</strong></p>
-<p>$$<br>R&#x3D;<br>\begin{cases}<br>+1, &amp; \text{学习玩家获胜} \<br>-1, &amp; \text{学习玩家失败}  &amp; or &amp; \text{双方平局} \<br>0, &amp; \text{游戏尚未结束}<br>\end{cases}<br>$$</p>
+<h3 id="强化学习">强化学习</h3>
+<p>首先对这个问题进行建模</p>
+<p><strong>状态空间<span
+class="math inline">\(S\)</span>是棋盘上的9个位置</strong> 我们可以记为
+<span class="math display">\[
+S = \lbrace -1, 0, 1 \rbrace^9
+\]</span> 将其表示为 <span class="math display">\[
+board = \big[ \underbrace{0, 0, 0, 0, 0, 0, 0, 0, 0}_{\text{一共9个0}}
+\big]
+\]</span> 胜利条件表示为一个三元数组列表 <span class="math display">\[
+WIN\_LINES = [
+    (0, 1, 2), (3, 4, 5), (6, 7, 8),
+    (0, 3, 6), (1, 4, 7), (2, 5, 8),
+    (0, 4, 8), (2, 4, 6)
+]
+\]</span></p>
+<p><strong>动作空间<span class="math inline">\(A\)</span>
+表示为</strong> <span class="math display">\[
+A(S) = \{s[i] \mid i \in [0,8], s[i] = 0 \}
+\]</span> 这里的<span
+class="math inline">\(s[i]=0\)</span>是因为我们落子必须要在棋盘空位上落子。</p>
+<p><strong>奖励函数<span
+class="math inline">\(R\)</span>表示为</strong></p>
+<p><span class="math display">\[
+R=
+\begin{cases}
++1, &amp; \text{学习玩家获胜} \\
+-1, &amp; \text{学习玩家失败}  &amp; or &amp; \text{双方平局} \\
+0, &amp; \text{游戏尚未结束}
+\end{cases}
+\]</span></p>
 <p>但是书上的奖励函数是定义的</p>
-<p>$$<br>V&#x3D;<br>\begin{cases}<br>+1, &amp; \text{学习玩家获胜} \<br>-1, &amp; \text{学习玩家失败}  &amp; or &amp; \text{双方平局} &amp; or &amp; \text{游戏尚未结束}\<br>\end{cases}<br>$$<br>这里的V是终局状态的固定价值<br>后面根据书上给出的状态方程进行解释<br><strong>状态转移方程</strong><br>$$<br>V(S_t) \leftarrow V(S_t) + \alpha [V(S_{t+1}) - V(S_t)]<br>$$</p>
-<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TODO: 这里的练习没做的后面再做</span><br></pre></td></tr></table></figure>
-<p>练习 1.1 左右互搏 假设上面的强化学习算法不是对战随机对手，而是以左右互搏的方式<br>与自己对战来训练自己 你认为在这种情况下会发生怎样的事情？它是否会学习到不同的<br>策略？</p>
+<p><span class="math display">\[
+V=
+\begin{cases}
++1, &amp; \text{学习玩家获胜} \\
+-1, &amp; \text{学习玩家失败}  &amp; or &amp; \text{双方平局} &amp; or
+&amp; \text{游戏尚未结束}\\
+\end{cases}
+\]</span> 这里的V是终局状态的固定价值 后面根据书上给出的状态方程进行解释
+<strong>状态转移方程</strong> <span class="math display">\[
+V(S_t) \leftarrow V(S_t) + \alpha [V(S_{t+1}) - V(S_t)]
+\]</span></p>
+<h3 id="练习">练习</h3>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TODO: 这里的练习没做的后面再做</span><br></pre></td></tr></table></figure>
+<p>练习 1.1 左右互搏
+假设上面的强化学习算法不是对战随机对手，而是以左右互搏的方式
+与自己对战来训练自己
+你认为在这种情况下会发生怎样的事情？它是否会学习到不同的 策略？</p>
 <p>A:经过充分探索过后，自我对弈通常会逼近井字棋的最优策略，导致agent在能赢的时候选择获胜，对方即将获胜时及时阻挡，面对完美对手时至少保持平局。</p>
-<p>练习 1.2 对称性 由千对称性，井字棋的很多位置看起来不同但其实是相同的 我们如<br>何利用这一点来修改上面提到的学习过程呢？这种改变会怎样改善学习过程？假设对方没<br>有利用对称性，那我们应该利用吗？对称相等的位置是否必然具有相同的价值呢？</p>
-<p>练习 1.3 贪心策略 假设强化学习的玩家是贪心的，也就是说，他总是把棋子移动到他认<br>为最好的位置，而从不进行试探 比起一个非贪心的玩家，他会玩得更好，还是更差呢？<br>可能会出现什么问题？</p>
-<p>练习 1.4 从试探中学习 假设学习更新发生在包括试探动作在内的所有动作之后，如果步<br>长参数随着时间而适当减小（试探的趋势并不减弱），那么状态的价值将收敛到一组概率<br>我们从试探性的行动中学习 或者不从中学习，计算出两组概率（从概念上说），分别会是<br>什么？假设我们继续进行试探性的行动，哪一组概率对于学习来说可能更好？哪一组更可<br>能带来更大的胜率？</p>
-<p>练习 1.5 其他提升方法 你能想出其他方法来提升强化学习的玩家能力吗？你能想出更好<br>的方法来解决井字棋的问题吗？</p>
-<p>这里可以使用MiniMax算法来解决井字棋<br>同时还可以直接进行树搜索</p>
-<h2 id="MiniMax算法"><a href="#MiniMax算法" class="headerlink" title="MiniMax算法"></a>MiniMax算法</h2><p>他妈的 本质树搜索。</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/predict-the-winner/description/">预测赢家</a></p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">predict_the_winner</span>(nums: <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;) <span class="punctuation">-&gt;</span> <span class="type">bool</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> <span class="variable">n</span> = nums.<span class="title function_ invoke__">len</span>();</span><br><span class="line">        <span class="keyword">if</span> nums.<span class="title function_ invoke__">len</span>() == <span class="number">0</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">fn</span> <span class="title function_">minimax</span>(</span><br><span class="line">            nums:&amp;[<span class="type">i32</span>],</span><br><span class="line">            left:<span class="type">usize</span>,</span><br><span class="line">            right:<span class="type">usize</span>,</span><br><span class="line">            player1_turn:<span class="type">bool</span>,</span><br><span class="line">            memo:&amp;<span class="keyword">mut</span> [<span class="type">Vec</span>&lt;[<span class="type">Option</span>&lt;<span class="type">i32</span>&gt;;<span class="number">2</span>]&gt;])<span class="punctuation">-&gt;</span> <span class="type">i32</span>&#123;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">turn</span>:<span class="type">usize</span> =  player1_turn <span class="keyword">as</span> <span class="type">usize</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">Some</span>(result) = memo[left][right][turn]&#123;</span><br><span class="line">                <span class="keyword">return</span> result;</span><br><span class="line">            &#125; <span class="comment">//记忆化搜索</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> <span class="variable">result</span>;</span><br><span class="line">            <span class="keyword">if</span> left == right &#123;</span><br><span class="line">                result = <span class="keyword">if</span> player1_turn &#123;</span><br><span class="line">                    <span class="comment">// 玩家1拿走</span></span><br><span class="line">                    nums[left]&#125; </span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 玩家2拿走</span></span><br><span class="line">                    -nums[left]&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> player1_turn</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">player1_left</span> = nums[left] + <span class="title function_ invoke__">minimax</span>(nums,left+<span class="number">1</span>,right,!player1_turn,memo);</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">player1_right</span> = nums[right] + <span class="title function_ invoke__">minimax</span>(nums,left,right-<span class="number">1</span>,!player1_turn,memo);</span><br><span class="line">                </span><br><span class="line">                result = player1_left.<span class="title function_ invoke__">max</span>(player1_right);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">player2_left</span> = -nums[left] + <span class="title function_ invoke__">minimax</span>(nums,left+<span class="number">1</span>,right,!player1_turn,memo);</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">player2_right</span> = -nums[right] + <span class="title function_ invoke__">minimax</span>(nums,left,right-<span class="number">1</span>,!player1_turn,memo);</span><br><span class="line">                </span><br><span class="line">                result = player2_left.<span class="title function_ invoke__">min</span>(player2_right);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            memo[left][right][turn] = <span class="title function_ invoke__">Some</span>(result);</span><br><span class="line">            result</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">memo</span> = <span class="built_in">vec!</span>[<span class="built_in">vec!</span>[[<span class="literal">None</span>; <span class="number">2</span>]; n]; n];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">score_difference</span> = <span class="title function_ invoke__">minimax</span>(</span><br><span class="line">            &amp;nums,</span><br><span class="line">            <span class="number">0</span>,</span><br><span class="line">            n - <span class="number">1</span>,</span><br><span class="line">            <span class="literal">true</span>,</span><br><span class="line">            &amp;<span class="keyword">mut</span> memo,</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> score_difference&gt;=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>练习 1.2 对称性 由千对称性，井字棋的很多位置看起来不同但其实是相同的
+我们如
+何利用这一点来修改上面提到的学习过程呢？这种改变会怎样改善学习过程？假设对方没
+有利用对称性，那我们应该利用吗？对称相等的位置是否必然具有相同的价值呢？</p>
+<p>练习 1.3 贪心策略
+假设强化学习的玩家是贪心的，也就是说，他总是把棋子移动到他认
+为最好的位置，而从不进行试探
+比起一个非贪心的玩家，他会玩得更好，还是更差呢？
+可能会出现什么问题？</p>
+<p>练习 1.4 从试探中学习
+假设学习更新发生在包括试探动作在内的所有动作之后，如果步
+长参数随着时间而适当减小（试探的趋势并不减弱），那么状态的价值将收敛到一组概率
+我们从试探性的行动中学习
+或者不从中学习，计算出两组概率（从概念上说），分别会是
+什么？假设我们继续进行试探性的行动，哪一组概率对于学习来说可能更好？哪一组更可
+能带来更大的胜率？</p>
+<p>练习 1.5 其他提升方法
+你能想出其他方法来提升强化学习的玩家能力吗？你能想出更好
+的方法来解决井字棋的问题吗？</p>
+<p>这里可以使用MiniMax算法来解决井字棋 同时还可以直接进行树搜索</p>
+<h2 id="minimax算法">MiniMax算法</h2>
+<p>他妈的 本质树搜索。</p>
+<p><a
+target="_blank" rel="noopener" href="https://leetcode.cn/problems/predict-the-winner/description/">预测赢家</a>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="title function_">predict_the_winner</span>(nums: <span class="type">Vec</span>&lt;<span class="type">i32</span>&gt;) <span class="punctuation">-&gt;</span> <span class="type">bool</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> <span class="variable">n</span> = nums.<span class="title function_ invoke__">len</span>();</span><br><span class="line">        <span class="keyword">if</span> nums.<span class="title function_ invoke__">len</span>() == <span class="number">0</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">fn</span> <span class="title function_">minimax</span>(</span><br><span class="line">            nums:&amp;[<span class="type">i32</span>],</span><br><span class="line">            left:<span class="type">usize</span>,</span><br><span class="line">            right:<span class="type">usize</span>,</span><br><span class="line">            player1_turn:<span class="type">bool</span>,</span><br><span class="line">            memo:&amp;<span class="keyword">mut</span> [<span class="type">Vec</span>&lt;[<span class="type">Option</span>&lt;<span class="type">i32</span>&gt;;<span class="number">2</span>]&gt;])<span class="punctuation">-&gt;</span> <span class="type">i32</span>&#123;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">turn</span>:<span class="type">usize</span> =  player1_turn <span class="keyword">as</span> <span class="type">usize</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">Some</span>(result) = memo[left][right][turn]&#123;</span><br><span class="line">                <span class="keyword">return</span> result;</span><br><span class="line">            &#125; <span class="comment">//记忆化搜索</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> <span class="variable">result</span>;</span><br><span class="line">            <span class="keyword">if</span> left == right &#123;</span><br><span class="line">                result = <span class="keyword">if</span> player1_turn &#123;</span><br><span class="line">                    <span class="comment">// 玩家1拿走</span></span><br><span class="line">                    nums[left]&#125; </span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 玩家2拿走</span></span><br><span class="line">                    -nums[left]&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> player1_turn</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">player1_left</span> = nums[left] + <span class="title function_ invoke__">minimax</span>(nums,left+<span class="number">1</span>,right,!player1_turn,memo);</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">player1_right</span> = nums[right] + <span class="title function_ invoke__">minimax</span>(nums,left,right-<span class="number">1</span>,!player1_turn,memo);</span><br><span class="line">                </span><br><span class="line">                result = player1_left.<span class="title function_ invoke__">max</span>(player1_right);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">player2_left</span> = -nums[left] + <span class="title function_ invoke__">minimax</span>(nums,left+<span class="number">1</span>,right,!player1_turn,memo);</span><br><span class="line">                <span class="keyword">let</span> <span class="variable">player2_right</span> = -nums[right] + <span class="title function_ invoke__">minimax</span>(nums,left,right-<span class="number">1</span>,!player1_turn,memo);</span><br><span class="line">                </span><br><span class="line">                result = player2_left.<span class="title function_ invoke__">min</span>(player2_right);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            memo[left][right][turn] = <span class="title function_ invoke__">Some</span>(result);</span><br><span class="line">            result</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">memo</span> = <span class="built_in">vec!</span>[<span class="built_in">vec!</span>[[<span class="literal">None</span>; <span class="number">2</span>]; n]; n];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="variable">score_difference</span> = <span class="title function_ invoke__">minimax</span>(</span><br><span class="line">            &amp;nums,</span><br><span class="line">            <span class="number">0</span>,</span><br><span class="line">            n - <span class="number">1</span>,</span><br><span class="line">            <span class="literal">true</span>,</span><br><span class="line">            &amp;<span class="keyword">mut</span> memo,</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> score_difference&gt;=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
