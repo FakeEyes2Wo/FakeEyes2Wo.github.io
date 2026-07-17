@@ -1,0 +1,20 @@
+## reflex-based model
+
+e.g.  linear classifiers  deep neural networks
+
+Fully feed-forward(no backtracking), no reasoning about what was going on
+
+
+## state-based model
+
+e.g. 在下国际象棋的时候  白棋怎么走下一步，这种需要一定的推理的玩意儿
+
+Search problem
+
+Markov decision processes
+
+Adversarial games
+
+## Variable-based models
+Constraint satisfaction problems: hard constraints(e.g. sudoku, scheduling)
+Bayesian networks: soft dependencies(e.g. tracking cars from sensors)

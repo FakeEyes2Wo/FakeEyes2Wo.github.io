@@ -1,0 +1,19 @@
+# inference search problem
+
+## Definition: search problem
+- **s_start**: starting state  
+- **Actions(s)**: possible actions  
+- **Cost(s, a)**: action cost  
+- **Succ(s, a)**: successor  
+- **IsEnd(s)**: reached end state?
+
+### BackTracking Search   回溯搜索
+
+| ALgorithms  | Cost | time | Space |
+| Backtracing Search | Any | $O(b^D)$ b(is branch factor,D is deepth) |  $O(D)$ |
+|
+|DFS | 0 | $O(b^D)$ | $O(D)$ |
+|BFS | C |  $O(b^d) (d is BF tree deepth)$ | $O(D)$ |  如果没有负成本  那么找到的就是最优策略
+| DFS-ID |
+
+DFS-ID每次深搜都会有搜索的最大深度限制，如果没有找到解，那么就增大深度，再进行深搜，如此循环直到找到解为止。

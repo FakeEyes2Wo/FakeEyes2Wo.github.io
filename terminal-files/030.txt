@@ -1,0 +1,100 @@
+# Linear Regression
+
+## 正规方程 (Normal Equation)
+对于线性回归模型 $h_\theta(x) = \theta^T x$, 通过最小化平方误差损失函数 $J(\theta) = \frac{1}{2} \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2$, 可得闭式解: $\theta = (X^T X)^{-1} X^T y$
+其中 $X$ 为设计矩阵, $y$ 为观测值向量。
+
+## 局部加权线性回归 (Locally Weighted Linear Regression, LWLR)
+- **核心思想**: 为每个查询点 $x$ 赋予邻近样本更高的权重, 通过加权平方误差进行局部拟合: 
+$$
+\min_\theta \sum_{i=1}^m w^{(i)}(x) (h_\theta(x^{(i)}) - y^{(i)})^2
+$$
+- **权重函数**: 常用高斯核权重: 
+$$    
+w^{(i)}(x) = \exp\left(-\frac{(x^{(i)} - x)^T (x^{(i)} - x)}{2\tau^2}\right)
+$$
+其中 $\tau$ 为带宽参数, 控制权重衰减速度。
+- **特点**: 
+  - 非参数方法, 计算复杂度随数据量增加而显著上升。
+  - 难以外推至训练数据范围外的区域。
+  - 适用于低维数据（n=2,3,4）且样本量适中（数百至数千）。
+
+---
+
+# Logistic Regression
+
+## 模型假设
+- **假设函数**（Sigmoid函数）: 
+$$
+h_\theta(x) = g(\theta^T x) = \frac{1}{1+e^{-\theta^T x}}
+$$
+- **概率解释**: 
+$$
+\begin{aligned}
+p(y=1|x;\theta) &= h_\theta(x) \\
+p(y=0|x;\theta) &= 1 - h_\theta(x) \\
+\end{aligned}
+$$
+- **统一形式**: 
+$$
+p(y|x;\theta) = h_\theta(x)^y (1-h_\theta(x))^{1-y}
+$$
+
+## 参数估计
+### 极大似然估计 (MLE)
+- **似然函数**: 
+$$
+L(\theta) = \prod_{i=1}^m h_\theta(x^{(i)})^{y^{(i)}} (1-h_\theta(x^{(i)}))^{1-y^{(i)}}
+$$
+- **对数似然函数**: 
+$$
+l(\theta) = \sum_{i=1}^m \left[ y^{(i)} \log h_\theta(x^{(i)}) + (1-y^{(i)}) \log (1-h_\theta(x^{(i)})) \right]
+$$
+- **梯度上升更新**: 
+$$
+\theta := \theta + \alpha \sum_{i=1}^m \left( y^{(i)} - h_\theta(x^{(i)}) \right) x^{(i)}
+$$
+（注: 使用梯度上升最大化对数似然, 若定义损失函数为负对数似然, 则采用梯度下降）
+
+### 牛顿法
+- **更新公式**: 
+$$
+\theta := \theta - H^{-1} \nabla_\theta l(\theta)
+$$
+- **Hessian矩阵**: 
+$$
+H = -\sum_{i=1}^m h_\theta(x^{(i)}) (1-h_\theta(x^{(i)})) x^{(i)} x^{(i)T}
+$$
+（注: Hessian矩阵负定, 保证收敛到极大值点）
+- **优缺点**: 
+  - 优点: 二次收敛速度, 迭代次数少。
+  - 缺点: 高维时计算 $H^{-1}$ 复杂度为 $O(n^3)$, 适用于维度较低（n < 50）的情况。
+
+## 模型特性
+- **决策边界**: 线性决策边界由 $\theta^T x = 0$ 定义。
+- **与线性回归对比**: 
+  - 逻辑回归用于分类, 输出概率；线性回归用于回归, 输出连续值。
+  - 逻辑回归无闭式解, 需迭代优化；线性回归可通过正规方程直接求解。
+- **正则化**: 
+  - 加入L1/L2正则项防止过拟合: 
+  $$
+  J(\theta) = -l(\theta) + \lambda \|\theta\|^2
+  $$
+  - 更新公式中增加正则化梯度项: $\theta_j := \theta_j - \alpha \left( \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_j^{(i)} + \lambda \theta_j \right)$
+
+---
+
+## 最小二乘法与最大似然
+- **正态误差假设**: 若误差 $\epsilon \sim \mathcal{N}(0, \sigma^2)$ 且独立同分布, 则最小二乘估计等价于极大似然估计。
+- **高斯-马尔可夫定理**: 在误差满足零均值、同方差、无自相关且与自变量不相关时, 最小二乘估计为最佳线性无偏估计（BLUE）。
+
+---
+
+## 多分类扩展
+- **Softmax回归**: 对K个类别, 假设函数为: 
+  $$
+  h_\theta(x)_k = \frac{e^{\theta_k^T x}}{\sum_{j=1}^K e^{\theta_j^T x}}
+  $$
+- 参数估计: 通过极大化对数似然, 梯度更新类似二元逻辑回归。
+
+---

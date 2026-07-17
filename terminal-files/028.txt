@@ -1,0 +1,207 @@
+# OS 课设
+<a href="../download/操作系统课程设计/OS-课设.zip" download>课设相关资料</a>
+
+## 初始环境搭建
+- Linux环境
+- Bochs虚拟机
+- 一系列工具集
+
+```bash
+sudo apt-get install build-essential nasm
+```
+其中bochs和vgabios可以进行一键式安装，使用以下命令
+```bash
+sudo apt-get install vgabios bochs bochs-x bximage
+```
+也可以直接在bochs官网上下载。此处建议在官网上下载。官网上下载过后  bochs和vgabios都在解压后的安装包中。bios都在bochs目录下的bios目录中。
+
+## Bochs虚拟机使用
+
+首先创建a.img映像
+```bash
+bximage
+```
+然后输入1  回车 fd然后一系列回车，最后得到一个磁盘拷贝的img文件映像
+nasm编译后的文件为if处的值，将我们编译的启动程序拷贝到img文件映像中，这里需要加上conv=notrunc，否则会因为boot.bin的大小较小而产生截断。
+
+编写后的文件
+```bash
+dd if=boot.bin of=a.img bs=512 count=1 conv=notrunc
+```
+
+在编写bochsrc.txt的配置文件的示例
+其中romimage和vgaromimage的路径需要修改为实际路径。
+floppya修改成实际大小和实际映像。
+```bochsrc.txt
+###############################################################
+# Configuration file for Bochs
+###############################################################
+
+# how much memory the emulated machine will have
+megs: 32
+
+# filename of ROM images
+# romimage: file=/usr/share/bochs/BIOS-bochs-latest
+# vgaromimage: file=/usr/share/vgabios/vgabios.bin
+
+romimage: file=/home/temp/Desktop/OS/Bochs-REL_2_8_FINAL/bochs/bios/BIOS-bochs-latest
+vgaromimage: file=/home/temp/Desktop/OS/Bochs-REL_2_8_FINAL/bochs/bios/VGABIOS-lgpl-latest
+
+# what disk images will be used
+floppya: 1_44=a.img, status=inserted
+
+# choose the boot disk.
+boot: floppy
+
+# where do we send log messages?
+log: bochsout.txt
+
+# disable the mouse
+mouse: enabled=0
+
+# enable key mapping, using US layout as default.
+# keyboard_mapping: enabled=1, map=/usr/share/bochs/keymaps/x11-pc-us.map
+```
+
+## PMTest1
+1. **下载 FreeDOS 镜像**
+   - 到 [Bochs 官方网站](http://bochs.sourceforge.net/) 下载 FreeDOS 镜像。
+   - 解压后，将其中的 `a.img` 复制到工作目录中，并改名为 `freedos.img`。
+
+2. **生成软盘镜像**
+   - 使用 `bximage` 工具生成一个软盘镜像，命名为 `pm.img`：
+     ```bash
+     bximage -fd -q -size=1.44 pm.img
+     ```
+
+3. **修改 Bochs 配置文件**
+   - 修改 `bochsrc` 文件，确保包含以下三行：
+     ```plaintext
+     floppya: 1_44=freedos.img, status=inserted
+     floppyb: 1_44=pm.img, status=inserted
+     boot: a
+     ```
+
+4. **启动 Bochs 并格式化 B: 盘**
+   - 启动 Bochs，等待 FreeDOS 启动完毕。
+   - 在 FreeDOS 中格式化 B: 盘：
+     ```bash
+     format B:
+     ```
+
+5. **修改代码并重新编译**
+   - 将代码 `pmtest1.asm` 的第 8 行中的 `07c00h` 改为 `0100h`, 从而将代码编译成com文件, 便于debug。
+   - 重新编译代码：
+     ```bash
+     nasm pmtest1.asm -o pmtest1.com
+     ```
+
+6. **将程序复制到虚拟软盘**
+   - 挂载 `pm.img` 到 `/mnt/floppy`：
+     ```bash
+     sudo mkdir -p /mnt/floppy
+     sudo mount -o loop pm.img /mnt/floppy
+     sudo cp pmtest1.com /mnt/floppy/
+     sudo umount /mnt/floppy
+     ```
+
+7. **在 FreeDOS 中运行程序**
+   - 在 FreeDOS 中执行以下命令：
+     ```bash
+     B:\pmtest1.com
+     ```
+   - 如果一切正常，屏幕上会显示一个红色的字母“P”如图
+   ![alt text](image.png)
+
+
+## MyProject
+```bash
+#/bin/bash
+
+if [ ! -d /mnt/floppy ]; then 
+    sudo mkdir /mnt/floppy; 
+fi
+sudo mount -o loop pmtest.img /mnt/floppy
+sudo cp $1 /mnt/floppy/
+sudo umount /mnt/floppy
+```
+
+在实现优先级调度的时候  如果想要使用C语言混合编程  那么需要有一个boot.asm然后将我们的展示代码写道Loader中去。
+
+### 段选择子结构
+![段选择子结构](Selector_Structure.png)
+
+---
+
+### 调试技巧
+
+#### Bochs调试命令
+| 命令          | 功能               |
+|--------------|-------------------|
+| b 0x7c00     | 在引导扇区设置断点 |
+| c            | 继续执行          |
+| x /64bx 0x7c00 | 查看内存数据      |
+| info gdt     | 查看GDT表内容     |
+
+#### Magic Breakpoint
+```asm
+xchg bx, bx  ; Bochs特殊断点
+```
+
+### 常见问题
+
+#### Q1: 映像文件挂载失败
+**现象**：
+```bash
+mount: /mnt/floppy: wrong fs type...
+```
+**解决方案**：
+```bash
+sudo apt-get install mtools
+mcopy -i pm.img pmtest1.com ::
+```
+
+#### Q2: Bochs启动黑屏
+**检查点**：
+1. BIOS路径是否正确
+2. 映像文件是否已正确写入
+3. GDT设置是否完整
+
+#### Q3: 保护模式切换失败
+**调试步骤**：
+1. 检查A20是否开启
+2. 验证GDT描述符是否正确
+3. 确认CR0.PE位设置
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##### knowledge
+
+[bits 16］是告诉编译器，下面的代码帮我编译成 16 位的机器码。
+[bits 32］是告诉编译器，下面的代码帮我编译成 32 位的机器码。
+
+进入保护模式需要三个步骤。
+(1) 打开 A20 。(2) 加载 gdt 。(3) 将 cr0 的 pe 位置 1 。
+
+在保护模式下，要访问 4gb 的内存空间，再采取实模式下的方法是远远不够的，所以段寄存器中存储的数据变成了选择子，其格式如下图所示，其中索引值即 gdt 中索引值，TI 用于指示是去 GDT 还是 LDT 中寻找段基址，RPL 是特权级
+![Selector_Structure](Selector_Structure.png)
+
+
+##### 参考资料
+- https://www.cnblogs.com/fdxsec/p/18655799
+- https://www.cnblogs.com/fdxsec/p/18664411
+- [bochs 调试](https://www.cnblogs.com/lqerio/p/11779293.html)

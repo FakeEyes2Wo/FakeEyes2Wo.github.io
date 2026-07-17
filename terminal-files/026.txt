@@ -1,0 +1,118 @@
+### 一、间隔（Margin）概念
+
+#### 1.1 函数间隔（Functional Margin）
+定义单个样本的函数间隔：
+$$
+\hat{\gamma}^{(i)} = y^{(i)} (\mathbf{w}^\top \mathbf{x}^{(i)} + b)
+$$
+整体函数间隔为最小样本间隔：
+$$
+\hat{\gamma} = \min_{i=1,\ldots,m} \hat{\gamma}^{(i)}
+$$
+
+> **注意**：函数间隔受参数模长影响（$\|\mathbf{w}\|$和$b$），需标准化处理。
+
+#### 1.2 几何间隔（Geometric Margin）
+几何间隔是函数间隔的标准化形式：
+$$
+\gamma^{(i)} = \frac{\hat{\gamma}^{(i)}}{\|\mathbf{w}\|} = \frac{y^{(i)} (\mathbf{w}^\top \mathbf{x}^{(i)} + b)}{\|\mathbf{w}\|}
+$$
+整体几何间隔：
+$$
+\gamma = \frac{\hat{\gamma}}{\|\mathbf{w}\|} = \min_{i=1,\ldots,m} \gamma^{(i)}
+$$
+
+---
+
+### 二、支持向量机的理论特性
+
+#### 2.1 参数表示定理（Representer Theorem）
+最优参数 $\mathbf{w}$ 可表示为训练样本的线性组合：
+$$
+\mathbf{w} = \sum_{i=1}^{m} \alpha_i y^{(i)} \mathbf{x}^{(i)}
+$$
+
+可以通过梯度下降的参数更新的式子来归纳看出
+如果我们以Logistic Regression为例子
+$$\theta = \theta_i - \alpha h_\theta(x^{(i)})-y^{(i)})$$
+可以轻易看出$\theta$可以表示成各个训练集的线性组合
+*可通过梯度下降法的参数更新过程归纳证明*
+
+#### 2.2 对偶问题推导
+通过拉格朗日乘数法将原优化问题转化为对偶问题，此过程涉及：
+- 构造拉格朗日函数
+- 求导消元（$\mathbf{w}$ 和 $b$）
+- 得到仅含 $\alpha_i$ 的优化目标
+
+---
+
+### 三、核技巧（Kernel Trick）
+
+#### 3.1 核方法实现步骤
+1. 将算法改写为仅含内积 $\langle x^{(i)}, x^{(j)} \rangle$ 的形式
+2. 设计特征映射 $\phi: \mathcal{X} \to \mathcal{H}$ 将输入空间映射到高维特征空间
+3. 构造核函数 $K(x,z) = \phi(x)^\top \phi(z)$
+4. 用核函数替换所有内积运算
+
+#### 3.2 核函数合法性条件（Mercer条件）[^1]
+合法核函数需满足：
+1. **对称性**：$K(x,z) = K(z,x)$
+2. **半正定性**：$\forall c_i \in \mathbb{R},\ \sum_{i,j}c_i c_j K(x^{(i)},x^{(j)}) \geq 0$
+3. **线性性**：$K(ax+by,z) = aK(x,z) + bK(y,z)$
+本质上是一个广义内积[^2]
+#### 3.3 常用核函数对照表
+
+| 核类型       | 公式                                 | 参数               | 特征空间维度       |
+|--------------|--------------------------------------|--------------------|--------------------|
+| 线性核       | $K(x,z) = x^\top z$                 | 无                 | $\mathbb{R}^n$     |
+| 多项式核     | $K(x,z) = (x^\top z + c)^d$         | $c \geq 0, d \in \mathbb{N}$ | $\mathbb{R}^n$     |
+| 高斯核（RBF）| $K(x,z) = \exp(-\frac{\|x-z\|^2}{2\sigma^2})$ | $\sigma > 0$       | $\mathbb{R}^\infty$|
+| Sigmoid核    | $K(x,z) = \tanh(\alpha x^\top z + c)$ | $\alpha, c$        | $\mathbb{R}^n$     |
+| Laplace核    | $K(x,z) = \exp(-\frac{\|x-z\|_1}{\sigma})$ | $\sigma > 0$       | $\mathbb{R}^\infty$|
+
+---
+
+### 四、L1范数软间隔SVM
+
+#### 4.1 原始优化问题
+$$
+\begin{aligned}
+\min_{\mathbf{w},b,\xi} & \quad \frac{1}{2}\|\mathbf{w}\|^2 + C\sum_{i=1}^n \xi_i \\
+\text{s.t.} & \quad y_i(\mathbf{w}^\top \phi(x_i) + b) \geq 1 - \xi_i \\
+& \quad \xi_i \geq 0,\ \forall i=1,...,n
+\end{aligned}
+$$
+
+#### 4.2 对偶形式
+通过拉格朗日乘数法推导得到：
+$$
+\begin{aligned}
+\max_{\alpha} & \quad \sum_{i=1}^n \alpha_i - \frac{1}{2}\sum_{i,j}\alpha_i\alpha_j y_i y_j K(x_i,x_j) \\
+\text{s.t.} & \quad 0 \leq \alpha_i \leq C \\
+& \quad \sum_{i=1}^n \alpha_i y_i = 0
+\end{aligned}
+$$
+
+---
+
+### 五、应用案例：蛋白质序列分类
+
+#### 5.1 特征工程
+- 将蛋白质序列按4个氨基酸为一组进行分窗
+- **使用改进的KMP算法计算序列相似性核函数**(使用广义内积的示例)
+
+#### 5.2 实现流程
+1. 序列→特征向量转换
+2. 构造基于k-mer的序列核
+3. 使用软间隔SVM进行分类
+
+---
+
+### 附：关键公式推导技巧
+1. **拉格朗日对偶性**：通过引入乘子处理不等式约束
+2. **KKT条件**：确定支持向量的必要条件
+3. **SMO算法**：高效求解对偶问题的分解方法
+
+[^1]:Mercer定理:任何半正定的函数都可以作为核函数(充分不必要条件)
+Mercer条件:若函数K(a, b)符合Mercer条件, 则K必须是连续的，并且在其参数上对称，所以K(a, b)=K(b, a)，则存在函数 $\phi$ 将a和b映射到另一空间，使得K(a, b) = $\phi(a)^T$ $\phi(b)$ 。即两个向量的核函数值等价于映射后的两个向量的内积。
+[^2]:https://surprisedcat.github.io/studynotes/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E4%B8%8E%E7%9F%A9%E9%98%B5%E4%B9%8B%E5%BA%A6%E9%87%8F%E7%9F%A9%E9%98%B5%E4%B8%8E%E5%B9%BF%E4%B9%89%E5%86%85%E7%A7%AF/

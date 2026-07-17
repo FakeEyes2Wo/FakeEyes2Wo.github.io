@@ -1,0 +1,69 @@
+1.
+(a)
+$$
+\nabla f(x) = Ax+b^T
+$$
+(b)
+$$
+\nabla f(x) = g^{'}(h(x))\nabla h(x)
+$$important
+
+(c)
+$$
+\nabla^2 f(x) = A
+$$
+(d)
+$$
+\nabla f(x) = g^{'}(a^Tx)a \\
+\nabla^2 f(x) = g^{''}(a^Tx)aa^T
+$$
+
+
+2.
+(a)
+$ A^T = (zz^T)^T = zz^T = A $
+对于$\forall x \in R^n$
+有$x^TAx = x^Tzz^Tx \\
+        = (x^Tz)(x^Tz)^T$
+因为x^Tz 正定
+所以A正定
+**(b)**
+$\because$ z为非零向量
+$\therefore R(A) = 1$
+$N(A = {x|z^Tx=0})$ N 是NullSpace
+
+(c)
+对于$\forall x \in R^m$
+有$x^TBAB^Tx = (x^TB)A(x^TB)^T$
+因为A正定，所以 $ (B^Tx)^TA(B^Tx) \geq 0$
+所以$BAB^T$PSD
+
+3.
+(a).
+$$
+\begin{align*}
+\because A &= T\Lambda T^{-1} \\
+\therefore AT &= T\Lambda        \\
+A[t^{(i)}] &= [t^{(i)}]\Lambda      \\
+[At^{(0)},At^{(1)},\cdots,At^{(n-1)}] &= \begin{bmatrix} t^{(0)} & t^{(1)}& \cdots & t^{(n-1)}\end{bmatrix} \cdot  \begin{bmatrix} 
+\lambda^{0} & 0 & 0 & \cdots & 0 \\
+0 & \lambda^{1} & 0 & \cdots & 0 \\
+0 & 0 & \lambda^{2} & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & \lambda^{n-1} 
+\end{bmatrix}   \\
+\therefore At^{(i)}&=\lambda t{(i)}
+\end{align*}
+$$
+(b).
+$$
+A=U\Lambda U^T \\
+AU = U\Lambda \\
+$$
+然后和a相同
+(c).
+$\because$ A is PSD
+$\therefore$ 对于A的特征矩阵  有$A = U\Lambda U^T \geq 0$
+$U\Lambda U^T = [u^{(i)}]\Lambda [u^{(i)}]^T$
+$= \lambda^{(i)}(t^{(i)})^2$
+$\therefore \lambda^{(i)} \geq 0$
