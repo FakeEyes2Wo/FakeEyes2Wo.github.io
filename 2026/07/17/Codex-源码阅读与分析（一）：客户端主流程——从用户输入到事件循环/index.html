@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#0b1120"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/iron-moon-mark.svg" color="#0b1120">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fakeeyes2wo.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":420},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"duration":260,"transition":{"menu_item":"fadeInDown","post_block":"fadeInUp","post_header":"fadeInDown","post_body":"fadeIn","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Codex 源码阅读与分析（一）：从用户输入到事件循环本篇技术博客主要解读 Codex 命令行版本的运行机制。我会沿着一次 codex exec 任务的主流程，从用户输入开始，一直看到事件循环结束以及最终结果输出。 Codex 面向用户的输入方式大体可以分为两类： 通过 code...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="# Codex 源码阅读与分析（一）：客户端主流程——从用户输入到事件循环">
+<meta property="og:url" content="https://fakeeyes2wo.github.io/2026/07/17/Codex-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B8%8E%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%BB%E6%B5%81%E7%A8%8B%E2%80%94%E2%80%94%E4%BB%8E%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E5%88%B0%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/index.html">
+<meta property="og:site_name" content="Iron Moon Blog">
+<meta property="og:description" content="Codex 源码阅读与分析（一）：从用户输入到事件循环本篇技术博客主要解读 Codex 命令行版本的运行机制。我会沿着一次 codex exec 任务的主流程，从用户输入开始，一直看到事件循环结束以及最终结果输出。 Codex 面向用户的输入方式大体可以分为两类： 通过 code...">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-17T14:22:45.000Z">
+<meta property="article:modified_time" content="2026-07-17T14:28:44.917Z">
+<meta property="article:author" content="iron moon">
+<meta property="article:tag" content="Agent开发">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://fakeeyes2wo.github.io/2026/07/17/Codex-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B8%8E%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%BB%E6%B5%81%E7%A8%8B%E2%80%94%E2%80%94%E4%BB%8E%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E5%88%B0%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fakeeyes2wo.github.io/2026/07/17/Codex-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B8%8E%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%BB%E6%B5%81%E7%A8%8B%E2%80%94%E2%80%94%E4%BB%8E%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E5%88%B0%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/","path":"2026/07/17/Codex-源码阅读与分析（一）：客户端主流程——从用户输入到事件循环/","title":"# Codex 源码阅读与分析（一）：客户端主流程——从用户输入到事件循环"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title># Codex 源码阅读与分析（一）：客户端主流程——从用户输入到事件循环 | Iron Moon Blog</title>
+  
+
+
+
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/iron-moon-mark.svg">
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Iron Moon Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">AI · Agents · Systems · Security</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-博客"><a href="/blog/" rel="section"><i class="fa fa-book fa-fw"></i>博客</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Codex-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B8%8E%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E4%BB%8E%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E5%88%B0%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.</span> <span class="nav-text">Codex 源码阅读与分析（一）：从用户输入到事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Prompt-%E7%9A%84%E8%A7%A3%E6%9E%90"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. Prompt 的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8-UserInput-%E5%AD%98%E5%82%A8%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 使用 UserInput 存储用户输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B0%81%E8%A3%85%E4%B8%BA-InitialOperation"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 封装为 InitialOperation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BC%9A%E8%AF%9D%E5%90%AF%E5%8A%A8%E5%89%8D%E7%9A%84%E6%A3%80%E6%9F%A5%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">二、会话启动前的检查与初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A3%80%E6%9F%A5%E5%BD%93%E5%89%8D%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 检查当前工作目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%90%AF%E5%8A%A8%E8%BF%9B%E7%A8%8B%E5%86%85-App-Server-Client"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 启动进程内 App Server Client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%88%9B%E5%BB%BA%E6%88%96%E6%81%A2%E5%A4%8D-Thread"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 创建或恢复 Thread</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%90%AF%E5%8A%A8-Turn-%E4%B8%8E%E4%B8%AD%E6%96%AD%E7%9B%91%E5%90%AC"><span class="nav-number">1.2.</span> <span class="nav-text">三、启动 Turn 与中断监听</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%9B%91%E5%90%AC-Ctrl-C"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 监听 Ctrl+C</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A0%B9%E6%8D%AE-InitialOperation-%E5%90%AF%E5%8A%A8%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 根据 InitialOperation 启动任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.3.</span> <span class="nav-text">四、事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A4%84%E7%90%86-Ctrl-C"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 处理 Ctrl+C</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%A4%84%E7%90%86-ServerRequest"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 处理 ServerRequest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%A4%84%E7%90%86-ServerNotification"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. 处理 ServerNotification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%A4%84%E7%90%86-Lagged"><span class="nav-number">1.3.4.</span> <span class="nav-text">4. 处理 Lagged</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-%E4%BA%8B%E4%BB%B6%E9%98%9F%E5%88%97%E6%9C%AC%E8%BA%AB%E6%98%AF%E6%9C%89%E7%95%8C%E7%9A%84"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">4.1 事件队列本身是有界的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-%E4%BA%8B%E4%BB%B6%E8%A2%AB%E5%88%86%E4%B8%BA%E6%97%A0%E6%8D%9F%E5%92%8C%E5%B0%BD%E5%8A%9B%E8%80%8C%E4%B8%BA%E4%B8%A4%E7%B1%BB"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">4.2 事件被分为无损和尽力而为两类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-%E9%98%9F%E5%88%97%E6%BB%A1%E6%97%B6%EF%BC%8C%E5%B0%BD%E5%8A%9B%E8%80%8C%E4%B8%BA%E4%BA%8B%E4%BB%B6%E4%BC%9A%E8%A2%AB%E6%98%8E%E7%A1%AE%E4%B8%A2%E5%BC%83"><span class="nav-number">1.3.4.3.</span> <span class="nav-text">4.3 队列满时，尽力而为事件会被明确丢弃</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-Lagged-%E4%B8%8A%E6%8A%A5%E7%9A%84%E6%98%AF%E7%B4%AF%E8%AE%A1%E4%B8%A2%E5%A4%B1%E6%95%B0%E9%87%8F"><span class="nav-number">1.3.4.4.</span> <span class="nav-text">4.4 Lagged 上报的是累计丢失数量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%BC%9A%E8%AF%9D%E7%BB%93%E6%9D%9F"><span class="nav-number">1.4.</span> <span class="nav-text">五、会话结束</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iron moon</p>
+  <div class="site-description" itemprop="description">Iron Moon 的技术笔记与工程实践，聚焦 AI、Agent、机器学习、系统与安全。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/FakeEyes2Wo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;FakeEyes2Wo" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fakeeyes2wo.github.io/2026/07/17/Codex-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E4%B8%8E%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%BB%E6%B5%81%E7%A8%8B%E2%80%94%E2%80%94%E4%BB%8E%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5%E5%88%B0%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iron moon">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Iron Moon Blog">
+      <meta itemprop="description" content="Iron Moon 的技术笔记与工程实践，聚焦 AI、Agent、机器学习、系统与安全。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="# Codex 源码阅读与分析（一）：客户端主流程——从用户输入到事件循环 | Iron Moon Blog">
+      <meta itemprop="description" content="Codex 源码阅读与分析（一）：从用户输入到事件循环本篇技术博客主要解读 Codex 命令行版本的运行机制。我会沿着一次 codex exec 任务的主流程，从用户输入开始，一直看到事件循环结束以及最终结果输出。 Codex 面向用户的输入方式大体可以分为两类： 通过 code...">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          # Codex 源码阅读与分析（一）：客户端主流程——从用户输入到事件循环
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-07-17 22:22:45 / 修改时间：22:28:44" itemprop="dateCreated datePublished" datetime="2026-07-17T22:22:45+08:00">2026-07-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Agent%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">Agent开发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Codex 源码阅读与分析（一）：从用户输入到事件循环本篇技术博客主要解读 Codex 命令行版本的运行机制。我会沿着一次 codex exec 任务的主流程，从用户输入开始，一直看到事件循环结束以及最终结果输出。 Codex 面向用户的输入方式大体可以分为两类： 通过 code...</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Codex-源码阅读与分析（一）：从用户输入到事件循环"><a href="#Codex-源码阅读与分析（一）：从用户输入到事件循环" class="headerlink" title="Codex 源码阅读与分析（一）：从用户输入到事件循环"></a>Codex 源码阅读与分析（一）：从用户输入到事件循环</h1><p>本篇技术博客主要解读 Codex 命令行版本的运行机制。我会沿着一次 <code>codex exec</code> 任务的主流程，从用户输入开始，一直看到事件循环结束以及最终结果输出。</p>
+<p>Codex 面向用户的输入方式大体可以分为两类：</p>
+<ul>
+<li>通过 <code>codex exec</code> 运行非交互式任务；</li>
+<li>通过 TUI 进行交互。</li>
+</ul>
+<p>TUI 有自己的入口，位于 <code>codex-rs/tui/src/lib.rs</code>。本篇文章主要关注 <code>codex exec</code>，对应代码位于 <code>codex-rs/exec/src/lib.rs</code>。两者虽然共享底层的 App Server 等基础设施，但入口并不相同。<br><code>codex exec</code> 的主入口是：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pub</span> <span class="keyword">async</span> <span class="keyword">fn</span> <span class="title function_">run_main</span>(cli: Cli, arg0_paths: Arg0DispatchPaths) <span class="punctuation">-&gt;</span> anyhow::<span class="type">Result</span>&lt;()&gt;</span><br></pre></td></tr></table></figure>
+<p><code>run_main</code> 完成命令行参数、配置、日志以及运行环境等初始化后，最终进入 <code>run_exec_session</code>。我们主要关注的会话逻辑就在这个函数里面。</p>
+<h3 id="1-Prompt-的解析"><a href="#1-Prompt-的解析" class="headerlink" title="1. Prompt 的解析"></a>1. Prompt 的解析</h3><p>用户的 Prompt 主要通过 <code>codex-rs/exec/src/lib.rs</code> 中的 <code>resolve_root_prompt</code> 和 <code>resolve_prompt</code> 两个函数进行解析：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">resolve_root_prompt</span>(prompt_arg: <span class="type">Option</span>&lt;<span class="type">String</span>&gt;) <span class="punctuation">-&gt;</span> <span class="type">String</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fn</span> <span class="title function_">resolve_prompt</span>(prompt_arg: <span class="type">Option</span>&lt;<span class="type">String</span>&gt;) <span class="punctuation">-&gt;</span> <span class="type">String</span></span><br></pre></td></tr></table></figure>
+
+<p>普通的 <code>codex exec</code> 根路径使用 <code>resolve_root_prompt</code>；<code>codex exec resume</code> 路径则直接使用 <code>resolve_prompt</code>。当命令行没有提供 Prompt，或者显式传入 <code>-</code> 时，Codex 会从 <code>stdin</code> 读取输入：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">Some</span>(prompt) = <span class="title function_ invoke__">read_prompt_from_stdin</span>(behavior)</span><br></pre></td></tr></table></figure>
+
+<p><code>resolve_root_prompt</code> 除了处理命令行参数，也可以把管道输入的 <code>stdin</code> 内容作为额外上下文追加进去。</p>
+<p>总体来说，这几个函数解决的是同一件事：<strong>确定本次任务最终使用的 Prompt 文本来自命令行参数、标准输入，还是两者的组合。</strong></p>
+<h3 id="2-使用-UserInput-存储用户输入"><a href="#2-使用-UserInput-存储用户输入" class="headerlink" title="2. 使用 UserInput 存储用户输入"></a>2. 使用 <code>UserInput</code> 存储用户输入</h3><p>Prompt 解析完成后会变成 <code>prompt_text</code>。对于用户输入，Codex 准备了一个 <code>UserInput</code> 枚举进行统一存储：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pub</span> <span class="keyword">enum</span> <span class="title class_">UserInput</span> &#123;</span><br><span class="line">    Text &#123;</span><br><span class="line">        text: <span class="type">String</span>,</span><br><span class="line">        <span class="comment">/// UI-defined spans within `text` that should be treated as special elements.</span></span><br><span class="line">        <span class="comment">/// These are byte ranges into the UTF-8 `text` buffer and are used to render</span></span><br><span class="line">        <span class="comment">/// or persist rich input markers (e.g., image placeholders) across history</span></span><br><span class="line">        <span class="comment">/// and resume without mutating the literal text.</span></span><br><span class="line">        <span class="meta">#[serde(default)]</span></span><br><span class="line">        text_elements: <span class="type">Vec</span>&lt;TextElement&gt;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">/// Pre-encoded data: URI image.</span></span><br><span class="line">    Image &#123;</span><br><span class="line">        image_url: <span class="type">String</span>,</span><br><span class="line">        <span class="meta">#[serde(default, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]</span></span><br><span class="line">        <span class="meta">#[ts(optional)]</span></span><br><span class="line">        detail: <span class="type">Option</span>&lt;ImageDetail&gt;,</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// Local image path provided by the user. This will be converted to an</span></span><br><span class="line">    <span class="comment">/// `Image` variant (base64 data URL) during request serialization.</span></span><br><span class="line">    LocalImage &#123;</span><br><span class="line">        path: std::path::PathBuf,</span><br><span class="line">        <span class="meta">#[serde(default, skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]</span></span><br><span class="line">        <span class="meta">#[ts(optional)]</span></span><br><span class="line">        detail: <span class="type">Option</span>&lt;ImageDetail&gt;,</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// Skill selected by the user (name + path to SKILL.md).</span></span><br><span class="line">    Skill &#123;</span><br><span class="line">        name: <span class="type">String</span>,</span><br><span class="line">        path: std::path::PathBuf,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">/// Explicit structured mention selected by the user.</span></span><br><span class="line">    <span class="comment">///</span></span><br><span class="line">    <span class="comment">/// `path` identifies the exact mention target, for example</span></span><br><span class="line">    <span class="comment">/// `app://&lt;connector-id&gt;` or `plugin://&lt;plugin-name&gt;@&lt;marketplace-name&gt;`.</span></span><br><span class="line">    Mention &#123; name: <span class="type">String</span>, path: <span class="type">String</span> &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的 <code>TextElement</code> 设计得很好。它不会直接修改原始文本，而是通过 UTF-8 字节范围记录图片占位符等特殊元素在文本中的位置。<br>不过，本篇文章暂不对这部分展开分析。</p>
+<h3 id="3-封装为-InitialOperation"><a href="#3-封装为-InitialOperation" class="headerlink" title="3. 封装为 InitialOperation"></a>3. 封装为 <code>InitialOperation</code></h3><p>解析后的输入会进一步封装到 <code>InitialOperation</code> 中：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">InitialOperation</span> &#123;</span><br><span class="line">    UserTurn &#123;</span><br><span class="line">        items: <span class="type">Vec</span>&lt;UserInput&gt;,</span><br><span class="line">        output_schema: <span class="type">Option</span>&lt;Value&gt;,</span><br><span class="line">    &#125;,</span><br><span class="line">    Review &#123;</span><br><span class="line">        review_request: ReviewRequest,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>InitialOperation</code> 主要包括两种操作：</p>
+<ul>
+<li><code>UserTurn</code>：普通用户任务，用户输入就存放在这里；</li>
+<li><code>Review</code>：启动专门的代码审查任务。</li>
+</ul>
+<p>我们这里主要关注 Codex 的普通执行流程，因此暂时不展开 <code>Review</code>。</p>
+<h2 id="二、会话启动前的检查与初始化"><a href="#二、会话启动前的检查与初始化" class="headerlink" title="二、会话启动前的检查与初始化"></a>二、会话启动前的检查与初始化</h2><h3 id="1-检查当前工作目录"><a href="#1-检查当前工作目录" class="headerlink" title="1. 检查当前工作目录"></a>1. 检查当前工作目录</h3><p>封装完成后，Codex 会检查当前工作目录是否位于一个 Git 仓库中：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> !skip_git_repo_check</span><br><span class="line">    &amp;&amp; !dangerously_bypass_approvals_and_sandbox</span><br><span class="line">    &amp;&amp; <span class="title function_ invoke__">get_git_repo_root</span>(&amp;default_cwd).<span class="title function_ invoke__">is_none</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">eprintln!</span>(<span class="string">&quot;Not inside a trusted directory and --skip-git-repo-check was not specified.&quot;</span>);</span><br><span class="line">    std::process::<span class="title function_ invoke__">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只有在没有跳过 Git 检查、也没有开启绕过审批与沙箱的危险模式时，这项检查才会生效。</p>
+<h3 id="2-启动进程内-App-Server-Client"><a href="#2-启动进程内-App-Server-Client" class="headerlink" title="2. 启动进程内 App Server Client"></a>2. 启动进程内 App Server Client</h3><p>接下来开始建立客户端与 App Server 之间的通信：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">request_ids</span> = RequestIdSequencer::<span class="title function_ invoke__">new</span>();</span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">client</span> = InProcessAppServerClient::<span class="title function_ invoke__">start</span>(in_process_start_args).<span class="keyword">await</span>?;</span><br></pre></td></tr></table></figure>
+
+<p>这里使用的是 <code>InProcessAppServerClient</code>，也就是<strong>运行在同一进程内部的 App Server Client</strong>。它会在调用方和底层 App Server 之间转发请求、响应以及事件。</p>
+<h3 id="3-创建或恢复-Thread"><a href="#3-创建或恢复-Thread" class="headerlink" title="3. 创建或恢复 Thread"></a>3. 创建或恢复 Thread</h3><p>启动客户端以后，Codex 会确定本次任务使用哪个 Thread：</p>
+<ul>
+<li>如果执行的是 <code>codex exec resume</code>，就通过现有的 <code>thread/list</code> 和 <code>thread/resume</code> API 找到并恢复旧 Thread；</li>
+<li>否则通过 <code>thread/start</code> 创建一个新 Thread。</li>
+</ul>
+<p>得到 Thread 信息后，Codex 会把 Thread ID 记录到当前的 tracing span 中：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec_span.<span class="title function_ invoke__">record</span>(<span class="string">&quot;thread.id&quot;</span>, primary_thread_id_for_span.<span class="title function_ invoke__">as_str</span>());</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、启动-Turn-与中断监听"><a href="#三、启动-Turn-与中断监听" class="headerlink" title="三、启动 Turn 与中断监听"></a>三、启动 Turn 与中断监听</h2><h3 id="1-监听-Ctrl-C"><a href="#1-监听-Ctrl-C" class="headerlink" title="1. 监听 Ctrl+C"></a>1. 监听 <code>Ctrl+C</code></h3><p>Thread 准备完成后，Codex 会单独启动一个异步任务，用来监听用户是否按下 <code>Ctrl+C</code>：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> (interrupt_tx, <span class="keyword">mut</span> interrupt_rx) = mpsc::unbounded_channel::&lt;()&gt;();</span><br><span class="line">tokio::<span class="title function_ invoke__">spawn</span>(<span class="keyword">async</span> <span class="keyword">move</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> tokio::signal::<span class="title function_ invoke__">ctrl_c</span>().<span class="keyword">await</span>.<span class="title function_ invoke__">is_ok</span>() &#123;</span><br><span class="line">        tracing::debug!(<span class="string">&quot;Keyboard interrupt&quot;</span>);</span><br><span class="line">        <span class="keyword">let</span> <span class="variable">_</span> = interrupt_tx.<span class="title function_ invoke__">send</span>(());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这里没有直接结束进程，而是向 <code>interrupt_rx</code> 对应的通道发送一个中断信号。真正的中断请求会在后面的事件循环里处理。</p>
+<h3 id="2-根据-InitialOperation-启动任务"><a href="#2-根据-InitialOperation-启动任务" class="headerlink" title="2. 根据 InitialOperation 启动任务"></a>2. 根据 <code>InitialOperation</code> 启动任务</h3><p>接下来，Codex 根据 <code>InitialOperation</code> 的类型启动普通 Turn 或 Review。我们仍然只看普通的 <code>UserTurn</code> 路径。</p>
+<p>Turn ID 由 App Server 返回：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 省略 send_request_with_response 的具体参数。</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">response</span>: TurnStartResponse = <span class="title function_ invoke__">send_request_with_response</span>(<span class="comment">/* ... */</span>).<span class="keyword">await</span>?;</span><br><span class="line"><span class="comment">// 首先通过 client 开启一个 Turn，</span></span><br><span class="line"><span class="comment">// 然后从服务端返回的 response 中取得 ID，作为 task_id。</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">task_id</span> = response.turn.id;</span><br></pre></td></tr></table></figure>
+
+<p>到这里，我们已经拿到了两个关键 ID：</p>
+<ul>
+<li><code>primary_thread_id</code>：定位会话；</li>
+<li><code>task_id</code>：定位本次 Turn。</li>
+</ul>
+<p>后续不论是处理中断、过滤通知还是判断任务完成状态，基本都会围绕这两个 ID 进行。</p>
+<p>自此，任务的初始化环节结束，程序正式进入事件循环。</p>
+<h2 id="四、事件循环"><a href="#四、事件循环" class="headerlink" title="四、事件循环"></a>四、事件循环</h2><p>事件循环的完整代码比较长，不适合全部放到正文中。这里主要拆解其中最关键的几类分支。</p>
+<h3 id="1-处理-Ctrl-C"><a href="#1-处理-Ctrl-C" class="headerlink" title="1. 处理 Ctrl+C"></a>1. 处理 <code>Ctrl+C</code></h3><p>循环首先同时监听两类消息：</p>
+<ul>
+<li>用户是否按下 <code>Ctrl+C</code>；</li>
+<li>App Server 是否产生了新事件。</li>
+</ul>
+<p>如果收到中断信号，客户端会向 App Server 发送 <code>TurnInterrupt</code> 请求：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">send_request_with_response::&lt;TurnInterruptResponse&gt;(</span><br><span class="line">    &amp;client,</span><br><span class="line">    ClientRequest::<span class="title function_ invoke__">TurnInterrupt</span>(...),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>这个请求中会携带当前的 <code>thread_id</code> 和 <code>turn_id</code>，用于中断当前 Turn。需要注意的是，发送请求后程序不会马上退出事件循环，而是会继续接收 App Server 的后续事件，从而确认任务最终是完成、失败还是已经中断。</p>
+<p>如果 <code>maybe_interrupt.is_none()</code>，代表中断监听通道已经关闭。此时程序只会停止监听这个通道，并继续处理服务器事件。</p>
+<h3 id="2-处理-ServerRequest"><a href="#2-处理-ServerRequest" class="headerlink" title="2. 处理 ServerRequest"></a>2. 处理 <code>ServerRequest</code></h3><p>第一类服务端事件是 <code>ServerRequest</code>：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">InProcessServerEvent::<span class="title function_ invoke__">ServerRequest</span>(request) =&gt; &#123;</span><br><span class="line">    <span class="title function_ invoke__">handle_server_request</span>(&amp;client, request, &amp;<span class="keyword">mut</span> error_seen).<span class="keyword">await</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ServerRequest</code> 表示服务端主动向客户端发起、并且需要客户端返回响应的请求，例如命令执行审批、文件修改审批、工具向用户请求输入、MCP elicitation 以及动态工具调用等。</p>
+<p>这些请求统一交给 <code>handle_server_request</code> 处理。这个流程很重要，但是我们暂时不展开。</p>
+<h3 id="3-处理-ServerNotification"><a href="#3-处理-ServerNotification" class="headerlink" title="3. 处理 ServerNotification"></a>3. 处理 <code>ServerNotification</code></h3><p>第二类事件是 <code>ServerNotification</code>：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">InProcessServerEvent::<span class="title function_ invoke__">ServerNotification</span>(<span class="keyword">mut</span> notification) =&gt; &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它表示服务端主动向客户端发送的通知，其中包括运行过程中出现的错误、Item 状态变化、流式输出以及 Turn 完成信息等。</p>
+<p>首先，事件循环会根据 <code>Error</code> 或 <code>TurnCompleted</code> 的内容判断本次任务是否已经失败或中断：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">InProcessServerEvent::<span class="title function_ invoke__">ServerNotification</span>(<span class="keyword">mut</span> notification) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">ServerNotification</span>::<span class="title function_ invoke__">Error</span>(payload) = &amp;notification &#123;</span><br><span class="line">        <span class="keyword">if</span> payload.thread_id == primary_thread_id_for_requests</span><br><span class="line">            &amp;&amp; payload.turn_id == task_id</span><br><span class="line">            &amp;&amp; !payload.will_retry</span><br><span class="line">        &#123;</span><br><span class="line">            error_seen = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">ServerNotification</span>::<span class="title function_ invoke__">TurnCompleted</span>(payload) = &amp;notification</span><br><span class="line">        &amp;&amp; payload.thread_id == primary_thread_id_for_requests</span><br><span class="line">        &amp;&amp; payload.turn.id == task_id</span><br><span class="line">        &amp;&amp; matches!(</span><br><span class="line">            payload.turn.status,</span><br><span class="line">            codex_app_server_protocol::TurnStatus::Failed</span><br><span class="line">                | codex_app_server_protocol::TurnStatus::Interrupted</span><br><span class="line">        )</span><br><span class="line">    &#123;</span><br><span class="line">        error_seen = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里匹配到的 <code>notification</code> 使用了 <code>mut</code>，是因为后面还可能对它进行补全：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">maybe_backfill_turn_completed_items</span>(</span><br><span class="line">    config.ephemeral,</span><br><span class="line">    &amp;client,</span><br><span class="line">    &amp;<span class="keyword">mut</span> request_ids,</span><br><span class="line">    &amp;<span class="keyword">mut</span> notification,</span><br><span class="line">)</span><br><span class="line">.<span class="keyword">await</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这一部分属于尽力而为的数据修复。当非临时 Thread 的 <code>TurnCompleted</code> 没有携带完整 Items 时，Codex 会通过一次 <code>thread/read</code> 尝试补回最终结果。</p>
+<p>注意，这种补全恢复的是 Thread 中已经持久化的最终状态，并不等于把之前丢失的每一条流式事件重新播放一遍。</p>
+<p>补全结束后，<code>should_process_notification</code> 会判断当前通知是否属于本次 CLI 任务。因为事件流中可能存在其他 Thread、其他 Turn 或全局级别的通知，所以这里需要根据 <code>thread_id</code> 和 <code>turn_id</code> 进行过滤。</p>
+<p>最后，符合条件的通知会交给：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event_processor.<span class="title function_ invoke__">process_server_notification</span>(notification)</span><br></pre></td></tr></table></figure>
+
+<p>它负责输出事件，并根据返回的 <code>CodexStatus</code> 决定继续运行，还是开始结束整个执行会话。</p>
+<h3 id="4-处理-Lagged"><a href="#4-处理-Lagged" class="headerlink" title="4. 处理 Lagged"></a>4. 处理 <code>Lagged</code></h3><p>最后一类事件是 <code>Lagged</code>：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">InProcessServerEvent::Lagged &#123; skipped &#125; =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">message</span> = <span class="title function_ invoke__">lagged_event_warning_message</span>(skipped);</span><br><span class="line">    warn!(<span class="string">&quot;&#123;message&#125;&quot;</span>);</span><br><span class="line">    event_processor.<span class="title function_ invoke__">process_warning</span>(message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Lagged</code> 表示内部事件消费者跟不上事件生成速度，已经有部分事件因为背压被跳过。这里会生成一条警告，既写入日志，也交给 <code>event_processor</code> 展示。</p>
+<p>需要特别注意：<strong>这里不会逐条重新获取被跳过的原始事件。</strong> 原因不在这个 <code>match</code> 分支本身，而在更上游的事件转发逻辑。</p>
+<h4 id="4-1-事件队列本身是有界的"><a href="#4-1-事件队列本身是有界的" class="headerlink" title="4.1 事件队列本身是有界的"></a>4.1 事件队列本身是有界的</h4><p>在 <code>codex-rs/app-server-client/src/lib.rs</code> 中，事件通道按照 <code>channel_capacity</code> 创建：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pub</span> <span class="keyword">async</span> <span class="keyword">fn</span> <span class="title function_">start</span>(args: InProcessClientStartArgs) <span class="punctuation">-&gt;</span> IoResult&lt;<span class="keyword">Self</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">channel_capacity</span> = args.channel_capacity.<span class="title function_ invoke__">max</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">handle</span> =</span><br><span class="line">        codex_app_server::in_process::<span class="title function_ invoke__">start</span>(args.<span class="title function_ invoke__">into_runtime_start_args</span>()).<span class="keyword">await</span>?;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">request_sender</span> = handle.<span class="title function_ invoke__">sender</span>();</span><br><span class="line">    <span class="keyword">let</span> (command_tx, <span class="keyword">mut</span> command_rx) = mpsc::channel::&lt;ClientCommand&gt;(channel_capacity);</span><br><span class="line">    <span class="keyword">let</span> (event_tx, event_rx) = mpsc::channel::&lt;InProcessServerEvent&gt;(channel_capacity);</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，队列最多只能保存 <code>channel_capacity</code> 个尚未被消费的事件。这样可以让内存占用保持有界，而不是在消费者变慢时无限堆积消息。</p>
+<h4 id="4-2-事件被分为无损和尽力而为两类"><a href="#4-2-事件被分为无损和尽力而为两类" class="headerlink" title="4.2 事件被分为无损和尽力而为两类"></a>4.2 事件被分为无损和尽力而为两类</h4><p>上游首先通过 <code>event_requires_delivery</code> 判断事件是否必须送达：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">event_requires_delivery</span>(event: &amp;InProcessServerEvent) <span class="punctuation">-&gt;</span> <span class="type">bool</span> &#123;</span><br><span class="line">    <span class="comment">// These transcript and terminal events must remain lossless. Dropping</span></span><br><span class="line">    <span class="comment">// streamed assistant text or the authoritative completed item can leave</span></span><br><span class="line">    <span class="comment">// the TUI with permanently corrupted markdown, while dropping completion</span></span><br><span class="line">    <span class="comment">// notifications can leave surfaces waiting forever.</span></span><br><span class="line">    <span class="keyword">match</span> event &#123;</span><br><span class="line">        InProcessServerEvent::<span class="title function_ invoke__">ServerNotification</span>(notification) =&gt; &#123;</span><br><span class="line">            <span class="title function_ invoke__">server_notification_requires_delivery</span>(notification)</span><br><span class="line">        &#125;</span><br><span class="line">        _ =&gt; <span class="literal">false</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>必须送达的事件包括助手文本、计划、推理增量，以及 <code>ItemCompleted</code>、<code>TurnCompleted</code> 等关键通知。这些事件使用等待式的 <code>send</code>：队列满时会等待消费者腾出空间，而不是直接丢弃。</p>
+<p>其他事件则属于尽力而为类型，例如高频的命令输出增量或进度通知。它们使用非阻塞的 <code>try_send</code>。</p>
+<h4 id="4-3-队列满时，尽力而为事件会被明确丢弃"><a href="#4-3-队列满时，尽力而为事件会被明确丢弃" class="headerlink" title="4.3 队列满时，尽力而为事件会被明确丢弃"></a>4.3 队列满时，尽力而为事件会被明确丢弃</h4><p>最直接的证据仍然位于 <code>codex-rs/app-server-client/src/lib.rs</code>：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="title function_ invoke__">event_requires_delivery</span>(&amp;event) &#123;</span><br><span class="line">    <span class="comment">// Block until the consumer catches up for transcript/completion notifications; this</span></span><br><span class="line">    <span class="comment">// preserves the visible assistant output even when the queue is otherwise saturated.</span></span><br><span class="line">    <span class="keyword">if</span> event_tx.<span class="title function_ invoke__">send</span>(event).<span class="keyword">await</span>.<span class="title function_ invoke__">is_err</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> ForwardEventResult::DisableStream;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ForwardEventResult::Continue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">match</span> event_tx.<span class="title function_ invoke__">try_send</span>(event) &#123;</span><br><span class="line">    <span class="title function_ invoke__">Ok</span>(()) =&gt; ForwardEventResult::Continue,</span><br><span class="line">    <span class="title function_ invoke__">Err</span>(mpsc::error::TrySendError::<span class="title function_ invoke__">Full</span>(event)) =&gt; &#123;</span><br><span class="line">        *skipped_events = skipped_events.<span class="title function_ invoke__">saturating_add</span>(<span class="number">1</span>);</span><br><span class="line">        warn!(<span class="string">&quot;dropping in-process app-server event because consumer queue is full&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">InProcessServerEvent</span>::<span class="title function_ invoke__">ServerRequest</span>(request) = event &#123;</span><br><span class="line">            <span class="title function_ invoke__">reject_server_request</span>(request);</span><br><span class="line">        &#125;</span><br><span class="line">        ForwardEventResult::Continue</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_ invoke__">Err</span>(mpsc::error::TrySendError::<span class="title function_ invoke__">Closed</span>(_)) =&gt; ForwardEventResult::DisableStream,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的执行流程非常明确：</p>
+<ol>
+<li>使用 <code>try_send(event)</code> 尝试把尽力而为事件放入队列；</li>
+<li>队列已满时进入 <code>TrySendError::Full(event)</code> 分支；</li>
+<li>将 <code>skipped_events</code> 加一；</li>
+<li>输出 <code>dropping ... because consumer queue is full</code> 警告；</li>
+<li>返回 <code>ForwardEventResult::Continue</code>，继续处理后续事件，并没有重试或保存当前事件。</li>
+</ol>
+<p>如果无法入队的是 <code>ServerRequest</code>，代码还会调用 <code>reject_server_request(request)</code> 明确拒绝它，避免 App Server 永远等待一个不可能到来的响应。</p>
+<p>因此，当下游最终收到 <code>Lagged &#123; skipped &#125;</code> 时，它拿到的只有“丢失了多少条事件”这个计数，并没有那些事件的完整内容、事件 ID 或可供重放的游标。此时自然无法在 <code>Lagged</code> 分支中把它们逐条取回来。</p>
+<p>这套设计的核心取舍是：<strong>让可降级的实时通知在过载时可以被丢弃，对无法入队的 <code>ServerRequest</code> 给出明确拒绝，换取内存有界，并避免慢消费者拖住整个执行流程；同时对文本内容和完成状态等关键事件保持可靠送达。</strong></p>
+<h4 id="4-4-Lagged-上报的是累计丢失数量"><a href="#4-4-Lagged-上报的是累计丢失数量" class="headerlink" title="4.4 Lagged 上报的是累计丢失数量"></a>4.4 <code>Lagged</code> 上报的是累计丢失数量</h4><p>被跳过的事件数量会累计在 <code>skipped_events</code> 中。转发下一个事件时，如果队列已经有空间，上游会尝试先发送 <code>Lagged</code>；如果下一个事件属于必须送达类型，则会等待容量并保证先发出这个标记。计数会被封装成：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">InProcessServerEvent::Lagged &#123;</span><br><span class="line">    skipped: *skipped_events,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对应的事件定义位于 <code>codex-rs/app-server/src/in_process.rs</code>：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// Event emitted from the app-server to the in-process client.</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// [`Lagged`](Self::Lagged) is a transport health marker, not an application</span></span><br><span class="line"><span class="comment">/// event — it signals that the consumer fell behind and some events were dropped.</span></span><br><span class="line"><span class="meta">#[derive(Debug, Clone)]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">enum</span> <span class="title class_">InProcessServerEvent</span> &#123;</span><br><span class="line">    <span class="comment">/// Server request that requires client response/rejection.</span></span><br><span class="line">    <span class="title function_ invoke__">ServerRequest</span>(ServerRequest),</span><br><span class="line">    <span class="comment">/// App-server notification directed to the embedded client.</span></span><br><span class="line">    <span class="title function_ invoke__">ServerNotification</span>(ServerNotification),</span><br><span class="line">    <span class="comment">/// Indicates one or more events were dropped due to backpressure.</span></span><br><span class="line">    Lagged &#123; skipped: <span class="type">usize</span> &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>源码注释也明确说明，<code>Lagged</code> 是一个传输健康标记，而不是原始业务事件。它只能告诉下游“消费者落后了，并且已经丢失若干事件”，无法携带和恢复那些事件的具体内容。</p>
+<h2 id="五、会话结束"><a href="#五、会话结束" class="headerlink" title="五、会话结束"></a>五、会话结束</h2><p>当事件处理器根据完成通知返回 <code>CodexStatus::InitiateShutdown</code> 后，Codex 会请求取消 Thread 订阅，并退出事件循环。随后关闭进程内客户端：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> <span class="variable">Err</span>(err) = client.<span class="title function_ invoke__">shutdown</span>().<span class="keyword">await</span> &#123;</span><br><span class="line">    warn!(<span class="string">&quot;in-process app-server shutdown failed: &#123;err&#125;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后通过：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event_processor.<span class="title function_ invoke__">print_final_output</span>();</span><br></pre></td></tr></table></figure>
+
+<p>输出本次任务的最终结果。如果此前记录到了不可重试的错误、失败或中断状态，进程还会以非零状态码退出，方便脚本和自动化系统判断执行结果。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Agent%E5%BC%80%E5%8F%91/" rel="tag"># Agent开发</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/07/14/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%AC%AC%E4%BA%8C%E7%AB%A0/" rel="prev" title="强化学习-第二章">
+                  <i class="fa fa-angle-left"></i> 强化学习-第二章
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">iron moon</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+</body>
+</html>

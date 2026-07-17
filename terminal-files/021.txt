@@ -1,340 +1,218 @@
-首先这个网站在检测到你是爬虫过后是会把你的IP扔到黑名单的，这时候你会爬取到方正证券的评论信息，你的所有访问都会给你转到那里去
-所以对于这个爬虫，我们需要使用多个ip的代理池来进行管理。
+## 信创的基本概念
 
-我设计了一个线程用来进行ip请求和对评论的爬取。这里需要注意对ip请求的限制。因为对于在编写这个的时候找到的各个ip代理网站，他们都用的是同一套机制，即请求的时候直接把ip给你，过后就不管了。如果用户丢失了关于这个ip的信息也不退款。所以为了省钱等等一系列原因。我们设置每个线程去代理网站请求一个ip
-
-在爬取过程中，一开始是直接使用的requests库来获取网站的源码，再从源码中获取需要的信息
-```python
-soup = BeautifulSoup(res.text, 'html.parser')
-script_tags = soup.find_all('script')
-
-for script in script_tags:
-    if script.string and 'var article_list' in script.string:
-        try:
-            match = re.search(r'var article_list\s*=\s*({.*?});', script.string, re.DOTALL)
-            if match:
-                json_str = match.group(1)
-                json_str = re.sub(r',\s*}(?=\s*$)', '}', json_str)
-                json_str = re.sub(r',\s*](?=\s*$)', ']', json_str)
-                data = json.loads(json_str)
-                posts = extract_posts(data)
-                result_queue.put({
-                    'stock': stock,
-                    'page': page,
-                    'data': posts,
-                    'method': 'requests'
-                })
-                return
-        except Exception as e:
-            print(f"Error parsing page {page}: {str(e)}")
-            continue
-
-def extract_posts(data):
-    # Implement your post extraction logic here
-    posts = []
-    for post in data.get('re', []):
-        try:
-            title = post.get('post_title', '').strip()
-            # if isinstance(title, bytes):
-            #     title = title.decode('utf-8')
-            post_info = {
-                'id': post.get('post_id'),
-                'title': post['post_title'],
-                'author': post.get('user_nickname', '').strip(),
-                'click_count': post.get('post_click_count', 0),
-                'comment_count': post.get('post_comment_count', 0),
-                'publish_time': post.get('post_publish_time', ''),
-                'last_time': post.get('post_last_time', ''),
-                'source_url': f"https://guba.eastmoney.com/news,{self.stock_num},{post.get('post_id')}.html"
-            }
-            posts.append(post_info)
-        except (KeyError, AttributeError) as e:
-            logger.warning(f"Skipping malformed post: {str(e)}")
-    # ... parsing logic ...
-
-    return posts
-```
-但可能因为其爬虫特征太明显，很轻易的就被网站丢入了ip黑名单，然后一直获取方正证券吧的假数据。实际获取的有效数据有大概40页左右
-
-于是我们选择更换使用selenium来模拟人的行为来破解网站的反爬机制。
-这里我们找到了网上流传的[东方财富爬虫](https://github.com/zcyeee/EastMoney_Crawler)，具体使用后发现其获取的网站评论内容也不过500页 。到一个几百页的页码时
-网站会跳出来验证码机制。如果过不了，那么ip会被拉黑，从而不断的获取方正股吧的虚假数据。  这里使用selenium去模拟验证码的时候，其验证码不能稳定触发。这里暂时还不知道应该
-如何去规避这种反爬机制，等待进一步的学习。
-
-于是选择使用多个高匿IP去获取网站源代码的方式去获取网站源码。由于最终比较了一下各个IP代理商的价格，选择了一个IP多但是单个IP持续时间不长的厂商。这样的话就可以使用requests来构建代理池爬取了
-
-```python
-import requests
-from fake_useragent import UserAgent
-from threading import Thread,Lock,BoundedSemaphore
-import json
-import re
-from typing import Dict, List
-from bs4 import BeautifulSoup
-import logging
-import time
-import os
-from queue import Queue
-
-import random
-
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.INFO)
-logger.addHandler(stream_handler)
-lock = Lock()
-semaphore = BoundedSemaphore(5)
-
-def get_proxy():
-    api_url = 'http*******************'
-    try:
-        time.sleep(0.2)
-        response = requests.get(api_url, timeout=10)
-        response.raise_for_status()
-        data = json.loads(response.content)
-        proxy_list = data.get('data', [])
-        proxy_list = proxy_list.get('proxy_list',[])
-        item = proxy_list[0]
-        if isinstance(item, str) and ':' in item:
-            ip, remain = item.split(':', 1)
-            port = remain.split(',')[0]
-            return f"http://{ip}:{port}"
-    except Exception as e:
-        logger.error(f"获取代理失败: {e}")
-    return None
-
-def get_url(stock,page):
-    return f"https://guba.eastmoney.com/list,{stock}_{page}.html"
-
-def extract_posts(data: Dict,stock_num:int) -> List[Dict]:
-    """Extract and format post information from raw data."""
-    posts = []
-    for post in data.get('re', []):
-        try:
-            title = post.get('post_title', '').strip()
-            # if isinstance(title, bytes):
-            #     title = title.decode('utf-8')
-            post_info = {
-                'id': post.get('post_id'),
-                'title': post['post_title'],
-                'author': post.get('user_nickname', '').strip(),
-                'click_count': post.get('post_click_count', 0),
-                'comment_count': post.get('post_comment_count', 0),
-                'publish_time': post.get('post_publish_time', ''),
-                'last_time': post.get('post_last_time', ''),
-                'source_url': f"https://guba.eastmoney.com/news,{stock_num},{post.get('post_id')}.html"
-            }
-            posts.append(post_info)
-        except (KeyError, AttributeError) as e:
-            logger.warning(f"Skipping malformed post: {str(e)}")
-    return posts
-
-def parse_page(page_source: str, page: int,stock_num:int) -> List[Dict]:
-    soup = BeautifulSoup(page_source, 'html.parser')
-    script_tags = soup.find_all('script')
-    
-    for script in script_tags:
-        if script.string and 'var article_list' in script.string:
-            try:
-                match = re.search(r'var article_list\s*=\s*({.*?});', script.string, re.DOTALL)
-                if match:
-                    json_str = match.group(1)
-                    json_str = re.sub(r',\s*}(?=\s*$)', '}', json_str)
-                    json_str = re.sub(r',\s*](?=\s*$)', ']', json_str)
-                    data = json.loads(json_str)
-                    return extract_posts(data,stock_num)
-            except (json.JSONDecodeError, AttributeError, KeyError) as e:
-                logger.error(f"解析页面{page}错误: {str(e)}")
-                continue
-def get_page(stock, page, proxy):
-    headers = {
-        'User-Agent': UserAgent().random,
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'Accept-Language': 'zh-CN,zh;q=0.9',
-        'Connection': 'keep-alive',
-    }
-    
-    proxies = {
-        "http": proxy,
-        "https": proxy
-    }
-    
-    url = get_url(stock, page)
-    try:
-        response = requests.get(url, headers=headers, proxies=proxies, timeout=10)
-        print(f"Page {page} of stock {stock} fetched successfully.")
-        return response.content.decode()
-    except Exception as e:
-        print(f"Failed to fetch page {page} of stock {stock}: {e}")
-
-def save_to_json(posts: List[Dict], file_path: str):
-    """将帖子信息保存到 JSON 文件中"""
-    with lock:
-        if os.path.exists(file_path):
-            # 如果文件已存在，追加数据
-            with open(file_path, 'r', encoding='utf-8') as f:
-                existing_data = json.load(f)
-            existing_data.extend(posts)
-            posts = existing_data
-
-        with open(file_path, 'w', encoding='utf-8') as f:
-            json.dump(posts, f, ensure_ascii=False, indent=4)
-        logger.info(f"数据已保存到 {file_path}")
-
-def load_progress(progress_file: str) -> int:
-    """从进度文件中加载已爬取的最大页数"""
-    if os.path.exists(progress_file):
-        with open(progress_file, 'r', encoding='utf-8') as f:
-            try:
-                return int(f.read().strip())
-            except ValueError:
-                pass
-    return 0  # 如果文件不存在或内容无效，返回 0
-
-def update_progress(progress_file: str, current_page: int):
-    """更新进度文件中的最大页数"""
-    with open(progress_file, 'a+', encoding='utf-8') as f:
-        f.write(str(current_page)+'\n')
-    logger.info(f"进度已更新到 {progress_file}，当前页数：{current_page}")
-
-def process_pages(stock_code: str, start_page: int, end_page: int, output_file: str):
-    """处理指定范围内的多个页面"""
-    semaphore.acquire()  # 获取信号量，控制并发线程数
-    proxy = get_proxy()
-    if not proxy:
-        logger.error("未能获取代理 IP，跳过线程创建。")
-        semaphore.release()
-        return
-    try:
-        for page in range(start_page, end_page + 1):
-            page_source = get_page(stock_code, page, proxy)
-            if not page_source:
-                logger.error(f"无法获取页面源码，跳过页面 {page}。")
-                continue
-
-            posts = parse_page(page_source, page, stock_code)
-            if posts:
-                logger.info(f"成功提取页面 {page} 的 {len(posts)} 条帖子信息。")
-                save_to_json(posts, output_file)
-                update_progress("./log", page)
-
-            else:
-                logger.warning(f"页面 {page} 未提取到任何帖子信息。")
-
-            # 添加延迟，保护服务器
-            time.sleep(abs(random.uniform(3,7)))
-    finally:
-        semaphore.release()  # 释放信号量
+**信创的来源**：24家专业从事软硬件关键技术研究及应用的国内单位，共同发起成立了一个非营利性社会组 织，并将其命名为“信息技术应用创新工作委员会”,简称“信创工委会”。这是“信创”这个词的来源。
+"信创"的核心目的，是为了实现信息技术产业的完全自主可控。
 
 
-def main(stock_code: str, total_pages: int, pages_per_thread: int):
-    """主函数：动态分配任务给多个线程"""
-    output_file = f"{stock_code}_posts.json"
-    threads = []
-    num_threads = total_pages // pages_per_thread + (1 if total_pages % pages_per_thread != 0 else 0)
+**信创的发展历程**: (“863”、“973”、“核高基”)  核高基就是“核心电子器件、高端通用芯片及基础软件产品”的简称
 
-    for i in range(num_threads):
-        # 每个线程获取一个代理 IP
-        # 计算当前线程负责的页数范围
-        start_page = i * pages_per_thread + 1
-        end_page = min((i + 1) * pages_per_thread, total_pages)
 
-        # 创建线程
-        thread = Thread(target=process_pages, args=(stock_code, start_page, end_page, output_file))
-        threads.append(thread)
-        thread.start()
+**信创的发展背景(关键时间警示)**
+- 2008年：微软“黑屏”事件；           
+- 2013年：美国“棱镜门”事件；
+- 2018年：中兴、华为事件；
+- 实体清单事件
 
-    # 等待所有线程完成
-    for t in threads:
-        t.join()
+**信创的发展背景**
+- 由于历史的原因，我们国家在信息技术领域长期处于模仿和引进的地位。国际IT巨头占据了大量的市场份额， 也垄断了国内的信息基础设施。它们制定了国内IT底层技术标准，并控制了整个信息产业生态。
+- 随着中国国力的不断崛起，某些国家主动挑起贸易和科技领域的摩擦，试图打压中国的和平发展。作为国民经济底层支持的信息技术领域，自然而然地成为他们的重点打击对象。
+- 面对日益增加的安全风险，我们国家必须尽快实现自主可控。
 
-def process_missing_pages(stock_code: str, pages: list, output_file: str):
-    """处理缺失的多个页面"""
-    semaphore.acquire()  # 获取信号量，控制并发线程数
-    proxy = get_proxy()
-    if not proxy:
-        logger.error("未能获取代理 IP，跳过线程创建。")
-        semaphore.release()
-        return
-    
-    try:
-        for page in pages:
-            page_source = get_page(stock_code, page, proxy)
-            if not page_source:
-                logger.error(f"无法获取页面源码，跳过页面 {page}。")
-                continue
+**信创的5个核心要求**
+技术先进，数据安全，技术成熟，产业完整，自主可控
 
-            posts = parse_page(page_source, page, stock_code)
-            if posts:
-                logger.info(f"成功提取页面 {page} 的 {len(posts)} 条帖子信息。")
-                save_to_json(posts, output_file)
-                update_progress("./log", page)
-            else:
-                logger.warning(f"页面 {page} 未提取到任何帖子信息。")
+**信创的作用和意义**
+- **带动经济**：信息技术应用创新发展是目前的一项国家战略，也是当今形势下国家经济发展的新动能。      
+- **维护安全**：发展信创是为了解决本质安全的问题，实现可掌控、可研究、可发展、可生产。
+- **布局产业**：信创产业发展已经成为发展数字经济的关键举措，可以带动传统ICT 产业转型，构建产业集群。
 
-            # 添加延迟，保护服务器
-            time.sleep(abs(random.uniform(3,7)))
-    finally:
-        semaphore.release()  # 释放信号量
+## 信创的产业生态
 
-def crawl_missing_pages(stock_code: str, missing_pages: list, batch_size: int = 20):
-    """主函数：多线程爬取缺失的页面"""
-    output_file = f"{stock_code}_posts.json"
-    threads = []
-    
-    # 将缺失的页面分成批次，每个线程处理一个批次
-    for i in range(0, len(missing_pages), batch_size):
-        batch = missing_pages[i:i + batch_size]
-        
-        # 创建线程
-        thread = Thread(
-            target=process_missing_pages, 
-            args=(stock_code, batch, output_file)
-            )
-        threads.append(thread)
-        thread.start()
-        time.sleep(1)  # 稍微延迟一下，避免同时创建太多线程
+### 信创产业的体系类别
+- 信创产业的生态体系极为庞大，几乎覆盖信息产业的方方面面；
+- 从产业链角度来看，它主要由基础硬件、基础软件、应用软件、信息安全这四部分构成。
+![alt text](image.png)
 
-    # 等待所有线程完成
-    for t in threads:
-        t.join()
-        
-if __name__ =='__main__':
-    # 测试参数
-    stock_code = "300750"   # 贵州茅台股票代码
-    total_pages = 3300       # 总页数
-    threads_count = 5       # 线程数（每个线程爬取 20 页）
 
-    # 爬取页面
-    # main(stock_code, total_pages, threads_count)
-    
-    # 爬取没有爬到的页面
-    try:
-        with open("./log", "r", encoding='utf-8') as f:
-            codes = f.read().split('\n')
-    except FileNotFoundError:
-        codes = []
-    
-    # 处理并找出缺失的页码
-    codes = list(set(codes))
-    codes = [int(i) for i in codes if i.isdigit()]
-    codes.sort()
-    
-    missing_pages = []
-    for i in range(1, total_pages + 1):
-        if i not in codes:
-            print(f"缺失页码：{i}")
-            missing_pages.append(i)
-    
-    print(f"共发现 {len(missing_pages)} 个缺失页面")
-    
-    if missing_pages:
-        # 开始爬取缺失的页面
-        crawl_missing_pages(stock_code, missing_pages)
-        print("缺失页面爬取完成！")
-    else:
-        print("没有缺失页面需要爬取。")
-        print("没有缺失页面需要爬取。")
+### 信创的应用领域(2+8+N)
+![alt text](image-1.png)
 
-```
+### 中国信创产业发展现状
+中国信创产业趋向集团化，目前形成“三大四小”的发展格局。
+“三大”:中国电子、中国电科和华为。
+“四小”:航天系、中科系、浪潮股份和紫光集团。
+
+
+
+### 信创的芯片产业链
+
+信创的芯片产业链包括
+- **计算机系统芯片**
+  - 中央处理器（CPU，Central Processing Unit）
+  - 图形处理单元（GPU，Graphics Processing Unit）
+  - 数据处理单元（DPU，Data Processing Unit）
+
+- **移动终端芯片**
+  - 主芯片/片上系统（SoC，System on Chip）
+  - 应用处理器（AP，Application Processor）
+  - 基带芯片（BP，Baseband Processor）
+  - 嵌入式CPU/GPU（Embedded CPU/GPU）
+  - 嵌入式图形处理芯片（EmbeddedDSP）
+
+- **通用电子系统芯片**
+  - 可编程逻辑设备（FPGA/EPLD，Field Programmable Gate Array）
+  - 数字信号处理器（DSP，Digital Signal Processor）
+  - 嵌入式系统（Embedded CPU）
+
+- **半导体存储芯片**
+  - 动态随机存取存储器（DRAM，Dynamic RAM）
+  - NAND闪存（NAND Flash）
+  - NOR闪存（NOR Flash）
+
+- **人工智能芯片**
+  - 嵌入式神经网络处理器（NPU，Neural network Processing Unit）
+
+CPU分类  按照指令集分类分成 CISC(x86) RISC(ARM MIPS RISC-V)
+
+信创储存产业链 以​​存储晶圆颗粒​​为基础载体实现数据存储，通过​​主控芯片​​完成读写控制，经​​封装测试​​环节实现芯片集成与可靠性验证，最终由​​模组厂商​​整合为终端产品
+
+
+### 数据库
+
+#### 数据库的体系架构：
+- **数据库内核**：对数据进行写入、读取与查询等核心操作；
+- **数据库管理平台**：对数据库集群进行统一管理和维护；
+- **数据库周边工具**：提升数据库的使用效率，改善用户体验。
+
+#### 数据库的分类：
+- **按功能**：OLTP事务型数据库、OLAP分析型数据库、HTAP混合型数据库
+- **按数据**：传统关系型数据库、NoSQL数据库、NewSQL数据库、多模数据库
+- **按架构**：层次式数据库、网络式数据库、关系式数据库
+- **按存储介质**：硬盘数据库、内存数据库
+- **按部署模式**：本地数据库、云数据库
+- **按商业模式**：开源数据库、商业数据库
+
+#### 数据库的分类
+关系型数据库
+非关系型数据库
+
+
+### 应用软件产业
+
+#### 通用应用软件
+**1. 办公软件**
+- **基础办公软件**：包括输入法、浏览器、邮箱、会议系统、办公自动化（OA）、即时通讯（IM）、文字识别软件（OCR）、知识库（KB）等。
+- **流版签软件**：涵盖流式软件、版式软件和签名软件。
+
+**2. 管理&应用软件**
+- **业务管理软件**：如ERP（企业资源计划）、HCM（人力资源管理）、CRM（客户关系管理）、SCM（供应链管理）、BMP（业务流程管理）等。
+- **业务应用软件**：例如BI平台（商业智能平台）、客服软件等。
+
+#### 工业软件
+**1. 研发设计类**
+- 包括CAD（计算机辅助设计）、CAM（计算机辅助制造）、PLM（产品生命周期管理）、CAE（计算机辅助工程）、EDA（电子设计自动化）等。
+
+**2. 生产制作类**
+- 涉及MES（制造执行系统）、DSC（分布式控制系统）、SCADA（数据采集与监视控制系统）、PLC（可编程逻辑控制器）、EMS（能源管理系统）等。
+
+**3. 运维服务类**
+- 主要包含APM（应用程序性能管理）、MRO（维护、修理和大修）等。
+
+### 信创中的信息安全
+
+#### 一、硬件
+- **防火墙**：用于在网络边界处过滤和控制数据包，防止未经授权的访问。
+- **VPN（虚拟专用网络）**：提供安全的远程访问通道，确保数据传输的安全性。
+- **入侵检测与防御系统（IPS/IDS）**：监测网络流量，识别并阻止潜在的攻击行为。
+- **安全内容管理**：对网络内容进行过滤和管理，防止恶意软件和不适当内容的传播。
+- **统一威胁管理（UTM）**：集成多种安全功能，如防火墙、防病毒、入侵检测等，提供全面的安全保护。
+- **安全芯片**：内置安全功能的芯片，用于加密和身份验证等安全操作。
+- **智能卡**：存储用户身份信息和密钥的卡片，用于身份认证和数据保护。
+- **生物鉴定**：利用指纹、面部识别等生物特征进行身份验证。
+
+#### 二、软件
+- **身份管理与访问控制**：管理和控制用户的身份和访问权限，确保只有授权用户可以访问资源。
+- **终端安全软件**：保护终端设备免受病毒、恶意软件等威胁。
+- **数字信任软件**：建立和维护数字环境中的信任关系，如数字签名和证书管理。
+- **安全浏览器**：具有增强安全功能的浏览器，保护用户在互联网上的活动。
+- **态势感知**：实时监控和分析网络安全状况，及时发现和应对安全威胁。
+- **网络舆情**：监测和分析网络上的公众舆论，防范网络舆情风险。
+- **云安全**：保护云计算环境中的数据和应用安全。
+- **数据源认证**：验证数据来源的真实性，防止数据篡改和伪造。
+
+#### 三、服务
+- **安全规划与咨询**：提供安全策略和方案的规划与咨询服务。
+- **安全运维**：负责日常的安全管理和维护工作，确保系统的安全运行。
+- **数据灾备**：制定和实施数据备份和恢复计划，保障数据的安全性和可用性。
+- **安全测评认证**：对信息系统进行安全评估和认证，确保其符合安全标准。
+- **安全实施**：执行安全策略和措施，确保其有效落地。
+- **安全培训**：对员工进行安全意识和技能培训，提高整体安全水平。
+- **攻防演练**：通过模拟攻击和防御演练，检验和提升安全防护能力。
+
+--- 
+
+## 信创的现状与未来
+信创的阶段性目标是国资委下发的**79号文**
+
+### 信创的发展阶段
+
+预研摸索阶段（1993-2007年）
+加速追赶阶段（2008-2016年）
+落地实践阶段（2017-2019年）
+应用赶超阶段（2020年-未来）
+
+### 信创的发展思路
+第一步，在党政等封闭市场进行应用，打磨产品和生态，培育骨干企业；
+第二步，在产品好用和生态相对成熟之后，进入重点行业市场，如电信、轨交、电力等行业；
+第三步，将信创产品全面应用到消费市场。
+
+### 信创的发展现状
+- 信创产业规模以每年不低于3%的比例持续增长；
+- 国有企业在资金、技术等方面具备一定优势，约占据信创市场的75%;
+- 东部地区借助沿海贸易和交通优势，占据市场份额50%以上，中部地区产业实力较强，占据市场份额35%,西部 地区经济体量相对较小，占据市场份额不到15%;
+- 整机生产、操作系统、数据库、软件中间件等已实现全过程国产化；
+- 芯片制造、存储器、安全终端、网络设备等基础设备在工艺、设计等方面与国外还存在差距。
+
+
+### 信创的主要挑战
+- 行业内的同质化竞争情况严重，价格战比较严重；
+- 部分领域产品的技术指标、稳定性有待进一步提升；
+- 部分关键技术仍未完全突破，尤其是上游核心技术，仍有部分被国外企业垄断；
+- 信创产业的绝对用户数量仍然难以与国外巨头抗衡，需要在国际上赢得用户和市场的认可；  
+- 信创产业格局较为分散，龙头企业不多，无法发挥合力优势；
+- 信创产业人才数量仍然不足，人才梯队结构不合理，影响长远发展；
+- 存在弄虚作假的情况，假借信创的名义，浑水摸鱼。
+
+### 信创发展需要关注的重点
+1. **顶层设计**：通过政策引导和制度建设，加强资源投入，推动产业发展。
+2. **区域布局**：地方产业合理布局信创领域，与产业升级紧密结合。
+3. **生态建设**：产业联盟和行业协会积极发挥作用，推动生态，共建标准。
+4. **产业实践**：通过实践，加强产品的兼容适配，推动成熟度。
+5. **人才培养**：重视人才储备，加强产教融合，增设理论和实践课程。
+
+
+---
+
+### 人工智能定义
+- 人工智能（AI）是计算机科学的一个分支，旨在使计算机能够像人类一样思考、学习和解决问题。目标是通过算法和模型让计算机具备智能行为，从而实现自动化决策和任务执行。
+
+### 人工智能发展历程
+- **早期阶段**
+  - 符号主义和规则引擎
+- **中期阶段**
+  - 统计学习和机器学习的兴起
+- **当前阶段**
+  - 深度学习的广泛应用，结合大数据和计算能力，推动AI进入强人工智能领域
+
+### 人工智能重要性
+- 推动科技进步与解决复杂问题
+
+### 强人工智能 vs 弱人工智能
+- **强人工智能**：具备与人类智能相当的能力，能够理解复杂问题并自主解决。
+- **弱人工智能**：专注于特定任务，如语音识别、图像分类等，目前应用广泛。
+
+### 人工智能的应用领域
+- 自然语言处理（NLP）
+- 计算机视觉（CV）
+- 推荐系统
+- 自动驾驶

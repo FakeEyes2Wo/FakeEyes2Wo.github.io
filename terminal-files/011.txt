@@ -1,95 +1,53 @@
-## 智能体
-Agent是一个能感知环境、做出决策、执行动作，并通过经验学习改进自身行为的自主实体。
-现在LLM出来过后，Agent的研究领域基本上采取大模型来作为大脑构建LLM + Agent
+# 数据科学生命周期
+![alt text](image-3.png)
+**1. 提问**
+- 核心：提出好问题，问题类型（描述、探索、推理、预测）决定分析方向。
+- 关键：将宽泛问题转化为可被数据回答的具体问题，明确所需数据与分析路径。
 
-这个的话我知道的有Reflection和RAG等机制
+**2. 获取数据**
+- 来源：昂贵（需精确协议）或廉价（如在线数据）。
+- 重点：检查数据质量（缺失、异常值）、范围、代表性及潜在偏见，必要时进行数据清洗与转换。
 
-Reflection机制为自我反思机制，大模型自己判断自己的思路是否正确。这个玩意我看过的有在 gemini 解决IMO题目的时候看到过
+**3. 理解数据**
+- 方法：探索性数据分析（图表、统计）、统计模型（如回归）。
+- 特点：高度迭代，可能回溯至前阶段以优化数据或问题。
 
-
-## 多智能体系统
-
-- 多智能体系统工程应用
-    - 多智能体的分布式问题求解机制
-    - 多智能体的可扩展性
-    - 多智能体的鲁棒性
-
-- 多智能体的控制理论
-    - 有限时间容错控制
-    - 多智能体间的通信，激励设计
-
-- 多智能体RL
-    - 多智能体奖励分配
-    - 多智能体表征学习
-
-### LLM与多智能体系统
-
-**大模型赋能的智能体团队**
-这种系统在 这篇[survey](https://arxiv.org/pdf/2501.06322)里面的说法是   现在主流的研究在开发这种多智能体系统上，尤其是针对某个具体场景开发多智能体系统。
-文章里面说这种多智能体系统包括
-> - 智能体（Agents）：具有角色、能力、行为和知识模型的核心行动者。其能力包括学习、规划、推理和决策等，这些能力赋予智能体及整个系统以智能。
-> - 环境（Environment）：智能体所处的外部世界，智能体可以感知该环境并对其采取行动。环境可以是模拟的，也可以是物理空间，例如工厂、道路、电网等。
-> - 交互（Interactions）：智能体之间通过标准的智能体通信语言进行交流。根据系统需求，智能体之间的交互可包括合作、协调、协商等多种形式。
-> - 组织结构（Organization）：智能体既可以采用层级化控制结构，也可以基于涌现行为进行自组织。
+**4. 了解世界**
+- 目标：将发现推广至样本之外。
+- 手段：推断总体（A/B检验、置信区间），预测未来（预测区间、训练/测试拆分）。
 
 
-里面的环境这块就说明这种多智能体系统的玩意主要是在某个具体场景进行落地，然后来发论文
+## 问题与数据范围
+如果要问自己一些关于数据的问题，可以从下面三个方面来进行提问：
+- **来源**：谁收集？为何收集？（判断数据是否适用）
+- **时空**：何时？何地？（判断情境是否相关）
+- **范围**：目标群体？访问方式？选择与测量方法？仪器与校准？
 
-**e.g.**
-金融方面的：[TradingAgents: Multi-Agents LLM Financial Trading Framework](https://arxiv.org/abs/2412.20138)
-法律方面的：[LawLuo: A Multi-Agent Collaborative Framework for Multi-Round Chinese Legal Consultation](https://arxiv.org/abs/2407.16252)
-安全方面的：[AI-Driven Multi-Agent System for Real-Time Security Analysis of Software Releases](https://ieeexplore.ieee.org/document/11172929)
+**偏差类型**
+- **覆盖偏差**：抽样框未覆盖目标人群全体。
+- **选择偏差**：选择机制使样本单位概率不均（如便利样本、志愿者）。
+- **无应答偏差**：单位或项目无应答者与应答者存在系统性差异。
+- **测量偏差**：仪器或问题导致系统性单向偏离真实值。
 
-**多智能体的基础设施建设**
-[AgentScope: A Flexible yet Robust Multi-Agent Platform](https://arxiv.org/abs/2412.03801)
-然后还有langgraph langchain AutoGen这块。
-**多智能体协作**
+**方差类型**
+- **抽样方差**：偶然选择样本导致的结果波动。
+- **分配方差**：实验分组随机性导致的结果波动。
+- **测量误差**：重复测量时围绕真值的随机波动。
 
-**协作类型又分为合作，竞争，合作竞争**
-**合作**方面：各个智能体的目标基本对齐到一个共同目标 G，强调分工与配合。如[AgentVerse](https://arxiv.org/abs/2308.10848)
-**竞争**方面：智能体之间存在冲突目标，让 LLM 智能体相互对抗以优化决策。
-比方说提供一个游戏环境，让LLM互相打。如[LLMArena ACL 2024](https://aclanthology.org/2024.acl-long.705/)
-**合作竞争**相结合的。这个一般出现在社科类研究，这里就没写。
-
-### 多智能体控制理论
-### AI智能体博弈方面的问题
-这里的话就是多智能体=可学习的博弈参与者，所以就有一堆围绕策略收敛、均衡概念、合作/对抗机制的工作。
-一些比较新的综述把 MARL 明确放在"博弈论 + 机器学习"的交叉位置，讨论不同奖励结构下的合作、对抗、混合博弈；
-多智能体场景特有的问题：非平稳性、信用分配、可扩展性等。
-综述[A Survey of Progress on Cooperative Multi-agent Reinforcement Learning](https://arxiv.org/abs/2312.01058)
-e.g.
-多个智能体共同博弈学习，最终达到某个稳态:
-像下面这篇论文就是在带状态扰动/对抗者的马尔可夫博弈里，定义了一个均衡并给出 Q-learning 收敛条件。
-[Robust Multi-Agent Reinforcement Learning with State Uncertainty](https://arxiv.org/abs/2307.16212)
-
-#### 多智能体间的通信，激励设计
-[Multi-Agent Incentive Communication (AAAI 2023)](https://doi.org/10.1609/aaai.v36i9.21179)
-在强化学习框架下，每个智能体可发送"激励信号"给其他智能体，该信号直接加到接收方的局部Q值上，引导其行为朝向全局最优；
-[Efficient Communication in Multi-Agent Reinforcement Learning with Consensus-guided Messages(AAAI 2024)](https://doi.org/10.1609/aaai.v39i22.34490)
-
-### 多智能体系统可扩展性的研究
-比如一个系统能够在10个agent下运行，那么100个，1900个能不能稳定运行这种，去找系统的负载的类型的文章
-e.g. [The scalability impact on Organization-based Multi-Agent Systems](https://www.sciencedirect.com/science/article/pii/S1877050924025638?via%3Dihub)
+## 仿真与数据设计
 
 
-### 多智能体强化学习
-#### 对AI系统方面某个agent所作出的工作\贡献进行量化的内容
-因为在合作 MARL/MAS 中，只有一个团队奖励，怎么知道哪个 agent 在什么时候贡献了多少？或者在奖励非常稀疏的时候，又如何让学习收敛，然后就有了这种类型的工作
-[FACMAC: Factored Multi-Agent Centralised Policy Gradients(NeurIPS 2021)](https://arxiv.org/abs/2003.06709)
+简单随机抽样：从骨灰罐中不更换弹珠的过程相当于简单的随机抽样。在简单的随机抽样中，每个样本被选中的概率相同。虽然方法名称中包含“简单”一词，但构
+分层抽样
+将人口划分为不重叠的组，称为地层（一个组称为地层，多个组为地层），然后从每个组中随机抽取一个简单样本。这就像每个层都有一个独立的骨灰盒，然后分别从每个骨灰罐中抽取弹珠。地层不必大小相同，我们也不必从每个地层取相同数量的弹珠。
 
-[ndividual Reward Assisted Multi-Agent Reinforcement Learning（ICML 2022）](https://icml.cc/virtual/2022/spotlight/17844)
+集群抽样  这个详细一点，弄一个简单的example
+将总体划分为不重叠的子群，称为簇，取一个简单的随机样本，并将该簇中的所有单元纳入样本。我们可以把这看作是从一个装有大弹珠的罐子中随机抽取的样本，而这些弹珠本身是装小弹珠的容器。（大型弹珠不一定包含相同数量的弹珠。）打开时，大弹珠样本会变成小弹珠样本。（群聚通常比地层小。）
+As an example, we might organize our seven marbles, labeled –, into three clusters, , , and . Then, a cluster sample of size one has an equal chance of drawing any of the three clusters. In this scenario, each marble has the same chance of being in the sample: 
+But every combination of elements is not equally likely: it is not possible for the sample to include both and , because they are in different clusters.
 
-[STAS: Spatial-Temporal Return Decomposition for Solving Sparse Rewards Problems in MARL（AAAI 2024）](https://ojs.aaai.org/index.php/AAAI/article/view/29681)
+Often, we are interested in a summary of the sample; in other words, we are interested in a statistic. For any sample, we can calculate the statistic, and the urn model helps us find the distribution of possible values that statistic may take on. Next, we examine the distribution of a statistic for our simple example.
 
-### 多智能体表征学习
-这个主要是为了让后续的值分解/策略学习更容易。
-这种学习又分为三类，分别是基于角色的表征，使用图结构的表征，关系建模的表征。和 为值分解门优化的 latent 表征。
 
-#### 基于角色的表征
-[ROMA: Multi-Agent Reinforcement Learning with Emergent Roles (ICML 2020)](https://arxiv.org/abs/2003.08039)
-这篇论文就通过引入了入一个角色embedding空间，每个 agent 在其中采样一个 role，policy 以 role 为条件。通过互信息和正则项，让同一角色的 agent 行为相似，可以共享经验；不同角色的 agent 行为差异大，有任务分工。
-#### 使用GNN的表征
-[MAGNet: Multi-agent Graph Network for Deep MARL](https://arxiv.org/abs/2012.09762)
-#### 为值分解专门优化的latent表征
-[UNSR：Unit-wise Attentive State Representation](https://arxiv.org/abs/2305.07182)
-先用 transformer 学一个更 disentangled 的 unit-wise state 表征，再增强 MIXING 网络中的 credit assignment
+### 抽样分布
+这个很重要

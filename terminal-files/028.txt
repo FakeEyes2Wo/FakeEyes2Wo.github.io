@@ -1,207 +1,167 @@
-# OS 课设
-<a href="../download/操作系统课程设计/OS-课设.zip" download>课设相关资料</a>
+# 生成学习算法与判别学习算法的区别
 
-## 初始环境搭建
-- Linux环境
-- Bochs虚拟机
-- 一系列工具集
+**判别学习算法**
+- **目标**: 学习条件概率分布 $P(y|x)$或直接建模决策边界 $h_\theta(x)$。
+- **e.g.**: 逻辑回归、支持向量机(SVM)。
+- **关注点**: 直接估计特征 $x$和标签 $y$之间的关系。
 
-```bash
-sudo apt-get install build-essential nasm
-```
-其中bochs和vgabios可以进行一键式安装，使用以下命令
-```bash
-sudo apt-get install vgabios bochs bochs-x bximage
-```
-也可以直接在bochs官网上下载。此处建议在官网上下载。官网上下载过后  bochs和vgabios都在解压后的安装包中。bios都在bochs目录下的bios目录中。
-
-## Bochs虚拟机使用
-
-首先创建a.img映像
-```bash
-bximage
-```
-然后输入1  回车 fd然后一系列回车，最后得到一个磁盘拷贝的img文件映像
-nasm编译后的文件为if处的值，将我们编译的启动程序拷贝到img文件映像中，这里需要加上conv=notrunc，否则会因为boot.bin的大小较小而产生截断。
-
-编写后的文件
-```bash
-dd if=boot.bin of=a.img bs=512 count=1 conv=notrunc
-```
-
-在编写bochsrc.txt的配置文件的示例
-其中romimage和vgaromimage的路径需要修改为实际路径。
-floppya修改成实际大小和实际映像。
-```bochsrc.txt
-###############################################################
-# Configuration file for Bochs
-###############################################################
-
-# how much memory the emulated machine will have
-megs: 32
-
-# filename of ROM images
-# romimage: file=/usr/share/bochs/BIOS-bochs-latest
-# vgaromimage: file=/usr/share/vgabios/vgabios.bin
-
-romimage: file=/home/temp/Desktop/OS/Bochs-REL_2_8_FINAL/bochs/bios/BIOS-bochs-latest
-vgaromimage: file=/home/temp/Desktop/OS/Bochs-REL_2_8_FINAL/bochs/bios/VGABIOS-lgpl-latest
-
-# what disk images will be used
-floppya: 1_44=a.img, status=inserted
-
-# choose the boot disk.
-boot: floppy
-
-# where do we send log messages?
-log: bochsout.txt
-
-# disable the mouse
-mouse: enabled=0
-
-# enable key mapping, using US layout as default.
-# keyboard_mapping: enabled=1, map=/usr/share/bochs/keymaps/x11-pc-us.map
-```
-
-## PMTest1
-1. **下载 FreeDOS 镜像**
-   - 到 [Bochs 官方网站](http://bochs.sourceforge.net/) 下载 FreeDOS 镜像。
-   - 解压后，将其中的 `a.img` 复制到工作目录中，并改名为 `freedos.img`。
-
-2. **生成软盘镜像**
-   - 使用 `bximage` 工具生成一个软盘镜像，命名为 `pm.img`：
-     ```bash
-     bximage -fd -q -size=1.44 pm.img
-     ```
-
-3. **修改 Bochs 配置文件**
-   - 修改 `bochsrc` 文件，确保包含以下三行：
-     ```plaintext
-     floppya: 1_44=freedos.img, status=inserted
-     floppyb: 1_44=pm.img, status=inserted
-     boot: a
-     ```
-
-4. **启动 Bochs 并格式化 B: 盘**
-   - 启动 Bochs，等待 FreeDOS 启动完毕。
-   - 在 FreeDOS 中格式化 B: 盘：
-     ```bash
-     format B:
-     ```
-
-5. **修改代码并重新编译**
-   - 将代码 `pmtest1.asm` 的第 8 行中的 `07c00h` 改为 `0100h`, 从而将代码编译成com文件, 便于debug。
-   - 重新编译代码：
-     ```bash
-     nasm pmtest1.asm -o pmtest1.com
-     ```
-
-6. **将程序复制到虚拟软盘**
-   - 挂载 `pm.img` 到 `/mnt/floppy`：
-     ```bash
-     sudo mkdir -p /mnt/floppy
-     sudo mount -o loop pm.img /mnt/floppy
-     sudo cp pmtest1.com /mnt/floppy/
-     sudo umount /mnt/floppy
-     ```
-
-7. **在 FreeDOS 中运行程序**
-   - 在 FreeDOS 中执行以下命令：
-     ```bash
-     B:\pmtest1.com
-     ```
-   - 如果一切正常，屏幕上会显示一个红色的字母“P”如图
-   ![alt text](image.png)
+**生成学习算法**
+- **目标**: 通过建模 $P(x|y)$和 $P(y)$来学习联合概率分布 $P(x, y)$，然后通过贝叶斯定理推导出 $P(y|x)$
+- **e.g.** 高斯判别分析(GDA)，朴素贝叶斯。
+- **关注点**: 建模每个类别 $y$中特征 $x$的分布，并推断 $P(y|x)$进行分类。
 
 
-## MyProject
-```bash
-#/bin/bash
+# 高斯判别分析（GDA）
 
-if [ ! -d /mnt/floppy ]; then 
-    sudo mkdir /mnt/floppy; 
-fi
-sudo mount -o loop pmtest.img /mnt/floppy
-sudo cp $1 /mnt/floppy/
-sudo umount /mnt/floppy
-```
+## 多元高斯分布
+一个 $d$-维随机变量 $X \sim \mathcal{N}(\mu, \Sigma)$具有：
+- **概率密度函数(PDF)**:
+  $$
+  p(x; \mu, \Sigma) = \frac{1}{(2\pi)^{d/2}|\Sigma|^{1/2}} \exp\left( -\frac{1}{2}(x-\mu)^T \Sigma^{-1}(x-\mu) \right)
+  $$
+- **参数**:
+  - 均值向量 $\mu \in \mathbb{R}^d$。
+  - 协方差矩阵 $\Sigma \in \mathbb{R}^{d \times d}$（对称，半正定）。
 
-在实现优先级调度的时候  如果想要使用C语言混合编程  那么需要有一个boot.asm然后将我们的展示代码写道Loader中去。
+## GDA中的模型假设
+- **类先验**: $y \sim \text{Bernoulli}(\phi)$。
+- **条件分布**:
+  $$
+  x|y=0 \sim \mathcal{N}(\mu_0, \Sigma), \quad x|y=1 \sim \mathcal{N}(\mu_1, \Sigma)
+  $$
+  *共享的协方差矩阵 $\Sigma$确保了线性的决策边界。*
 
-### 段选择子结构
-![段选择子结构](Selector_Structure.png)
+## 参数估计通过最大似然法
+给定训练集 $\{(x^{(i)}, y^{(i)})\}_{i=1}^m$，最大化**联合似然性**:
+$
+\mathcal{L}(\phi_y,\phi_{j|y=0},\phi_{j|y=1}) = \prod_{i=1}^{n} p(x_i,y_i)
+$
+对该函数取log然后求极大似然值得到MLE解
+**MLE解**:
+- 类先验:
+  $$
+  \phi_y = \frac{1}{m} \sum_{i=1}^m \mathbb{I}\{y^{(i)}=1\}
+  $$
+- 类条件均值:
+  $$
+  \mu_0 = \frac{\sum_{i=1}^m \mathbb{I}\{y^{(i)}=0\} x^{(i)}}{\sum_{i=1}^m \mathbb{I}\{y^{(i)}=0\}}, \quad \mu_1 = \frac{\sum_{i=1}^m \mathbb{I}\{y^{(i)}=1\} x^{(i)}}{\sum_{i=1}^m \mathbb{I}\{y^{(i)}=1\}}
+  $$
+- 共享协方差:
+  $$
+  \Sigma = \frac{1}{m} \sum_{i=1}^m (x^{(i)} - \mu_{y^{(i)}})(x^{(i)} - \mu_{y^{(i)}})^T
+  $$
+
+## 模型优缺点
+优点：模型简单，计算方便，易于理解和解释。
+缺点：效果不好。
+
+
+## 决策边界
+后验概率 $P(y=1|x)$遵循逻辑函数:
+$$
+P(y=1|x) = \frac{1}{1 + \exp(-\theta^T x)}, \quad \theta = \Sigma^{-1}(\mu_1 - \mu_0)
+$$
+*当 $\Sigma_0 = \Sigma_1$时，GDA产生一个**线性的决策边界**。**同时如果两个分类的协方差矩阵不同，那么决策边界将不再是线性的。**
 
 ---
 
-### 调试技巧
+# 朴素贝叶斯与多元朴素贝叶斯
 
-#### Bochs调试命令
-| 命令          | 功能               |
-|--------------|-------------------|
-| b 0x7c00     | 在引导扇区设置断点 |
-| c            | 继续执行          |
-| x /64bx 0x7c00 | 查看内存数据      |
-| info gdt     | 查看GDT表内容     |
+## 模型假设
+**条件独立性**:
+$$
+P(x_1, x_2, ..., x_n|y) = \prod_{i=1}^n P(x_i|y)
+$$
+- **核心思想**：在给定类别 $y$ 的条件下，所有特征 $x_i$ 相互独立。这一假设简化了计算，但忽略了特征间的潜在关联，故称为“朴素”。
+- **实际影响**：尽管现实中特征可能相关（如文本中的相邻词汇），但模型仍表现良好，尤其在文本分类等高维场景中。
 
-#### Magic Breakpoint
-```asm
-xchg bx, bx  ; Bochs特殊断点
-```
+---
 
-### 常见问题
+## 参数估计
+### 类先验
+对于二分类 $y \in \{0,1\}$：
+$$
+\phi_y = \frac{1}{m} \sum_{i=1}^m \mathbb{I}\{y^{(i)}=1\}
+$$
+- $\phi_y$ 表示类别 $y=1$ 的先验概率，直接通过样本比例估计。
 
-#### Q1: 映像文件挂载失败
-**现象**：
-```bash
-mount: /mnt/floppy: wrong fs type...
-```
-**解决方案**：
-```bash
-sudo apt-get install mtools
-mcopy -i pm.img pmtest1.com ::
-```
+### 特征似然
+- **二元特征**（如伯努利模型）：
+  $$
+  \phi_{j|y=1} = \frac{\sum_{i=1}^m \mathbb{I}\{x_j^{(i)}=1 \wedge y^{(i)}=1\}}{\sum_{i=1}^m \mathbb{I}\{y^{(i)}=1\}}
+  $$
+  - 分子：类别 $y=1$ 中特征 $x_j=1$ 的样本数。
+  - 分母：类别 $y=1$ 的总样本数。
 
-#### Q2: Bochs启动黑屏
-**检查点**：
-1. BIOS路径是否正确
-2. 映像文件是否已正确写入
-3. GDT设置是否完整
+---
 
-#### Q3: 保护模式切换失败
-**调试步骤**：
-1. 检查A20是否开启
-2. 验证GDT描述符是否正确
-3. 确认CR0.PE位设置
+### 拉普拉斯平滑
+- **问题**：若某特征在训练集中未出现（如 $\sum \mathbb{I}\{x_j=1 \wedge y=1\}=0$），概率估计为 $0$，导致连乘失效。
+- **解决方法**：添加伪计数，避免零概率。
+  - **伯努利模型**：
+    $$
+    \phi_{j|y=1} = \frac{1 + \sum_{i=1}^m \mathbb{I}\{x_j^{(i)}=1 \wedge y^{(i)}=1\}}{2 + \sum_{i=1}^m \mathbb{I}\{y^{(i)}=1\}}
+    $$
+  - **多项式模型**（词汇表大小为 $V$）：
+    $$
+    \phi_{k|y} = \frac{1 + \sum_{i=1}^m \sum_{t=1}^{n_i} \mathbb{I}\{\text{word}_t^{(i)}=k \wedge y^{(i)}=y\}}{V + \sum_{k'=1}^V \sum_{i=1}^m \sum_{t=1}^{n_i} \mathbb{I}\{\text{word}_t^{(i)}=k' \wedge y^{(i)}=y\}}
+    $$
 
+---
 
+### 文本分类事件模型对比
+#### 1. 伯努利事件模型（Multivariate Bernoulli）
+- **特征表示**：$x_j \in \{0,1\}$，表示词 $j$ 是否在文档中出现。
+- **似然函数**：
+  $$
+  P(x|y) = \prod_{j=1}^n \phi_{j|y}^{x_j}(1-\phi_{j|y})^{1-x_j}
+  $$
+- **参数估计**：
+  $$
+  \phi_{j|y} = \frac{\sum_{i=1}^m \mathbb{I}\{x_j^{(i)}=1 \wedge y^{(i)}=y\}}{\sum_{i=1}^m \mathbb{I}\{y^{(i)}=y\}}
+  $$
+- **特点**：忽略词频，适合短文本或存在性特征显著的任务。
 
+#### 2. 多项式事件模型
+- **特征表示**：$x_j$ 表示文档中第 $j$ 个位置的词在词汇表中的索引。
+- **似然函数**：
+  $$
+  P(x|y) = \prod_{t=1}^{n} \phi_{k|y}, \quad \text{其中 } k \text{ 是位置 } t \text{ 的词}
+  $$
+- **参数估计**：
+  $$
+  \phi_{k|y} = \frac{\sum_{i=1}^m \sum_{t=1}^{n_i} \mathbb{I}\{\text{word}_t^{(i)}=k \wedge y^{(i)}=y\}}{\sum_{i=1}^m n_i \cdot \mathbb{I}\{y^{(i)}=y\}}
+  $$
+- **特点**：考虑词频，适合长文本或词频信息重要的任务。
 
+---
 
+### 模型总结
+#### 优点
+1. **计算高效**：参数估计和预测时间复杂度低，适合高维数据（如文本）。
+2. **内存友好**：仅需存储各类别的特征概率。
+3. **鲁棒性**：对缺失数据不敏感，适合部分特征缺失的场景。
 
+#### 缺点
+1. **条件独立假设过强**：忽略特征间关联，可能损失信息（如文本中的词共现）。
+2. **概率估计偏倚**：拉普拉斯平滑可能引入微小偏差。
+3. **性能局限**：分类性能相比于逻辑回归、SVM等模型较差。
 
+---
 
+### 附：高斯朴素贝叶斯（补充）
+- **适用场景**：连续特征，假设 $P(x_j|y)$ 服从高斯分布。
+- **参数估计**：
+  $$
+  \mu_{j|y} = \frac{1}{m_y} \sum_{i:y^{(i)}=y} x_j^{(i)}, \quad \sigma_{j|y}^2 = \frac{1}{m_y} \sum_{i:y^{(i)}=y} (x_j^{(i)} - \mu_{j|y})^2
+  $$
+- **概率计算**：
+  $$
+  P(x_j|y) = \frac{1}{\sqrt{2\pi\sigma_{j|y}^2}} \exp\left(-\frac{(x_j - \mu_{j|y})^2}{2\sigma_{j|y}^2}\right)
+  $$
+---
 
-
-
-
-
-
-
-
-
-##### knowledge
-
-[bits 16］是告诉编译器，下面的代码帮我编译成 16 位的机器码。
-[bits 32］是告诉编译器，下面的代码帮我编译成 32 位的机器码。
-
-进入保护模式需要三个步骤。
-(1) 打开 A20 。(2) 加载 gdt 。(3) 将 cr0 的 pe 位置 1 。
-
-在保护模式下，要访问 4gb 的内存空间，再采取实模式下的方法是远远不够的，所以段寄存器中存储的数据变成了选择子，其格式如下图所示，其中索引值即 gdt 中索引值，TI 用于指示是去 GDT 还是 LDT 中寻找段基址，RPL 是特权级
-![Selector_Structure](Selector_Structure.png)
-
-
-##### 参考资料
-- https://www.cnblogs.com/fdxsec/p/18655799
-- https://www.cnblogs.com/fdxsec/p/18664411
-- [bochs 调试](https://www.cnblogs.com/lqerio/p/11779293.html)
+**关键要点**
+- **生成模型**（如GDA、朴素贝叶斯）在已知特征分布时有用。
+- **判别模型**（如逻辑回归）更适合于复杂数据，直接学习 $P(y|x)$。
+- **朴素贝叶斯**通过条件独立性简化计算，在高维数据（如文本）中特别有效。

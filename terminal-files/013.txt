@@ -1,1 +1,36 @@
-# Marcov Decision Process
+# 成员推理攻击(membership inference attack)
+
+首先该攻击是指在已经知道模型和一个数据的情况下，去判断这个数据是否用于模型的训练。
+
+![alt text](image-1.png)
+![alt text](image-2.png)
+## 影子数据集的构建方法
+
+第一种方法使用对目标模型的黑盒访问来合成这些数据。第二种方法使用关于从中提取目标训练数据集的总体的统计数据。第三种方法假设对手可以访问目标训练数据集的潜在噪声版本。第一种方法不假设任何关于目标模型训练数据分布的先验知识，而第二和第三种方法允许攻击者在推断给定记录是否在其训练数据集中之前仅查询目标模型一次。
+
+The second, sampling phase starts when the target model’s
+probability yc that the proposed data record is classified as
+belonging to class c is larger than the probabilities for all
+other classes and also larger than a threshold confmin. This
+ensures that the predicted label for the record is c, and that the
+target model is sufficiently confident in its label prediction. We
+select such record for the synthetic dataset with probability y
+∗
+c
+and, if selection fails, repeat until a record is selected.
+This synthesis procedure works only if the adversary can
+efficiently explore the space of possible inputs and discover
+inputs that are classified by the target model with high confi-
+dence. For example, it may not work if the inputs are highresolution images and the target model performs a complex
+image classification task.
+Statistics-based synthesis. The attacker may have some statistical information about the population from which the target
+model’s training data was drawn. For example, the attacker
+may have prior knowledge of the marginal distributions of
+different features. In our experiments, we generate synthetic
+training records for the shadow models by independently
+sampling the value of each feature from its own marginal
+distribution. The resulting attack models are very effective.
+Noisy real data. The attacker may have access to some data
+that is similar to the target model’s training data and can be
+considered as a “noisy” version thereof. In our experiments
+with location datasets, we simulate this by flipping the (binary) values of 10% or 20% randomly selected features, then

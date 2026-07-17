@@ -1,118 +1,147 @@
-### 一、间隔（Margin）概念
-
-#### 1.1 函数间隔（Functional Margin）
-定义单个样本的函数间隔：
-$$
-\hat{\gamma}^{(i)} = y^{(i)} (\mathbf{w}^\top \mathbf{x}^{(i)} + b)
-$$
-整体函数间隔为最小样本间隔：
-$$
-\hat{\gamma} = \min_{i=1,\ldots,m} \hat{\gamma}^{(i)}
-$$
-
-> **注意**：函数间隔受参数模长影响（$\|\mathbf{w}\|$和$b$），需标准化处理。
-
-#### 1.2 几何间隔（Geometric Margin）
-几何间隔是函数间隔的标准化形式：
-$$
-\gamma^{(i)} = \frac{\hat{\gamma}^{(i)}}{\|\mathbf{w}\|} = \frac{y^{(i)} (\mathbf{w}^\top \mathbf{x}^{(i)} + b)}{\|\mathbf{w}\|}
-$$
-整体几何间隔：
-$$
-\gamma = \frac{\hat{\gamma}}{\|\mathbf{w}\|} = \min_{i=1,\ldots,m} \gamma^{(i)}
-$$
+# 线性代数重要性质与定理总结
 
 ---
 
-### 二、支持向量机的理论特性
+## **1. 基本概念与符号**
+- **矩阵表示**  
+  - $ A \in \mathbb{R}^{m \times n} $：$ m $ 行 $ n $ 列的实矩阵。  
+  - **列向量**：$ x \in \mathbb{R}^n $，默认按列排列；**行向量**为 $ x^T $。  
+  - 矩阵元素：$ A_{ij} $ 表示第 $ i $ 行第 $ j $ 列的元素。  
 
-#### 2.1 参数表示定理（Representer Theorem）
-最优参数 $\mathbf{w}$ 可表示为训练样本的线性组合：
-$$
-\mathbf{w} = \sum_{i=1}^{m} \alpha_i y^{(i)} \mathbf{x}^{(i)}
-$$
-
-可以通过梯度下降的参数更新的式子来归纳看出
-如果我们以Logistic Regression为例子
-$$\theta = \theta_i - \alpha h_\theta(x^{(i)})-y^{(i)})$$
-可以轻易看出$\theta$可以表示成各个训练集的线性组合
-*可通过梯度下降法的参数更新过程归纳证明*
-
-#### 2.2 对偶问题推导
-通过拉格朗日乘数法将原优化问题转化为对偶问题，此过程涉及：
-- 构造拉格朗日函数
-- 求导消元（$\mathbf{w}$ 和 $b$）
-- 得到仅含 $\alpha_i$ 的优化目标
+- **矩阵分块**  
+  - 列分块：$ A = [a^1 \ a^2 \ \cdots \ a^n] $，其中 $ a^j $ 为第 $ j $ 列。  
+  - 行分块：$ A = [a_1^T; \ a_2^T; \ \cdots; \ a_m^T] $，其中 $ a_i^T $ 为第 $ i $ 行。
 
 ---
 
-### 三、核技巧（Kernel Trick）
+## **2. 矩阵乘法**
+- **定义**  
+  - $ C = AB $，其中 $ C_{ij} = \sum_{k=1}^n A_{ik} B_{kj} $。  
+  - 矩阵乘积维度：$ A \in \mathbb{R}^{m \times n}, B \in \mathbb{R}^{n \times p} \Rightarrow C \in \mathbb{R}^{m \times p} $。  
 
-#### 3.1 核方法实现步骤
-1. 将算法改写为仅含内积 $\langle x^{(i)}, x^{(j)} \rangle$ 的形式
-2. 设计特征映射 $\phi: \mathcal{X} \to \mathcal{H}$ 将输入空间映射到高维特征空间
-3. 构造核函数 $K(x,z) = \phi(x)^\top \phi(z)$
-4. 用核函数替换所有内积运算
+- **特殊乘积形式**  
+  - **内积**：$ x^T y = \sum_{i=1}^n x_i y_i $。  
+  - **外积**：$ xy^T \in \mathbb{R}^{m \times n} $，元素为 $ x_i y_j $。  
+  - **矩阵-向量乘积**：  
+    - 按行：$ Ax = [a_1^T x; \ a_2^T x; \ \cdots; \ a_m^T x] $。  
+    - 按列：$ Ax = \sum_{j=1}^n x_j a^j $。  
 
-#### 3.2 核函数合法性条件（Mercer条件）[^1]
-合法核函数需满足：
-1. **对称性**：$K(x,z) = K(z,x)$
-2. **半正定性**：$\forall c_i \in \mathbb{R},\ \sum_{i,j}c_i c_j K(x^{(i)},x^{(j)}) \geq 0$
-3. **线性性**：$K(ax+by,z) = aK(x,z) + bK(y,z)$
-本质上是一个广义内积[^2]
-#### 3.3 常用核函数对照表
+- **矩阵乘积的四种视角**  
+  1. 行-列内积：$ C_{ij} = a_i^T b^j $。  
+  2. 列-行外积和：$ AB = \sum_{k=1}^n a^k b_k^T $。  
+  3. 矩阵-列向量乘积：$ AB = [A b^1 \ A b^2 \ \cdots \ A b^p] $。  
+  4. 行向量-矩阵乘积：$ AB = [a_1^T B; \ a_2^T B; \ \cdots; \ a_m^T B] $。  
 
-| 核类型       | 公式                                 | 参数               | 特征空间维度       |
-|--------------|--------------------------------------|--------------------|--------------------|
-| 线性核       | $K(x,z) = x^\top z$                 | 无                 | $\mathbb{R}^n$     |
-| 多项式核     | $K(x,z) = (x^\top z + c)^d$         | $c \geq 0, d \in \mathbb{N}$ | $\mathbb{R}^n$     |
-| 高斯核（RBF）| $K(x,z) = \exp(-\frac{\|x-z\|^2}{2\sigma^2})$ | $\sigma > 0$       | $\mathbb{R}^\infty$|
-| Sigmoid核    | $K(x,z) = \tanh(\alpha x^\top z + c)$ | $\alpha, c$        | $\mathbb{R}^n$     |
-| Laplace核    | $K(x,z) = \exp(-\frac{\|x-z\|_1}{\sigma})$ | $\sigma > 0$       | $\mathbb{R}^\infty$|
-
----
-
-### 四、L1范数软间隔SVM
-
-#### 4.1 原始优化问题
-$$
-\begin{aligned}
-\min_{\mathbf{w},b,\xi} & \quad \frac{1}{2}\|\mathbf{w}\|^2 + C\sum_{i=1}^n \xi_i \\
-\text{s.t.} & \quad y_i(\mathbf{w}^\top \phi(x_i) + b) \geq 1 - \xi_i \\
-& \quad \xi_i \geq 0,\ \forall i=1,...,n
-\end{aligned}
-$$
-
-#### 4.2 对偶形式
-通过拉格朗日乘数法推导得到：
-$$
-\begin{aligned}
-\max_{\alpha} & \quad \sum_{i=1}^n \alpha_i - \frac{1}{2}\sum_{i,j}\alpha_i\alpha_j y_i y_j K(x_i,x_j) \\
-\text{s.t.} & \quad 0 \leq \alpha_i \leq C \\
-& \quad \sum_{i=1}^n \alpha_i y_i = 0
-\end{aligned}
-$$
+- **性质**  
+  - 结合律：$ (AB)C = A(BC) $。  
+  - 分配律：$ A(B + C) = AB + AC $。  
+  - **不可交换**：一般 $ AB \neq BA $。
 
 ---
 
-### 五、应用案例：蛋白质序列分类
+## **3. 运算与性质**
+- **单位矩阵与对角矩阵**  
+  - 单位矩阵 $ I \in \mathbb{R}^{n \times n} $，满足 $ AI = A = IA $。  
+  - 对角矩阵 $ D = \text{diag}(d_1, \dots, d_n) $，非对角元素为 0。  
 
-#### 5.1 特征工程
-- 将蛋白质序列按4个氨基酸为一组进行分窗
-- **使用改进的KMP算法计算序列相似性核函数**(使用广义内积的示例)
+- **转置**  
+  - 转置性质：  
+    - $ (A^T)^T = A $。  
+    - $ (AB)^T = B^T A^T $。  
+    - $ (A + B)^T = A^T + B^T $。  
 
-#### 5.2 实现流程
-1. 序列→特征向量转换
-2. 构造基于k-mer的序列核
-3. 使用软间隔SVM进行分类
+- **对称矩阵**  
+  - 对称矩阵：$ A = A^T $。  
+  - 任何方阵 $ A $ 可分解为对称与反对称矩阵之和：  
+    $ A = \frac{1}{2}(A + A^T) + \frac{1}{2}(A - A^T) $。  
+
+- **迹（Trace）**  
+  - 定义：$ \text{tr}(A) = \sum_{i=1}^n A_{ii} $。  
+  - 性质：  
+    - $ \text{tr}(A) = \text{tr}(A^T) $。  
+    - $ \text{tr}(AB) = \text{tr}(BA) $。  
+    - 线性性：$ \text{tr}(A + B) = \text{tr}(A) + \text{tr}(B) $。  
+
+- **范数（Norms）**  
+  - 向量范数：  
+    - $ \ell_2 $ 范数：$ \|x\|_2 = \sqrt{x^T x} $。  
+    - $ \ell_1 $ 范数：$ \|x\|_1 = \sum |x_i| $。  
+    - $ \ell_\infty $ 范数：$ \|x\|_\infty = \max |x_i| $。  
+  - 矩阵范数：  
+    - Frobenius 范数：$ \|A\|_F = \sqrt{\text{tr}(A^T A)} $。  
+
+- **线性相关与秩**  
+  - 列秩 = 行秩 = 矩阵的秩。  
+  - 满秩矩阵：$ \text{rank}(A) = \min(m, n) $。  
+  - 秩的性质：  
+    - $ \text{rank}(AB) \leq \min(\text{rank}(A), \text{rank}(B)) $。  
+
+- **逆矩阵**  
+  - 存在条件：方阵且满秩（非奇异）。  
+  - 性质：  
+    - $ (A^{-1})^{-1} = A $。  
+    - $ (AB)^{-1} = B^{-1} A^{-1} $。  
+    - $ (A^{-1})^T = (A^T)^{-1} $。  
+
+- **正交矩阵**  
+  - 定义：列向量正交且归一化，满足 $ U^T U = I $。  
+  - 性质：  
+    - 保范性：$ \|U x\|_2 = \|x\|_2 $。  
+
+- **范围与零空间**  
+  - 列空间 $ \mathcal{R}(A) = \{Ax \mid x \in \mathbb{R}^n\} $。  
+  - 零空间 $ \mathcal{N}(A) = \{x \mid Ax = 0\} $。  
+  - 正交补关系：$ \mathcal{R}(A^T) \oplus \mathcal{N}(A) = \mathbb{R}^n $。  
+
+- **行列式（Determinant）**  
+  - 几何意义：平行多面体的体积。  
+  - 性质：  
+    - $ |AB| = |A||B| $。  
+    - $ |A^{-1}| = 1 / |A| $。  
+    - $ |A| = 0 \iff A $ 奇异。  
+  - 递归公式：  
+    $ |A| = \sum_{j=1}^n (-1)^{i+j} A_{ij} |A_{\backslash i \backslash j}| \quad (\text{按第 } i \text{ 行展开}) $。  
+
+- **二次型与半正定矩阵**  
+  - 对称矩阵分类：  
+    - 正定（PD）：$ x^T A x > 0 \quad (\forall x \neq 0) $。  
+    - 半正定（PSD）：$ x^T A x \geq 0 $。  
+    - 负定（ND）、半负定（NSD）、不定。  
+  - Gram 矩阵：$ G = A^T A $ 必为半正定；若 $ A $ 列满秩，则 $ G $ 正定。  
+
+- **特征值与特征向量**  
+  - 定义：$ A x = \lambda x \quad (x \neq 0) $。  
+  - 对称矩阵性质：  
+    1. 特征值为实数。  
+    2. 存在正交特征向量集，可对角化：$ A = U \Lambda U^T $。  
+  - 迹与行列式：  
+    - $ \text{tr}(A) = \sum \lambda_i $。  
+    - $ |A| = \prod \lambda_i $。  
+  - 优化视角：  
+    - 最大特征值对应二次型最大值：$ \max_{\|x\|=1} x^T A x = \lambda_{\max} $。  
 
 ---
 
-### 附：关键公式推导技巧
-1. **拉格朗日对偶性**：通过引入乘子处理不等式约束
-2. **KKT条件**：确定支持向量的必要条件
-3. **SMO算法**：高效求解对偶问题的分解方法
+## **4. 矩阵微积分**
+- **梯度（Gradient）**  
+  - 标量函数 $ f: \mathbb{R}^{m \times n} \to \mathbb{R} $，梯度为矩阵：  
+    $ (\nabla_A f(A))_{ij} = \frac{\partial f(A)}{\partial A_{ij}} $。  
+  - 重要公式：  
+    - **$ \nabla_x (b^T x) = b $。**  
+    - **$ \nabla_x (x^T A x) = 2 A x \quad (A \text{ 对称}) $。**
 
-[^1]:Mercer定理:任何半正定的函数都可以作为核函数(充分不必要条件)
-Mercer条件:若函数K(a, b)符合Mercer条件, 则K必须是连续的，并且在其参数上对称，所以K(a, b)=K(b, a)，则存在函数 $\phi$ 将a和b映射到另一空间，使得K(a, b) = $\phi(a)^T$ $\phi(b)$ 。即两个向量的核函数值等价于映射后的两个向量的内积。
-[^2]:https://surprisedcat.github.io/studynotes/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E4%B8%8E%E7%9F%A9%E9%98%B5%E4%B9%8B%E5%BA%A6%E9%87%8F%E7%9F%A9%E9%98%B5%E4%B8%8E%E5%B9%BF%E4%B9%89%E5%86%85%E7%A7%AF/
+- **Hessian 矩阵**  
+  - 定义：二阶偏导数矩阵，对称。  
+  - 二次型：$ \nabla_x^2 (x^T A x) = 2 A \quad (A \text{ 对称}) $。  
+
+- **最小二乘法**  
+  - 目标函数：$ \min_x \|Ax - b\|_2^2 $。  
+  - 解：$ x = (A^T A)^{-1} A^T b $。  
+
+- **行列式的梯度**  
+  - $ \nabla_A |A| = |A| A^{-T} $。  
+  - 对数行列式：$ \nabla_A \log |A| = A^{-1} \quad (A \succ 0) $。  
+
+- **特征值的优化视角**  
+  - 拉格朗日函数：$ \mathcal{L}(x, \lambda) = x^T A x - \lambda (x^T x - 1) $。  
+  - 最优解条件：$ A x = \lambda x $，即 $ x $ 为特征向量，$ \lambda $ 为特征值。
